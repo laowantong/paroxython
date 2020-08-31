@@ -4,8 +4,8 @@
         "data": [
             "01_hello_world.py",
             "02_input_name.py",
-            "def/procedure",
-            "call/function",
+            "def/subroutine/procedure",
+            "call/subroutine",
             "flow",
         ],
     },
@@ -31,7 +31,7 @@
     {
         "operation": "hide",
         "data": [
-            "call/function/builtin/print",
+            "call/subroutine/builtin/print",
             r".*test.*\.py",
         ],
     },

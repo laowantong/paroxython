@@ -28,32 +28,32 @@ print("Hello\n" * 10) # argument:, binary_operator:Mult, external_free_call:prin
 # ----------------------------------------------------------------------------------------
 # 003.0019-create-a-procedure.py
 # ----------------------------------------------------------------------------------------
-def finish(name): # function:finish (-> +1), function_parameter:name, function_parameter_flavor:arg, function_returning_nothing:finish (-> +1), local_scope:name (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), procedural_style (-> +1), scope:name (-> +1), whole_span:2 (-> +1)
+def finish(name): # function:finish (-> +1), function_line_count:2 (-> +1), function_parameter:name, function_parameter_flavor:arg, function_returning_nothing:finish (-> +1), local_scope:name (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), procedural_style (-> +1), scope:name (-> +1), whole_span:2 (-> +1)
     print("My job here is done. Goodbye " + name) # argument:, binary_operator:Add, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, loaded_variable:name, node:BinOp, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 003.2372-create-a-procedure.py
 # ----------------------------------------------------------------------------------------
-def a(): # function:a (-> +1), function_returning_nothing:a (-> +1), function_without_parameters:a (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), procedural_style (-> +1), whole_span:2 (-> +1)
+def a(): # function:a (-> +1), function_line_count:2 (-> +1), function_returning_nothing:a (-> +1), function_without_parameters:a (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), procedural_style (-> +1), whole_span:2 (-> +1)
     pass # node:Pass
 
 # ----------------------------------------------------------------------------------------
 # 004.0024-create-a-function-which-returns-the-square-of-an-integer.py
 # ----------------------------------------------------------------------------------------
-def square(x): # function:square (-> +1), function_parameter:x, function_parameter_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), scope:x (-> +1), whole_span:2 (-> +1)
+def square(x): # function:square (-> +1), function_line_count:2 (-> +1), function_parameter:x, function_parameter_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), scope:x (-> +1), whole_span:2 (-> +1)
     return x * x # binary_operator:Mult, loaded_variable:x, multiplication_operator, node:BinOp, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
 # 004.2921-create-a-function-which-returns-the-square-of-an-integer.py
 # ----------------------------------------------------------------------------------------
-def square(x): # function:square (-> +1), function_parameter:x, function_parameter_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), scope:x (-> +1), whole_span:2 (-> +1)
+def square(x): # function:square (-> +1), function_line_count:2 (-> +1), function_parameter:x, function_parameter_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), scope:x (-> +1), whole_span:2 (-> +1)
     return x ** 2 # binary_operator:Pow, literal:2, loaded_variable:x, node:BinOp, node:Name, node:Num, node:Return, return
 
 # ----------------------------------------------------------------------------------------
 # 005.0663-create-a-2d-point-data-structure.py
 # ----------------------------------------------------------------------------------------
 from dataclasses import dataclass # import:dataclasses:dataclass, import_module:dataclasses, import_name:dataclass, node:ImportFrom, object_oriented_style (-> +1), whole_span:2 (-> +1)
-@dataclass # loaded_variable:dataclass, node:ClassDef, node:Name
+@dataclass # class:Point, loaded_variable:dataclass, node:ClassDef, node:Name
 class Point:
     x: float # loaded_variable:float, node:AnnAssign, node:Name
     y: float # loaded_variable:float, node:AnnAssign, node:Name
@@ -78,8 +78,8 @@ x = {"one": 1, "two": 2} # assignment, assignment_lhs_identifier:x, assignment_r
 # ----------------------------------------------------------------------------------------
 # 009.1410-create-a-binary-tree-data-structure.py
 # ----------------------------------------------------------------------------------------
-class Node: # node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5 (-> +4)
-    def __init__(self, data): # function:__init__ (-> +3), function_parameter:data, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), local_scope:data (-> +3), local_scope:self (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg, scope:data (-> +3), scope:self (-> +3)
+class Node: # class:Node (-> +4), class_method_count:1 (-> +4), node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5 (-> +4)
+    def __init__(self, data): # function:__init__ (-> +3), function_line_count:4 (-> +3), function_parameter:data, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), local_scope:data (-> +3), local_scope:self (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg, scope:data (-> +3), scope:self (-> +3)
         self.data = data # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:data, loaded_variable:data, loaded_variable:self, node:Assign, node:Attribute, node:Name
         self.left = None # assignment:None, assignment_lhs_identifier:self, assignment_rhs_atom:None, literal:None, loaded_variable:self, node:Assign, node:Attribute, node:Name, node:NameConstant
         self.right = None # assignment:None, assignment_lhs_identifier:self, assignment_rhs_atom:None, literal:None, loaded_variable:self, node:Assign, node:Attribute, node:Name, node:NameConstant
@@ -87,8 +87,8 @@ class Node: # node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5
 # ----------------------------------------------------------------------------------------
 # 009.3176-create-a-binary-tree-data-structure.py
 # ----------------------------------------------------------------------------------------
-class Node: # node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5 (-> +4)
-    def __init__(self, data, left_child, right_child): # function:__init__ (-> +3), function_parameter:data, function_parameter:left_child, function_parameter:right_child, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), local_scope:data (-> +3), local_scope:left_child (-> +3), local_scope:right_child (-> +3), local_scope:self (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg, scope:data (-> +3), scope:left_child (-> +3), scope:right_child (-> +3), scope:self (-> +3)
+class Node: # class:Node (-> +4), class_method_count:1 (-> +4), node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5 (-> +4)
+    def __init__(self, data, left_child, right_child): # function:__init__ (-> +3), function_line_count:4 (-> +3), function_parameter:data, function_parameter:left_child, function_parameter:right_child, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), local_scope:data (-> +3), local_scope:left_child (-> +3), local_scope:right_child (-> +3), local_scope:self (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg, scope:data (-> +3), scope:left_child (-> +3), scope:right_child (-> +3), scope:self (-> +3)
         self.data = data # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:data, loaded_variable:data, loaded_variable:self, node:Assign, node:Attribute, node:Name
         self._left_child = left_child # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:left_child, loaded_variable:left_child, loaded_variable:self, node:Assign, node:Attribute, node:Name
         self._right_child = right_child # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:right_child, loaded_variable:right_child, loaded_variable:self, node:Assign, node:Attribute, node:Name
@@ -126,7 +126,7 @@ for k, v in mymap.items(): # for:k (-> +1), for:v (-> +1), global_scope:k (-> +1
 # 014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py
 # ----------------------------------------------------------------------------------------
 import random # functional_style (-> +2), import:random, import_module:random, node:Import, one_liner_style (-> +2), whole_span:3 (-> +2)
-def pick(a, b): # function:pick (-> +1), function_parameter:a, function_parameter:b, function_parameter_flavor:arg, function_returning_something:pick (-> +1), local_scope:a (-> +1), local_scope:b (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:pick (-> +1), scope:a (-> +1), scope:b (-> +1)
+def pick(a, b): # function:pick (-> +1), function_line_count:2 (-> +1), function_parameter:a, function_parameter:b, function_parameter_flavor:arg, function_returning_something:pick (-> +1), local_scope:a (-> +1), local_scope:b (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:pick (-> +1), scope:a (-> +1), scope:b (-> +1)
     return random.randrange(a, b) # argument:a, argument:b, loaded_variable:a, loaded_variable:b, loaded_variable:random, member_call:random:randrange, member_call_method:randrange, member_call_object:random, node:Attribute, node:Call, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ random.randint(a, b) # argument:a, argument:b, loaded_variable:a, loaded_variabl
 # ----------------------------------------------------------------------------------------
 # 016.1530-depth-first-traversing-of-a-binary-tree.py
 # ----------------------------------------------------------------------------------------
-def dfs(bt): # body_recursive_function:dfs (-> +5), function:dfs (-> +5), function_parameter:bt, function_parameter_flavor:arg, function_returning_nothing:dfs (-> +5), local_scope:bt (-> +5), node:FunctionDef (-> +5), node:arg, procedural_style (-> +5), recursive_call_count:2 (-> +5), recursive_function:dfs (-> +5), scope:bt (-> +5), whole_span:6 (-> +5)
+def dfs(bt): # body_recursive_function:dfs (-> +5), function:dfs (-> +5), function_line_count:6 (-> +5), function_parameter:bt, function_parameter_flavor:arg, function_returning_nothing:dfs (-> +5), local_scope:bt (-> +5), node:FunctionDef (-> +5), node:arg, procedural_style (-> +5), recursive_call_count:2 (-> +5), recursive_function:dfs (-> +5), scope:bt (-> +5), whole_span:6 (-> +5)
     if bt is None: # comparison_operator:Is, if (-> +1), if_guard (-> +1), if_test_atom:None, if_test_atom:bt, if_without_else (-> +1), literal:None, loaded_variable:bt, node:Compare, node:If (-> +1), node:Name, node:NameConstant
         return # if_then_branch, node:Return, return:None
     dfs(bt.left) # argument:, free_call:dfs, free_call_without_result:dfs, internal_free_call:dfs, loaded_variable:bt, node:Attribute, node:Call, node:Expr, node:Name
@@ -154,15 +154,15 @@ def dfs(bt): # body_recursive_function:dfs (-> +5), function:dfs (-> +5), functi
 # ----------------------------------------------------------------------------------------
 # 017.1103-create-a-tree-data-structure.py
 # ----------------------------------------------------------------------------------------
-class Node(object): # loaded_variable:object, node:ClassDef (-> +3), node:Name, object_oriented_style (-> +3), whole_span:4 (-> +3)
-    def __init__(self, value, *children): # function:__init__ (-> +2), function_parameter:children, function_parameter:self, function_parameter:value, function_parameter_flavor:arg, function_parameter_flavor:vararg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), local_scope:children (-> +2), local_scope:self (-> +2), local_scope:value (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg, scope:children (-> +2), scope:self (-> +2), scope:value (-> +2)
+class Node(object): # class:Node (-> +3), class_method_count:1 (-> +3), loaded_variable:object, node:ClassDef (-> +3), node:Name, object_oriented_style (-> +3), whole_span:4 (-> +3)
+    def __init__(self, value, *children): # function:__init__ (-> +2), function_line_count:3 (-> +2), function_parameter:children, function_parameter:self, function_parameter:value, function_parameter_flavor:arg, function_parameter_flavor:vararg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), local_scope:children (-> +2), local_scope:self (-> +2), local_scope:value (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg, scope:children (-> +2), scope:self (-> +2), scope:value (-> +2)
         self.value = value # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:value, loaded_variable:self, loaded_variable:value, node:Assign, node:Attribute, node:Name
         self.children = list(children) # argument:children, assignment:list, assignment_lhs_identifier:self, assignment_rhs_atom:children, external_free_call:list, free_call:list, loaded_variable:children, loaded_variable:self, node:Assign, node:Attribute, node:Call, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 018.2084-depth-first-traversing-of-a-tree.py
 # ----------------------------------------------------------------------------------------
-def DFS(f, root): # body_recursive_function:DFS (-> +3), function:DFS (-> +3), function_parameter:f, function_parameter:root, function_parameter_flavor:arg, function_returning_nothing:DFS (-> +3), higher_order_function:f (-> +3), local_scope:child (-> +3), local_scope:f (-> +3), local_scope:root (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), recursive_call_count:1 (-> +3), recursive_function:DFS (-> +3), scope:child (-> +3), scope:f (-> +3), scope:root (-> +3), whole_span:4 (-> +3)
+def DFS(f, root): # body_recursive_function:DFS (-> +3), function:DFS (-> +3), function_line_count:4 (-> +3), function_parameter:f, function_parameter:root, function_parameter_flavor:arg, function_returning_nothing:DFS (-> +3), higher_order_function:f (-> +3), local_scope:child (-> +3), local_scope:f (-> +3), local_scope:root (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), recursive_call_count:1 (-> +3), recursive_function:DFS (-> +3), scope:child (-> +3), scope:f (-> +3), scope:root (-> +3), whole_span:4 (-> +3)
     f(root) # argument:root, external_free_call:f, free_call:f, free_call_without_result:f, loaded_variable:root, node:Call, node:Expr, node:Name
     for child in root: # for:child (-> +1), for_each:child (-> +1), iteration_variable:child, loaded_variable:root, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
         DFS(f, child) # argument:child, argument:f, free_call:DFS, free_call_without_result:DFS, internal_free_call:DFS, loaded_variable:child, loaded_variable:f, node:Call, node:Expr, node:Name
@@ -185,7 +185,7 @@ x.reverse() # flat_style, imperative_style, loaded_variable:x, member_call:x:rev
 # ----------------------------------------------------------------------------------------
 # 020.0573-return-two-values.py
 # ----------------------------------------------------------------------------------------
-def search(m, x): # function:search (-> +3), function_parameter:m, function_parameter:x, function_parameter_flavor:arg, function_returning_something:search (-> +3), impure_function:search (-> +3), local_scope:idx (-> +3), local_scope:item (-> +3), local_scope:m (-> +3), local_scope:x (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), scope:idx (-> +3), scope:item (-> +3), scope:m (-> +3), scope:x (-> +3), whole_span:4 (-> +3)
+def search(m, x): # function:search (-> +3), function_line_count:4 (-> +3), function_parameter:m, function_parameter:x, function_parameter_flavor:arg, function_returning_something:search (-> +3), impure_function:search (-> +3), local_scope:idx (-> +3), local_scope:item (-> +3), local_scope:m (-> +3), local_scope:x (-> +3), node:FunctionDef (-> +3), node:arg, procedural_style (-> +3), scope:idx (-> +3), scope:item (-> +3), scope:m (-> +3), scope:x (-> +3), whole_span:4 (-> +3)
     for idx, item in enumerate(m): # argument:m, external_free_call:enumerate, for:idx (-> +2), for:item (-> +2), for_indexes_elements:idx (-> +2), free_call:enumerate, iteration_variable:idx, iteration_variable:item, literal:Tuple, loaded_variable:m, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
         if x in item: # comparison_operator:In, if (-> +1), if_test_atom:item, if_test_atom:x, if_without_else (-> +1), loaded_variable:item, loaded_variable:x, node:Compare, node:If (-> +1), node:Name
             return idx, item.index(x) # argument:x, if_then_branch, literal:Tuple, loaded_variable:idx, loaded_variable:item, loaded_variable:x, member_call_method:index, node:Attribute, node:Call, node:Name, node:Return, node:Tuple, return
@@ -214,7 +214,7 @@ s = "ネコ" # assignment, assignment_lhs_identifier:s, flat_style, global_scope
 # 025.0195-send-a-value-to-another-thread.py
 # ----------------------------------------------------------------------------------------
 import Queue # flat_style (-> +5), global_scope:q (-> +5), global_scope:t (-> +5), imperative_style (-> +5), import:Queue, import_module:Queue, node:Import, scope:q (-> +5), scope:t (-> +5), whole_span:6 (-> +5)
-q = Queue() # assignment:Queue, assignment_lhs_identifier:q, external_free_call:Queue, free_call:Queue, free_call_without_arguments:Queue, node:Assign, node:Call, node:Name, single_assignment:q
+q = Queue() # assignment:Queue, assignment_lhs_identifier:q, external_free_call:Queue, free_call:Queue, free_call_no_arguments:Queue, node:Assign, node:Call, node:Name, single_assignment:q
 t = Thread(target=worker) # argument:worker, assignment:Thread, assignment_lhs_identifier:t, assignment_rhs_atom:worker, external_free_call:Thread, free_call:Thread, free_call_with_keyword_argument:Thread:target, keyword_argument:target, loaded_variable:worker, node:Assign, node:Call, node:Name, single_assignment:t
 t.daemon = True # assignment:True, assignment_lhs_identifier:t, assignment_rhs_atom:True, literal:True, loaded_variable:t, node:Assign, node:Attribute, node:Name, node:NameConstant
 t.start() # loaded_variable:t, member_call:t:start, member_call_method:start, member_call_object:t, node:Attribute, node:Call, node:Expr, node:Name
@@ -250,14 +250,14 @@ del items[i] # flat_style, imperative_style, index:i, loaded_variable:i, loaded_
 # 030.0189-parallelize-execution-of-1000-independent-tasks.py
 # ----------------------------------------------------------------------------------------
 from multiprocessing import Pool # global_scope:i (-> +3), global_scope:pool (-> +3), imperative_style (-> +3), import:multiprocessing:Pool, import_module:multiprocessing, import_name:Pool, node:ImportFrom, scope:i (-> +3), scope:pool (-> +3), whole_span:4 (-> +3)
-pool = Pool() # assignment:Pool, assignment_lhs_identifier:pool, external_free_call:Pool, free_call:Pool, free_call_without_arguments:Pool, node:Assign, node:Call, node:Name, single_assignment:pool
+pool = Pool() # assignment:Pool, assignment_lhs_identifier:pool, external_free_call:Pool, free_call:Pool, free_call_no_arguments:Pool, node:Assign, node:Call, node:Name, single_assignment:pool
 for i in range(1, 1001): # argument:1, argument:1001, external_free_call:range, for:i (-> +1), for_range:1:1001 (-> +1), free_call:range, iteration_variable:i, literal:1, literal:1001, loop:for (-> +1), loop_with_late_exit:for (-> +1), magic_number:1001, node:Call, node:For (-> +1), node:Name, node:Num, range:1:1001
     pool.apply_async(f, [i]) # argument:, argument:f, literal:List, loaded_variable:f, loaded_variable:i, loaded_variable:pool, member_call:pool:apply_async, member_call_method:apply_async, member_call_object:pool, node:Attribute, node:Call, node:Expr, node:List, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 031.0188-recursive-factorial-simple.py
 # ----------------------------------------------------------------------------------------
-def f(i): # body_recursive_function:f (-> +4), function:f (-> +4), function_parameter:i, function_parameter_flavor:arg, function_returning_something:f (-> +4), functional_style (-> +4), local_scope:i (-> +4), node:FunctionDef (-> +4), node:arg, pure_function:f (-> +4), recursive_call_count:1 (-> +4), recursive_function:f (-> +4), scope:i (-> +4), whole_span:5 (-> +4)
+def f(i): # body_recursive_function:f (-> +4), function:f (-> +4), function_line_count:5 (-> +4), function_parameter:i, function_parameter_flavor:arg, function_returning_something:f (-> +4), functional_style (-> +4), local_scope:i (-> +4), node:FunctionDef (-> +4), node:arg, pure_function:f (-> +4), recursive_call_count:1 (-> +4), recursive_function:f (-> +4), scope:i (-> +4), whole_span:5 (-> +4)
     if i == 0: # comparison_operator:Eq, if (-> +3), if_test_atom:0, if_test_atom:i, literal:0, loaded_variable:i, node:Compare, node:If (-> +3), node:Name, node:Num
         return 1 # if_then_branch, literal:1, node:Num, node:Return, return:1
     else:
@@ -266,7 +266,7 @@ def f(i): # body_recursive_function:f (-> +4), function:f (-> +4), function_para
 # ----------------------------------------------------------------------------------------
 # 032.0196-integer-exponentiation-by-squaring.py
 # ----------------------------------------------------------------------------------------
-def exp(x, n): # function:exp (-> +1), function_parameter:n, function_parameter:x, function_parameter_flavor:arg, function_returning_something:exp (-> +1), functional_style (-> +1), local_scope:n (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:exp (-> +1), scope:n (-> +1), scope:x (-> +1), whole_span:2 (-> +1)
+def exp(x, n): # function:exp (-> +1), function_line_count:2 (-> +1), function_parameter:n, function_parameter:x, function_parameter_flavor:arg, function_returning_something:exp (-> +1), functional_style (-> +1), local_scope:n (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:exp (-> +1), scope:n (-> +1), scope:x (-> +1), whole_span:2 (-> +1)
     return x ** n # binary_operator:Pow, loaded_variable:n, loaded_variable:x, node:BinOp, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
@@ -283,28 +283,28 @@ finally:
 # ----------------------------------------------------------------------------------------
 # 034.0625-create-a-set-of-objects.py
 # ----------------------------------------------------------------------------------------
-class T(object): # global_scope:x (-> +2), loaded_variable:object, node:ClassDef (-> +1), node:Name, object_oriented_style (-> +2), scope:x (-> +2), whole_span:3 (-> +2)
+class T(object): # class:T (-> +1), global_scope:x (-> +2), loaded_variable:object, node:ClassDef (-> +1), node:Name, object_oriented_style (-> +2), scope:x (-> +2), whole_span:3 (-> +2)
     pass # node:Pass
-x = set(T()) # argument:, assignment:set, assignment_lhs_identifier:x, composition, external_free_call:T, external_free_call:set, free_call:T, free_call:set, free_call_without_arguments:T, node:Assign, node:Call, node:Name, single_assignment:x
+x = set(T()) # argument:, assignment:set, assignment_lhs_identifier:x, composition, external_free_call:T, external_free_call:set, free_call:T, free_call:set, free_call_no_arguments:T, node:Assign, node:Call, node:Name, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
 # 035.0667-first-class-function--compose.py
 # ----------------------------------------------------------------------------------------
-def compose(f, g): # function:compose (-> +1), function_parameter:f, function_parameter:g, function_parameter_flavor:arg, function_returning_something:compose (-> +1), functional_style (-> +1), higher_order_function:f (-> +1), higher_order_function:g (-> +1), local_scope:a (-> +1), local_scope:f (-> +1), local_scope:g (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:compose (-> +1), scope:a (-> +1), scope:f (-> +1), scope:g (-> +1), whole_span:2 (-> +1)
+def compose(f, g): # function:compose (-> +1), function_line_count:2 (-> +1), function_parameter:f, function_parameter:g, function_parameter_flavor:arg, function_returning_something:compose (-> +1), functional_style (-> +1), higher_order_function:f (-> +1), higher_order_function:g (-> +1), local_scope:a (-> +1), local_scope:f (-> +1), local_scope:g (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:compose (-> +1), scope:a (-> +1), scope:f (-> +1), scope:g (-> +1), whole_span:2 (-> +1)
     return lambda a: g(f(a)) # argument:, argument:a, composition, external_free_call:f, external_free_call:g, free_call:f, free_call:g, function_parameter:a, function_parameter_flavor:arg, loaded_variable:a, node:Call, node:Lambda, node:Name, node:Return, node:arg, return
 
 # ----------------------------------------------------------------------------------------
 # 036.0670-first-class-function--generic-composition.py
 # ----------------------------------------------------------------------------------------
-def compose(f, g): # function:compose (-> +1), function_parameter:f, function_parameter:g, function_parameter_flavor:arg, function_returning_something:compose (-> +1), functional_style (-> +1), higher_order_function:f (-> +1), higher_order_function:g (-> +1), local_scope:f (-> +1), local_scope:g (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:compose (-> +1), scope:f (-> +1), scope:g (-> +1), scope:x (-> +1), whole_span:2 (-> +1)
+def compose(f, g): # function:compose (-> +1), function_line_count:2 (-> +1), function_parameter:f, function_parameter:g, function_parameter_flavor:arg, function_returning_something:compose (-> +1), functional_style (-> +1), higher_order_function:f (-> +1), higher_order_function:g (-> +1), local_scope:f (-> +1), local_scope:g (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:compose (-> +1), scope:f (-> +1), scope:g (-> +1), scope:x (-> +1), whole_span:2 (-> +1)
     return lambda x: g(f(x)) # argument:, argument:x, composition, external_free_call:f, external_free_call:g, free_call:f, free_call:g, function_parameter:x, function_parameter_flavor:arg, loaded_variable:x, node:Call, node:Lambda, node:Name, node:Return, node:arg, return
 
 # ----------------------------------------------------------------------------------------
 # 037.0671-currying.py
 # ----------------------------------------------------------------------------------------
 from functools import partial # functional_style (-> +5), import:functools:partial, import_module:functools, import_name:partial, node:ImportFrom, whole_span:6 (-> +5)
-def f(a): # closure:f (-> +3), function:f (-> +3), function_parameter:a, function_parameter_flavor:arg, function_returning_something:f (-> +3), local_scope:a (-> +3), nested_function:f (-> +3), node:FunctionDef (-> +3), node:arg, pure_function:f (-> +3), scope:a (-> +3)
-    def add(b): # access_outer_scope:a (-> +1), function:add (-> +1), function_parameter:b, function_parameter_flavor:arg, function_returning_something:add (-> +1), local_scope:b (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:add (-> +1), scope:b (-> +1)
+def f(a): # closure:f (-> +3), function:f (-> +3), function_line_count:4 (-> +3), function_parameter:a, function_parameter_flavor:arg, function_returning_something:f (-> +3), local_scope:a (-> +3), nested_function:f (-> +3), node:FunctionDef (-> +3), node:arg, pure_function:f (-> +3), scope:a (-> +3)
+    def add(b): # access_outer_scope:a (-> +1), function:add (-> +1), function_line_count:2 (-> +1), function_parameter:b, function_parameter_flavor:arg, function_returning_something:add (-> +1), local_scope:b (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:add (-> +1), scope:b (-> +1)
         return a + b # addition_operator, binary_operator:Add, loaded_variable:a, loaded_variable:b, node:BinOp, node:Name, node:Return, return
     return add # loaded_variable:add, node:Name, node:Return, return:add
 print(f(2)(1)) # argument:, argument:1, argument:2, composition, external_free_call:print, free_call:f, free_call:print, free_call_without_result:print, internal_free_call:f, literal:1, literal:2, node:Call, node:Expr, node:Name, node:Num
@@ -323,14 +323,14 @@ ok = word in s # assignment, assignment_lhs_identifier:ok, assignment_rhs_atom:s
 # 040.2279-graph-with-adjacency-lists.py
 # ----------------------------------------------------------------------------------------
 from collections import defaultdict # global_scope:G (-> +12), import:collections:defaultdict, import_module:collections, import_name:defaultdict, node:ImportFrom, object_oriented_style (-> +12), scope:G (-> +12), whole_span:13 (-> +12)
-class Vertex(set): # loaded_variable:set, node:ClassDef (-> +1), node:Name
+class Vertex(set): # class:Vertex (-> +1), class_method_count:2 (-> +1), loaded_variable:set, node:ClassDef (-> +1), node:Name
     pass # node:Pass
-class Graph(defaultdict): # loaded_variable:defaultdict, node:ClassDef (-> +8), node:Name
-    def __init__(self, *paths): # function:__init__ (-> +3), function_parameter:paths, function_parameter:self, function_parameter_flavor:arg, function_parameter_flavor:vararg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), local_scope:path (-> +3), local_scope:paths (-> +3), local_scope:self (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg, scope:path (-> +3), scope:paths (-> +3), scope:self (-> +3)
+class Graph(defaultdict): # class:Graph (-> +8), class_method_count:2 (-> +8), loaded_variable:defaultdict, node:ClassDef (-> +8), node:Name
+    def __init__(self, *paths): # function:__init__ (-> +3), function_line_count:4 (-> +3), function_parameter:paths, function_parameter:self, function_parameter_flavor:arg, function_parameter_flavor:vararg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), local_scope:path (-> +3), local_scope:paths (-> +3), local_scope:self (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg, scope:path (-> +3), scope:paths (-> +3), scope:self (-> +3)
         self.default_factory = Vertex # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:Vertex, loaded_variable:Vertex, loaded_variable:self, node:Assign, node:Attribute, node:Name
         for path in paths: # for:path (-> +1), for_each:path (-> +1), iteration_variable:path, loaded_variable:paths, loop:for (-> +1), loop_with_late_exit:for (-> +1), node:For (-> +1), node:Name
             self.make_path(path) # argument:path, loaded_variable:path, loaded_variable:self, member_call:self:make_path, member_call_method:make_path, member_call_object:self, node:Attribute, node:Call, node:Expr, node:Name
-    def make_path(self, labels): # function:make_path (-> +3), function_parameter:labels, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:make_path (-> +3), instance_method:make_path (-> +3), local_scope:l1 (-> +3), local_scope:l2 (-> +3), local_scope:labels (-> +3), local_scope:self (-> +3), method:make_path (-> +3), node:FunctionDef (-> +3), node:arg, scope:l1 (-> +3), scope:l2 (-> +3), scope:labels (-> +3), scope:self (-> +3)
+    def make_path(self, labels): # function:make_path (-> +3), function_line_count:4 (-> +3), function_parameter:labels, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:make_path (-> +3), instance_method:make_path (-> +3), local_scope:l1 (-> +3), local_scope:l2 (-> +3), local_scope:labels (-> +3), local_scope:self (-> +3), method:make_path (-> +3), node:FunctionDef (-> +3), node:arg, scope:l1 (-> +3), scope:l2 (-> +3), scope:labels (-> +3), scope:self (-> +3)
         for l1, l2 in zip(labels, labels[1:]): # argument:, argument:labels, external_free_call:zip, for:l1 (-> +2), for:l2 (-> +2), free_call:zip, iteration_variable:l1, iteration_variable:l2, literal:1, literal:Tuple, loaded_variable:labels, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Num, node:Subscript, node:Tuple, slice:1::, slice_lower:1, slice_step:, slice_upper:
             self[l1].add(l2) # argument:l2, index:l1, loaded_variable:l1, loaded_variable:l2, loaded_variable:self, member_call_method:add, node:Attribute, node:Call, node:Expr, node:Name, node:Subscript
             self[l2].add(l1) # argument:l1, index:l2, loaded_variable:l1, loaded_variable:l2, loaded_variable:self, member_call_method:add, node:Attribute, node:Call, node:Expr, node:Name, node:Subscript
@@ -353,7 +353,7 @@ for v in a: # for:v (-> +7), for_each:v (-> +7), global_scope:u (-> +7), global_
     try: # node:Try (-> +6), try_except:Exception (-> +6), try_raise:Exception (-> +6)
         for u in b: # for:u (-> +2), for_each:u (-> +2), iteration_variable:u, loaded_variable:b, loop:for (-> +2), loop_with_early_exit:for:raise (-> +2), loop_with_raise:for (-> +2), nested_for:1 (-> +2), node:For (-> +2), node:Name
             if v == u: # comparison_operator:Eq, if (-> +1), if_test_atom:u, if_test_atom:v, if_without_else (-> +1), loaded_variable:u, loaded_variable:v, node:Compare, node:If (-> +1), node:Name
-                raise Exception() # external_free_call:Exception, free_call:Exception, free_call_without_arguments:Exception, if_then_branch, node:Call, node:Name, node:Raise, raise:Exception
+                raise Exception() # external_free_call:Exception, free_call:Exception, free_call_no_arguments:Exception, if_then_branch, node:Call, node:Name, node:Raise, raise:Exception
         print(v) # argument:v, external_free_call:print, free_call:print, free_call_without_result:print, loaded_variable:v, node:Call, node:Expr, node:Name
     except Exception: # except:Exception, loaded_variable:Exception, node:ExceptHandler (-> +1), node:Name
         continue # node:Continue
@@ -370,7 +370,7 @@ for v in a: # for:v (-> +4), for_each:v (-> +4), global_scope:v (-> +4), global_
 # ----------------------------------------------------------------------------------------
 # 043.0676-break-outer-loop.py
 # ----------------------------------------------------------------------------------------
-class BreakOuterLoop(Exception): # global_scope:column (-> +10), global_scope:position (-> +10), global_scope:row (-> +10), loaded_variable:Exception, node:ClassDef (-> +1), node:Name, object_oriented_style (-> +10), scope:column (-> +10), scope:position (-> +10), scope:row (-> +10), whole_span:11 (-> +10)
+class BreakOuterLoop(Exception): # class:BreakOuterLoop (-> +1), global_scope:column (-> +10), global_scope:position (-> +10), global_scope:row (-> +10), loaded_variable:Exception, node:ClassDef (-> +1), node:Name, object_oriented_style (-> +10), scope:column (-> +10), scope:position (-> +10), scope:row (-> +10), whole_span:11 (-> +10)
     pass # node:Pass
 try: # node:Try (-> +8), try_except:BreakOuterLoop (-> +8), try_raise:BreakOuterLoop (-> +8)
     position = None # assignment:None, assignment_lhs_identifier:position, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:position
@@ -385,7 +385,7 @@ except BreakOuterLoop: # except:BreakOuterLoop, loaded_variable:BreakOuterLoop, 
 # ----------------------------------------------------------------------------------------
 # 043.2733-break-outer-loop.py
 # ----------------------------------------------------------------------------------------
-def loop_breaking(m, v): # function:loop_breaking (-> +5), function_parameter:m, function_parameter:v, function_parameter_flavor:arg, function_returning_something:loop_breaking (-> +5), impure_function:loop_breaking (-> +5), local_scope:i (-> +5), local_scope:j (-> +5), local_scope:m (-> +5), local_scope:row (-> +5), local_scope:v (-> +5), local_scope:value (-> +5), node:FunctionDef (-> +5), node:arg, procedural_style (-> +6), scope:i (-> +5), scope:j (-> +5), scope:m (-> +5), scope:row (-> +5), scope:v (-> +5), scope:value (-> +5), whole_span:7 (-> +6)
+def loop_breaking(m, v): # function:loop_breaking (-> +5), function_line_count:6 (-> +5), function_parameter:m, function_parameter:v, function_parameter_flavor:arg, function_returning_something:loop_breaking (-> +5), impure_function:loop_breaking (-> +5), local_scope:i (-> +5), local_scope:j (-> +5), local_scope:m (-> +5), local_scope:row (-> +5), local_scope:v (-> +5), local_scope:value (-> +5), node:FunctionDef (-> +5), node:arg, procedural_style (-> +6), scope:i (-> +5), scope:j (-> +5), scope:m (-> +5), scope:row (-> +5), scope:v (-> +5), scope:value (-> +5), whole_span:7 (-> +6)
     for i, row in enumerate(m): # argument:m, external_free_call:enumerate, for:i (-> +3), for:row (-> +3), for_indexes_elements:i (-> +3), free_call:enumerate, iteration_variable:i, iteration_variable:row, literal:Tuple, loaded_variable:m, loop:for (-> +3), loop_with_early_exit:for:return (-> +3), loop_with_return:for (-> +3), node:Call, node:For (-> +3), node:Name, node:Tuple
         for j, value in enumerate(row): # argument:row, external_free_call:enumerate, for:j (-> +2), for:value (-> +2), for_indexes_elements:j (-> +2), free_call:enumerate, iteration_variable:j, iteration_variable:value, literal:Tuple, loaded_variable:row, loop:for (-> +2), loop_with_early_exit:for:return (-> +2), loop_with_return:for (-> +2), nested_for:1 (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
             if value == v: # comparison_operator:Eq, if (-> +1), if_test_atom:v, if_test_atom:value, if_without_else (-> +1), loaded_variable:v, loaded_variable:value, node:Compare, node:If (-> +1), node:Name
@@ -466,7 +466,7 @@ s = str(i) # argument:i, assignment:str, assignment_lhs_identifier:s, assignment
 # 056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py
 # ----------------------------------------------------------------------------------------
 from multiprocessing import Pool # import:multiprocessing:Pool, import_module:multiprocessing, import_name:Pool, node:ImportFrom, procedural_style (-> +5), whole_span:6 (-> +5)
-def f(i): # function:f (-> +1), function_parameter:i, function_parameter_flavor:arg, function_returning_nothing:f (-> +1), local_scope:i (-> +1), node:FunctionDef (-> +1), node:arg, scope:i (-> +1)
+def f(i): # function:f (-> +1), function_line_count:2 (-> +1), function_parameter:i, function_parameter_flavor:arg, function_returning_nothing:f (-> +1), local_scope:i (-> +1), node:FunctionDef (-> +1), node:arg, scope:i (-> +1)
     i * i # binary_operator:Mult, loaded_variable:i, multiplication_operator, node:BinOp, node:Expr, node:Name
 with Pool(processes) as p: # argument:processes, external_free_call:Pool, free_call:Pool, loaded_variable:processes, node:Call, node:Name, node:With (-> +1)
     p.map(func=f, iterable=range(1, 1001)) # argument:, argument:1, argument:1001, argument:f, external_free_call:range, free_call:range, keyword_argument:func, keyword_argument:iterable, literal:1, literal:1001, loaded_variable:f, loaded_variable:p, magic_number:1001, member_call:p:map, member_call_method:map, member_call_object:p, node:Attribute, node:Call, node:Expr, node:Name, node:Num, range:1:1001
@@ -534,7 +534,7 @@ z = x ** n # assignment:Pow, assignment_lhs_identifier:z, assignment_rhs_atom:n,
 # 067.1426-binomial-coefficient-n-choose-k.py
 # ----------------------------------------------------------------------------------------
 import math # functional_style (-> +2), import:math, import_module:math, node:Import, one_liner_style (-> +2), whole_span:3 (-> +2)
-def binom(n, k): # function:binom (-> +1), function_parameter:k, function_parameter:n, function_parameter_flavor:arg, function_returning_something:binom (-> +1), local_scope:k (-> +1), local_scope:n (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:binom (-> +1), scope:k (-> +1), scope:n (-> +1)
+def binom(n, k): # function:binom (-> +1), function_line_count:2 (-> +1), function_parameter:k, function_parameter:n, function_parameter_flavor:arg, function_returning_something:binom (-> +1), local_scope:k (-> +1), local_scope:n (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:binom (-> +1), scope:k (-> +1), scope:n (-> +1)
     return math.factorial(n) // math.factorial(k) // math.factorial(n - k) # argument:, argument:k, argument:n, binary_operator:FloorDiv, binary_operator:Sub, loaded_variable:k, loaded_variable:math, loaded_variable:n, member_call_method:factorial, node:Attribute, node:BinOp, node:Call, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
@@ -565,7 +565,7 @@ print(" ".join(sys.argv[1:])) # argument:, composition, external_free_call:print
 # ----------------------------------------------------------------------------------------
 # 073.0673-create-a-factory.py
 # ----------------------------------------------------------------------------------------
-def fact(a_class, str_): # function:fact (-> +2), function_parameter:a_class, function_parameter:str_, function_parameter_flavor:arg, function_returning_something:fact (-> +2), functional_style (-> +2), higher_order_function:a_class (-> +2), local_scope:a_class (-> +2), local_scope:str_ (-> +2), node:FunctionDef (-> +2), node:arg, pure_function:fact (-> +2), scope:a_class (-> +2), scope:str_ (-> +2), whole_span:3 (-> +2)
+def fact(a_class, str_): # function:fact (-> +2), function_line_count:3 (-> +2), function_parameter:a_class, function_parameter:str_, function_parameter_flavor:arg, function_returning_something:fact (-> +2), functional_style (-> +2), higher_order_function:a_class (-> +2), local_scope:a_class (-> +2), local_scope:str_ (-> +2), node:FunctionDef (-> +2), node:arg, pure_function:fact (-> +2), scope:a_class (-> +2), scope:str_ (-> +2), whole_span:3 (-> +2)
     if issubclass(a_class, Parent): # argument:Parent, argument:a_class, external_free_call:issubclass, free_call:issubclass, if (-> +1), if_test_atom:Parent, if_test_atom:a_class, if_without_else (-> +1), loaded_variable:Parent, loaded_variable:a_class, node:Call, node:If (-> +1), node:Name
         return a_class(str_) # argument:str_, external_free_call:a_class, free_call:a_class, free_tail_call:a_class, if_then_branch, loaded_variable:str_, node:Call, node:Name, node:Return, return
 
@@ -596,7 +596,7 @@ y = x * 1j # assignment:Mult, assignment_lhs_identifier:y, assignment_rhs_atom:1
 # 078.1089-do-while-loop.py
 # ----------------------------------------------------------------------------------------
 while True: # imperative_style (-> +3), infinite_while (-> +3), literal:True, loop:while (-> +3), loop_with_break:while (-> +3), loop_with_early_exit:while:break (-> +3), node:NameConstant, node:While (-> +3), whole_span:4 (-> +3)
-    do_something() # external_free_call:do_something, free_call:do_something, free_call_without_arguments:do_something, free_call_without_result:do_something, node:Call, node:Expr, node:Name
+    do_something() # external_free_call:do_something, free_call:do_something, free_call_no_arguments:do_something, free_call_without_result:do_something, node:Call, node:Expr, node:Name
     if not c: # if (-> +1), if_test_atom:c, if_without_else (-> +1), loaded_variable:c, node:If (-> +1), node:Name, node:UnaryOp, unary_operator:Not
         break # if_then_branch, node:Break
 
@@ -634,13 +634,13 @@ c = bin(i).count("1") # argument:, argument:i, assignment:count, assignment_lhs_
 # ----------------------------------------------------------------------------------------
 # 085.1003-check-if-integer-addition-will-overflow.py
 # ----------------------------------------------------------------------------------------
-def adding_will_overflow(x, y): # function:adding_will_overflow (-> +1), function_parameter:x, function_parameter:y, function_parameter_flavor:arg, function_returning_something:adding_will_overflow (-> +1), functional_style (-> +1), local_scope:x (-> +1), local_scope:y (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:adding_will_overflow (-> +1), scope:x (-> +1), scope:y (-> +1), whole_span:2 (-> +1)
+def adding_will_overflow(x, y): # function:adding_will_overflow (-> +1), function_line_count:2 (-> +1), function_parameter:x, function_parameter:y, function_parameter_flavor:arg, function_returning_something:adding_will_overflow (-> +1), functional_style (-> +1), local_scope:x (-> +1), local_scope:y (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:adding_will_overflow (-> +1), scope:x (-> +1), scope:y (-> +1), whole_span:2 (-> +1)
     return False # literal:False, node:NameConstant, node:Return, return:False
 
 # ----------------------------------------------------------------------------------------
 # 086.1004-check-if-integer-multiplication-will-overflow.py
 # ----------------------------------------------------------------------------------------
-def multiplyWillOverflow(x, y): # function:multiplyWillOverflow (-> +1), function_parameter:x, function_parameter:y, function_parameter_flavor:arg, function_returning_something:multiplyWillOverflow (-> +1), functional_style (-> +1), local_scope:x (-> +1), local_scope:y (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:multiplyWillOverflow (-> +1), scope:x (-> +1), scope:y (-> +1), whole_span:2 (-> +1)
+def multiplyWillOverflow(x, y): # function:multiplyWillOverflow (-> +1), function_line_count:2 (-> +1), function_parameter:x, function_parameter:y, function_parameter_flavor:arg, function_returning_something:multiplyWillOverflow (-> +1), functional_style (-> +1), local_scope:x (-> +1), local_scope:y (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:multiplyWillOverflow (-> +1), scope:x (-> +1), scope:y (-> +1), whole_span:2 (-> +1)
     return False # literal:False, node:NameConstant, node:Return, return:False
 
 # ----------------------------------------------------------------------------------------
@@ -662,10 +662,10 @@ raise ValueError("x is invalid") # argument:, external_free_call:ValueError, fla
 # ----------------------------------------------------------------------------------------
 # 090.1099-read-only-outside.py
 # ----------------------------------------------------------------------------------------
-class Foo(object): # loaded_variable:object, node:ClassDef (-> +5), node:Name, object_oriented_style (-> +5), whole_span:6 (-> +5)
-    def __init__(self): # function:__init__ (-> +1), function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +1), instance_method:__init__ (-> +1), local_scope:self (-> +1), method:__init__ (-> +1), node:FunctionDef (-> +1), node:arg, scope:self (-> +1)
+class Foo(object): # class:Foo (-> +5), class_method_count:2 (-> +5), loaded_variable:object, node:ClassDef (-> +5), node:Name, object_oriented_style (-> +5), whole_span:6 (-> +5)
+    def __init__(self): # function:__init__ (-> +1), function_line_count:2 (-> +1), function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +1), instance_method:__init__ (-> +1), local_scope:self (-> +1), method:__init__ (-> +1), node:FunctionDef (-> +1), node:arg, scope:self (-> +1)
         self._x = 0 # assignment:0, assignment_lhs_identifier:self, assignment_rhs_atom:0, literal:0, loaded_variable:self, node:Assign, node:Attribute, node:Name, node:Num
-    @property # decorated_function:x (-> +2), function:x (-> +2), function_decorator:property (-> +2), function_returning_something:x (-> +2), instance_method:x (-> +2), loaded_variable:property, local_scope:self (-> +2), method:x (-> +2), node:FunctionDef (-> +2), node:Name, scope:self (-> +2)
+    @property # decorated_function:x (-> +2), function:x (-> +2), function_decorator:property (-> +2), function_line_count:3 (-> +2), function_returning_something:x (-> +2), instance_method:x (-> +2), loaded_variable:property, local_scope:self (-> +2), method:x (-> +2), node:FunctionDef (-> +2), node:Name, scope:self (-> +2)
     def x(self): # function_parameter:self, function_parameter_flavor:arg, node:arg
         return self._x # loaded_variable:self, node:Attribute, node:Name, node:Return, return, value_attr:_x
 
@@ -687,8 +687,8 @@ with open("data.json", "w") as output: # argument:, external_free_call:open, fre
 # 093.1082-pass-a-runnable-procedure-as-parameter.py
 # ----------------------------------------------------------------------------------------
 from __future__ import print_function # functional_style (-> +2), import:__future__:print_function, import_module:__future__, import_name:print_function, node:ImportFrom, one_liner_style (-> +2), whole_span:3 (-> +2)
-def control(f): # function:control (-> +1), function_parameter:f, function_parameter_flavor:arg, function_returning_something:control (-> +1), higher_order_function:f (-> +1), local_scope:f (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:control (-> +1), scope:f (-> +1)
-    return f() # external_free_call:f, free_call:f, free_call_without_arguments:f, free_tail_call:f, node:Call, node:Name, node:Return, return
+def control(f): # function:control (-> +1), function_line_count:2 (-> +1), function_parameter:f, function_parameter_flavor:arg, function_returning_something:control (-> +1), higher_order_function:f (-> +1), local_scope:f (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:control (-> +1), scope:f (-> +1)
+    return f() # external_free_call:f, free_call:f, free_call_no_arguments:f, free_tail_call:f, node:Call, node:Name, node:Return, return
 
 # ----------------------------------------------------------------------------------------
 # 094.1101-print-type-of-variable.py
@@ -764,11 +764,11 @@ x = lxml.etree.parse("data.xml") # argument:, assignment:parse, assignment_lhs_i
 # 104.3264-save-object-into-xml-file.py
 # ----------------------------------------------------------------------------------------
 import pyxser as pyx # global_scope:a (-> +11), global_scope:b (-> +11), global_scope:c (-> +11), global_scope:ser (-> +11), global_scope:tst (-> +11), import:pyxser, import_module:pyxser, node:Import, object_oriented_style (-> +11), scope:a (-> +11), scope:b (-> +11), scope:c (-> +11), scope:ser (-> +11), scope:tst (-> +11), whole_span:12 (-> +11)
-class TestClass(object): # loaded_variable:object, node:ClassDef (-> +7), node:Name
+class TestClass(object): # class:TestClass (-> +7), class_method_count:1 (-> +7), loaded_variable:object, node:ClassDef (-> +7), node:Name
     a = None # assignment:None, assignment_lhs_identifier:a, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:a
     b = None # assignment:None, assignment_lhs_identifier:b, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:b
     c = None # assignment:None, assignment_lhs_identifier:c, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:c
-    def __init__(self, a, b, c): # function:__init__ (-> +3), function_parameter:a, function_parameter:b, function_parameter:c, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), local_scope:a (-> +3), local_scope:b (-> +3), local_scope:c (-> +3), local_scope:self (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg, scope:a (-> +3), scope:b (-> +3), scope:c (-> +3), scope:self (-> +3), shadowing_scope:a (-> +3), shadowing_scope:b (-> +3), shadowing_scope:c (-> +3)
+    def __init__(self, a, b, c): # function:__init__ (-> +3), function_line_count:4 (-> +3), function_parameter:a, function_parameter:b, function_parameter:c, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), local_scope:a (-> +3), local_scope:b (-> +3), local_scope:c (-> +3), local_scope:self (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg, scope:a (-> +3), scope:b (-> +3), scope:c (-> +3), scope:self (-> +3), shadowing_scope:a (-> +3), shadowing_scope:b (-> +3), shadowing_scope:c (-> +3)
         self.a = a # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:a, loaded_variable:a, loaded_variable:self, node:Assign, node:Attribute, node:Name
         self.b = b # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:b, loaded_variable:b, loaded_variable:self, node:Assign, node:Attribute, node:Name
         self.c = c # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:c, loaded_variable:c, loaded_variable:self, node:Assign, node:Attribute, node:Name
@@ -797,7 +797,7 @@ dir = os.path.dirname(os.path.abspath(__file__)) # argument:, argument:__file__,
 # ----------------------------------------------------------------------------------------
 # 108.1291-determine-if-variable-name-is-defined.py
 # ----------------------------------------------------------------------------------------
-if "x" in locals(): # comparison_operator:In, external_free_call:locals, free_call:locals, free_call_without_arguments:locals, if (-> +1), if_without_else (-> +1), imperative_style (-> +1), literal:Str, node:Call, node:Compare, node:If (-> +1), node:Name, node:Str, whole_span:2 (-> +1)
+if "x" in locals(): # comparison_operator:In, external_free_call:locals, free_call:locals, free_call_no_arguments:locals, if (-> +1), if_without_else (-> +1), imperative_style (-> +1), literal:Str, node:Call, node:Compare, node:If (-> +1), node:Name, node:Str, whole_span:2 (-> +1)
     print(x) # argument:x, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, loaded_variable:x, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -869,7 +869,7 @@ x = list(set(x)) # argument:, argument:x, assignment:list, assignment_lhs_identi
 # 119.3263-deduplicate-list.py
 # ----------------------------------------------------------------------------------------
 elements = ["b", "a", "b", "c"] # assignment, assignment_lhs_identifier:elements, global_scope:elements (-> +7), global_scope:elements_unique (-> +7), global_scope:i (-> +7), global_scope:unique_set (-> +7), imperative_style (-> +7), literal:List, literal:Str, node:Assign, node:List, node:Name, node:Str, scope:elements (-> +7), scope:elements_unique (-> +7), scope:i (-> +7), scope:unique_set (-> +7), single_assignment:elements, whole_span:8 (-> +7)
-unique_set = set() # assignment:set, assignment_lhs_identifier:unique_set, external_free_call:set, free_call:set, free_call_without_arguments:set, node:Assign, node:Call, node:Name, single_assignment:unique_set
+unique_set = set() # assignment:set, assignment_lhs_identifier:unique_set, external_free_call:set, free_call:set, free_call_no_arguments:set, node:Assign, node:Call, node:Name, single_assignment:unique_set
 elements_unique = [] # assignment, assignment_lhs_identifier:elements_unique, empty_literal:List, literal:List, node:Assign, node:List, node:Name, single_assignment:elements_unique
 for i in elements: # accumulate_elements:add (-> +3), accumulate_elements:append (-> +3), accumulate_some_elements:add (-> +3), accumulate_some_elements:append (-> +3), for:i (-> +3), for_each:i (-> +3), iteration_variable:i, loaded_variable:elements, loop:for (-> +3), loop_with_late_exit:for (-> +3), node:For (-> +3), node:Name
     if i not in unique_set: # comparison_operator:NotIn, if (-> +2), if_test_atom:i, if_test_atom:unique_set, if_without_else (-> +2), loaded_variable:i, loaded_variable:unique_set, node:Compare, node:If (-> +2), node:Name
@@ -896,14 +896,14 @@ while True: # infinite_while (-> +2), literal:True, loop:while (-> +2), loop_wit
 # ----------------------------------------------------------------------------------------
 # 122.1453-declare-enumeration.py
 # ----------------------------------------------------------------------------------------
-class Suit: # global_scope:CLUBS (-> +1), global_scope:DIAMONDS (-> +1), global_scope:HEARTS (-> +1), global_scope:SPADES (-> +1), node:ClassDef (-> +1), object_oriented_style (-> +1), one_liner_style (-> +1), scope:CLUBS (-> +1), scope:DIAMONDS (-> +1), scope:HEARTS (-> +1), scope:SPADES (-> +1), whole_span:2 (-> +1)
+class Suit: # class:Suit (-> +1), global_scope:CLUBS (-> +1), global_scope:DIAMONDS (-> +1), global_scope:HEARTS (-> +1), global_scope:SPADES (-> +1), node:ClassDef (-> +1), object_oriented_style (-> +1), one_liner_style (-> +1), scope:CLUBS (-> +1), scope:DIAMONDS (-> +1), scope:HEARTS (-> +1), scope:SPADES (-> +1), whole_span:2 (-> +1)
     SPADES, HEARTS, DIAMONDS, CLUBS = range(4) # argument:4, assignment:range, assignment_lhs_identifier:CLUBS, assignment_lhs_identifier:DIAMONDS, assignment_lhs_identifier:HEARTS, assignment_lhs_identifier:SPADES, assignment_rhs_atom:4, external_free_call:range, free_call:range, literal:4, literal:Tuple, magic_number:4, node:Assign, node:Call, node:Name, node:Num, node:Tuple, parallel_assignment:4, range:4
 
 # ----------------------------------------------------------------------------------------
 # 122.1454-declare-enumeration.py
 # ----------------------------------------------------------------------------------------
 from enum import Enum # global_scope:CLUBS (-> +5), global_scope:DIAMONDS (-> +5), global_scope:HEARTS (-> +5), global_scope:SPADES (-> +5), import:enum:Enum, import_module:enum, import_name:Enum, node:ImportFrom, object_oriented_style (-> +5), scope:CLUBS (-> +5), scope:DIAMONDS (-> +5), scope:HEARTS (-> +5), scope:SPADES (-> +5), whole_span:6 (-> +5)
-class Suit(Enum): # loaded_variable:Enum, node:ClassDef (-> +4), node:Name
+class Suit(Enum): # class:Suit (-> +4), loaded_variable:Enum, node:ClassDef (-> +4), node:Name
     SPADES = 1 # assignment:1, assignment_lhs_identifier:SPADES, assignment_rhs_atom:1, literal:1, node:Assign, node:Name, node:Num, single_assignment:SPADES
     HEARTS = 2 # assignment:2, assignment_lhs_identifier:HEARTS, assignment_rhs_atom:2, literal:2, node:Assign, node:Name, node:Num, single_assignment:HEARTS
     DIAMONDS = 3 # assignment:3, assignment_lhs_identifier:DIAMONDS, assignment_rhs_atom:3, literal:3, node:Assign, node:Name, node:Num, single_assignment:DIAMONDS
@@ -918,7 +918,7 @@ assert isConsistent # flat_style, imperative_style, loaded_variable:isConsistent
 # 124.2152-binary-search-for-a-value-in-sorted-array.py
 # ----------------------------------------------------------------------------------------
 import bisect # import:bisect, import_module:bisect, node:Import, procedural_style (-> +3), whole_span:4 (-> +3)
-def binarySearch(a, x): # function:binarySearch (-> +2), function_parameter:a, function_parameter:x, function_parameter_flavor:arg, function_returning_something:binarySearch (-> +2), impure_function:binarySearch (-> +2), local_scope:a (-> +2), local_scope:i (-> +2), local_scope:x (-> +2), node:FunctionDef (-> +2), node:arg, scope:a (-> +2), scope:i (-> +2), scope:x (-> +2)
+def binarySearch(a, x): # function:binarySearch (-> +2), function_line_count:3 (-> +2), function_parameter:a, function_parameter:x, function_parameter_flavor:arg, function_returning_something:binarySearch (-> +2), impure_function:binarySearch (-> +2), local_scope:a (-> +2), local_scope:i (-> +2), local_scope:x (-> +2), node:FunctionDef (-> +2), node:arg, scope:a (-> +2), scope:i (-> +2), scope:x (-> +2)
     i = bisect.bisect_left(a, x) # argument:a, argument:x, assignment:bisect_left, assignment_lhs_identifier:i, assignment_rhs_atom:a, assignment_rhs_atom:bisect, assignment_rhs_atom:x, loaded_variable:a, loaded_variable:bisect, loaded_variable:x, member_call_method:bisect_left, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:i
     return i if i != len(a) and a[i] == x else -1 # argument:a, boolean_operator:And, comparison_operator:Eq, comparison_operator:NotEq, external_free_call:len, free_call:len, index:i, literal:-1, loaded_variable:a, loaded_variable:i, loaded_variable:x, node:BoolOp, node:Call, node:Compare, node:IfExp, node:Name, node:Num, node:Return, node:Subscript, return
 
@@ -927,14 +927,14 @@ def binarySearch(a, x): # function:binarySearch (-> +2), function_parameter:a, f
 # ----------------------------------------------------------------------------------------
 import time # flat_style (-> +4), global_scope:t1 (-> +4), global_scope:t2 (-> +4), imperative_style (-> +4), import:time, import_module:time, node:Import, scope:t1 (-> +4), scope:t2 (-> +4), whole_span:5 (-> +4)
 t1 = time.perf_counter() # assignment:perf_counter, assignment_lhs_identifier:t1, assignment_rhs_atom:time, loaded_variable:time, member_call_method:perf_counter, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t1
-foo() # external_free_call:foo, free_call:foo, free_call_without_arguments:foo, free_call_without_result:foo, node:Call, node:Expr, node:Name
+foo() # external_free_call:foo, free_call:foo, free_call_no_arguments:foo, free_call_without_result:foo, node:Call, node:Expr, node:Name
 t2 = time.perf_counter() # assignment:perf_counter, assignment_lhs_identifier:t2, assignment_rhs_atom:time, loaded_variable:time, member_call_method:perf_counter, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:t2
 print("Seconds:", t2 - t1) # argument:, binary_operator:Sub, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, loaded_variable:t1, loaded_variable:t2, node:BinOp, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 126.2137-multiple-return-values.py
 # ----------------------------------------------------------------------------------------
-def foo(): # function:foo (-> +1), function_returning_something:foo (-> +1), function_without_parameters:foo (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), pure_function:foo (-> +1), whole_span:2 (-> +1)
+def foo(): # function:foo (-> +1), function_line_count:2 (-> +1), function_returning_something:foo (-> +1), function_without_parameters:foo (-> +1), functional_style (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), pure_function:foo (-> +1), whole_span:2 (-> +1)
     return "string", True # literal:Str, literal:True, literal:Tuple, node:NameConstant, node:Return, node:Str, node:Tuple, return
 
 # ----------------------------------------------------------------------------------------
@@ -946,7 +946,7 @@ foo = imp.load_module("foobody", "foobody.txt").foo # argument:, assignment, ass
 # ----------------------------------------------------------------------------------------
 # 128.2085-breadth-first-traversing-of-a-tree.py
 # ----------------------------------------------------------------------------------------
-def BFS(f, root): # function:BFS (-> +8), function_parameter:f, function_parameter:root, function_parameter_flavor:arg, function_returning_nothing:BFS (-> +8), higher_order_function:f (-> +8), local_scope:Q (-> +8), local_scope:child (-> +8), local_scope:f (-> +8), local_scope:n (-> +8), local_scope:root (-> +8), node:FunctionDef (-> +8), node:arg, procedural_style (-> +8), scope:Q (-> +8), scope:child (-> +8), scope:f (-> +8), scope:n (-> +8), scope:root (-> +8), whole_span:9 (-> +8)
+def BFS(f, root): # function:BFS (-> +8), function_line_count:9 (-> +8), function_parameter:f, function_parameter:root, function_parameter_flavor:arg, function_returning_nothing:BFS (-> +8), higher_order_function:f (-> +8), local_scope:Q (-> +8), local_scope:child (-> +8), local_scope:f (-> +8), local_scope:n (-> +8), local_scope:root (-> +8), node:FunctionDef (-> +8), node:arg, procedural_style (-> +8), scope:Q (-> +8), scope:child (-> +8), scope:f (-> +8), scope:n (-> +8), scope:root (-> +8), whole_span:9 (-> +8)
     Q = [root] # assignment, assignment_lhs_identifier:Q, assignment_rhs_atom:root, literal:List, loaded_variable:root, node:Assign, node:List, node:Name, single_assignment:Q
     while Q: # loaded_variable:Q, loop:while (-> +6), loop_with_late_exit:while (-> +6), node:Name, node:While (-> +6)
         n = Q.pop(0) # argument:0, assignment:pop, assignment_lhs_identifier:n, assignment_rhs_atom:0, assignment_rhs_atom:Q, literal:0, loaded_variable:Q, member_call_method:pop, node:Assign, node:Attribute, node:Call, node:Name, node:Num, single_assignment:n
@@ -960,8 +960,8 @@ def BFS(f, root): # function:BFS (-> +8), function_parameter:f, function_paramet
 # 129.2282-breadth-first-traversing-in-a-graph.py
 # ----------------------------------------------------------------------------------------
 from collections import deque # import:collections:deque, import_module:collections, import_name:deque, node:ImportFrom, procedural_style (-> +8), whole_span:9 (-> +8)
-def breadth_first(start, f): # function:breadth_first (-> +7), function_parameter:f, function_parameter:start, function_parameter_flavor:arg, function_returning_nothing:breadth_first (-> +7), higher_order_function:f (-> +7), local_scope:f (-> +7), local_scope:q (-> +7), local_scope:seen (-> +7), local_scope:start (-> +7), local_scope:vertex (-> +7), node:FunctionDef (-> +7), node:arg, scope:f (-> +7), scope:q (-> +7), scope:seen (-> +7), scope:start (-> +7), scope:vertex (-> +7)
-    seen = set() # assignment:set, assignment_lhs_identifier:seen, external_free_call:set, free_call:set, free_call_without_arguments:set, node:Assign, node:Call, node:Name, single_assignment:seen
+def breadth_first(start, f): # function:breadth_first (-> +7), function_line_count:8 (-> +7), function_parameter:f, function_parameter:start, function_parameter_flavor:arg, function_returning_nothing:breadth_first (-> +7), higher_order_function:f (-> +7), local_scope:f (-> +7), local_scope:q (-> +7), local_scope:seen (-> +7), local_scope:start (-> +7), local_scope:vertex (-> +7), node:FunctionDef (-> +7), node:arg, scope:f (-> +7), scope:q (-> +7), scope:seen (-> +7), scope:start (-> +7), scope:vertex (-> +7)
+    seen = set() # assignment:set, assignment_lhs_identifier:seen, external_free_call:set, free_call:set, free_call_no_arguments:set, node:Assign, node:Call, node:Name, single_assignment:seen
     q = deque([start]) # argument:, assignment:deque, assignment_lhs_identifier:q, assignment_rhs_atom:start, external_free_call:deque, free_call:deque, literal:List, loaded_variable:start, node:Assign, node:Call, node:List, node:Name, single_assignment:q
     while q: # loaded_variable:q, loop:while (-> +4), loop_with_late_exit:while (-> +4), node:Name, node:While (-> +4)
         vertex = q.popleft() # assignment:popleft, assignment_lhs_identifier:vertex, assignment_rhs_atom:q, loaded_variable:q, member_call_method:popleft, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:vertex
@@ -972,8 +972,8 @@ def breadth_first(start, f): # function:breadth_first (-> +7), function_paramete
 # ----------------------------------------------------------------------------------------
 # 130.2283-depth-first-traversing-in-a-graph.py
 # ----------------------------------------------------------------------------------------
-def depth_first(start, f): # function:depth_first (-> +7), function_parameter:f, function_parameter:start, function_parameter_flavor:arg, function_returning_nothing:depth_first (-> +7), higher_order_function:f (-> +7), local_scope:f (-> +7), local_scope:seen (-> +7), local_scope:stack (-> +7), local_scope:start (-> +7), local_scope:vertex (-> +7), node:FunctionDef (-> +7), node:arg, procedural_style (-> +7), scope:f (-> +7), scope:seen (-> +7), scope:stack (-> +7), scope:start (-> +7), scope:vertex (-> +7), whole_span:8 (-> +7)
-    seen = set() # assignment:set, assignment_lhs_identifier:seen, external_free_call:set, free_call:set, free_call_without_arguments:set, node:Assign, node:Call, node:Name, single_assignment:seen
+def depth_first(start, f): # function:depth_first (-> +7), function_line_count:8 (-> +7), function_parameter:f, function_parameter:start, function_parameter_flavor:arg, function_returning_nothing:depth_first (-> +7), higher_order_function:f (-> +7), local_scope:f (-> +7), local_scope:seen (-> +7), local_scope:stack (-> +7), local_scope:start (-> +7), local_scope:vertex (-> +7), node:FunctionDef (-> +7), node:arg, procedural_style (-> +7), scope:f (-> +7), scope:seen (-> +7), scope:stack (-> +7), scope:start (-> +7), scope:vertex (-> +7), whole_span:8 (-> +7)
+    seen = set() # assignment:set, assignment_lhs_identifier:seen, external_free_call:set, free_call:set, free_call_no_arguments:set, node:Assign, node:Call, node:Name, single_assignment:seen
     stack = [start] # assignment, assignment_lhs_identifier:stack, assignment_rhs_atom:start, literal:List, loaded_variable:start, node:Assign, node:List, node:Name, single_assignment:stack
     while stack: # loaded_variable:stack, loop:while (-> +4), loop_with_late_exit:while (-> +4), node:Name, node:While (-> +4)
         vertex = stack.pop() # assignment:pop, assignment_lhs_identifier:vertex, assignment_rhs_atom:stack, loaded_variable:stack, member_call_method:list:pop, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:vertex
@@ -990,11 +990,11 @@ f1 if c1 else f2 if c2 else f3 if c3 else None # flat_style, imperative_style, l
 # 131.2766-successive-conditions.py
 # ----------------------------------------------------------------------------------------
 if c1: # if (-> +5), imperative_style (-> +5), loaded_variable:c1, node:If (-> +5), node:Name, whole_span:6 (-> +5)
-    f1() # external_free_call:f1, free_call:f1, free_call_without_arguments:f1, free_call_without_result:f1, if_then_branch, node:Call, node:Expr, node:Name
+    f1() # external_free_call:f1, free_call:f1, free_call_no_arguments:f1, free_call_without_result:f1, if_then_branch, node:Call, node:Expr, node:Name
 elif c2: # if (-> +3), loaded_variable:c2, node:If (-> +3), node:Name
-    f2() # external_free_call:f2, free_call:f2, free_call_without_arguments:f2, free_call_without_result:f2, if_elif_branch, node:Call, node:Expr, node:Name
+    f2() # external_free_call:f2, free_call:f2, free_call_no_arguments:f2, free_call_without_result:f2, if_elif_branch, node:Call, node:Expr, node:Name
 elif c3: # if (-> +1), loaded_variable:c3, node:If (-> +1), node:Name
-    f3() # external_free_call:f3, free_call:f3, free_call_without_arguments:f3, free_call_without_result:f3, if_elif_branch, node:Call, node:Expr, node:Name
+    f3() # external_free_call:f3, free_call:f3, free_call_no_arguments:f3, free_call_without_result:f3, if_elif_branch, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 132.2040-measure-duration-of-procedure-execution.py
@@ -1110,7 +1110,7 @@ t = re.sub("[^\u0000-\u007f]", "", s) # argument:, argument:s, assignment:sub, a
 # ----------------------------------------------------------------------------------------
 # 148.1829-read-list-of-integer-numbers-from-stdin.py
 # ----------------------------------------------------------------------------------------
-list(map(int, input().split())) # argument:, argument:int, composition, external_free_call:input, external_free_call:list, external_free_call:map, flat_style, free_call:input, free_call:list, free_call:map, free_call_without_arguments:input, free_call_without_result:list, imperative_style, loaded_variable:int, member_call_method:split, node:Attribute, node:Call, node:Expr, node:Name, one_liner_style, whole_span:1
+list(map(int, input().split())) # argument:, argument:int, composition, external_free_call:input, external_free_call:list, external_free_call:map, flat_style, free_call:input, free_call:list, free_call:map, free_call_no_arguments:input, free_call_without_result:list, imperative_style, loaded_variable:int, member_call_method:split, node:Attribute, node:Call, node:Expr, node:Name, one_liner_style, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 150.2154-remove-trailing-slash.py
@@ -1145,13 +1145,13 @@ c = "#{:02x}{:02x}{:02x}".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2)
 # 154.2292-halfway-between-two-hex-color-codes.py
 # ----------------------------------------------------------------------------------------
 import numpy # global_scope:c1 (-> +14), global_scope:c2 (-> +14), import:numpy, import_module:numpy, node:Import, object_oriented_style (-> +14), scope:c1 (-> +14), scope:c2 (-> +14), whole_span:15 (-> +14)
-class RGB(numpy.ndarray): # loaded_variable:numpy, node:Attribute, node:ClassDef (-> +8), node:Name
-    @classmethod # class_method:from_str (-> +4), decorated_function:from_str (-> +4), function:from_str (-> +4), function_decorator:classmethod (-> +4), function_returning_something:from_str (-> +4), loaded_variable:classmethod, local_scope:cls (-> +4), local_scope:rgbstr (-> +4), method:from_str (-> +4), node:FunctionDef (-> +4), node:Name, scope:cls (-> +4), scope:rgbstr (-> +4)
+class RGB(numpy.ndarray): # class:RGB (-> +8), class_method_count:2 (-> +8), loaded_variable:numpy, node:Attribute, node:ClassDef (-> +8), node:Name
+    @classmethod # class_method:from_str (-> +4), decorated_function:from_str (-> +4), function:from_str (-> +4), function_decorator:classmethod (-> +4), function_line_count:5 (-> +4), function_returning_something:from_str (-> +4), loaded_variable:classmethod, local_scope:cls (-> +4), local_scope:rgbstr (-> +4), method:from_str (-> +4), node:FunctionDef (-> +4), node:Name, scope:cls (-> +4), scope:rgbstr (-> +4)
     def from_str(cls, rgbstr): # function_parameter:cls, function_parameter:rgbstr, function_parameter_flavor:arg, node:arg
         return numpy.array( # composition, loaded_variable:numpy, member_call:numpy:array, member_call:numpy:view, member_call_method:array, member_call_method:view, member_call_object:numpy, method_chaining, node:Attribute, node:Attribute (-> +1), node:Call (-> +1), node:Call (-> +2), node:Name, node:Return (-> +2), return (-> +2)
             [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)] # addition_operator, argument:, argument:1, argument:16, argument:2, argument:rgbstr, binary_operator:Add, composition, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:len, external_free_call:range, free_call:int, free_call:len, free_call:range, iteration_variable:i, literal:1, literal:16, literal:2, loaded_variable:i, loaded_variable:rgbstr, local_scope:i, magic_number:16, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, range:1:_:2, scope:i, slice:i:_:, slice_lower:i, slice_step:, slice_upper:_
         ).view(cls) # argument:cls, loaded_variable:cls, node:Name
-    def __str__(self): # function:__str__ (-> +2), function_parameter:self, function_parameter_flavor:arg, function_returning_something:__str__ (-> +2), instance_method:__str__ (-> +2), local_scope:self (-> +2), method:__str__ (-> +2), node:FunctionDef (-> +2), node:arg, scope:self (-> +2)
+    def __str__(self): # function:__str__ (-> +2), function_line_count:3 (-> +2), function_parameter:self, function_parameter_flavor:arg, function_returning_something:__str__ (-> +2), instance_method:__str__ (-> +2), local_scope:self (-> +2), method:__str__ (-> +2), node:FunctionDef (-> +2), node:arg, scope:self (-> +2)
         self = self.astype(numpy.uint8) # argument:, assignment:astype, assignment_lhs_identifier:self, assignment_rhs_atom:numpy, assignment_rhs_atom:self, loaded_variable:numpy, loaded_variable:self, member_call_method:astype, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:self, update:self:numpy, update_by_assignment:self:numpy, update_by_assignment_with:astype, update_with:astype
         return "#" + "".join(format(n, "x") for n in self) # argument:, argument:n, binary_operator:Add, composition, comprehension:Generator, comprehension_for_count:1, concatenation_operator:Str, empty_literal:Str, external_free_call:format, free_call:format, iteration_variable:n, literal:Str, loaded_variable:n, loaded_variable:self, local_scope:n, member_call_method:join, node:Attribute, node:BinOp, node:Call, node:GeneratorExp, node:Name, node:Return, node:Str, return, scope:n
 c1 = RGB.from_str("#a1b1c1") # argument:, assignment:from_str, assignment_lhs_identifier:c1, assignment_rhs_atom:RGB, literal:Str, loaded_variable:RGB, member_call_method:from_str, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:c1
@@ -1186,8 +1186,8 @@ y = random.sample(x, k) # argument:k, argument:x, assignment:sample, assignment_
 # ----------------------------------------------------------------------------------------
 # 159.2281-trie.py
 # ----------------------------------------------------------------------------------------
-class Trie: # node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5 (-> +4)
-    def __init__(self, prefix, value=None): # function:__init__ (-> +3), function_parameter:prefix, function_parameter:self, function_parameter:value, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), literal:None, local_scope:prefix (-> +3), local_scope:self (-> +3), local_scope:value (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:NameConstant, node:arg, scope:prefix (-> +3), scope:self (-> +3), scope:value (-> +3)
+class Trie: # class:Trie (-> +4), class_method_count:1 (-> +4), node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5 (-> +4)
+    def __init__(self, prefix, value=None): # function:__init__ (-> +3), function_line_count:4 (-> +3), function_parameter:prefix, function_parameter:self, function_parameter:value, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), literal:None, local_scope:prefix (-> +3), local_scope:self (-> +3), local_scope:value (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:NameConstant, node:arg, scope:prefix (-> +3), scope:self (-> +3), scope:value (-> +3)
         self.prefix = prefix # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:prefix, loaded_variable:prefix, loaded_variable:self, node:Assign, node:Attribute, node:Name
         self.children = [] # assignment, assignment_lhs_identifier:self, empty_literal:List, literal:List, loaded_variable:self, node:Assign, node:Attribute, node:List, node:Name
         self.value = value # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:value, loaded_variable:self, loaded_variable:value, node:Assign, node:Attribute, node:Name
@@ -1197,9 +1197,9 @@ class Trie: # node:ClassDef (-> +4), object_oriented_style (-> +4), whole_span:5
 # ----------------------------------------------------------------------------------------
 import sys # imperative_style (-> +4), import:sys, import_module:sys, node:Import, whole_span:5 (-> +4)
 if sys.maxsize > 2 ** 32: # binary_operator:Pow, comparison_operator:Gt, if (-> +3), if_test_atom:2, if_test_atom:32, if_test_atom:sys, literal:2, literal:32, loaded_variable:sys, magic_number:32, node:Attribute, node:BinOp, node:Compare, node:If (-> +3), node:Name, node:Num
-    f64() # external_free_call:f64, free_call:f64, free_call_without_arguments:f64, free_call_without_result:f64, if_then_branch, node:Call, node:Expr, node:Name
+    f64() # external_free_call:f64, free_call:f64, free_call_no_arguments:f64, free_call_without_result:f64, if_then_branch, node:Call, node:Expr, node:Name
 else:
-    f32() # external_free_call:f32, free_call:f32, free_call_without_arguments:f32, free_call_without_result:f32, if_else_branch, node:Call, node:Expr, node:Name
+    f32() # external_free_call:f32, free_call:f32, free_call_no_arguments:f32, free_call_without_result:f32, if_else_branch, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 161.2098-multiply-all-the-elements-of-a-list.py
@@ -1211,9 +1211,9 @@ elements = [c * x for x in elements] # assignment, assignment_lhs_identifier:ele
 # ----------------------------------------------------------------------------------------
 import sys # imperative_style (-> +4), import:sys, import_module:sys, node:Import, whole_span:5 (-> +4)
 if "b" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, loaded_variable:sys, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv
-    bat() # external_free_call:bat, free_call:bat, free_call_without_arguments:bat, free_call_without_result:bat, if_then_branch, node:Call, node:Expr, node:Name
+    bat() # external_free_call:bat, free_call:bat, free_call_no_arguments:bat, free_call_without_result:bat, if_then_branch, node:Call, node:Expr, node:Name
 if "f" in sys.argv[1:]: # comparison_operator:In, if (-> +1), if_test_atom:1, if_test_atom:sys, if_without_else (-> +1), literal:1, literal:Str, loaded_variable:sys, node:Attribute, node:Compare, node:If (-> +1), node:Name, node:Num, node:Str, node:Subscript, slice:1::, slice_lower:1, slice_step:, slice_upper:, value_attr:argv
-    fox() # external_free_call:fox, free_call:fox, free_call_without_arguments:fox, free_call_without_result:fox, if_then_branch, node:Call, node:Expr, node:Name
+    fox() # external_free_call:fox, free_call:fox, free_call_no_arguments:fox, free_call_without_result:fox, if_then_branch, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 163.2170-print-list-elements-by-group-of-2.py
@@ -1225,7 +1225,7 @@ for x in zip(list[::2], list[1::2]): # argument:, external_free_call:zip, for:x 
 # 163.3177-print-list-elements-by-group-of-2.py
 # ----------------------------------------------------------------------------------------
 from itertools import tee # global_scope:a (-> +6), global_scope:b (-> +6), import:itertools:tee, import_module:itertools, import_name:tee, node:ImportFrom, procedural_style (-> +6), scope:a (-> +6), scope:b (-> +6), whole_span:7 (-> +6)
-def pairwise(iterable): # function:pairwise (-> +3), function_parameter:iterable, function_parameter_flavor:arg, function_returning_something:pairwise (-> +3), impure_function:pairwise (-> +3), local_scope:a (-> +3), local_scope:b (-> +3), local_scope:iterable (-> +3), node:FunctionDef (-> +3), node:arg, scope:a (-> +3), scope:b (-> +3), scope:iterable (-> +3), shadowing_scope:a (-> +3), shadowing_scope:b (-> +3)
+def pairwise(iterable): # function:pairwise (-> +3), function_line_count:4 (-> +3), function_parameter:iterable, function_parameter_flavor:arg, function_returning_something:pairwise (-> +3), impure_function:pairwise (-> +3), local_scope:a (-> +3), local_scope:b (-> +3), local_scope:iterable (-> +3), node:FunctionDef (-> +3), node:arg, scope:a (-> +3), scope:b (-> +3), scope:iterable (-> +3), shadowing_scope:a (-> +3), shadowing_scope:b (-> +3)
     a, b = tee(iterable) # argument:iterable, assignment:tee, assignment_lhs_identifier:a, assignment_lhs_identifier:b, assignment_rhs_atom:iterable, external_free_call:tee, free_call:tee, literal:Tuple, loaded_variable:iterable, node:Assign, node:Call, node:Name, node:Tuple, parallel_assignment:2
     next(b, None) # argument:None, argument:b, external_free_call:next, free_call:next, free_call_without_result:next, literal:None, loaded_variable:b, node:Call, node:Expr, node:Name, node:NameConstant
     return zip(a, b) # argument:a, argument:b, external_free_call:zip, free_call:zip, free_tail_call:zip, loaded_variable:a, loaded_variable:b, node:Call, node:Name, node:Return, return
@@ -1409,19 +1409,19 @@ sys.exit(0) # argument:0, literal:0, loaded_variable:sys, member_call:sys:exit, 
 # ----------------------------------------------------------------------------------------
 # 187.3261-disjoint-set.py
 # ----------------------------------------------------------------------------------------
-class UnionFind: # node:ClassDef (-> +14), object_oriented_style (-> +14), whole_span:15 (-> +14)
-    def __init__(self, size): # function:__init__ (-> +2), function_parameter:self, function_parameter:size, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), local_scope:self (-> +2), local_scope:size (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg, scope:self (-> +2), scope:size (-> +2)
+class UnionFind: # class:UnionFind (-> +14), class_method_count:4 (-> +14), node:ClassDef (-> +14), object_oriented_style (-> +14), whole_span:15 (-> +14)
+    def __init__(self, size): # function:__init__ (-> +2), function_line_count:3 (-> +2), function_parameter:self, function_parameter:size, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +2), instance_method:__init__ (-> +2), local_scope:self (-> +2), local_scope:size (-> +2), method:__init__ (-> +2), node:FunctionDef (-> +2), node:arg, scope:self (-> +2), scope:size (-> +2)
         self.rank = [0] * size # assignment:Mult, assignment_lhs_identifier:self, assignment_rhs_atom:0, assignment_rhs_atom:size, binary_operator:Mult, literal:0, literal:List, loaded_variable:self, loaded_variable:size, node:Assign, node:Attribute, node:BinOp, node:List, node:Name, node:Num, replication_operator:List
         self.p = [i for i in range(size)] # argument:size, assignment, assignment_lhs_identifier:self, assignment_rhs_atom:i, assignment_rhs_atom:size, comprehension:List, comprehension_for_count:1, external_free_call:range, free_call:range, iteration_variable:i, loaded_variable:i, loaded_variable:self, loaded_variable:size, local_scope:i, node:Assign, node:Attribute, node:Call, node:ListComp, node:Name, range:size, scope:i
-    def find_set(self, i): # function:find_set (-> +5), function_parameter:i, function_parameter:self, function_parameter_flavor:arg, function_returning_something:find_set (-> +5), instance_method:find_set (-> +5), local_scope:i (-> +5), local_scope:self (-> +5), method:find_set (-> +5), node:FunctionDef (-> +5), node:arg, scope:i (-> +5), scope:self (-> +5)
+    def find_set(self, i): # function:find_set (-> +5), function_line_count:6 (-> +5), function_parameter:i, function_parameter:self, function_parameter_flavor:arg, function_returning_something:find_set (-> +5), instance_method:find_set (-> +5), local_scope:i (-> +5), local_scope:self (-> +5), method:find_set (-> +5), node:FunctionDef (-> +5), node:arg, scope:i (-> +5), scope:self (-> +5)
         if self.p[i] == i: # comparison_operator:Eq, if (-> +4), if_test_atom:i, if_test_atom:self, index:i, loaded_variable:i, loaded_variable:self, node:Attribute, node:Compare, node:If (-> +4), node:Name, node:Subscript, value_attr:p
             return i # if_then_branch, loaded_variable:i, node:Name, node:Return, return:i
         else:
             self.p[i] = self.find_set(self.p[i]) # argument:, assignment:find_set, assignment_rhs_atom:i, assignment_rhs_atom:self, if_else_branch (-> +1), index:i, loaded_variable:i, loaded_variable:self, member_call_method:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Subscript, subscript_assignment:Index, value_attr:p
             return self.p[i] # index:i, loaded_variable:i, loaded_variable:self, node:Attribute, node:Name, node:Return, node:Subscript, return, value_attr:p
-    def is_same_set(self, i, j): # function:is_same_set (-> +1), function_parameter:i, function_parameter:j, function_parameter:self, function_parameter_flavor:arg, function_returning_something:is_same_set (-> +1), instance_method:is_same_set (-> +1), local_scope:i (-> +1), local_scope:j (-> +1), local_scope:self (-> +1), method:is_same_set (-> +1), node:FunctionDef (-> +1), node:arg, scope:i (-> +1), scope:j (-> +1), scope:self (-> +1)
+    def is_same_set(self, i, j): # function:is_same_set (-> +1), function_line_count:2 (-> +1), function_parameter:i, function_parameter:j, function_parameter:self, function_parameter_flavor:arg, function_returning_something:is_same_set (-> +1), instance_method:is_same_set (-> +1), local_scope:i (-> +1), local_scope:j (-> +1), local_scope:self (-> +1), method:is_same_set (-> +1), node:FunctionDef (-> +1), node:arg, scope:i (-> +1), scope:j (-> +1), scope:self (-> +1)
         return self.find_set(i) == self.find_set(j) # argument:i, argument:j, comparison_operator:Eq, loaded_variable:i, loaded_variable:j, loaded_variable:self, member_call_method:find_set, node:Attribute, node:Call, node:Compare, node:Name, node:Return, return
-    def union_set(self, i, j): # function:union_set (-> +2), function_parameter:i, function_parameter:j, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:union_set (-> +2), instance_method:union_set (-> +2), local_scope:i (-> +2), local_scope:j (-> +2), local_scope:self (-> +2), local_scope:x (-> +2), local_scope:y (-> +2), method:union_set (-> +2), node:FunctionDef (-> +2), node:arg, scope:i (-> +2), scope:j (-> +2), scope:self (-> +2), scope:x (-> +2), scope:y (-> +2)
+    def union_set(self, i, j): # function:union_set (-> +2), function_line_count:3 (-> +2), function_parameter:i, function_parameter:j, function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:union_set (-> +2), instance_method:union_set (-> +2), local_scope:i (-> +2), local_scope:j (-> +2), local_scope:self (-> +2), local_scope:x (-> +2), local_scope:y (-> +2), method:union_set (-> +2), node:FunctionDef (-> +2), node:arg, scope:i (-> +2), scope:j (-> +2), scope:self (-> +2), scope:x (-> +2), scope:y (-> +2)
         if not self.is_same_set(i, j): # argument:i, argument:j, if (-> +1), if_test_atom:i, if_test_atom:j, if_test_atom:self, if_without_else (-> +1), loaded_variable:i, loaded_variable:j, loaded_variable:self, member_call_method:is_same_set, node:Attribute, node:Call, node:If (-> +1), node:Name, node:UnaryOp, unary_operator:Not
             x, y = self.find_set(i), self.find_set(j) # argument:i, argument:j, assignment, assignment_lhs_identifier:x, assignment_lhs_identifier:y, assignment_rhs_atom:i, assignment_rhs_atom:j, assignment_rhs_atom:self, if_then_branch, literal:Tuple, loaded_variable:i, loaded_variable:j, loaded_variable:self, member_call_method:find_set, node:Assign, node:Attribute, node:Call, node:Name, node:Tuple, parallel_assignment:2
 
@@ -1446,7 +1446,7 @@ y = [T(e) for e in x if P(e)] # argument:e, assignment, assignment_lhs_identifie
 # 191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py
 # ----------------------------------------------------------------------------------------
 if any(v > x for v in a): # argument:, comparison_operator:Gt, comprehension:Generator, comprehension_for_count:1, external_free_call:any, free_call:any, if (-> +1), if_test_atom:a, if_test_atom:v, if_test_atom:x, if_without_else (-> +1), imperative_style (-> +1), iteration_variable:v, loaded_variable:a, loaded_variable:v, loaded_variable:x, local_scope:v, node:Call, node:Compare, node:GeneratorExp, node:If (-> +1), node:Name, scope:v, whole_span:2 (-> +1)
-    f() # external_free_call:f, free_call:f, free_call_without_arguments:f, free_call_without_result:f, if_then_branch, node:Call, node:Expr, node:Name
+    f() # external_free_call:f, free_call:f, free_call_no_arguments:f, free_call_without_result:f, if_then_branch, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 197.3457-get-a-list-of-lines-from-a-file.py

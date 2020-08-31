@@ -9,8 +9,8 @@
 [![paroxython SLOC](https://img.shields.io/badge/main%20program-~1700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython)
 [![tests SLOC](https://img.shields.io/badge/tests-~2700%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/tests)
 [![helpers SLOC](https://img.shields.io/badge/helpers-~850%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/helpers)
-[![spec lines](https://img.shields.io/badge/spec-~8250%20lines-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
-[![taxonomy mappings](https://img.shields.io/badge/taxonomy-272%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
+[![spec lines](https://img.shields.io/badge/spec-~8400%20lines-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
+[![taxonomy mappings](https://img.shields.io/badge/taxonomy-274%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -90,10 +90,10 @@ These **labels** constitute only a scattered knowledge. The next step is to map 
 
 <p align="center">
   <a href="https://laowantong.github.io/paroxython/user_manual/index.html#taxonomy">
-  <img src="docs/resources/tree.png" alt="A taxonomy." width="66%">
+  <img src="docs/resources/tree.png" alt="A taxonomy.">
   </a>
   <br>
-  <em>Taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its dynamic version in the user manual.</em>
+  <em>Extract of the taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its full dynamic version in the user manual.</em>
 </p>
 
 Everything is then persisted in a tag **database**, which can later be filtered through a **pipeline** of commands, for instance:
@@ -172,13 +172,14 @@ def fibonacci(n):                     # 2
 
 | Taxon | Lines |
 |:--|:--|
-| `call/method/sequence/list/append` | 6 |
+| `call/subroutine/method/sequence/list/append` | 6 |
 | `condition/inequality` | 5 |
-| `def/function/impure` | 2-8 |
+| `def/subroutine/function/impure` | 2-8 |
 | `flow/loop/exit/late` | 5-7 |
 | `flow/loop/while` | 5-7 |
+| `meta/count/program/sloc/8` | 2-8 |
+| `meta/count/subroutine/sloc/7` | 2-8 |
 | `meta/program` | 2-8 |
-| `meta/sloc/8` | 2-8 |
 | `operator/arithmetic/addition` | 7 |
 | `style/procedural` | 2-8 |
 | `type/number/integer/literal` | 4 |
@@ -195,9 +196,9 @@ def fibonacci(n):                     # 2
 As you can see, in this program, Paroxython identifies among others:
 
 - the use of the [procedural paradigm](https://en.wikipedia.org/wiki/Procedural_programming) (`style/procedural`);
-- an im[pure function](https://en.wikipedia.org/wiki/Pure_function) (`def/function/impure`);
+- an im[pure function](https://en.wikipedia.org/wiki/Pure_function) (`def/subroutine/function/impure`);
 - a `while` loop (`flow/loop/while`) with a late exit (`flow/loop/exit/late`);
-- a little bit of voodoo on lists (`type/sequence/list/literal/empty` and `call/method/sequence/list/append`);
+- a little bit of voodoo on lists (`type/sequence/list/literal/empty` and `call/subroutine/method/sequence/list/append`);
 - a simple [tuple assignment](https://openbookproject.net/thinkcs/python/english3e/tuples.html#tuple-assignment) (`var/assignment/explicit/parallel`). Note that we distinguish between explicit (with `=`) and implicit (parameters and iteration variables) assignments;
 - a “sliding” tuple assignment (`var/assignment/explicit/parallel/slide`). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of [C-finite sequences](https://en.wikipedia.org/wiki/Constant-recursive_sequence) with C greater than 1, [Greatest Common Divisor](https://en.wikipedia.org/wiki/Greatest_common_divisor), [Quicksort](https://en.wikipedia.org/wiki/Quicksort), etc.
 - four local variables (`var/scope/local`): `n`, `result`, `a`, `b`.

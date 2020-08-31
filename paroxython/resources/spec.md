@@ -43,7 +43,7 @@
       - [Feature `free_call`](#feature-free_call)
       - [Feature `free_call_with_keyword_argument` (SQL)](#feature-free_call_with_keyword_argument)
       - [Feature `free_call_without_result`](#feature-free_call_without_result)
-      - [Feature `free_call_without_arguments`](#feature-free_call_without_arguments)
+      - [Feature `free_call_no_arguments`](#feature-free_call_no_arguments)
       - [Feature `free_tail_call`](#feature-free_tail_call)
       - [Feature `internal_free_call` (SQL)](#feature-internal_free_call)
       - [Feature `external_free_call` (SQL)](#feature-external_free_call)
@@ -94,10 +94,11 @@
       - [Feature `verbose_conditional_assignment`](#feature-verbose_conditional_assignment)
       - [Feature `compact_conditional_assignment`](#feature-compact_conditional_assignment)
       - [Feature `corrective_conditional_assignment`](#feature-corrective_conditional_assignment)
-  - [Function definitions](#function-definitions)
+  - [Function and class definitions](#function-and-class-definitions)
     - [Interface](#interface)
       - [Feature `function`](#feature-function)
       - [Feature `return`](#feature-return)
+      - [Feature `class`](#feature-class)
       - [Feature `method` (SQL)](#feature-method)
       - [Feature `instance_method|class_method|static_method` (SQL)](#feature-instance_methodclass_methodstatic_method)
       - [Feature `yield`](#feature-yield)
@@ -199,6 +200,9 @@
       - [Feature `imperative_style` (SQL)](#feature-imperative_style)
       - [Feature `flat_style` (SQL)](#feature-flat_style)
       - [Feature `one_liner_style` (SQL)](#feature-one_liner_style)
+  - [Counts](#counts)
+      - [Feature `class_method_count` (SQL)](#feature-class_method_count)
+      - [Feature `function_line_count` (SQL)](#feature-function_line_count)
   - [Others](#others)
       - [Feature `topic|technique|complexity`](#feature-topictechniquecomplexity)
 
@@ -216,8 +220,6 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 [⬇️ feature `imperative_style`](#feature-imperative_style)  
 [⬇️ feature `loop`](#feature-loop)  
 [⬇️ feature `loop_with_break`](#feature-loop_with_break)  
-[⬇️ feature `method`](#feature-method)  
-[⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
 [⬇️ feature `one_liner_style`](#feature-one_liner_style)  
 [⬇️ feature `pure_function`](#feature-pure_function)  
 [⬇️ feature `try_raise|try_except`](#feature-try_raisetry_except)  
@@ -469,11 +471,11 @@ Generally speaking, all _falsey_ constants (i.e., whose [truth value](https://do
 - null integer: `literal:0`;
 - null floating-point number: `literal:0.0`;
 - null complex number: `literal:0j`;
-- empty string: `free_call_without_arguments:str` or `empty_literal:Str`;
-- empty tuple: `free_call_without_arguments:tuple` or `empty_literal:Tuple`;
-- empty list: `free_call_without_arguments:list` or `empty_literal:List`;
-- empty dictionary: `free_call_without_arguments:dict` or `empty_literal:Dict`;
-- empty set: `free_call_without_arguments:set`;
+- empty string: `free_call_no_arguments:str` or `empty_literal:Str`;
+- empty tuple: `free_call_no_arguments:tuple` or `empty_literal:Tuple`;
+- empty list: `free_call_no_arguments:list` or `empty_literal:List`;
+- empty dictionary: `free_call_no_arguments:dict` or `empty_literal:Dict`;
+- empty set: `free_call_no_arguments:set`;
 - empty range: `range:0`.
 
 ##### Specification
@@ -1842,7 +1844,7 @@ JOIN t_keyword_argument k ON (k.path GLOB f.path || "*-")
 
 --------------------------------------------------------------------------------
 
-#### Feature `free_call_without_arguments`
+#### Feature `free_call_no_arguments`
 
 ##### Specification
 
@@ -1866,7 +1868,7 @@ JOIN t_keyword_argument k ON (k.path GLOB f.path || "*-")
 
 | Label | Lines |
 |:--|:--|
-| `free_call_without_arguments:foo` | 1 |
+| `free_call_no_arguments:foo` | 1 |
 
 --------------------------------------------------------------------------------
 
@@ -3726,7 +3728,7 @@ Assign a “default” value to a variable, then if a certain condition is satis
 
 --------------------------------------------------------------------------------
 
-## Function definitions
+## Function and class definitions
 
 ### Interface
 
@@ -3734,13 +3736,14 @@ Assign a “default” value to a variable, then if a certain condition is satis
 
 #### Feature `function`
 
-In Python, the term "function" encompasses any type of subroutine, be it a method, a procedure, a generator or a "pure" function.
+In Python, the term "function" encompasses any type of subroutine, be it a method, a procedure, a generator or a "pure" function. We follow this terminology in this specification. However, in the taxonomy, “function” is used as a category of “subroutine”, as well as “method”, “procedure”, “generator”, and so on.
 
 ##### Derivations
 
 [⬇️ feature `access_outer_scope`](#feature-access_outer_scope)  
 [⬇️ feature `closure`](#feature-closure)  
 [⬇️ feature `deeply_recursive_function`](#feature-deeply_recursive_function)  
+[⬇️ feature `function_line_count`](#feature-function_line_count)  
 [⬇️ feature `function_returning_nothing`](#feature-function_returning_nothing)  
 [⬇️ feature `function_returning_something`](#feature-function_returning_something)  
 [⬇️ feature `generator`](#feature-generator)  
@@ -3872,12 +3875,55 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 
 --------------------------------------------------------------------------------
 
+#### Feature `class`
+
+##### Derivations
+
+[⬇️ feature `class_method_count`](#feature-class_method_count)  
+[⬇️ feature `method`](#feature-method)  
+[⬇️ feature `object_oriented_style`](#feature-object_oriented_style)  
+
+##### Specification
+
+```re
+           ^(.*)/_type=ClassDef
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
+\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   class MyClass:
+2
+3       def an_instance_method(self, a, b, c):
+4           pass
+5
+6       @staticmethod
+7       def a_static_method(f, g):
+8           pass
+9
+10      @classmethod
+11      def a_class_method(cls, d, e):
+12          pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `class:MyClass` | 1-12 |
+
+--------------------------------------------------------------------------------
+
 #### Feature `method`
 
 ##### Derivations
 
+[⬆️ feature `class`](#feature-class)  
 [⬆️ feature `function`](#feature-function)  
-[⬆️ feature `node`](#feature-node)  
+[⬇️ feature `class_method_count`](#feature-class_method_count)  
 [⬇️ feature `impure_function`](#feature-impure_function)  
 [⬇️ feature `instance_method|class_method|static_method`](#feature-instance_methodclass_methodstatic_method)  
 [⬇️ feature `pure_function`](#feature-pure_function)  
@@ -3889,9 +3935,8 @@ SELECT "method",
        f.name_suffix,
        f.span,
        f.path
-FROM t_node c
+FROM t_class c
 JOIN t_function f ON (f.path GLOB c.path || "*-*-")
-WHERE c.name_suffix = "ClassDef"
 ```
 
 ##### Example
@@ -7920,7 +7965,7 @@ A program featuring at least one class definition is considered as object-orient
 
 ##### Derivations
 
-[⬆️ feature `node`](#feature-node)  
+[⬆️ feature `class`](#feature-class)  
 [⬆️ feature `whole_span`](#feature-whole_span)  
 [⬇️ feature `functional_style`](#feature-functional_style)  
 [⬇️ feature `procedural_style`](#feature-procedural_style)  
@@ -7933,8 +7978,7 @@ SELECT "object_oriented_style",
        p.span,
        p.path
 FROM t_whole_span p
-CROSS JOIN t_node n
-WHERE n.name_suffix = "ClassDef"
+CROSS JOIN t_class
 LIMIT 1
 ```
 
@@ -8214,6 +8258,107 @@ WHERE cast(p.name_suffix AS INTEGER) - 1 =
 | Label | Lines |
 |:--|:--|
 | `one_liner_style` | 1-3 |
+
+--------------------------------------------------------------------------------
+
+## Counts
+
+--------------------------------------------------------------------------------
+
+#### Feature `class_method_count`
+
+##### Derivations
+
+[⬆️ feature `class`](#feature-class)  
+[⬆️ feature `method`](#feature-method)  
+
+##### Specification
+
+```sql
+SELECT "class_method_count",
+       count(*),
+       c.span,
+       c.path
+FROM t_method m
+JOIN t_class c ON (m.path GLOB "*-")
+GROUP BY c.rowid
+```
+
+##### Example
+
+```python
+1   class MyClass:
+2
+3       def an_instance_method(self, a, b, c):
+4           pass
+5
+6       @staticmethod
+7       def a_static_method(f, g):
+8           pass
+9
+10      @classmethod
+11      def a_class_method(cls, d, e):
+12          pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `class_method_count:3` | 1-12 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `function_line_count`
+
+##### Derivations
+
+[⬆️ feature `function`](#feature-function)  
+
+##### Specification
+
+```sql
+SELECT "function_line_count",
+       f.span_end - f.span_start + 1,
+       f.span,
+       f.path
+FROM t_function f
+```
+
+##### Example
+
+```python
+1   def foo(bar):
+2       def fizz(buzz):
+3           a += 1
+4           print(a)
+5
+6       bar += 1
+7       print(bar)
+8
+9   @decoration
+10  def christmas_tree():
+11      pass
+12
+13  def function_with_types(x: Int) -> Int:
+14      return x + 1
+15
+16  class Foo:
+17
+18      def bar(self):
+19          pass
+20
+21  def generator():
+22      yield x
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_line_count:2` | 13-14, 18-19, 21-22 |
+| `function_line_count:3` | 2-4, 9-11 |
+| `function_line_count:7` | 1-7 |
 
 --------------------------------------------------------------------------------
 

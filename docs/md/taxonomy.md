@@ -23,7 +23,7 @@ type/number/integer/literal
 
 ... describes, you know... this kind of literal which is a kind of integer which is a kind of number which is a kind of type (as an example, think of the answer to the ultimate question of life, the universe, and everything).
 
-In the visualization below, we have introduced the pseudo-root “•” to gather all the trees into one:
+In the visualization below, we have introduced the pseudo-root “🐍” to gather all the trees into one:
 
 <div id="tree" style="width: 100%; height: 1000px;"></div>
 
@@ -34,7 +34,7 @@ This comes[^tree_sql] straight from the tagging of the public repository [The Al
     ```
     SELECT taxon, count(*)
     FROM taxon
-    WHERE taxon not LIKE 'meta/sloc/%'
+    WHERE taxon not LIKE 'meta/%/sloc/%'
     GROUP BY taxon
     ```
     on the SQLite tag database.
@@ -81,17 +81,17 @@ It defines a 5-1 mapping, which converts five possible labels (`member_call_meth
 
 ### 1-N mapping
 
-When a source code is, say, 42 lines long, it is tagged with the label `"whole_span:42"`. This is an example of a single label which produces two taxa: `"meta/program"` and `"meta/sloc/42"`. Both span the whole program and, although it is not obvious, both have their uses:
+When a source code is, say, 42 lines long, it is tagged with the label `"whole_span:42"`. This is an example of a single label which produces two taxa: `"meta/program"` and `"meta/count/program/sloc/42"`. Both span the whole program and, although it is not obvious, both have their uses:
 
 - The first one is common to all programs, and provides an invariable access key to an all-encompassing span. In a command pipeline, it can be used to [express the absence of a taxon](#expressing-the-absence-of-a-taxon).
-- The second one has a variable part, and can be used to filter programs by [size](https://en.wikipedia.org/wiki/Source_lines_of_code) (for example, in `paroxython.recommend_programs`, the pattern `"meta/sloc/[1-4]?[0-9]"` will be used to filter out the programs that have 50 lines or more).
+- The second one has a variable part, and can be used to filter programs by [size](https://en.wikipedia.org/wiki/Source_lines_of_code) (for example, in `paroxython.recommend_programs`, the pattern `"meta/count/program/sloc/[1-4]?[0-9]"` will be used to filter out the programs that have 50 lines or more).
 
 This conversions are triggered by the following rows in the default taxonomy:
 
 Taxa (replacement patterns)    | Labels (search patterns)
 :------------------------------|:-----------------------
 `meta/program` | `whole_span:.+`
-`meta/sloc/\1` | `whole_span:(.+)`
+`meta/count/program/sloc/\1` | `whole_span:(.+)`
 
 On the first row, the sequence of metacharacters `".+"` means: “eat all you can up to the end of the line.” On the second row, the added parentheses also _captures_ these characters: they are restituted in the replacement pattern by `"\1"`, which denotes a [_backreference_](https://docs.python.org/3/library/re.html#re.sub) to the first captured group.
 
@@ -100,7 +100,7 @@ Another example could be:
 Taxa (replacement patterns)    | Labels (search patterns)
 :------------------------------|:-----------------------
 `type/sequence/list` | `member_call_method:(append|extend|insert|reverse|sort)`
-`call/method/sequence/list/\1` | `member_call_method:(append|extend|insert|reverse|sort)`
+`call/subroutine/method/sequence/list/\1` | `member_call_method:(append|extend|insert|reverse|sort)`
 
 ... which means: when you encounter a label `member_call_method:sort` (for instance), that means the program features a list and a call to the `sort()` method.
 

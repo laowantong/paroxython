@@ -20,6 +20,7 @@ a = b # assignment
 # ----------------------------------------------------------------------------------------
 def print_collatz(n): # added_block_label (-> +7)
                       # function:print_collatz (-> +7)
+                      # function_line_count:8 (-> +7)
                       # function_parameter:n
                       # function_parameter_flavor:arg
                       # function_returning_nothing:print_collatz (-> +7)
@@ -246,6 +247,7 @@ import fizzbuzz # functional_style (-> +2)
                 # one_liner_style (-> +2)
                 # whole_span:3 (-> +2)
 def is_even(n): # function:is_even (-> +1)
+                # function_line_count:2 (-> +1)
                 # function_parameter:n
                 # function_parameter_flavor:arg
                 # function_returning_something:is_even (-> +1)

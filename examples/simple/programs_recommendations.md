@@ -1,21 +1,21 @@
 # Table of contents
 - [`1 program of learning cost in [1, 2[`](#1-program-of-learning-cost-in-1-2)
-    - [`09_indent.py`](#program-09_indentpy-learning-cost-171875)
-- [`2 programs of learning cost in [2, 4[`](#2-programs-of-learning-cost-in-2-4)
+    - [`09_indent.py`](#program-09_indentpy-learning-cost-10)
+- [`4 programs of learning cost in [2, 4[`](#4-programs-of-learning-cost-in-2-4)
+    - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-253125)
     - [`08_arguments.py`](#program-08_argumentspy-learning-cost-26875)
-    - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-30)
-- [`6 programs of learning cost in [4, 8[`](#6-programs-of-learning-cost-in-4-8)
-    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-43125)
-    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-43125)
-    - [`10_time.py`](#program-10_timepy-learning-cost-45)
-    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-559375)
-    - [`12_classes.py`](#program-12_classespy-learning-cost-565625)
-    - [`14_median.py`](#program-14_medianpy-learning-cost-60)
+    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-359375)
+    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-3625)
+- [`4 programs of learning cost in [4, 8[`](#4-programs-of-learning-cost-in-4-8)
+    - [`10_time.py`](#program-10_timepy-learning-cost-403125)
+    - [`12_classes.py`](#program-12_classespy-learning-cost-4640625)
+    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-4875)
+    - [`14_median.py`](#program-14_medianpy-learning-cost-5625)
 # Recommended programs
 
 ## 1 program of learning cost in [1, 2[
 
-### Program `09_indent.py` (learning cost 1.71875)
+### Program `09_indent.py` (learning cost 1.0)
 
 ```python
 1   import glob
@@ -31,11 +31,11 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `call/composition` | 7 |
-| 0 | `call/function/builtin/open` | 5 |
-| 0 | `call/function/builtin/sorted` | 3 |
-| 0 | `call/function/without_arguments` | 8 |
-| 0.25 | `call/method` | 2 |
-| 0.46875 | `call/method/sequence/string/rstrip` | 7 |
+| 0 | `call/subroutine/builtin/open` | 5 |
+| 0 | `call/subroutine/builtin/sorted` | 3 |
+| 0 | `call/subroutine/method` | 2 |
+| 0 | `call/subroutine/method/sequence/string/rstrip` | 7 |
+| 0 | `call/subroutine/no_arguments` | 8 |
 | 0.4375 | `def/import/standard/glob` | 1 |
 | 0 | `flow/loop/exit/late` | 3-8, 6-7 |
 | 0 | `flow/loop/for` | 3-8 |
@@ -48,12 +48,43 @@
 | 0 | `var/assignment/explicit/single` | 2 |
 | 0.1875 | `var/assignment/implicit/iteration_variable` | 3, 6 |
 | 0 | `var/scope/global` | 1-8 |
+| 0 | `meta/count/program/sloc/8` | 1-8 |
 | 0 | `meta/program` | 1-8 |
-| 0 | `meta/sloc/8` | 1-8 |
 
 ---
 
-## 2 programs of learning cost in [2, 4[
+## 4 programs of learning cost in [2, 4[
+
+### Program `04_fibonacci.py` (learning cost 2.53125)
+
+```python
+1   parents, babies = (1, 1)
+2   while babies < 100:
+3       print("This generation has {} babies".format(babies))
+4       parents, babies = (babies, parents + babies)
+```
+
+| Cost  | Taxon | Location |
+|----|----|----|
+| 0.25 | `call/composition` | 3 |
+| 0 | `call/subroutine/method/sequence/string/format` | 3 |
+| 0.75 | `condition/inequality` | 2 |
+| 0 | `flow/loop/exit/late` | 2-4 |
+| 0 | `flow/loop/while` | 2-4 |
+| 0.375 | `operator/arithmetic/addition` | 4 |
+| 0 | `style/imperative` | 1-4 |
+| 0.4375 | `type/number/integer/literal` | 1, 1, 2 |
+| 0.375 | `type/number/magic` | 2 |
+| 0 | `type/sequence/string` | 3 |
+| 0 | `type/sequence/string/literal` | 3 |
+| 0.1875 | `type/sequence/tuple/literal` | 1, 1, 4, 4 |
+| 0.0625 | `var/assignment/explicit/parallel` | 1 |
+| 0.09375 | `var/assignment/explicit/parallel/slide` | 4 |
+| 0 | `var/scope/global` | 1-4 |
+| 0 | `meta/count/program/sloc/4` | 1-4 |
+| 0 | `meta/program` | 1-4 |
+
+---
 
 ### Program `08_arguments.py` (learning cost 2.6875)
 
@@ -69,8 +100,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `call/composition` | 3 |
-| 0 | `call/function/builtin/casting/int` | 3 |
-| 0 | `call/function/builtin/sum` | 3 |
+| 0 | `call/subroutine/builtin/casting/int` | 3 |
+| 0 | `call/subroutine/builtin/sum` | 3 |
 | 0.4375 | `def/import/standard/sys` | 1 |
 | 0 | `flow/exception/catch/ValueError` | 2-6 |
 | 0 | `style/imperative` | 1-6 |
@@ -82,91 +113,12 @@
 | 0.1875 | `var/assignment/implicit/iteration_variable` | 3 |
 | 0 | `var/scope/global` | 1-6 |
 | 0.125 | `var/scope/local` | 3 |
+| 0 | `meta/count/program/sloc/6` | 1-6 |
 | 0 | `meta/program` | 1-6 |
-| 0 | `meta/sloc/6` | 1-6 |
 
 ---
 
-### Program `04_fibonacci.py` (learning cost 3.0)
-
-```python
-1   parents, babies = (1, 1)
-2   while babies < 100:
-3       print("This generation has {} babies".format(babies))
-4       parents, babies = (babies, parents + babies)
-```
-
-| Cost  | Taxon | Location |
-|----|----|----|
-| 0.25 | `call/composition` | 3 |
-| 0.46875 | `call/method/sequence/string/format` | 3 |
-| 0.75 | `condition/inequality` | 2 |
-| 0 | `flow/loop/exit/late` | 2-4 |
-| 0 | `flow/loop/while` | 2-4 |
-| 0.375 | `operator/arithmetic/addition` | 4 |
-| 0 | `style/imperative` | 1-4 |
-| 0.4375 | `type/number/integer/literal` | 1, 1, 2 |
-| 0.375 | `type/number/magic` | 2 |
-| 0 | `type/sequence/string` | 3 |
-| 0 | `type/sequence/string/literal` | 3 |
-| 0.1875 | `type/sequence/tuple/literal` | 1, 1, 4, 4 |
-| 0.0625 | `var/assignment/explicit/parallel` | 1 |
-| 0.09375 | `var/assignment/explicit/parallel/slide` | 4 |
-| 0 | `var/scope/global` | 1-4 |
-| 0 | `meta/program` | 1-4 |
-| 0 | `meta/sloc/4` | 1-4 |
-
----
-
-## 6 programs of learning cost in [4, 8[
-
-### Program `20_prime_numbers.py` (learning cost 4.3125)
-
-```python
-1   import itertools
-2   def iter_primes():
-3       numbers = itertools.count(2)
-4       while True:
-5           prime = next(numbers)
-6           yield prime
-7           numbers = filter(prime.__rmod__, numbers)
-8   for p in iter_primes():
-9       if p > 1000:
-10          break
-11      print(p)
-```
-
-| Cost  | Taxon | Location |
-|----|----|----|
-| 0 | `call/function/builtin/filter` | 7 |
-| 0 | `call/function/builtin/next` | 5 |
-| 0 | `call/function/without_arguments` | 8 |
-| 0.4375 | `call/method/sequence_duck/count` | 3 |
-| 0.75 | `condition/inequality` | 9 |
-| 0.25 | `def/generator` | 2-7 |
-| 0.4375 | `def/import/standard/itertools` | 1 |
-| 0.25 | `def/no_parameter` | 2-7 |
-| 0 | `flow/conditional/no_else` | 9-10 |
-| 0 | `flow/loop/exit/early/break` | 8-11 |
-| 0 | `flow/loop/exit/late` | 4-7 |
-| 0 | `flow/loop/for` | 8-11 |
-| 0 | `flow/loop/while/infinite` | 4-7 |
-| 0.375 | `style/functional_trait/filter` | 7 |
-| 0.25 | `style/procedural` | 1-11 |
-| 0.4375 | `type/boolean/literal/True` | 4 |
-| 0.4375 | `type/number/integer/literal` | 3, 9 |
-| 0.375 | `type/number/magic` | 9 |
-| 0 | `type/sequence` | 3 |
-| 0 | `var/assignment/explicit/single` | 3, 5, 7 |
-| 0.1875 | `var/assignment/implicit/iteration_variable` | 8 |
-| 0 | `var/scope/global` | 1-11 |
-| 0.125 | `var/scope/local` | 2-7 |
-| 0 | `meta/program` | 1-11 |
-| 0 | `meta/sloc/11` | 1-11 |
-
----
-
-### Program `21_xml_html_parsing.py` (learning cost 4.3125)
+### Program `21_xml_html_parsing.py` (learning cost 3.59375)
 
 ```python
 1   dinner_recipe = """<html><body><table>
@@ -188,8 +140,8 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `call/composition` | 14 |
-| 0.25 | `call/method` | 9, 11 |
-| 0.46875 | `call/method/sequence/string/format` | 14 |
+| 0 | `call/subroutine/method` | 9, 11 |
+| 0 | `call/subroutine/method/sequence/string/format` | 14 |
 | 0.875 | `condition/belonging/not` | 13 |
 | 0.75 | `condition/equality` | 13 |
 | 0.4375 | `def/import/standard/xml.etree.ElementTree` | 8 |
@@ -207,12 +159,61 @@
 | 0 | `var/assignment/explicit/single` | 1, 9, 10 |
 | 0.1875 | `var/assignment/implicit/iteration_variable` | 11 |
 | 0 | `var/scope/global` | 1-14 |
+| 0 | `meta/count/program/sloc/14` | 1-14 |
 | 0 | `meta/program` | 1-14 |
-| 0 | `meta/sloc/14` | 1-14 |
 
 ---
 
-### Program `10_time.py` (learning cost 4.5)
+### Program `20_prime_numbers.py` (learning cost 3.625)
+
+```python
+1   import itertools
+2   def iter_primes():
+3       numbers = itertools.count(2)
+4       while True:
+5           prime = next(numbers)
+6           yield prime
+7           numbers = filter(prime.__rmod__, numbers)
+8   for p in iter_primes():
+9       if p > 1000:
+10          break
+11      print(p)
+```
+
+| Cost  | Taxon | Location |
+|----|----|----|
+| 0 | `call/subroutine/builtin/filter` | 7 |
+| 0 | `call/subroutine/builtin/next` | 5 |
+| 0 | `call/subroutine/method/sequence_duck/count` | 3 |
+| 0 | `call/subroutine/no_arguments` | 8 |
+| 0.75 | `condition/inequality` | 9 |
+| 0.4375 | `def/import/standard/itertools` | 1 |
+| 0.125 | `def/subroutine/generator` | 2-7 |
+| 0.125 | `def/subroutine/no_parameter` | 2-7 |
+| 0 | `flow/conditional/no_else` | 9-10 |
+| 0 | `flow/loop/exit/early/break` | 8-11 |
+| 0 | `flow/loop/exit/late` | 4-7 |
+| 0 | `flow/loop/for` | 8-11 |
+| 0 | `flow/loop/while/infinite` | 4-7 |
+| 0.375 | `style/functional_trait/filter` | 7 |
+| 0.25 | `style/procedural` | 1-11 |
+| 0.4375 | `type/boolean/literal/True` | 4 |
+| 0.4375 | `type/number/integer/literal` | 3, 9 |
+| 0.375 | `type/number/magic` | 9 |
+| 0 | `type/sequence` | 3 |
+| 0 | `var/assignment/explicit/single` | 3, 5, 7 |
+| 0.1875 | `var/assignment/implicit/iteration_variable` | 8 |
+| 0 | `var/scope/global` | 1-11 |
+| 0.125 | `var/scope/local` | 2-7 |
+| 0 | `meta/count/program/sloc/11` | 1-11 |
+| 0 | `meta/count/subroutine/sloc/6` | 2-7 |
+| 0 | `meta/program` | 1-11 |
+
+---
+
+## 4 programs of learning cost in [4, 8[
+
+### Program `10_time.py` (learning cost 4.03125)
 
 ```python
 1   from time import localtime
@@ -237,9 +238,9 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `call/composition` | 12 |
-| 0 | `call/function/builtin/sorted` | 12 |
-| 0 | `call/function/without_arguments` | 10 |
-| 0.46875 | `call/method/non_sequence/dictionary/keys` | 12 |
+| 0 | `call/subroutine/builtin/sorted` | 12 |
+| 0 | `call/subroutine/method/non_sequence/dictionary/keys` | 12 |
+| 0 | `call/subroutine/no_arguments` | 10 |
 | 0.75 | `condition/inequality` | 13 |
 | 0.46875 | `def/import/standard/time/localtime` | 1 |
 | 0 | `flow/conditional/no_else` | 13-15 |
@@ -255,12 +256,60 @@
 | 0 | `var/assignment/explicit/single` | 2, 10, 11 |
 | 0.1875 | `var/assignment/implicit/iteration_variable` | 12 |
 | 0 | `var/scope/global` | 1-17 |
+| 0 | `meta/count/program/sloc/17` | 1-17 |
 | 0 | `meta/program` | 1-17 |
-| 0 | `meta/sloc/17` | 1-17 |
 
 ---
 
-### Program `33_guess_the_number.py` (learning cost 5.59375)
+### Program `12_classes.py` (learning cost 4.640625)
+
+```python
+1   class BankAccount(object):
+2       def __init__(self, initial_balance=0):
+3           self.balance = initial_balance
+4       def deposit(self, amount):
+5           self.balance += amount
+6       def withdraw(self, amount):
+7           self.balance -= amount
+8       def overdrawn(self):
+9           return self.balance < 0
+10  my_account = BankAccount(15)
+11  my_account.withdraw(50)
+12  print(my_account.balance, my_account.overdrawn())
+```
+
+| Cost  | Taxon | Location |
+|----|----|----|
+| 0.375 | `call/class/construct` | 10 |
+| 0.25 | `call/composition` | 12 |
+| 0 | `call/subroutine/method` | 11, 12 |
+| 0.75 | `condition/inequality` | 9 |
+| 0.25 | `def/class` | 1-9 |
+| 0.125 | `def/subroutine/function` | 8-9 |
+| 0.21875 | `def/subroutine/method/flavor/instance` | 2-3, 4-5, 6-7, 8-9 |
+| 0.234375 | `def/subroutine/method/naming/magic/__init__` | 2-3 |
+| 0 | `def/subroutine/procedure` | 2-3, 4-5, 6-7 |
+| 0.1875 | `def/subroutine/return/something` | 9 |
+| 0.25 | `style/object_oriented` | 1-12 |
+| 0.4375 | `type/number/integer/literal` | 10, 11 |
+| 0.46875 | `type/number/integer/literal/zero` | 2, 9 |
+| 0.375 | `type/number/magic` | 10, 11 |
+| 0 | `var/assignment/explicit` | 3 |
+| 0.09375 | `var/assignment/explicit/augmented/Add` | 5 |
+| 0.09375 | `var/assignment/explicit/augmented/Sub` | 7 |
+| 0 | `var/assignment/explicit/single` | 10 |
+| 0.1875 | `var/assignment/implicit/parameter` | 2, 4, 6 |
+| 0.21875 | `var/assignment/implicit/parameter/self` | 2, 4, 6, 8 |
+| 0 | `var/scope/global` | 1-12 |
+| 0.125 | `var/scope/local` | 2-3, 4-5, 6-7, 8-9 |
+| 0 | `meta/count/class/methods/4` | 1-9 |
+| 0 | `meta/count/program/sloc/12` | 1-12 |
+| 0 | `meta/count/subroutine/sloc/2` | 2-3, 4-5, 6-7, 8-9 |
+| 0 | `meta/program` | 1-12 |
+
+---
+
+### Program `33_guess_the_number.py` (learning cost 4.875)
 
 ```python
 1   import random
@@ -286,10 +335,10 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `call/composition` | 5, 7, 16, 18 |
-| 0 | `call/function/builtin/casting/int` | 7 |
-| 0 | `call/function/builtin/input` | 3, 7 |
-| 0.25 | `call/method` | 4 |
-| 0.46875 | `call/method/sequence/string/format` | 5, 16, 18 |
+| 0 | `call/subroutine/builtin/casting/int` | 7 |
+| 0 | `call/subroutine/builtin/input` | 3, 7 |
+| 0 | `call/subroutine/method` | 4 |
+| 0 | `call/subroutine/method/sequence/string/format` | 5, 16, 18 |
 | 0.75 | `condition/equality` | 13, 15 |
 | 0.75 | `condition/inequality` | 6, 9, 11 |
 | 0.4375 | `def/import/standard/random` | 1 |
@@ -310,58 +359,12 @@
 | 0.09375 | `var/assignment/explicit/augmented/Add` | 8 |
 | 0 | `var/assignment/explicit/single` | 2, 3, 4, 7 |
 | 0 | `var/scope/global` | 1-18 |
+| 0 | `meta/count/program/sloc/18` | 1-18 |
 | 0 | `meta/program` | 1-18 |
-| 0 | `meta/sloc/18` | 1-18 |
 
 ---
 
-### Program `12_classes.py` (learning cost 5.65625)
-
-```python
-1   class BankAccount(object):
-2       def __init__(self, initial_balance=0):
-3           self.balance = initial_balance
-4       def deposit(self, amount):
-5           self.balance += amount
-6       def withdraw(self, amount):
-7           self.balance -= amount
-8       def overdrawn(self):
-9           return self.balance < 0
-10  my_account = BankAccount(15)
-11  my_account.withdraw(50)
-12  print(my_account.balance, my_account.overdrawn())
-```
-
-| Cost  | Taxon | Location |
-|----|----|----|
-| 0.375 | `call/class/construct` | 10 |
-| 0.25 | `call/composition` | 12 |
-| 0.25 | `call/method` | 11, 12 |
-| 0.75 | `condition/inequality` | 9 |
-| 0.25 | `def/class` | 1-9 |
-| 0.25 | `def/function` | 8-9 |
-| 0.4375 | `def/method/flavor/instance` | 2-3, 4-5, 6-7, 8-9 |
-| 0.46875 | `def/method/naming/magic/__init__` | 2-3 |
-| 0 | `def/procedure` | 2-3, 4-5, 6-7 |
-| 0.375 | `def/return/something` | 9 |
-| 0.25 | `style/object_oriented` | 1-12 |
-| 0.4375 | `type/number/integer/literal` | 10, 11 |
-| 0.46875 | `type/number/integer/literal/zero` | 2, 9 |
-| 0.375 | `type/number/magic` | 10, 11 |
-| 0 | `var/assignment/explicit` | 3 |
-| 0.09375 | `var/assignment/explicit/augmented/Add` | 5 |
-| 0.09375 | `var/assignment/explicit/augmented/Sub` | 7 |
-| 0 | `var/assignment/explicit/single` | 10 |
-| 0.1875 | `var/assignment/implicit/parameter` | 2, 4, 6 |
-| 0.21875 | `var/assignment/implicit/parameter/self` | 2, 4, 6, 8 |
-| 0 | `var/scope/global` | 1-12 |
-| 0.125 | `var/scope/local` | 2-3, 4-5, 6-7, 8-9 |
-| 0 | `meta/program` | 1-12 |
-| 0 | `meta/sloc/12` | 1-12 |
-
----
-
-### Program `14_median.py` (learning cost 6.0)
+### Program `14_median.py` (learning cost 5.625)
 
 ```python
 1   def median(pool):
@@ -375,13 +378,13 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0 | `call/function/builtin/casting/int` | 5, 7, 7 |
-| 0 | `call/function/builtin/len` | 3 |
-| 0 | `call/function/builtin/sorted` | 2 |
+| 0 | `call/subroutine/builtin/casting/int` | 5, 7, 7 |
+| 0 | `call/subroutine/builtin/len` | 3 |
+| 0 | `call/subroutine/builtin/sorted` | 2 |
 | 0.875 | `condition/divisibility/parity` | 4 |
 | 0.75 | `condition/equality` | 4 |
-| 0.375 | `def/function/impure` | 1-7 |
-| 0.375 | `def/return/something` | 5, 7 |
+| 0.1875 | `def/subroutine/function/impure` | 1-7 |
+| 0.1875 | `def/subroutine/return/something` | 5, 7 |
 | 0 | `flow/conditional` | 4-7 |
 | 0 | `flow/conditional/else` | 7 |
 | 0.375 | `operator/arithmetic/addition` | 7 |
@@ -395,8 +398,9 @@
 | 0 | `var/assignment/explicit/single` | 2, 3 |
 | 0.1875 | `var/assignment/implicit/parameter` | 1 |
 | 0.125 | `var/scope/local` | 1-7 |
+| 0 | `meta/count/program/sloc/7` | 1-7 |
+| 0 | `meta/count/subroutine/sloc/7` | 1-7 |
 | 0 | `meta/program` | 1-7 |
-| 0 | `meta/sloc/7` | 1-7 |
 
 ---
 

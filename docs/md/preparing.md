@@ -66,14 +66,14 @@ foo = compute_square(foo)
 
 ### Other conventions
 
-When the name of a function returning a value starts with `"is_"`, `"are_"`, `"has_"`, `"have_"`, `"can_"`, `"must_"` or `"needs_"`, it is tagged as predicate (`"def/function/predicate"`):
+When the name of a function returning a value starts with `"is_"`, `"are_"`, `"has_"`, `"have_"`, `"can_"`, `"must_"` or `"needs_"`, it is tagged as predicate (`"def/subroutine/function/predicate"`):
 
 ```python
 def is_odd(n):
     return n % 2
 ```
 
-When the name of a function returning nothing starts or ends with `"test"` or `"tests"`, it is tagged as test (`"def/procedure/test"`):
+When the name of a function returning nothing starts or ends with `"test"` or `"tests"`, it is tagged as test (`"def/subroutine/procedure/test"`):
 
 ```python
 def test_is_odd():
@@ -402,14 +402,14 @@ For us, this cute duck typing comes with a challenge. Although this may change i
 
 ```plain
 type/sequence/list	          member_call_method:(append|extend|insert|reverse|sort)
-call/method/sequence/list/\1  member_call_method:(append|extend|insert|reverse|sort)
+call/subroutine/method/sequence/list/\1  member_call_method:(append|extend|insert|reverse|sort)
 ```
 
-This is why the expression `foo.append(bar)` will be tagged `member_call_method:append` (label), and then `call/method/sequence/list/append` and `type/sequence/list` (taxa). Here, this technique increases our chances of finding programs that feature lists, but it does not achieve the same accuracy for `foo.count(bar)`: indeed, `count()` is shared by all sequential types. In the taxonomy, this comes down to:
+This is why the expression `foo.append(bar)` will be tagged `member_call_method:append` (label), and then `call/subroutine/method/sequence/list/append` and `type/sequence/list` (taxa). Here, this technique increases our chances of finding programs that feature lists, but it does not achieve the same accuracy for `foo.count(bar)`: indeed, `count()` is shared by all sequential types. In the taxonomy, this comes down to:
 
 ```plain
 type/sequence	                member_call_method:(count|index)
-call/method/sequence_duck/\1	member_call_method:(count|index)
+call/subroutine/method/sequence_duck/\1	member_call_method:(count|index)
 ```
 
 Did you spot the duck in the second row? It's there to tell you: “Quack! that's the best I can say, but in case this sequence can't actually be anything other than a list, just let me know.”
@@ -420,7 +420,7 @@ In fact, the taxonomy has two lines for that:
 
 ```plain
 type/sequence/list	            member_call_method:list:(count|index|pop|...)
-call/method/sequence/list/\1	member_call_method:list:(count|index|pop|...)
+call/subroutine/method/sequence/list/\1	member_call_method:list:(count|index|pop|...)
 ```
 
 This means that you can hint at every ambiguous list method (`count()`, etc.) by deleting the original label and adding a new one with an inserted `":list"`:
@@ -429,10 +429,10 @@ This means that you can hint at every ambiguous list method (`count()`, etc.) by
 a.count(b)  # paroxython: -member_call_method:count +member_call_method:list:count
 ```
 
-Now, the generated taxa will be: `type/sequence/list` and `call/method/sequence/list/count`[^explicit_duck]. As for the duck, it is no more. It has ceased to be. It is expired and gone to meet its maker. It has run down the curtain and joined the choir invisible. This is an ex-duck.
+Now, the generated taxa will be: `type/sequence/list` and `call/subroutine/method/sequence/list/count`[^explicit_duck]. As for the duck, it is no more. It has ceased to be. It is expired and gone to meet its maker. It has run down the curtain and joined the choir invisible. This is an ex-duck.
 
 [^explicit_duck]:
-    For the similar cases where no translation is provided in the default taxonomy, you can either add it yourself, or directly hint at the desired  taxa, i.e., after `# paroxython:`, replace `+member_call_method:list:count` by `type/sequence/list` and `call/method/sequence/list/count`🦆.
+    For the similar cases where no translation is provided in the default taxonomy, you can either add it yourself, or directly hint at the desired  taxa, i.e., after `# paroxython:`, replace `+member_call_method:list:count` by `type/sequence/list` and `call/subroutine/method/sequence/list/count`🦆.
 
 Admittedly, all of this may be overkill, since a program featuring a list would most of the time feature it in several places, most of them without ambiguity. After all, generally speaking, you just want Paroxython to help you find programs in your repository, but don't need it to find features in a given program (you know better).
 

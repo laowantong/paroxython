@@ -79,8 +79,8 @@ class ProgramFilter:
                     "fizzbuzz.py": {
                         ...
                         "taxa": {
-                            "call/function/builtin/print": [[4,4],[6,6],[8,8],[10,10]],
-                            "call/function/builtin/range": [[2,2]],
+                            "call/subroutine/builtin/print": [[4,4],[6,6],[8,8],[10,10]],
+                            "call/subroutine/builtin/range": [[2,2]],
                             "flow/conditional": [[3,10],[5,10],[7,10]],
                             ...
             ```
@@ -93,7 +93,7 @@ class ProgramFilter:
             ```
                             "operator/arithmetic/multiplication": [],
                             "def/argument/arg": [],
-                            "def/procedure": [],
+                            "def/subroutine/procedure": [],
                             ...
             ```
 

@@ -197,17 +197,17 @@ class Taxonomy:
 
             Taxa (replacement patterns)         | Labels (search patterns)
             :-----------------------------------|:-----------------------
-            `call/function/builtin/casting/\1`  | `free_call:(list|dict)`
+            `call/subroutine/builtin/casting/\1`  | `free_call:(list|dict)`
             `type/sequence/list`                | `free_call:list`
 
             Suppose now that we pass the label `"free_call:list"`. The lookup in the map produces
             a first translation: `"type/sequence/list"`. However, the linear search in the list
-            produces a second translation, namely: `"call/function/builtin/casting/list"`.
+            produces a second translation, namely: `"call/subroutine/builtin/casting/list"`.
 
             >>> a_taxonomy_instance.get_taxon_name_list("free_call:list")
             [
                 "type/sequence/list",
-                "call/function/builtin/casting/list",
+                "call/subroutine/builtin/casting/list",
             ]
 
             Therefore, the complexity of this function is linear in every case. However, its

@@ -91,10 +91,10 @@ The programming concepts you plan to teach remain relatively <strong>low level</
 <p>These <strong>labels</strong> constitute only a scattered knowledge. The next step is to map them onto a <strong>taxonomy</strong> designed with basic hierarchical constraints in mind (e.g., the fact that the introduction of the concept of early exit must come after that of loop, which itself requires that of control flow, is expressed by the <em>taxon</em> <code>"flow/loop/exit/early"</code>).</p>
 <p align="center">
 <a href="https://laowantong.github.io/paroxython/user_manual/index.html#taxonomy">
-<img src="resources/tree.png" alt="A taxonomy." width="66%">
+<img src="resources/tree.png" alt="A taxonomy.">
 </a>
 <br>
-<em>Taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its dynamic version in the user manual.</em>
+<em>Extract of the taxonomy generated from <a href="https://github.com/TheAlgorithms/Python">The Algorithms - Python</a>.<br>Click to jump to its full dynamic version in the user manual.</em>
 </p>
 <p>Everything is then persisted in a tag <strong>database</strong>, which can later be filtered through a <strong>pipeline</strong> of commands, for instance:</p>
 <ul>
@@ -153,7 +153,7 @@ def fibonacci(n):                     # 2
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>call/method/sequence/list/append</code></td>
+<td align="left"><code>call/subroutine/method/sequence/list/append</code></td>
 <td align="left">6</td>
 </tr>
 <tr>
@@ -161,7 +161,7 @@ def fibonacci(n):                     # 2
 <td align="left">5</td>
 </tr>
 <tr>
-<td align="left"><code>def/function/impure</code></td>
+<td align="left"><code>def/subroutine/function/impure</code></td>
 <td align="left">2-8</td>
 </tr>
 <tr>
@@ -173,11 +173,15 @@ def fibonacci(n):                     # 2
 <td align="left">5-7</td>
 </tr>
 <tr>
-<td align="left"><code>meta/program</code></td>
+<td align="left"><code>meta/count/program/sloc/8</code></td>
 <td align="left">2-8</td>
 </tr>
 <tr>
-<td align="left"><code>meta/sloc/8</code></td>
+<td align="left"><code>meta/count/subroutine/sloc/7</code></td>
+<td align="left">2-8</td>
+</tr>
+<tr>
+<td align="left"><code>meta/program</code></td>
 <td align="left">2-8</td>
 </tr>
 <tr>
@@ -233,9 +237,9 @@ def fibonacci(n):                     # 2
 <p>As you can see, in this program, Paroxython identifies among others:</p>
 <ul>
 <li>the use of the <a href="https://en.wikipedia.org/wiki/Procedural_programming">procedural paradigm</a> (<code>style/procedural</code>);</li>
-<li>an im<a href="https://en.wikipedia.org/wiki/Pure_function">pure function</a> (<code>def/function/impure</code>);</li>
+<li>an im<a href="https://en.wikipedia.org/wiki/Pure_function">pure function</a> (<code>def/subroutine/function/impure</code>);</li>
 <li>a <code>while</code> loop (<code>flow/loop/while</code>) with a late exit (<code>flow/loop/exit/late</code>);</li>
-<li>a little bit of voodoo on lists (<code>type/sequence/list/literal/empty</code> and <code>call/method/sequence/list/append</code>);</li>
+<li>a little bit of voodoo on lists (<code>type/sequence/list/literal/empty</code> and <code>call/subroutine/method/sequence/list/append</code>);</li>
 <li>a simple <a href="https://openbookproject.net/thinkcs/python/english3e/tuples.html#tuple-assignment">tuple assignment</a> (<code>var/assignment/explicit/parallel</code>). Note that we distinguish between explicit (with <code>=</code>) and implicit (parameters and iteration variables) assignments;</li>
 <li>a “sliding” tuple assignment (<code>var/assignment/explicit/parallel/slide</code>). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of <a href="https://en.wikipedia.org/wiki/Constant-recursive_sequence">C-finite sequences</a> with C greater than 1, <a href="https://en.wikipedia.org/wiki/Greatest_common_divisor">Greatest Common Divisor</a>, <a href="https://en.wikipedia.org/wiki/Quicksort">Quicksort</a>, etc.</li>
 <li>four local variables (<code>var/scope/local</code>): <code>n</code>, <code>result</code>, <code>a</code>, <code>b</code>.</li>

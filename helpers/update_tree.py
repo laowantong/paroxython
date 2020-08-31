@@ -17,7 +17,7 @@ var data = google.visualization.arrayToDataTable(%s);
 var options = {
     wordtree: {
     format: 'implicit',
-    word: '•',
+    word: '🐍',
     },
 };
 var tree = new google.visualization.WordTree(document.getElementById('tree'));
@@ -36,11 +36,11 @@ def dump_trees(directory, update_database=True):
     connexion = sqlite3.connect(str(db_path))  # str() for Python 3.6 compatibility
     c = connexion.cursor()
 
-    query = "SELECT taxon, count(*) FROM taxon WHERE taxon not LIKE 'meta/sloc/%' GROUP BY taxon"
+    query = "SELECT taxon, count(*) FROM taxon WHERE taxon not LIKE 'meta/%/sloc/%' GROUP BY taxon"
     table = c.execute(query).fetchall()
     result = [["node", "occurrences"]]
     for (taxon, count) in table:
-        result.append([f"• {taxon.replace('/', ' ')}.", count])
+        result.append([f"🐍 {taxon.replace('/', ' ')}.", count])
     result = js_template % result
     Path("docs/resources/tree.js").write_text(result.replace("], ['", "],\n['"))
 

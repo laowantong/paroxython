@@ -45,6 +45,8 @@
 - free_call_without_result:print / fizzbuzz.py / 4, 6, 8, 10
 - function:is_even / is_even.py / 2-3
 - function:print_collatz / collatz.py / 1-8
+- function_line_count:2 / is_even.py / 2-3
+- function_line_count:8 / collatz.py / 1-8
 - function_parameter:n / collatz.py / 1
 - function_parameter:n / is_even.py / 2
 - function_parameter_flavor:arg / collatz.py / 1
@@ -188,6 +190,8 @@
 - chained_equalities|chained_inequalities
 - clamp_min_max
 - clamp_ternary
+- class
+- class_method_count
 - closure
 - compact_conditional_assignment
 - comparison_operator
@@ -218,12 +222,13 @@
 - for_indexes_elements
 - for_range
 - free_call
+- free_call_no_arguments
 - free_call_with_keyword_argument
-- free_call_without_arguments
 - free_call_without_result
 - free_tail_call
 - function
 - function_decorator
+- function_line_count
 - function_parameter
 - function_parameter_flavor
 - function_returning_nothing

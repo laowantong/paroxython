@@ -616,8 +616,8 @@ class ProgramFilter:
         &quot;fizzbuzz.py&quot;: {
             ...
             &quot;taxa&quot;: {
-                &quot;call/function/builtin/print&quot;: [[4,4],[6,6],[8,8],[10,10]],
-                &quot;call/function/builtin/range&quot;: [[2,2]],
+                &quot;call/subroutine/builtin/print&quot;: [[4,4],[6,6],[8,8],[10,10]],
+                &quot;call/subroutine/builtin/range&quot;: [[2,2]],
                 &quot;flow/conditional&quot;: [[3,10],[5,10],[7,10]],
                 ...
 </code></pre>
@@ -627,7 +627,7 @@ programs. For instance, assuming that <code>fizzbuzz.py</code> imports <code>col
 copy the taxa featured by the latter, but not by the former program, namely:</p>
 <pre><code>                &quot;operator/arithmetic/multiplication&quot;: [],
                 &quot;def/argument/arg&quot;: [],
-                &quot;def/procedure&quot;: [],
+                &quot;def/subroutine/procedure&quot;: [],
                 ...
 </code></pre>
 <h2 id="notes">Notes</h2>

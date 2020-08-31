@@ -257,12 +257,12 @@ And now for something completely different: the following pipeline command will 
     "operation": "include",
     "data": [
       ("flow/loop", "contains", "flow/conditional"),
-      ("flow/conditional", "finished by", "def/return"),
+      ("flow/conditional", "finished by", "def/subroutine/return"),
     ]
   },
 ```
 
-It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop **and** ended by a `return` statement: the quintuple `("flow/loop", "contains", "flow/conditional", "finished by", "def/return")` would raise an error. As it stands, the best we can do is to chain the commands themselves:
+It is currently not possible to chain several operators with shared operands, for example to keep only the programs that feature a conditional inside a loop **and** ended by a `return` statement: the quintuple `("flow/loop", "contains", "flow/conditional", "finished by", "def/subroutine/return")` would raise an error. As it stands, the best we can do is to chain the commands themselves:
 
 ```python
   {
@@ -274,13 +274,13 @@ It is currently not possible to chain several operators with shared operands, fo
   {
     "operation": "include",
     "data": [
-      ("flow/conditional", "finished by", "def/return"),
+      ("flow/conditional", "finished by", "def/subroutine/return"),
     ]
   },
   {
     "operation": "include",
     "data": [
-      ("def/return", "contains", "flow/loop"),
+      ("def/subroutine/return", "contains", "flow/loop"),
     ]
   },
 ```

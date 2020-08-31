@@ -430,7 +430,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("var/assignment/explicit/single", "after", "call/function/builtin/print"),
+                ("var/assignment/explicit/single", "after", "call/subroutine/builtin/print"),
                 # collatz.py and fizzbuzz.py have an assignment after a print.
                 # is_even.py imports fizzbuzz.py.
                 # Consequently, these three programs are excluded.
@@ -462,8 +462,8 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("condition/equality", "inside", "def/function"),
-                # "condition/equality" is inside "def/function" in is_even.py, which is not
+                ("condition/equality", "inside", "def/subroutine/function"),
+                # "condition/equality" is inside "def/subroutine/function" in is_even.py, which is not
                 # imported anywhere.
             ],
         }
@@ -477,8 +477,8 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("call/function/builtin/range", "inside", "flow/conditional"),
-                # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
+                ("call/subroutine/builtin/range", "inside", "flow/conditional"),
+                # "call/subroutine/builtin/range" is not inside "flow/conditional" anywhere.
             ],
         }
     ]
@@ -496,9 +496,9 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("var/assignment/explicit/single", "after", "call/function/builtin/print"),
+                ("var/assignment/explicit/single", "after", "call/subroutine/builtin/print"),
                 # The taxon "var/assignment/explicit/single" is featured by assignment.py and
-                # collatz.py. In collatz.py, it appears after a taxon "call/function/builtin/print".
+                # collatz.py. In collatz.py, it appears after a taxon "call/subroutine/builtin/print".
                 # Consequently, it should be included in the results, but not the programs which
                 # import it: fizzbuzz.py and is_even.py.
             ],
@@ -542,8 +542,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("condition/equality", "inside", "def/function"),
-                # "condition/equality" is inside "def/function" in is_even.py, which is not
+                ("condition/equality", "inside", "def/subroutine/function"),
+                # "condition/equality" is inside "def/subroutine/function" in is_even.py, which is not
                 # imported anywhere.
             ],
         }
@@ -558,8 +558,8 @@ def test_recommend_mini_programs():
             "operation": "include",
             "data": [
                 ("condition/equality$", "inside", "def"),
-                # "condition/equality" (strictly, note the dollar sign) is inside "def/function"
-                # in is_even.py and inside "def/procedure" in collatz.py. Both will be
+                # "condition/equality" (strictly, note the dollar sign) is inside "def/subroutine/function"
+                # in is_even.py and inside "def/subroutine/procedure" in collatz.py. Both will be
                 # included.
             ],
         }
@@ -573,8 +573,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("call/function/builtin/range", "inside", "flow/conditional"),
-                # "call/function/builtin/range" is not inside "flow/conditional" anywhere.
+                ("call/subroutine/builtin/range", "inside", "flow/conditional"),
+                # "call/subroutine/builtin/range" is not inside "flow/conditional" anywhere.
             ],
         }
     ]
@@ -587,8 +587,8 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("call/function/builtin/print", "is", "call/function/builtin/print"),
-                # "call/function/builtin/print" may appear several times in the same program, but
+                ("call/subroutine/builtin/print", "is", "call/subroutine/builtin/print"),
+                # "call/subroutine/builtin/print" may appear several times in the same program, but
                 # never on the same line.
             ],
         }
@@ -632,12 +632,12 @@ def test_recommend_mini_programs():
         {
             "operation": "include",
             "data": [
-                ("call/function/builtin/print", "not inside", "flow/loop/exit/late"),
+                ("call/subroutine/builtin/print", "not inside", "flow/loop/exit/late"),
                 # A print statement is featured inside a loop by both collatz.py and fizzbuzz.py.
                 # However, in collatz.py, there exists a print statement which is not inside the
                 # loop. This makes it satisfy the predicate. Note that assignment.py and is_even.py
                 # are not included in the result, since they don't feature (at least directly)
-                # "call/function/builtin/print".
+                # "call/subroutine/builtin/print".
             ],
         }
     ]
@@ -650,7 +650,7 @@ def test_recommend_mini_programs():
         {
             "operation": "exclude",
             "data": [
-                ("call/function/builtin/print", "not inside", "flow/loop"),
+                ("call/subroutine/builtin/print", "not inside", "flow/loop"),
                 # Exclude the programs which feature a print statement outside a loop. This does
                 # not exclude assignment.py, which does not feature a print statement. This
                 # excludes collatz, which features a print statement outside a loop, even if it

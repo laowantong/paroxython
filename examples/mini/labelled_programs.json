@@ -151,6 +151,10 @@
         [[1,8,"1-"]]
       ],
       [
+        "function_line_count:8",
+        [[1,8,"1-"]]
+      ],
+      [
         "function_parameter:n",
         [[1,1,"1-1-0-1-"]]
       ],
@@ -614,6 +618,10 @@
       ],
       [
         "function:is_even",
+        [[2,3,"2-"]]
+      ],
+      [
+        "function_line_count:2",
         [[2,3,"2-"]]
       ],
       [

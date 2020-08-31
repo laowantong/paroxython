@@ -191,7 +191,7 @@ def test_update_docstring():
     path = Path("paroxython/preprocess_source.py")
     source = path.read_text()
     (source, n) = regex.subn(
-        r"(?sm)^(\s*def full_cleaning.+?Examples:\n).+?^ *\n",
+        r"(?sm)^(\s*def full_cleaning.+?Examples:\n).+?^\n(?= +All examples)",
         fr"\1            {result}\n\n",
         source,
     )

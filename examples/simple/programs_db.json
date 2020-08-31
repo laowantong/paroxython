@@ -19,9 +19,9 @@
         "whole_span:1": [[1,1]]
       },
       "taxa": {
-        "call/function/builtin/print": [[1,1]],
+        "call/subroutine/builtin/print": [[1,1]],
+        "meta/count/program/sloc/1": [[1,1]],
         "meta/program": [[1,1]],
-        "meta/sloc/1": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
         "type/sequence/string/literal": [[1,1]]
@@ -58,10 +58,10 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "call/function/builtin/input": [[1,1]],
-        "call/function/builtin/print": [[2,2]],
+        "call/subroutine/builtin/input": [[1,1]],
+        "call/subroutine/builtin/print": [[2,2]],
+        "meta/count/program/sloc/2": [[1,2]],
         "meta/program": [[1,2]],
-        "meta/sloc/2": [[1,2]],
         "operator/string/format": [[2,2]],
         "style/imperative/flat": [[1,2]],
         "type/sequence/string/literal": [[2,2]],
@@ -125,14 +125,14 @@
       },
       "taxa": {
         "call/composition": [[3,3]],
-        "call/function/builtin/enumerate": [[2,2]],
-        "call/function/builtin/print/iteration": [[3,3]],
-        "call/function/builtin/print/name": [[3,3]],
-        "call/method/sequence/string/format": [[3,3]],
+        "call/subroutine/builtin/enumerate": [[2,2]],
+        "call/subroutine/builtin/print/iteration": [[3,3]],
+        "call/subroutine/builtin/print/name": [[3,3]],
+        "call/subroutine/method/sequence/string/format": [[3,3]],
         "flow/loop/exit/late": [[2,3]],
         "flow/loop/for/indexes_and_elements": [[2,3]],
+        "meta/count/program/sloc/3": [[1,3]],
         "meta/program": [[1,3]],
-        "meta/sloc/3": [[1,3]],
         "style/imperative": [[1,3]],
         "type/sequence/list/literal": [[1,1]],
         "type/sequence/string": [[3,3]],
@@ -200,13 +200,13 @@
       },
       "taxa": {
         "call/composition": [[3,3]],
-        "call/function/builtin/print": [[3,3]],
-        "call/method/sequence/string/format": [[3,3]],
+        "call/subroutine/builtin/print": [[3,3]],
+        "call/subroutine/method/sequence/string/format": [[3,3]],
         "condition/inequality": [[2,2]],
         "flow/loop/exit/late": [[2,4]],
         "flow/loop/while": [[2,4]],
+        "meta/count/program/sloc/4": [[1,4]],
         "meta/program": [[1,4]],
-        "meta/sloc/4": [[1,4]],
         "operator/arithmetic/addition": [[4,4]],
         "style/imperative": [[1,4]],
         "type/number/integer/literal": [[1,1],[1,1],[2,2]],
@@ -231,6 +231,7 @@
         "free_call_without_result:greet": [[3,3],[4,4],[5,5]],
         "free_call_without_result:print": [[2,2]],
         "function:greet": [[1,2]],
+        "function_line_count:2": [[1,2]],
         "function_parameter:name": [[1,1]],
         "function_parameter_flavor:arg": [[1,1]],
         "function_returning_nothing:greet": [[1,2]],
@@ -249,11 +250,12 @@
         "whole_span:5": [[1,5]]
       },
       "taxa": {
-        "call/function": [[3,3],[4,4],[5,5]],
-        "call/function/builtin/print": [[2,2]],
-        "def/procedure": [[1,2]],
+        "call/subroutine": [[3,3],[4,4],[5,5]],
+        "call/subroutine/builtin/print": [[2,2]],
+        "def/subroutine/procedure": [[1,2]],
+        "meta/count/program/sloc/5": [[1,5]],
+        "meta/count/subroutine/sloc/2": [[1,2]],
         "meta/program": [[1,5]],
-        "meta/sloc/5": [[1,5]],
         "style/procedural": [[1,5]],
         "type/sequence/string/literal": [[2,2],[3,3],[4,4],[5,5]],
         "var/assignment/implicit/parameter": [[1,1]],
@@ -301,15 +303,15 @@
         "whole_span:6": [[1,6]]
       },
       "taxa": {
-        "call/function/builtin/print": [[4,4],[6,6]],
-        "call/method": [[3,3]],
+        "call/subroutine/builtin/print": [[4,4],[6,6]],
+        "call/subroutine/method": [[3,3]],
         "def/import/standard/re": [[1,1]],
         "flow/conditional": [[3,6]],
         "flow/conditional/else": [[6,6]],
         "flow/loop/exit/late": [[2,6]],
         "flow/loop/for": [[2,6]],
+        "meta/count/program/sloc/6": [[1,6]],
         "meta/program": [[1,6]],
-        "meta/sloc/6": [[1,6]],
         "style/imperative": [[1,6]],
         "type/sequence/list/literal": [[2,2]],
         "type/sequence/string/literal": [[2,2],[2,2],[4,4],[6,6]],
@@ -387,10 +389,10 @@
         "whole_span:4": [[1,4]]
       },
       "taxa": {
-        "call/function/builtin/print": [[4,4]],
-        "call/function/builtin/sum": [[3,3]],
+        "call/subroutine/builtin/print": [[4,4]],
+        "call/subroutine/builtin/sum": [[3,3]],
+        "meta/count/program/sloc/4": [[1,4]],
         "meta/program": [[1,4]],
-        "meta/sloc/4": [[1,4]],
         "operator/arithmetic/multiplication": [[3,3]],
         "operator/string/format": [[4,4]],
         "style/imperative/flat": [[1,4]],
@@ -466,13 +468,13 @@
       },
       "taxa": {
         "call/composition": [[3,3]],
-        "call/function/builtin/casting/int": [[3,3]],
-        "call/function/builtin/print": [[4,4],[6,6]],
-        "call/function/builtin/sum": [[3,3]],
+        "call/subroutine/builtin/casting/int": [[3,3]],
+        "call/subroutine/builtin/print": [[4,4],[6,6]],
+        "call/subroutine/builtin/sum": [[3,3]],
         "def/import/standard/sys": [[1,1]],
         "flow/exception/catch/ValueError": [[2,6]],
+        "meta/count/program/sloc/6": [[1,6]],
         "meta/program": [[1,6]],
-        "meta/sloc/6": [[1,6]],
         "style/imperative": [[1,6]],
         "subscript/slice/start": [[3,3]],
         "type/number/integer": [[3,3]],
@@ -506,7 +508,7 @@
         "free_call:open": [[5,5]],
         "free_call:print": [[4,4],[7,7],[8,8]],
         "free_call:sorted": [[3,3]],
-        "free_call_without_arguments:print": [[8,8]],
+        "free_call_no_arguments:print": [[8,8]],
         "free_call_without_result:print": [[4,4],[7,7],[8,8]],
         "global_scope:file_name": [[1,8]],
         "global_scope:line": [[1,8]],
@@ -545,19 +547,19 @@
       },
       "taxa": {
         "call/composition": [[7,7]],
-        "call/function/builtin/open": [[5,5]],
-        "call/function/builtin/print": [[4,4],[7,7],[8,8]],
-        "call/function/builtin/sorted": [[3,3]],
-        "call/function/without_arguments": [[8,8]],
-        "call/method": [[2,2]],
-        "call/method/sequence/string/rstrip": [[7,7]],
+        "call/subroutine/builtin/open": [[5,5]],
+        "call/subroutine/builtin/print": [[4,4],[7,7],[8,8]],
+        "call/subroutine/builtin/sorted": [[3,3]],
+        "call/subroutine/method": [[2,2]],
+        "call/subroutine/method/sequence/string/rstrip": [[7,7]],
+        "call/subroutine/no_arguments": [[8,8]],
         "def/import/standard/glob": [[1,1]],
         "flow/loop/exit/late": [[3,8],[6,7]],
         "flow/loop/for": [[3,8]],
         "flow/loop/for/elements": [[6,7]],
         "flow/loop/for/nested/1": [[6,7]],
+        "meta/count/program/sloc/8": [[1,8]],
         "meta/program": [[1,8]],
-        "meta/sloc/8": [[1,8]],
         "operator/string/concatenation": [[4,4],[7,7]],
         "style/imperative": [[1,8]],
         "type/sequence/string": [[7,7]],
@@ -593,7 +595,7 @@
         "free_call:localtime": [[10,10]],
         "free_call:print": [[14,14],[17,17]],
         "free_call:sorted": [[12,12]],
-        "free_call_without_arguments:localtime": [[10,10]],
+        "free_call_no_arguments:localtime": [[10,10]],
         "free_call_without_result:print": [[14,14],[17,17]],
         "global_scope:activities": [[1,17]],
         "global_scope:activity_time": [[1,17]],
@@ -659,17 +661,17 @@
       },
       "taxa": {
         "call/composition": [[12,12]],
-        "call/function/builtin/print": [[14,14],[17,17]],
-        "call/function/builtin/sorted": [[12,12]],
-        "call/function/without_arguments": [[10,10]],
-        "call/method/non_sequence/dictionary/keys": [[12,12]],
+        "call/subroutine/builtin/print": [[14,14],[17,17]],
+        "call/subroutine/builtin/sorted": [[12,12]],
+        "call/subroutine/method/non_sequence/dictionary/keys": [[12,12]],
+        "call/subroutine/no_arguments": [[10,10]],
         "condition/inequality": [[13,13]],
         "def/import/standard/time/localtime": [[1,1]],
         "flow/conditional/no_else": [[13,15]],
         "flow/loop/exit/early/break/else": [[12,17]],
         "flow/loop/for": [[12,17]],
+        "meta/count/program/sloc/17": [[1,17]],
         "meta/program": [[1,17]],
-        "meta/sloc/17": [[1,17]],
         "style/imperative": [[1,17]],
         "subscript/index": [[14,14]],
         "type/non_sequence/dictionary": [[12,12]],
@@ -736,12 +738,12 @@
         "whole_span:10": [[1,10]]
       },
       "taxa": {
-        "call/function/builtin/print": [[9,9]],
+        "call/subroutine/builtin/print": [[9,9]],
         "condition/inequality": [[8,8]],
         "flow/loop/exit/late": [[8,10]],
         "flow/loop/while": [[8,10]],
+        "meta/count/program/sloc/10": [[1,10]],
         "meta/program": [[1,10]],
-        "meta/sloc/10": [[1,10]],
         "operator/arithmetic/modulo": [[9,9]],
         "operator/arithmetic/substraction": [[9,9]],
         "style/imperative": [[1,10]],
@@ -771,6 +773,8 @@
         "assignment_rhs_atom:initial_balance": [[3,3]],
         "augmented_assignment:Add": [[5,5]],
         "augmented_assignment:Sub": [[7,7]],
+        "class:BankAccount": [[1,9]],
+        "class_method_count:4": [[1,9]],
         "comparison_operator:Lt": [[9,9]],
         "composition": [[12,12]],
         "external_free_call:BankAccount": [[10,10]],
@@ -782,6 +786,7 @@
         "function:deposit": [[4,5]],
         "function:overdrawn": [[8,9]],
         "function:withdraw": [[6,7]],
+        "function_line_count:2": [[2,3],[4,5],[6,7],[8,9]],
         "function_parameter:amount": [[4,4],[6,6]],
         "function_parameter:initial_balance": [[2,2]],
         "function_parameter:self": [[2,2],[4,4],[6,6],[8,8]],
@@ -846,17 +851,19 @@
       "taxa": {
         "call/class/construct": [[10,10]],
         "call/composition": [[12,12]],
-        "call/function/builtin/print": [[12,12]],
-        "call/method": [[11,11],[12,12]],
+        "call/subroutine/builtin/print": [[12,12]],
+        "call/subroutine/method": [[11,11],[12,12]],
         "condition/inequality": [[9,9]],
         "def/class": [[1,9]],
-        "def/function": [[8,9]],
-        "def/method/flavor/instance": [[2,3],[4,5],[6,7],[8,9]],
-        "def/method/naming/magic/__init__": [[2,3]],
-        "def/procedure": [[2,3],[4,5],[6,7]],
-        "def/return/something": [[9,9]],
+        "def/subroutine/function": [[8,9]],
+        "def/subroutine/method/flavor/instance": [[2,3],[4,5],[6,7],[8,9]],
+        "def/subroutine/method/naming/magic/__init__": [[2,3]],
+        "def/subroutine/procedure": [[2,3],[4,5],[6,7]],
+        "def/subroutine/return/something": [[9,9]],
+        "meta/count/class/methods/4": [[1,9]],
+        "meta/count/program/sloc/12": [[1,12]],
+        "meta/count/subroutine/sloc/2": [[2,3],[4,5],[6,7],[8,9]],
         "meta/program": [[1,12]],
-        "meta/sloc/12": [[1,12]],
         "style/object_oriented": [[1,12]],
         "type/number/integer/literal": [[10,10],[11,11]],
         "type/number/integer/literal/zero": [[2,2],[9,9]],
@@ -890,6 +897,8 @@
         "binary_operator:Div": [[6,6],[8,8],[8,8],[8,8]],
         "binary_operator:Mod": [[5,5]],
         "binary_operator:Sub": [[6,6],[8,8]],
+        "class:TestMedian": [[9,11]],
+        "class_method_count:1": [[9,11]],
         "comparison_operator:Eq": [[5,5]],
         "composition": [[11,11]],
         "divisibility_test:2": [[5,5]],
@@ -902,6 +911,8 @@
         "free_call:sorted": [[3,3]],
         "function:median": [[2,8]],
         "function:testMedian": [[10,11]],
+        "function_line_count:2": [[10,11]],
+        "function_line_count:7": [[2,8]],
         "function_parameter:pool": [[2,2]],
         "function_parameter:self": [[10,10]],
         "function_parameter_flavor:arg": [[2,2],[10,10]],
@@ -974,23 +985,26 @@
       },
       "taxa": {
         "call/composition": [[11,11]],
-        "call/function": [[11,11]],
-        "call/function/builtin/casting/int": [[6,6],[8,8],[8,8]],
-        "call/function/builtin/len": [[4,4]],
-        "call/function/builtin/sorted": [[3,3]],
-        "call/method": [[11,11]],
+        "call/subroutine": [[11,11]],
+        "call/subroutine/builtin/casting/int": [[6,6],[8,8],[8,8]],
+        "call/subroutine/builtin/len": [[4,4]],
+        "call/subroutine/builtin/sorted": [[3,3]],
+        "call/subroutine/method": [[11,11]],
         "condition/divisibility/parity": [[5,5]],
         "condition/equality": [[5,5]],
         "def/class": [[9,11]],
-        "def/function/impure": [[2,8]],
         "def/import/standard/unittest": [[1,1]],
-        "def/method/flavor/instance": [[10,11]],
-        "def/procedure": [[10,11]],
-        "def/return/something": [[6,6],[8,8]],
+        "def/subroutine/function/impure": [[2,8]],
+        "def/subroutine/method/flavor/instance": [[10,11]],
+        "def/subroutine/procedure": [[10,11]],
+        "def/subroutine/return/something": [[6,6],[8,8]],
         "flow/conditional": [[5,8]],
         "flow/conditional/else": [[8,8]],
+        "meta/count/class/methods/1": [[9,11]],
+        "meta/count/program/sloc/11": [[1,11]],
+        "meta/count/subroutine/sloc/2": [[10,11]],
+        "meta/count/subroutine/sloc/7": [[2,8]],
         "meta/program": [[1,11]],
-        "meta/sloc/11": [[1,11]],
         "operator/arithmetic/addition": [[8,8]],
         "operator/arithmetic/division": [[6,6],[8,8],[8,8],[8,8]],
         "operator/arithmetic/modulo": [[5,5]],
@@ -1034,6 +1048,7 @@
         "free_call:len": [[3,3]],
         "free_call:sorted": [[2,2]],
         "function:median": [[1,7]],
+        "function_line_count:7": [[1,7]],
         "function_parameter:pool": [[1,1]],
         "function_parameter_flavor:arg": [[1,1]],
         "function_returning_something:median": [[1,7]],
@@ -1075,17 +1090,18 @@
         "whole_span:7": [[1,7]]
       },
       "taxa": {
-        "call/function/builtin/casting/int": [[5,5],[7,7],[7,7]],
-        "call/function/builtin/len": [[3,3]],
-        "call/function/builtin/sorted": [[2,2]],
+        "call/subroutine/builtin/casting/int": [[5,5],[7,7],[7,7]],
+        "call/subroutine/builtin/len": [[3,3]],
+        "call/subroutine/builtin/sorted": [[2,2]],
         "condition/divisibility/parity": [[4,4]],
         "condition/equality": [[4,4]],
-        "def/function/impure": [[1,7]],
-        "def/return/something": [[5,5],[7,7]],
+        "def/subroutine/function/impure": [[1,7]],
+        "def/subroutine/return/something": [[5,5],[7,7]],
         "flow/conditional": [[4,7]],
         "flow/conditional/else": [[7,7]],
+        "meta/count/program/sloc/7": [[1,7]],
+        "meta/count/subroutine/sloc/7": [[1,7]],
         "meta/program": [[1,7]],
-        "meta/sloc/7": [[1,7]],
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/division": [[5,5],[7,7],[7,7],[7,7]],
         "operator/arithmetic/modulo": [[4,4]],
@@ -1158,16 +1174,16 @@
       },
       "taxa": {
         "call/composition": [[9,9]],
-        "call/function": [[7,7]],
-        "call/function/builtin/print": [[9,9]],
-        "call/method/sequence/string/join": [[9,9]],
-        "call/method/sequence/string/splitlines": [[6,6]],
+        "call/subroutine": [[7,7]],
+        "call/subroutine/builtin/print": [[9,9]],
+        "call/subroutine/method/sequence/string/join": [[9,9]],
+        "call/subroutine/method/sequence/string/splitlines": [[6,6]],
         "def/import/standard/itertools/groupby": [[1,1]],
         "flow/conditional/no_else": [[8,9]],
         "flow/loop/exit/late": [[7,9]],
         "flow/loop/for": [[7,9]],
+        "meta/count/program/sloc/9": [[1,9]],
         "meta/program": [[1,9]],
-        "meta/sloc/9": [[1,9]],
         "style/imperative": [[1,9]],
         "type/sequence/string": [[6,6],[9,9]],
         "type/sequence/string/literal": [[9,9]],
@@ -1231,6 +1247,7 @@
         "free_call_with_keyword_argument:open:newline": [[4,4]],
         "free_call_without_result:print": [[18,18]],
         "function:cmp": [[2,3]],
+        "function_line_count:2": [[2,3]],
         "function_parameter:a": [[2,2]],
         "function_parameter:b": [[2,2]],
         "function_parameter_flavor:arg": [[2,2],[2,2]],
@@ -1344,20 +1361,21 @@
       },
       "taxa": {
         "call/composition": [[17,17],[18,18],[18,18]],
-        "call/function": [[17,17]],
-        "call/function/builtin/casting/float": [[17,17],[18,18]],
-        "call/function/builtin/open": [[4,4],[13,13]],
-        "call/function/builtin/print": [[18,18]],
-        "call/method": [[5,5],[6,6],[14,14]],
-        "call/method/sequence/string/format": [[18,18]],
+        "call/subroutine": [[17,17]],
+        "call/subroutine/builtin/casting/float": [[17,17],[18,18]],
+        "call/subroutine/builtin/open": [[4,4],[13,13]],
+        "call/subroutine/builtin/print": [[18,18]],
+        "call/subroutine/method": [[5,5],[6,6],[14,14]],
+        "call/subroutine/method/sequence/string/format": [[18,18]],
         "condition/inequality": [[3,3],[3,3]],
-        "def/function/pure": [[2,3]],
         "def/import/standard/csv": [[1,1]],
-        "def/return/something": [[3,3]],
+        "def/subroutine/function/pure": [[2,3]],
+        "def/subroutine/return/something": [[3,3]],
         "flow/loop/exit/late": [[16,18]],
         "flow/loop/for/elements": [[16,18]],
+        "meta/count/program/sloc/18": [[1,18]],
+        "meta/count/subroutine/sloc/2": [[2,3]],
         "meta/program": [[1,18]],
-        "meta/sloc/18": [[1,18]],
         "operator/arithmetic/substraction": [[3,3]],
         "style/functional_trait/pure_function": [[2,3]],
         "style/procedural": [[1,18]],
@@ -1431,6 +1449,8 @@
         "free_call_without_result:print": [[20,20]],
         "function:solve": [[9,17]],
         "function:under_attack": [[2,8]],
+        "function_line_count:7": [[2,8]],
+        "function_line_count:9": [[9,17]],
         "function_parameter:col": [[2,2]],
         "function_parameter:n": [[9,9]],
         "function_parameter:queens": [[2,2]],
@@ -1543,23 +1563,25 @@
         "whole_span:20": [[1,20]]
       },
       "taxa": {
-        "call/function": [[12,12],[17,17],[19,19]],
-        "call/function/builtin/print": [[20,20]],
-        "call/function/builtin/range": [[15,15]],
-        "call/function/builtin/reversed": [[4,4]],
+        "call/subroutine": [[12,12],[17,17],[19,19]],
+        "call/subroutine/builtin/print": [[20,20]],
+        "call/subroutine/builtin/range": [[15,15]],
+        "call/subroutine/builtin/reversed": [[4,4]],
         "condition/belonging": [[6,6]],
         "condition/equality": [[10,10]],
-        "def/function/impure": [[2,8],[9,17]],
-        "def/recursive/body": [[9,17]],
-        "def/recursive/call_count/1": [[9,17]],
-        "def/return/something": [[11,11],[13,17]],
+        "def/subroutine/function/impure": [[2,8],[9,17]],
+        "def/subroutine/recursive/body": [[9,17]],
+        "def/subroutine/recursive/call_count/1": [[9,17]],
+        "def/subroutine/return/something": [[11,11],[13,17]],
         "flow/conditional/guard": [[10,11]],
         "flow/conditional/no_else": [[6,7],[10,11]],
         "flow/loop/exit/early/return": [[4,7]],
         "flow/loop/exit/late": [[19,20]],
         "flow/loop/for": [[4,7],[19,20]],
+        "meta/count/program/sloc/20": [[1,20]],
+        "meta/count/subroutine/sloc/7": [[2,8]],
+        "meta/count/subroutine/sloc/9": [[9,17]],
         "meta/program": [[1,20]],
-        "meta/sloc/20": [[1,20]],
         "operator/arithmetic/addition": [[5,5],[17,17]],
         "operator/arithmetic/substraction": [[5,5],[12,12]],
         "operator/boolean/not": [[17,17]],
@@ -1610,9 +1632,10 @@
         "free_call:iter_primes": [[8,8]],
         "free_call:next": [[5,5]],
         "free_call:print": [[11,11]],
-        "free_call_without_arguments:iter_primes": [[8,8]],
+        "free_call_no_arguments:iter_primes": [[8,8]],
         "free_call_without_result:print": [[11,11]],
         "function:iter_primes": [[2,7]],
+        "function_line_count:6": [[2,7]],
         "function_without_parameters:iter_primes": [[2,7]],
         "generator:iter_primes": [[2,7]],
         "global_scope:p": [[1,11]],
@@ -1671,22 +1694,23 @@
         "yield:prime": [[6,6]]
       },
       "taxa": {
-        "call/function/builtin/filter": [[7,7]],
-        "call/function/builtin/next": [[5,5]],
-        "call/function/builtin/print": [[11,11]],
-        "call/function/without_arguments": [[8,8]],
-        "call/method/sequence_duck/count": [[3,3]],
+        "call/subroutine/builtin/filter": [[7,7]],
+        "call/subroutine/builtin/next": [[5,5]],
+        "call/subroutine/builtin/print": [[11,11]],
+        "call/subroutine/method/sequence_duck/count": [[3,3]],
+        "call/subroutine/no_arguments": [[8,8]],
         "condition/inequality": [[9,9]],
-        "def/generator": [[2,7]],
         "def/import/standard/itertools": [[1,1]],
-        "def/no_parameter": [[2,7]],
+        "def/subroutine/generator": [[2,7]],
+        "def/subroutine/no_parameter": [[2,7]],
         "flow/conditional/no_else": [[9,10]],
         "flow/loop/exit/early/break": [[8,11]],
         "flow/loop/exit/late": [[4,7]],
         "flow/loop/for": [[8,11]],
         "flow/loop/while/infinite": [[4,7]],
+        "meta/count/program/sloc/11": [[1,11]],
+        "meta/count/subroutine/sloc/6": [[2,7]],
         "meta/program": [[1,11]],
-        "meta/sloc/11": [[1,11]],
         "style/functional_trait/filter": [[7,7]],
         "style/procedural": [[1,11]],
         "type/boolean/literal/True": [[4,4]],
@@ -1785,17 +1809,17 @@
       },
       "taxa": {
         "call/composition": [[14,14]],
-        "call/function/builtin/print": [[14,14]],
-        "call/method": [[9,9],[11,11]],
-        "call/method/sequence/string/format": [[14,14]],
+        "call/subroutine/builtin/print": [[14,14]],
+        "call/subroutine/method": [[9,9],[11,11]],
+        "call/subroutine/method/sequence/string/format": [[14,14]],
         "condition/belonging/not": [[13,13]],
         "condition/equality": [[13,13]],
         "def/import/standard/xml.etree.ElementTree": [[8,8]],
         "flow/conditional/no_else": [[13,14]],
         "flow/loop/exit/late": [[11,14]],
         "flow/loop/for": [[11,14]],
+        "meta/count/program/sloc/14": [[1,14]],
         "meta/program": [[1,14]],
-        "meta/sloc/14": [[1,14]],
         "operator/boolean/and": [[13,13]],
         "style/imperative": [[1,14]],
         "type/non_sequence/set/literal": [[10,10]],
@@ -1840,6 +1864,7 @@
         "binary_operator:Mult": [[24,24],[24,24]],
         "binary_operator:Sub": [[7,7],[24,24],[24,24]],
         "chained_assignment": [[5,5]],
+        "class:BailOut": [[2,3]],
         "comparison_operator:Eq": [[15,15]],
         "comparison_operator:In": [[8,8]],
         "composition": [[24,24]],
@@ -1867,6 +1892,8 @@
         "free_tail_call:add_queen": [[18,18]],
         "function:add_queen": [[10,21]],
         "function:validate": [[4,9]],
+        "function_line_count:12": [[10,21]],
+        "function_line_count:6": [[4,9]],
         "function_parameter:queens": [[4,4],[10,10]],
         "function_parameter_flavor:arg": [[4,4],[10,10]],
         "function_returning_nothing:validate": [[4,9]],
@@ -1988,20 +2015,20 @@
       },
       "taxa": {
         "call/composition": [[24,24]],
-        "call/function": [[14,14],[18,18],[22,22]],
-        "call/function/builtin/len": [[15,15]],
-        "call/function/builtin/print": [[23,23],[24,24]],
-        "call/function/builtin/range": [[11,11]],
-        "call/function/builtin/reversed": [[6,6]],
-        "call/method/sequence/string/join": [[24,24]],
+        "call/subroutine": [[14,14],[18,18],[22,22]],
+        "call/subroutine/builtin/len": [[15,15]],
+        "call/subroutine/builtin/print": [[23,23],[24,24]],
+        "call/subroutine/builtin/range": [[11,11]],
+        "call/subroutine/builtin/reversed": [[6,6]],
+        "call/subroutine/method/sequence/string/join": [[24,24]],
         "condition/belonging": [[8,8]],
         "condition/equality": [[15,15]],
         "def/class": [[2,3]],
-        "def/function/impure": [[10,21]],
-        "def/procedure": [[4,9]],
-        "def/recursive/call_count/1": [[10,21]],
-        "def/recursive/tail": [[10,21]],
-        "def/return/something": [[18,18]],
+        "def/subroutine/function/impure": [[10,21]],
+        "def/subroutine/procedure": [[4,9]],
+        "def/subroutine/recursive/call_count/1": [[10,21]],
+        "def/subroutine/recursive/tail": [[10,21]],
+        "def/subroutine/return/something": [[18,18]],
         "flow/conditional": [[15,18]],
         "flow/conditional/else": [[18,18]],
         "flow/conditional/no_else": [[8,9]],
@@ -2011,8 +2038,10 @@
         "flow/loop/for": [[6,9]],
         "flow/loop/for/arithmetic": [[11,20]],
         "flow/null_operation": [[3,3],[20,20]],
+        "meta/count/program/sloc/24": [[1,24]],
+        "meta/count/subroutine/sloc/12": [[10,21]],
+        "meta/count/subroutine/sloc/6": [[4,9]],
         "meta/program": [[1,24]],
-        "meta/sloc/24": [[1,24]],
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/substraction": [[7,7],[24,24],[24,24]],
         "operator/list/concatenation": [[12,12]],
@@ -2137,11 +2166,11 @@
       },
       "taxa": {
         "call/composition": [[5,5],[7,7],[16,16],[18,18]],
-        "call/function/builtin/casting/int": [[7,7]],
-        "call/function/builtin/input": [[3,3],[7,7]],
-        "call/function/builtin/print": [[5,5],[10,10],[12,12],[16,16],[18,18]],
-        "call/method": [[4,4]],
-        "call/method/sequence/string/format": [[5,5],[16,16],[18,18]],
+        "call/subroutine/builtin/casting/int": [[7,7]],
+        "call/subroutine/builtin/input": [[3,3],[7,7]],
+        "call/subroutine/builtin/print": [[5,5],[10,10],[12,12],[16,16],[18,18]],
+        "call/subroutine/method": [[4,4]],
+        "call/subroutine/method/sequence/string/format": [[5,5],[16,16],[18,18]],
         "condition/equality": [[13,13],[15,15]],
         "condition/inequality": [[6,6],[9,9],[11,11]],
         "def/import/standard/random": [[1,1]],
@@ -2150,8 +2179,8 @@
         "flow/conditional/no_else": [[9,10],[11,12],[13,14]],
         "flow/loop/exit/early/break": [[6,14]],
         "flow/loop/while": [[6,14]],
+        "meta/count/program/sloc/18": [[1,18]],
         "meta/program": [[1,18]],
-        "meta/sloc/18": [[1,18]],
         "pattern/states/accumulate/count": [[6,14]],
         "style/imperative": [[1,18]],
         "type/number/integer": [[7,7]],
@@ -2733,6 +2762,21 @@
       "18_queens.py",
       "28_queens.py"
     ],
+    "class:BailOut": [
+      "28_queens.py"
+    ],
+    "class:BankAccount": [
+      "12_classes.py"
+    ],
+    "class:TestMedian": [
+      "13_unit_testing.py"
+    ],
+    "class_method_count:1": [
+      "13_unit_testing.py"
+    ],
+    "class_method_count:4": [
+      "12_classes.py"
+    ],
     "comparison_operator:Eq": [
       "13_unit_testing.py",
       "14_median.py",
@@ -3090,6 +3134,15 @@
     "free_call:validate": [
       "28_queens.py"
     ],
+    "free_call_no_arguments:iter_primes": [
+      "20_prime_numbers.py"
+    ],
+    "free_call_no_arguments:localtime": [
+      "10_time.py"
+    ],
+    "free_call_no_arguments:print": [
+      "09_indent.py"
+    ],
     "free_call_with_keyword_argument:open:newline": [
       "16_csv.py"
     ],
@@ -3098,15 +3151,6 @@
     ],
     "free_call_with_keyword_argument:print:name": [
       "03_friends.py"
-    ],
-    "free_call_without_arguments:iter_primes": [
-      "20_prime_numbers.py"
-    ],
-    "free_call_without_arguments:localtime": [
-      "10_time.py"
-    ],
-    "free_call_without_arguments:print": [
-      "09_indent.py"
     ],
     "free_call_without_result:greet": [
       "05_greet.py"
@@ -3177,6 +3221,27 @@
     ],
     "function:withdraw": [
       "12_classes.py"
+    ],
+    "function_line_count:12": [
+      "28_queens.py"
+    ],
+    "function_line_count:2": [
+      "05_greet.py",
+      "12_classes.py",
+      "13_unit_testing.py",
+      "16_csv.py"
+    ],
+    "function_line_count:6": [
+      "20_prime_numbers.py",
+      "28_queens.py"
+    ],
+    "function_line_count:7": [
+      "13_unit_testing.py",
+      "14_median.py",
+      "18_queens.py"
+    ],
+    "function_line_count:9": [
+      "18_queens.py"
     ],
     "function_parameter:a": [
       "16_csv.py"
@@ -5450,7 +5515,7 @@
       "28_queens.py",
       "33_guess_the_number.py"
     ],
-    "call/function": [
+    "call/subroutine": [
       "05_greet.py",
       "13_unit_testing.py",
       "15_itertools_groupby.py",
@@ -5458,38 +5523,38 @@
       "18_queens.py",
       "28_queens.py"
     ],
-    "call/function/builtin/casting/float": [
+    "call/subroutine/builtin/casting/float": [
       "16_csv.py"
     ],
-    "call/function/builtin/casting/int": [
+    "call/subroutine/builtin/casting/int": [
       "08_arguments.py",
       "13_unit_testing.py",
       "14_median.py",
       "33_guess_the_number.py"
     ],
-    "call/function/builtin/enumerate": [
+    "call/subroutine/builtin/enumerate": [
       "03_friends.py"
     ],
-    "call/function/builtin/filter": [
+    "call/subroutine/builtin/filter": [
       "20_prime_numbers.py"
     ],
-    "call/function/builtin/input": [
+    "call/subroutine/builtin/input": [
       "02_input_name.py",
       "33_guess_the_number.py"
     ],
-    "call/function/builtin/len": [
+    "call/subroutine/builtin/len": [
       "13_unit_testing.py",
       "14_median.py",
       "28_queens.py"
     ],
-    "call/function/builtin/next": [
+    "call/subroutine/builtin/next": [
       "20_prime_numbers.py"
     ],
-    "call/function/builtin/open": [
+    "call/subroutine/builtin/open": [
       "09_indent.py",
       "16_csv.py"
     ],
-    "call/function/builtin/print": [
+    "call/subroutine/builtin/print": [
       "01_hello_world.py",
       "02_input_name.py",
       "04_fibonacci.py",
@@ -5509,36 +5574,31 @@
       "28_queens.py",
       "33_guess_the_number.py"
     ],
-    "call/function/builtin/print/iteration": [
+    "call/subroutine/builtin/print/iteration": [
       "03_friends.py"
     ],
-    "call/function/builtin/print/name": [
+    "call/subroutine/builtin/print/name": [
       "03_friends.py"
     ],
-    "call/function/builtin/range": [
+    "call/subroutine/builtin/range": [
       "18_queens.py",
       "28_queens.py"
     ],
-    "call/function/builtin/reversed": [
+    "call/subroutine/builtin/reversed": [
       "18_queens.py",
       "28_queens.py"
     ],
-    "call/function/builtin/sorted": [
+    "call/subroutine/builtin/sorted": [
       "09_indent.py",
       "10_time.py",
       "13_unit_testing.py",
       "14_median.py"
     ],
-    "call/function/builtin/sum": [
+    "call/subroutine/builtin/sum": [
       "07_grocery_bill.py",
       "08_arguments.py"
     ],
-    "call/function/without_arguments": [
-      "09_indent.py",
-      "10_time.py",
-      "20_prime_numbers.py"
-    ],
-    "call/method": [
+    "call/subroutine/method": [
       "06_regex.py",
       "09_indent.py",
       "12_classes.py",
@@ -5547,27 +5607,32 @@
       "21_xml_html_parsing.py",
       "33_guess_the_number.py"
     ],
-    "call/method/non_sequence/dictionary/keys": [
+    "call/subroutine/method/non_sequence/dictionary/keys": [
       "10_time.py"
     ],
-    "call/method/sequence/string/format": [
+    "call/subroutine/method/sequence/string/format": [
       "03_friends.py",
       "04_fibonacci.py",
       "16_csv.py",
       "21_xml_html_parsing.py",
       "33_guess_the_number.py"
     ],
-    "call/method/sequence/string/join": [
+    "call/subroutine/method/sequence/string/join": [
       "15_itertools_groupby.py",
       "28_queens.py"
     ],
-    "call/method/sequence/string/rstrip": [
+    "call/subroutine/method/sequence/string/rstrip": [
       "09_indent.py"
     ],
-    "call/method/sequence/string/splitlines": [
+    "call/subroutine/method/sequence/string/splitlines": [
       "15_itertools_groupby.py"
     ],
-    "call/method/sequence_duck/count": [
+    "call/subroutine/method/sequence_duck/count": [
+      "20_prime_numbers.py"
+    ],
+    "call/subroutine/no_arguments": [
+      "09_indent.py",
+      "10_time.py",
       "20_prime_numbers.py"
     ],
     "condition/belonging": [
@@ -5603,21 +5668,6 @@
       "13_unit_testing.py",
       "28_queens.py"
     ],
-    "def/function": [
-      "12_classes.py"
-    ],
-    "def/function/impure": [
-      "13_unit_testing.py",
-      "14_median.py",
-      "18_queens.py",
-      "28_queens.py"
-    ],
-    "def/function/pure": [
-      "16_csv.py"
-    ],
-    "def/generator": [
-      "20_prime_numbers.py"
-    ],
     "def/import/standard/csv": [
       "16_csv.py"
     ],
@@ -5648,33 +5698,48 @@
     "def/import/standard/xml.etree.ElementTree": [
       "21_xml_html_parsing.py"
     ],
-    "def/method/flavor/instance": [
+    "def/subroutine/function": [
+      "12_classes.py"
+    ],
+    "def/subroutine/function/impure": [
+      "13_unit_testing.py",
+      "14_median.py",
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "def/subroutine/function/pure": [
+      "16_csv.py"
+    ],
+    "def/subroutine/generator": [
+      "20_prime_numbers.py"
+    ],
+    "def/subroutine/method/flavor/instance": [
       "12_classes.py",
       "13_unit_testing.py"
     ],
-    "def/method/naming/magic/__init__": [
+    "def/subroutine/method/naming/magic/__init__": [
       "12_classes.py"
     ],
-    "def/no_parameter": [
+    "def/subroutine/no_parameter": [
       "20_prime_numbers.py"
     ],
-    "def/procedure": [
+    "def/subroutine/procedure": [
       "05_greet.py",
       "12_classes.py",
       "13_unit_testing.py",
       "28_queens.py"
     ],
-    "def/recursive/body": [
+    "def/subroutine/recursive/body": [
       "18_queens.py"
     ],
-    "def/recursive/call_count/1": [
+    "def/subroutine/recursive/call_count/1": [
       "18_queens.py",
       "28_queens.py"
     ],
-    "def/recursive/tail": [
+    "def/subroutine/recursive/tail": [
       "28_queens.py"
     ],
-    "def/return/something": [
+    "def/subroutine/return/something": [
       "12_classes.py",
       "13_unit_testing.py",
       "14_median.py",
@@ -5774,6 +5839,88 @@
     "flow/null_operation": [
       "28_queens.py"
     ],
+    "meta/count/class/methods/1": [
+      "13_unit_testing.py"
+    ],
+    "meta/count/class/methods/4": [
+      "12_classes.py"
+    ],
+    "meta/count/program/sloc/1": [
+      "01_hello_world.py"
+    ],
+    "meta/count/program/sloc/10": [
+      "11_bottles.py"
+    ],
+    "meta/count/program/sloc/11": [
+      "13_unit_testing.py",
+      "20_prime_numbers.py"
+    ],
+    "meta/count/program/sloc/12": [
+      "12_classes.py"
+    ],
+    "meta/count/program/sloc/14": [
+      "21_xml_html_parsing.py"
+    ],
+    "meta/count/program/sloc/17": [
+      "10_time.py"
+    ],
+    "meta/count/program/sloc/18": [
+      "16_csv.py",
+      "33_guess_the_number.py"
+    ],
+    "meta/count/program/sloc/2": [
+      "02_input_name.py"
+    ],
+    "meta/count/program/sloc/20": [
+      "18_queens.py"
+    ],
+    "meta/count/program/sloc/24": [
+      "28_queens.py"
+    ],
+    "meta/count/program/sloc/3": [
+      "03_friends.py"
+    ],
+    "meta/count/program/sloc/4": [
+      "04_fibonacci.py",
+      "07_grocery_bill.py"
+    ],
+    "meta/count/program/sloc/5": [
+      "05_greet.py"
+    ],
+    "meta/count/program/sloc/6": [
+      "06_regex.py",
+      "08_arguments.py"
+    ],
+    "meta/count/program/sloc/7": [
+      "14_median.py"
+    ],
+    "meta/count/program/sloc/8": [
+      "09_indent.py"
+    ],
+    "meta/count/program/sloc/9": [
+      "15_itertools_groupby.py"
+    ],
+    "meta/count/subroutine/sloc/12": [
+      "28_queens.py"
+    ],
+    "meta/count/subroutine/sloc/2": [
+      "05_greet.py",
+      "12_classes.py",
+      "13_unit_testing.py",
+      "16_csv.py"
+    ],
+    "meta/count/subroutine/sloc/6": [
+      "20_prime_numbers.py",
+      "28_queens.py"
+    ],
+    "meta/count/subroutine/sloc/7": [
+      "13_unit_testing.py",
+      "14_median.py",
+      "18_queens.py"
+    ],
+    "meta/count/subroutine/sloc/9": [
+      "18_queens.py"
+    ],
     "meta/program": [
       "01_hello_world.py",
       "02_input_name.py",
@@ -5796,61 +5943,6 @@
       "21_xml_html_parsing.py",
       "28_queens.py",
       "33_guess_the_number.py"
-    ],
-    "meta/sloc/1": [
-      "01_hello_world.py"
-    ],
-    "meta/sloc/10": [
-      "11_bottles.py"
-    ],
-    "meta/sloc/11": [
-      "13_unit_testing.py",
-      "20_prime_numbers.py"
-    ],
-    "meta/sloc/12": [
-      "12_classes.py"
-    ],
-    "meta/sloc/14": [
-      "21_xml_html_parsing.py"
-    ],
-    "meta/sloc/17": [
-      "10_time.py"
-    ],
-    "meta/sloc/18": [
-      "16_csv.py",
-      "33_guess_the_number.py"
-    ],
-    "meta/sloc/2": [
-      "02_input_name.py"
-    ],
-    "meta/sloc/20": [
-      "18_queens.py"
-    ],
-    "meta/sloc/24": [
-      "28_queens.py"
-    ],
-    "meta/sloc/3": [
-      "03_friends.py"
-    ],
-    "meta/sloc/4": [
-      "04_fibonacci.py",
-      "07_grocery_bill.py"
-    ],
-    "meta/sloc/5": [
-      "05_greet.py"
-    ],
-    "meta/sloc/6": [
-      "06_regex.py",
-      "08_arguments.py"
-    ],
-    "meta/sloc/7": [
-      "14_median.py"
-    ],
-    "meta/sloc/8": [
-      "09_indent.py"
-    ],
-    "meta/sloc/9": [
-      "15_itertools_groupby.py"
     ],
     "operator/arithmetic/addition": [
       "04_fibonacci.py",
