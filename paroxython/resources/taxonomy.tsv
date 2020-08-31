@@ -103,6 +103,7 @@ meta/complexity/\1	complexity:(.+)
 meta/count/class/methods/\1	class_method_count:(.+)
 meta/count/program/sloc/\1	whole_span:(.+)
 meta/count/subroutine/sloc/\1	function_line_count:(.+)
+meta/count/variety/\1	variety:(.+)
 meta/program	whole_span:.+
 meta/technique/\1	technique:(.+)
 meta/topic/\1	topic:(.+)

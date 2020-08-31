@@ -84,7 +84,7 @@ This section mainly describes how the different parts of Paroxython (code, data,
     1. `"flow/loop/exit/early/break"`
     1. `"flow/loop"`
 
-    The latter is a suffix of (at least) another one: as an overly broad categorization of the feature, it can be discarded. Only the former two will go into the deduplicated result: they indeed categorize the feature along two partially distinct dimensions (the iteration domain and the nature of the exit).
+    The latter is a prefix of (at least) another one: as an overly broad categorization of the feature, it can be discarded. Only the former two will go into the deduplicated result: they indeed categorize the feature along two partially distinct dimensions (the iteration domain and the nature of the exit).
 
 `paroxython.make_db`
 :   This is the main user-facing module of the first stage, invoked on command line by:

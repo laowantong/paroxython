@@ -20,12 +20,14 @@
         "node:Name": [[2,2]],
         "node:Str": [[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[2,2]],
         "def/import/standard/__future__/print_function": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -48,11 +50,13 @@
         "node:Name": [[1,1]],
         "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -88,6 +92,7 @@
         "node:Str": [[2,2]],
         "range:10": [[1,1]],
         "scope:i": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -96,6 +101,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/arithmetic": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "type/number/integer/literal": [[1,1]],
@@ -128,11 +134,13 @@
         "one_liner_style": [[1,1]],
         "replication_operator:Str": [[1,1]],
         "special_literal_string:Hello\\n": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/string/replication": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -165,11 +173,13 @@
         "one_liner_style": [[1,1]],
         "replication_operator:Str": [[1,1]],
         "special_literal_string:Hello\\n": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/string/replication": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -207,6 +217,7 @@
         "one_liner_style": [[1,2]],
         "procedural_style": [[1,2]],
         "scope:name": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -214,6 +225,7 @@
         "def/subroutine/procedure": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/string/concatenation": [[2,2]],
         "style/one_liner": [[1,2]],
@@ -235,6 +247,7 @@
         "node:Pass": [[2,2]],
         "one_liner_style": [[1,2]],
         "procedural_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -243,6 +256,7 @@
         "flow/null_operation": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/one_liner": [[1,2]],
         "style/procedural": [[1,2]]
@@ -271,6 +285,7 @@
         "pure_function:square": [[1,2]],
         "return": [[2,2]],
         "scope:x": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -278,6 +293,7 @@
         "def/subroutine/return/something": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/arithmetic/multiplication": [[2,2]],
         "style/functional": [[1,2]],
@@ -311,6 +327,7 @@
         "pure_function:square": [[1,2]],
         "return": [[2,2]],
         "scope:x": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -318,6 +335,7 @@
         "def/subroutine/return/something": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
         "style/functional": [[1,2]],
@@ -343,12 +361,14 @@
         "node:ImportFrom": [[1,1]],
         "node:Name": [[2,2],[4,4],[4,4],[5,5],[5,5]],
         "object_oriented_style": [[1,2]],
+        "variety:\u2605\u2605\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/class": [[2,2]],
         "def/import/standard/dataclasses/dataclass": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/object_oriented": [[1,2]]
       }
@@ -375,6 +395,7 @@
         "node:For": [[1,2]],
         "node:Name": [[1,1],[1,1],[2,2],[2,2]],
         "scope:x": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -382,6 +403,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/elements": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "var/assignment/implicit/iteration_variable": [[1,1]],
@@ -421,6 +443,7 @@
         "node:Tuple": [[1,1]],
         "scope:i": [[1,2]],
         "scope:x": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -429,6 +452,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for/indexes_and_elements": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "type/sequence/tuple/literal": [[1,1]],
@@ -459,10 +483,12 @@
         "one_liner_style": [[1,1]],
         "scope:x": [[1,1]],
         "single_assignment:x": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -507,6 +533,7 @@
         "object_oriented_style": [[1,5]],
         "scope:data": [[2,5]],
         "scope:self": [[2,5]],
+        "variety:\u2605\u2605": [[1,5]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -517,6 +544,7 @@
         "meta/count/class/methods/1": [[1,5]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/subroutine/sloc/4": [[2,5]],
+        "meta/count/variety/\u2605\u2605": [[1,5]],
         "meta/program": [[1,5]],
         "style/object_oriented": [[1,5]],
         "type/null/literal": [[4,4],[5,5]],
@@ -566,6 +594,7 @@
         "scope:left_child": [[2,5]],
         "scope:right_child": [[2,5]],
         "scope:self": [[2,5]],
+        "variety:\u2605\u2605": [[1,5]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -576,6 +605,7 @@
         "meta/count/class/methods/1": [[1,5]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/subroutine/sloc/4": [[2,5]],
+        "meta/count/variety/\u2605\u2605": [[1,5]],
         "meta/program": [[1,5]],
         "style/object_oriented": [[1,5]],
         "var/assignment/explicit": [[3,3],[4,4],[5,5]],
@@ -603,12 +633,14 @@
         "node:ImportFrom": [[1,1]],
         "node:Name": [[2,2],[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine": [[2,2]],
         "def/import/standard/random/shuffle": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]]
@@ -634,6 +666,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -641,6 +674,7 @@
         "call/subroutine/method/random/shuffle": [[2,2]],
         "def/import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]]
@@ -666,6 +700,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -673,6 +708,7 @@
         "call/subroutine/method/random/choice": [[2,2]],
         "def/import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]]
@@ -691,11 +727,13 @@
         "node:Expr": [[1,1]],
         "node:Name": [[1,1],[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "condition/belonging": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]]
@@ -732,6 +770,7 @@
         "node:Tuple": [[1,1]],
         "scope:k": [[1,2]],
         "scope:v": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -740,6 +779,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "type/non_sequence/dictionary": [[1,1]],
@@ -783,6 +823,7 @@
         "return": [[3,3]],
         "scope:a": [[2,3]],
         "scope:b": [[2,3]],
+        "variety:\u2605\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -793,6 +834,7 @@
         "def/subroutine/return/something": [[3,3]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/subroutine/sloc/2": [[2,3]],
+        "meta/count/variety/\u2605\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/functional": [[1,3]],
         "style/functional_trait/pure_function": [[2,3]],
@@ -823,6 +865,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2],[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -830,6 +873,7 @@
         "call/subroutine/method/random/uniform": [[2,2]],
         "def/import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]]
@@ -857,6 +901,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2],[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -864,6 +909,7 @@
         "call/subroutine/method/random/randint": [[2,2]],
         "def/import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]]
@@ -912,6 +958,7 @@
         "recursive_function:dfs": [[1,6]],
         "return:None": [[3,3]],
         "scope:bt": [[1,6]],
+        "variety:\u2605\u2605\u2605\u2605": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -925,6 +972,7 @@
         "flow/conditional/no_else": [[2,3]],
         "meta/count/program/sloc/6": [[1,6]],
         "meta/count/subroutine/sloc/6": [[1,6]],
+        "meta/count/variety/\u2605\u2605\u2605\u2605": [[1,6]],
         "meta/program": [[1,6]],
         "style/procedural": [[1,6]],
         "type/null/literal": [[2,2]],
@@ -974,6 +1022,7 @@
         "scope:children": [[2,4]],
         "scope:self": [[2,4]],
         "scope:value": [[2,4]],
+        "variety:\u2605\u2605": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -985,6 +1034,7 @@
         "meta/count/class/methods/1": [[1,4]],
         "meta/count/program/sloc/4": [[1,4]],
         "meta/count/subroutine/sloc/3": [[2,4]],
+        "meta/count/variety/\u2605\u2605": [[1,4]],
         "meta/program": [[1,4]],
         "style/object_oriented": [[1,4]],
         "type/sequence/list": [[4,4]],
@@ -1039,6 +1089,7 @@
         "scope:child": [[1,4]],
         "scope:f": [[1,4]],
         "scope:root": [[1,4]],
+        "variety:\u2605\u2605": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -1052,6 +1103,7 @@
         "flow/loop/for/elements": [[3,4]],
         "meta/count/program/sloc/4": [[1,4]],
         "meta/count/subroutine/sloc/4": [[1,4]],
+        "meta/count/variety/\u2605\u2605": [[1,4]],
         "meta/program": [[1,4]],
         "style/functional_trait/higher_order": [[1,4]],
         "style/procedural": [[1,4]],
@@ -1080,11 +1132,13 @@
         "one_liner_style": [[1,1]],
         "scope:x": [[1,1]],
         "single_assignment:x": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/reversed": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1116,10 +1170,12 @@
         "slice_lower:": [[1,1]],
         "slice_step:-1": [[1,1]],
         "slice_upper:": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1144,11 +1200,13 @@
         "node:Expr": [[1,1]],
         "node:Name": [[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/list/reverse": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1210,6 +1268,7 @@
         "scope:item": [[1,4]],
         "scope:m": [[1,4]],
         "scope:x": [[1,4]],
+        "variety:\u2605\u2605": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -1223,6 +1282,7 @@
         "flow/loop/for/indexes_and_elements": [[2,4]],
         "meta/count/program/sloc/4": [[1,4]],
         "meta/count/subroutine/sloc/4": [[1,4]],
+        "meta/count/variety/\u2605\u2605": [[1,4]],
         "meta/program": [[1,4]],
         "style/procedural": [[1,4]],
         "type/sequence": [[4,4]],
@@ -1262,10 +1322,12 @@
         "update_by_assignment:b:a": [[1,1]],
         "update_by_assignment_with": [[1,1]],
         "update_with": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1294,11 +1356,13 @@
         "one_liner_style": [[1,1]],
         "scope:i": [[1,1]],
         "single_assignment:i": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/int": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1329,11 +1393,13 @@
         "one_liner_style": [[1,1]],
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/format": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1360,10 +1426,12 @@
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
         "special_literal_string:\u30cd\u30b3": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1421,6 +1489,7 @@
         "scope:t": [[1,6]],
         "single_assignment:q": [[2,2]],
         "single_assignment:t": [[3,3]],
+        "variety:\u2605\u2605\u2605": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -1428,6 +1497,7 @@
         "call/subroutine/method": [[5,5],[6,6]],
         "def/import/third_party/Queue": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,6]],
         "meta/program": [[1,6]],
         "style/imperative/flat": [[1,6]],
         "type/boolean/literal/True": [[4,4]],
@@ -1474,11 +1544,13 @@
         "scope:j": [[1,1]],
         "scope:x": [[1,1]],
         "single_assignment:x": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine": [[1,1],[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1532,11 +1604,13 @@
         "scope:k": [[1,1]],
         "scope:x": [[1,1]],
         "single_assignment:x": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine": [[1,1],[1,1],[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1577,12 +1651,14 @@
         "one_liner_style": [[1,2]],
         "scope:x": [[1,2]],
         "single_assignment:x": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/third_party/numpy": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -1627,12 +1703,14 @@
         "update_by_assignment:items:x": [[1,1]],
         "update_by_assignment_with:sorted": [[1,1]],
         "update_with:sorted": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/sorted": [[1,1]],
         "def/subroutine/function/anonymous": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1655,10 +1733,12 @@
         "node:Subscript": [[1,1]],
         "one_liner_style": [[1,1]],
         "subscript_deletion:Index": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -1715,6 +1795,7 @@
         "scope:i": [[1,4]],
         "scope:pool": [[1,4]],
         "single_assignment:pool": [[2,2]],
+        "variety:\u2605\u2605": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -1725,6 +1806,7 @@
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/arithmetic/start": [[3,4]],
         "meta/count/program/sloc/4": [[1,4]],
+        "meta/count/variety/\u2605\u2605": [[1,4]],
         "meta/program": [[1,4]],
         "style/imperative": [[1,4]],
         "type/number/integer/literal": [[3,3],[3,3]],
@@ -1777,6 +1859,7 @@
         "return": [[5,5]],
         "return:1": [[3,3]],
         "scope:i": [[1,5]],
+        "variety:\u2605\u2605\u2605": [[1,5]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -1790,6 +1873,7 @@
         "flow/conditional/else": [[5,5]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/subroutine/sloc/5": [[1,5]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,5]],
         "meta/program": [[1,5]],
         "operator/arithmetic/multiplication": [[5,5]],
         "operator/arithmetic/substraction": [[5,5]],
@@ -1827,6 +1911,7 @@
         "return": [[2,2]],
         "scope:n": [[1,2]],
         "scope:x": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -1834,6 +1919,7 @@
         "def/subroutine/return/something": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/arithmetic/power": [[2,2]],
         "style/functional": [[1,2]],
@@ -1882,6 +1968,7 @@
         "scope:x": [[1,7]],
         "single_assignment:lock": [[2,2]],
         "single_assignment:x": [[5,5]],
+        "variety:\u2605\u2605": [[1,7]],
         "whole_span:7": [[1,7]]
       },
       "taxa": {
@@ -1889,6 +1976,7 @@
         "call/subroutine/method": [[3,3],[7,7]],
         "def/import/standard/threading": [[1,1]],
         "meta/count/program/sloc/7": [[1,7]],
+        "meta/count/variety/\u2605\u2605": [[1,7]],
         "meta/program": [[1,7]],
         "style/imperative/flat": [[1,7]],
         "var/assignment/explicit/single": [[2,2],[5,5]],
@@ -1919,6 +2007,7 @@
         "object_oriented_style": [[1,3]],
         "scope:x": [[1,3]],
         "single_assignment:x": [[3,3]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -1928,6 +2017,7 @@
         "def/class": [[1,2]],
         "flow/null_operation": [[2,2]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/object_oriented": [[1,3]],
         "type/non_sequence/set": [[3,3]],
@@ -1972,6 +2062,7 @@
         "scope:a": [[1,2]],
         "scope:f": [[1,2]],
         "scope:g": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -1983,6 +2074,7 @@
         "def/subroutine/return/something": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/functional": [[1,2]],
         "style/functional_trait/higher_order": [[1,2]],
@@ -2029,6 +2121,7 @@
         "scope:f": [[1,2]],
         "scope:g": [[1,2]],
         "scope:x": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -2040,6 +2133,7 @@
         "def/subroutine/return/something": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/functional": [[1,2]],
         "style/functional_trait/higher_order": [[1,2]],
@@ -2102,6 +2196,7 @@
         "return:add": [[5,5]],
         "scope:a": [[2,5]],
         "scope:b": [[3,4]],
+        "variety:\u2605\u2605\u2605": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -2115,6 +2210,7 @@
         "meta/count/program/sloc/6": [[1,6]],
         "meta/count/subroutine/sloc/2": [[3,4]],
         "meta/count/subroutine/sloc/4": [[2,5]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,6]],
         "meta/program": [[1,6]],
         "operator/arithmetic/addition": [[4,4]],
         "style/functional": [[1,6]],
@@ -2150,10 +2246,12 @@
         "slice_lower:i": [[1,1]],
         "slice_step:": [[1,1]],
         "slice_upper:j": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -2183,11 +2281,13 @@
         "one_liner_style": [[1,1]],
         "scope:ok": [[1,1]],
         "single_assignment:ok": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "condition/belonging": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -2302,6 +2402,7 @@
         "slice_lower:1": [[10,10]],
         "slice_step:": [[10,10]],
         "slice_upper:": [[10,10]],
+        "variety:\u2605\u2605\u2605\u2605": [[1,13]],
         "whole_span:13": [[1,13]]
       },
       "taxa": {
@@ -2321,6 +2422,7 @@
         "meta/count/class/methods/2": [[2,3],[4,12]],
         "meta/count/program/sloc/13": [[1,13]],
         "meta/count/subroutine/sloc/4": [[5,8],[9,12]],
+        "meta/count/variety/\u2605\u2605\u2605\u2605": [[1,13]],
         "meta/program": [[1,13]],
         "style/object_oriented": [[1,13]],
         "subscript/index": [[11,11],[12,12]],
@@ -2374,12 +2476,14 @@
         "slice_lower:": [[1,1]],
         "slice_step:-1": [[1,1]],
         "slice_upper:": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method": [[1,1]],
         "call/subroutine/method/sequence/string/encode": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -2415,10 +2519,12 @@
         "slice_lower:": [[1,1]],
         "slice_step:-1": [[1,1]],
         "slice_upper:": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -2479,6 +2585,7 @@
         "scope:v": [[1,8]],
         "try_except:Exception": [[2,8]],
         "try_raise:Exception": [[2,8]],
+        "variety:\u2605\u2605\u2605\u2605": [[1,8]],
         "whole_span:8": [[1,8]]
       },
       "taxa": {
@@ -2493,6 +2600,7 @@
         "flow/loop/for/elements": [[1,8],[3,5]],
         "flow/loop/for/nested/1": [[3,5]],
         "meta/count/program/sloc/8": [[1,8]],
+        "meta/count/variety/\u2605\u2605\u2605\u2605": [[1,8]],
         "meta/program": [[1,8]],
         "style/imperative": [[1,8]],
         "var/assignment/implicit/iteration_variable": [[1,1],[3,3]],
@@ -2538,6 +2646,7 @@
         "node:Name": [[1,1],[1,1],[2,2],[2,2],[3,3],[3,3],[5,5],[5,5]],
         "scope:v": [[1,5]],
         "scope:v_": [[1,5]],
+        "variety:\u2605\u2605\u2605": [[1,5]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -2549,6 +2658,7 @@
         "flow/loop/for/elements": [[1,5],[2,5]],
         "flow/loop/for/nested/1": [[2,5]],
         "meta/count/program/sloc/5": [[1,5]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,5]],
         "meta/program": [[1,5]],
         "style/imperative": [[1,5]],
         "var/assignment/implicit/iteration_variable": [[1,1],[2,2]],
@@ -2619,6 +2729,7 @@
         "single_assignment:position": [[4,4],[8,8]],
         "try_except:BreakOuterLoop": [[3,11]],
         "try_raise:BreakOuterLoop": [[3,11]],
+        "variety:\u2605\u2605\u2605\u2605": [[1,11]],
         "whole_span:11": [[1,11]]
       },
       "taxa": {
@@ -2632,6 +2743,7 @@
         "flow/loop/for/nested/1": [[6,9]],
         "flow/null_operation": [[2,2],[11,11]],
         "meta/count/program/sloc/11": [[1,11]],
+        "meta/count/variety/\u2605\u2605\u2605\u2605": [[1,11]],
         "meta/program": [[1,11]],
         "style/object_oriented": [[1,11]],
         "subscript/index": [[6,6],[7,7]],
@@ -2739,6 +2851,7 @@
         "scope:row": [[1,6]],
         "scope:v": [[1,6]],
         "scope:value": [[1,6]],
+        "variety:\u2605\u2605": [[1,7]],
         "whole_span:7": [[1,7]]
       },
       "taxa": {
@@ -2756,6 +2869,7 @@
         "flow/loop/for/nested/1": [[3,5]],
         "meta/count/program/sloc/7": [[1,7]],
         "meta/count/subroutine/sloc/6": [[1,6]],
+        "meta/count/variety/\u2605\u2605": [[1,7]],
         "meta/program": [[1,7]],
         "style/procedural": [[1,7]],
         "type/null/literal": [[6,6]],
@@ -2793,11 +2907,13 @@
         "update_by_member_call:s:x": [[1,1]],
         "update_by_member_call_with:insert": [[1,1]],
         "update_with:insert": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/list/insert": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -2826,6 +2942,7 @@
         "node:Name": [[2,2]],
         "node:Num": [[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -2833,6 +2950,7 @@
         "call/subroutine/method/time/sleep": [[2,2]],
         "def/import/standard/time": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -2865,10 +2983,12 @@
         "slice_lower:": [[1,1]],
         "slice_step:": [[1,1]],
         "slice_upper:5": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -2904,10 +3024,12 @@
         "slice_lower:-5": [[1,1]],
         "slice_step:": [[1,1]],
         "slice_upper:": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -2934,10 +3056,12 @@
         "scope:s": [[1,3]],
         "single_assignment:s": [[1,1]],
         "special_literal_string:Huey\\nDewey\\nLouie": [[3,3]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "type/sequence/string/literal/special/\\n": [[3,3]],
@@ -2964,11 +3088,13 @@
         "one_liner_style": [[1,1]],
         "scope:chunks": [[1,1]],
         "single_assignment:chunks": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/split": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -2989,6 +3115,7 @@
         "node:NameConstant": [[1,1]],
         "node:Pass": [[2,2]],
         "node:While": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -2996,6 +3123,7 @@
         "flow/loop/while/infinite": [[1,2]],
         "flow/null_operation": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "type/boolean/literal/True": [[1,1]]
@@ -3014,11 +3142,13 @@
         "node:Expr": [[1,1]],
         "node:Name": [[1,1],[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "condition/belonging": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]]
@@ -3040,12 +3170,14 @@
         "node:Expr": [[1,1]],
         "node:Name": [[1,1],[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/non_sequence/dictionary/values": [[1,1]],
         "condition/belonging": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -3074,11 +3206,13 @@
         "one_liner_style": [[1,1]],
         "scope:y": [[1,1]],
         "single_assignment:y": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/join": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -3117,6 +3251,7 @@
         "one_liner_style": [[1,1]],
         "scope:y": [[1,1]],
         "single_assignment:y": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -3124,6 +3259,7 @@
         "call/subroutine/builtin/map": [[1,1]],
         "call/subroutine/method/sequence/string/join": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/functional_trait/map": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -3154,11 +3290,13 @@
         "one_liner_style": [[1,1]],
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/sum": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -3186,11 +3324,13 @@
         "one_liner_style": [[1,1]],
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/str": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -3253,6 +3393,7 @@
         "procedural_style": [[1,6]],
         "range:1:1001": [[5,5]],
         "scope:i": [[2,3]],
+        "variety:\u2605\u2605\u2605": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -3264,6 +3405,7 @@
         "def/subroutine/procedure": [[2,3]],
         "meta/count/program/sloc/6": [[1,6]],
         "meta/count/subroutine/sloc/2": [[2,3]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,6]],
         "meta/program": [[1,6]],
         "operator/arithmetic/multiplication": [[3,3]],
         "style/procedural": [[1,6]],
@@ -3297,11 +3439,13 @@
         "one_liner_style": [[1,1]],
         "scope:y": [[1,1]],
         "single_assignment:y": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/filter": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/functional_trait/filter": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -3339,11 +3483,13 @@
         "scope:element": [[1,1]],
         "scope:y": [[1,1]],
         "single_assignment:y": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -3374,12 +3520,14 @@
         "one_liner_style": [[1,1]],
         "scope:lines": [[1,1]],
         "single_assignment:lines": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/open": [[1,1]],
         "call/subroutine/method": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -3413,12 +3561,14 @@
         "node:Str": [[2,2]],
         "one_liner_style": [[1,2]],
         "value_attr:stderr": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/builtin/print/file": [[2,2]],
         "def/import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -3451,11 +3601,13 @@
         "scope:x": [[1,2]],
         "single_assignment:x": [[2,2]],
         "value_attr:argv": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -3488,12 +3640,14 @@
         "scope:d": [[1,2]],
         "single_assignment:d": [[2,2]],
         "value_attr:datetime": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/datetime": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -3523,11 +3677,13 @@
         "one_liner_style": [[1,1]],
         "scope:i": [[1,1]],
         "single_assignment:i": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/find": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -3561,11 +3717,13 @@
         "one_liner_style": [[1,1]],
         "scope:x2": [[1,1]],
         "single_assignment:x2": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/replace": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -3597,10 +3755,12 @@
         "one_liner_style": [[1,1]],
         "scope:x": [[1,1]],
         "single_assignment:x": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/arithmetic/power": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -3633,11 +3793,13 @@
         "one_liner_style": [[1,1]],
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/format": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -3667,10 +3829,12 @@
         "one_liner_style": [[1,1]],
         "scope:z": [[1,1]],
         "single_assignment:z": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/arithmetic/power": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -3716,6 +3880,7 @@
         "return": [[3,3]],
         "scope:k": [[2,3]],
         "scope:n": [[2,3]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -3725,6 +3890,7 @@
         "def/subroutine/return/something": [[3,3]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/subroutine/sloc/2": [[2,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "operator/arithmetic/integer_division": [[3,3],[3,3]],
         "operator/arithmetic/substraction": [[3,3]],
@@ -3775,6 +3941,7 @@
         "one_liner_style": [[1,3]],
         "scope:x": [[1,3]],
         "single_assignment:x": [[3,3]],
+        "variety:\u2605\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -3785,6 +3952,7 @@
         "def/import/standard/__future__/division": [[1,1]],
         "def/import/standard/math": [[2,2]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "operator/arithmetic/division": [[3,3]],
         "style/imperative/flat": [[1,3]],
@@ -3821,11 +3989,13 @@
         "one_liner_style": [[1,2]],
         "scope:rand": [[1,2]],
         "single_assignment:rand": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -3855,11 +4025,13 @@
         "one_liner_style": [[1,2]],
         "scope:rand": [[1,2]],
         "single_assignment:rand": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -3898,6 +4070,7 @@
         "slice_step:": [[2,2]],
         "slice_upper:": [[2,2]],
         "value_attr:argv": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -3906,6 +4079,7 @@
         "call/subroutine/method/sequence/string/join": [[2,2]],
         "def/import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -3955,6 +4129,7 @@
         "return": [[3,3]],
         "scope:a_class": [[1,3]],
         "scope:str_": [[1,3]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -3966,6 +4141,7 @@
         "flow/conditional/no_else": [[2,3]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/subroutine/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/functional": [[1,3]],
         "style/functional_trait/higher_order": [[1,3]],
@@ -4001,12 +4177,14 @@
         "one_liner_style": [[1,2]],
         "scope:x": [[1,2]],
         "single_assignment:x": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine": [[2,2]],
         "def/import/standard/fractions/gcd": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -4045,12 +4223,14 @@
         "one_liner_style": [[1,2]],
         "scope:x": [[1,2]],
         "single_assignment:x": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine": [[2,2]],
         "def/import/standard/fractions/gcd": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/arithmetic/integer_division": [[2,2]],
         "operator/arithmetic/multiplication": [[2,2]],
@@ -4082,11 +4262,13 @@
         "one_liner_style": [[1,1]],
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/format": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -4127,10 +4309,12 @@
         "scope:y": [[1,2]],
         "single_assignment:x": [[1,1]],
         "single_assignment:y": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/arithmetic/multiplication": [[2,2]],
         "operator/arithmetic/substraction": [[1,1]],
@@ -4169,6 +4353,7 @@
         "node:UnaryOp": [[3,3]],
         "node:While": [[1,4]],
         "unary_operator:Not": [[3,3]],
+        "variety:\u2605\u2605\u2605": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -4177,6 +4362,7 @@
         "flow/loop/exit/early/break": [[1,4]],
         "flow/loop/while/infinite": [[1,4]],
         "meta/count/program/sloc/4": [[1,4]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,4]],
         "meta/program": [[1,4]],
         "operator/boolean/not": [[3,3]],
         "style/imperative": [[1,4]],
@@ -4203,11 +4389,13 @@
         "one_liner_style": [[1,1]],
         "scope:y": [[1,1]],
         "single_assignment:y": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/float": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -4236,11 +4424,13 @@
         "one_liner_style": [[1,1]],
         "scope:y": [[1,1]],
         "single_assignment:y": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/int": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -4276,11 +4466,13 @@
         "one_liner_style": [[1,1]],
         "scope:y": [[1,1]],
         "single_assignment:y": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/int": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/arithmetic/addition": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -4314,11 +4506,13 @@
         "one_liner_style": [[1,1]],
         "scope:count": [[1,1]],
         "single_assignment:count": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence_duck/count": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -4352,12 +4546,14 @@
         "one_liner_style": [[1,2]],
         "scope:r": [[1,2]],
         "single_assignment:r": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/re": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -4391,12 +4587,14 @@
         "one_liner_style": [[1,1]],
         "scope:c": [[1,1]],
         "single_assignment:c": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/bin": [[1,1]],
         "call/subroutine/method/sequence_duck/count": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -4429,12 +4627,14 @@
         "return:False": [[2,2]],
         "scope:x": [[1,2]],
         "scope:y": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/subroutine/function/pure": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/functional": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
@@ -4467,12 +4667,14 @@
         "return:False": [[2,2]],
         "scope:x": [[1,2]],
         "scope:y": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/subroutine/function/pure": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/functional": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
@@ -4503,6 +4705,7 @@
         "node:Name": [[2,2]],
         "node:Num": [[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -4510,6 +4713,7 @@
         "call/subroutine/method/sys/exit": [[2,2]],
         "def/import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -4538,11 +4742,13 @@
         "one_liner_style": [[1,1]],
         "scope:buf": [[1,1]],
         "single_assignment:buf": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/bytearray": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -4568,11 +4774,13 @@
         "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
         "raise:ValueError": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/exception/builtin/ValueError": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -4619,6 +4827,7 @@
         "return": [[6,6]],
         "scope:self": [[2,3],[4,6]],
         "value_attr:_x": [[6,6]],
+        "variety:\u2605\u2605\u2605\u2605": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -4633,6 +4842,7 @@
         "meta/count/program/sloc/6": [[1,6]],
         "meta/count/subroutine/sloc/2": [[2,3]],
         "meta/count/subroutine/sloc/3": [[4,6]],
+        "meta/count/variety/\u2605\u2605\u2605\u2605": [[1,6]],
         "meta/program": [[1,6]],
         "style/object_oriented": [[1,6]],
         "type/number/integer/literal/zero": [[3,3]],
@@ -4671,6 +4881,7 @@
         "node:With": [[2,3]],
         "scope:x": [[1,3]],
         "single_assignment:x": [[3,3]],
+        "variety:\u2605\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -4678,6 +4889,7 @@
         "call/subroutine/method": [[3,3]],
         "def/import/standard/json": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "type/sequence/string/literal": [[2,2],[2,2]],
@@ -4712,6 +4924,7 @@
         "node:Name": [[2,2],[2,2],[3,3],[3,3],[3,3]],
         "node:Str": [[2,2],[2,2]],
         "node:With": [[2,3]],
+        "variety:\u2605\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -4720,6 +4933,7 @@
         "call/subroutine/method/json/dump": [[3,3]],
         "def/import/standard/json": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "type/sequence/string/literal": [[2,2],[2,2]]
@@ -4754,6 +4968,7 @@
         "pure_function:control": [[2,3]],
         "return": [[3,3]],
         "scope:f": [[2,3]],
+        "variety:\u2605\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -4764,6 +4979,7 @@
         "def/subroutine/return/something": [[3,3]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/subroutine/sloc/2": [[2,3]],
+        "meta/count/variety/\u2605\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/functional": [[1,3]],
         "style/functional_trait/higher_order": [[2,3]],
@@ -4792,6 +5008,7 @@
         "node:Expr": [[1,1]],
         "node:Name": [[1,1],[1,1],[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -4799,6 +5016,7 @@
         "call/subroutine/builtin/print": [[1,1]],
         "call/subroutine/builtin/type": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]]
@@ -4820,11 +5038,13 @@
         "node:Expr": [[1,1]],
         "node:Name": [[1,1],[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]]
@@ -4856,12 +5076,14 @@
         "scope:x": [[1,2]],
         "single_assignment:x": [[2,2]],
         "value_attr:path": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -4891,11 +5113,13 @@
         "one_liner_style": [[1,1]],
         "scope:b": [[1,1]],
         "single_assignment:b": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/startswith": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -4926,11 +5150,13 @@
         "one_liner_style": [[1,1]],
         "scope:b": [[1,1]],
         "single_assignment:b": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/endswith": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -4965,12 +5191,14 @@
         "scope:d": [[1,2]],
         "single_assignment:d": [[2,2]],
         "value_attr:date": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/datetime": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -5023,6 +5251,7 @@
         "scope:x": [[1,3]],
         "single_assignment:d": [[2,2]],
         "single_assignment:x": [[3,3]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -5030,6 +5259,7 @@
         "call/subroutine/method": [[3,3]],
         "def/import/standard/datetime/date": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "type/number/integer/literal": [[2,2],[2,2],[2,2]],
@@ -5069,12 +5299,14 @@
         "scope:x": [[1,3]],
         "single_assignment:d": [[2,2]],
         "single_assignment:x": [[3,3]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2],[3,3]],
         "def/import/standard/datetime/date": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "var/assignment/explicit/single": [[2,2],[3,3]],
@@ -5098,11 +5330,13 @@
         "node:Expr": [[1,1]],
         "node:Name": [[1,1],[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/list/sort": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -5136,12 +5370,14 @@
         "scope:s": [[1,3]],
         "single_assignment:s": [[3,3]],
         "value_attr:request": [[2,2]],
+        "variety:\u2605\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2],[3,3]],
         "def/import/standard/urllib.request": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "var/assignment/explicit/single": [[3,3]],
@@ -5182,12 +5418,14 @@
         "scope:filename": [[1,2]],
         "scope:headers": [[1,2]],
         "value_attr:request": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/urllib": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -5223,12 +5461,14 @@
         "scope:x": [[1,2]],
         "single_assignment:x": [[2,2]],
         "value_attr:etree": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/third_party/lxml.etree": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -5327,6 +5567,7 @@
         "single_assignment:c": [[5,5]],
         "single_assignment:ser": [[11,11]],
         "single_assignment:tst": [[10,10]],
+        "variety:\u2605\u2605\u2605": [[1,12]],
         "whole_span:12": [[1,12]]
       },
       "taxa": {
@@ -5341,6 +5582,7 @@
         "meta/count/class/methods/1": [[2,9]],
         "meta/count/program/sloc/12": [[1,12]],
         "meta/count/subroutine/sloc/4": [[6,9]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,12]],
         "meta/program": [[1,12]],
         "style/object_oriented": [[1,12]],
         "type/null/literal": [[3,3],[4,4],[5,5]],
@@ -5380,11 +5622,13 @@
         "scope:s": [[1,2]],
         "single_assignment:s": [[2,2]],
         "value_attr:argv": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -5416,12 +5660,14 @@
         "one_liner_style": [[1,2]],
         "scope:dir": [[1,2]],
         "single_assignment:dir": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -5458,6 +5704,7 @@
         "scope:dir": [[1,2]],
         "single_assignment:dir": [[2,2]],
         "value_attr:path": [[2,2],[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -5465,6 +5712,7 @@
         "call/subroutine/method": [[2,2],[2,2]],
         "def/import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -5496,6 +5744,7 @@
         "node:If": [[1,2]],
         "node:Name": [[1,1],[2,2],[2,2]],
         "node:Str": [[1,1]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -5505,6 +5754,7 @@
         "condition/belonging": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "type/sequence/string/literal": [[1,1]]
@@ -5536,12 +5786,14 @@
         "scope:n": [[1,2]],
         "single_assignment:n": [[2,2]],
         "value_attr:asizeof": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/third_party/pympler.asizeof": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -5573,12 +5825,14 @@
         "one_liner_style": [[1,1]],
         "scope:blank": [[1,1]],
         "single_assignment:blank": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/strip": [[1,1]],
         "condition/equality": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -5611,6 +5865,7 @@
         "node:Name": [[2,2]],
         "node:Str": [[2,2],[2,2],[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -5618,6 +5873,7 @@
         "call/subroutine/method/subprocess/call": [[2,2]],
         "def/import/standard/subprocess": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -5651,6 +5907,7 @@
         "node:Name": [[1,1],[1,1],[1,1],[2,2],[2,2],[2,2]],
         "node:Subscript": [[2,2]],
         "scope:k": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -5659,6 +5916,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "subscript/index": [[2,2]],
@@ -5708,6 +5966,7 @@
         "scope:x": [[1,1],[1,2]],
         "shadowing_scope:k": [[1,1]],
         "shadowing_scope:x": [[1,1]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -5718,6 +5977,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "type/non_sequence/dictionary": [[1,1]],
@@ -5748,11 +6008,13 @@
         "one_liner_style": [[1,1]],
         "scope:b": [[1,1]],
         "single_assignment:b": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "condition/equality": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -5783,12 +6045,14 @@
         "one_liner_style": [[1,2]],
         "scope:b": [[1,2]],
         "single_assignment:b": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "condition/inequality": [[2,2]],
         "def/import/standard/datetime": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -5822,11 +6086,13 @@
         "one_liner_style": [[1,1]],
         "scope:s2": [[1,1]],
         "single_assignment:s2": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/replace": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -5856,11 +6122,13 @@
         "one_liner_style": [[1,1]],
         "scope:n": [[1,1]],
         "single_assignment:n": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/len": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -5888,11 +6156,13 @@
         "one_liner_style": [[1,1]],
         "scope:y": [[1,1]],
         "single_assignment:y": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/set": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -5916,11 +6186,13 @@
         "node:Expr": [[1,1]],
         "node:Name": [[1,1],[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/set": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -5951,6 +6223,7 @@
         "one_liner_style": [[1,1]],
         "scope:x": [[1,1]],
         "single_assignment:x": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -5958,6 +6231,7 @@
         "call/subroutine/builtin/casting/list": [[1,1]],
         "call/subroutine/builtin/casting/set": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -6042,6 +6316,7 @@
         "update_by_member_call_with:append": [[7,7]],
         "update_with:add": [[6,6]],
         "update_with:append": [[7,7]],
+        "variety:\u2605\u2605\u2605": [[1,8]],
         "whole_span:8": [[1,8]]
       },
       "taxa": {
@@ -6055,6 +6330,7 @@
         "flow/loop/exit/late": [[4,7]],
         "flow/loop/for/elements": [[4,7]],
         "meta/count/program/sloc/8": [[1,8]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,8]],
         "meta/program": [[1,8]],
         "pattern/elements/accumulate/into_list": [[4,7]],
         "pattern/elements/accumulate/into_set": [[4,7]],
@@ -6093,6 +6369,7 @@
         "one_liner_style": [[1,1]],
         "scope:input_var": [[1,1]],
         "single_assignment:input_var": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -6100,6 +6377,7 @@
         "call/subroutine": [[1,1]],
         "call/subroutine/builtin/casting/int": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -6172,6 +6450,7 @@
         "scope:sock": [[1,7]],
         "single_assignment:UDP_IP": [[2,2]],
         "single_assignment:sock": [[3,3]],
+        "variety:\u2605\u2605": [[1,7]],
         "whole_span:7": [[1,7]]
       },
       "taxa": {
@@ -6181,6 +6460,7 @@
         "flow/loop/exit/late": [[5,7]],
         "flow/loop/while/infinite": [[5,7]],
         "meta/count/program/sloc/7": [[1,7]],
+        "meta/count/variety/\u2605\u2605": [[1,7]],
         "meta/program": [[1,7]],
         "style/imperative": [[1,7]],
         "type/boolean/literal/True": [[5,5]],
@@ -6229,12 +6509,14 @@
         "scope:DIAMONDS": [[1,2]],
         "scope:HEARTS": [[1,2]],
         "scope:SPADES": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/builtin/range": [[2,2]],
         "def/class": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/object_oriented": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -6289,12 +6571,14 @@
         "single_assignment:DIAMONDS": [[5,5]],
         "single_assignment:HEARTS": [[4,4]],
         "single_assignment:SPADES": [[3,3]],
+        "variety:\u2605\u2605": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
         "def/class": [[2,6]],
         "def/import/standard/enum/Enum": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
+        "meta/count/variety/\u2605\u2605": [[1,6]],
         "meta/program": [[1,6]],
         "style/object_oriented": [[1,6]],
         "type/number/integer/literal": [[3,3],[4,4],[5,5],[6,6]],
@@ -6312,11 +6596,13 @@
         "loaded_variable:isConsistent": [[1,1]],
         "node:Assert": [[1,1]],
         "node:Name": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "flow/assertion": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]]
       }
@@ -6375,6 +6661,7 @@
         "scope:i": [[2,4]],
         "scope:x": [[2,4]],
         "single_assignment:i": [[3,3]],
+        "variety:\u2605\u2605": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -6387,6 +6674,7 @@
         "def/subroutine/return/something": [[4,4]],
         "meta/count/program/sloc/4": [[1,4]],
         "meta/count/subroutine/sloc/3": [[2,4]],
+        "meta/count/variety/\u2605\u2605": [[1,4]],
         "meta/program": [[1,4]],
         "operator/boolean/and": [[4,4]],
         "operator/ternary": [[4,4]],
@@ -6438,6 +6726,7 @@
         "scope:t2": [[1,5]],
         "single_assignment:t1": [[2,2]],
         "single_assignment:t2": [[4,4]],
+        "variety:\u2605\u2605": [[1,5]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -6446,6 +6735,7 @@
         "call/subroutine/no_arguments": [[3,3]],
         "def/import/standard/time": [[1,1]],
         "meta/count/program/sloc/5": [[1,5]],
+        "meta/count/variety/\u2605\u2605": [[1,5]],
         "meta/program": [[1,5]],
         "operator/arithmetic/substraction": [[5,5]],
         "style/imperative/flat": [[1,5]],
@@ -6474,6 +6764,7 @@
         "one_liner_style": [[1,2]],
         "pure_function:foo": [[1,2]],
         "return": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -6482,6 +6773,7 @@
         "def/subroutine/return/something": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/subroutine/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/functional": [[1,2]],
         "style/functional_trait/pure_function": [[1,2]],
@@ -6519,6 +6811,7 @@
         "one_liner_style": [[1,2]],
         "scope:foo": [[1,2]],
         "single_assignment:foo": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -6526,6 +6819,7 @@
         "call/subroutine/method/imp/load_module": [[2,2]],
         "def/import/standard/imp": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -6613,6 +6907,7 @@
         "update_by_member_call:Q:n": [[9,9]],
         "update_by_member_call_with:append": [[9,9]],
         "update_with:append": [[9,9]],
+        "variety:\u2605\u2605\u2605\u2605": [[1,9]],
         "whole_span:9": [[1,9]]
       },
       "taxa": {
@@ -6627,6 +6922,7 @@
         "flow/loop/while": [[3,9]],
         "meta/count/program/sloc/9": [[1,9]],
         "meta/count/subroutine/sloc/9": [[1,9]],
+        "meta/count/variety/\u2605\u2605\u2605\u2605": [[1,9]],
         "meta/program": [[1,9]],
         "operator/boolean/not": [[7,7]],
         "style/functional_trait/higher_order": [[1,9]],
@@ -6727,6 +7023,7 @@
         "update_by_member_call:seen:vertex": [[8,8]],
         "update_by_member_call_with:add": [[8,8]],
         "update_with:add": [[8,8]],
+        "variety:\u2605\u2605\u2605\u2605": [[1,9]],
         "whole_span:9": [[1,9]]
       },
       "taxa": {
@@ -6744,6 +7041,7 @@
         "flow/loop/while": [[5,9]],
         "meta/count/program/sloc/9": [[1,9]],
         "meta/count/subroutine/sloc/8": [[2,9]],
+        "meta/count/variety/\u2605\u2605\u2605\u2605": [[1,9]],
         "meta/program": [[1,9]],
         "style/functional_trait/higher_order": [[2,9]],
         "style/procedural": [[1,9]],
@@ -6834,6 +7132,7 @@
         "update_by_member_call:seen:vertex": [[7,7]],
         "update_by_member_call_with:add": [[7,7]],
         "update_with:add": [[7,7]],
+        "variety:\u2605\u2605\u2605": [[1,8]],
         "whole_span:8": [[1,8]]
       },
       "taxa": {
@@ -6850,6 +7149,7 @@
         "flow/loop/while": [[4,8]],
         "meta/count/program/sloc/8": [[1,8]],
         "meta/count/subroutine/sloc/8": [[1,8]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,8]],
         "meta/program": [[1,8]],
         "style/functional_trait/higher_order": [[1,8]],
         "style/procedural": [[1,8]],
@@ -6880,10 +7180,12 @@
         "node:Name": [[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]],
         "node:NameConstant": [[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/ternary": [[1,1],[1,1],[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -6918,6 +7220,7 @@
         "node:Expr": [[2,2],[4,4],[6,6]],
         "node:If": [[1,6],[3,6],[5,6]],
         "node:Name": [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6]],
+        "variety:\u2605\u2605": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -6925,6 +7228,7 @@
         "flow/conditional": [[1,6],[3,6],[5,6]],
         "flow/conditional/else/if": [[4,4],[6,6]],
         "meta/count/program/sloc/6": [[1,6]],
+        "meta/count/variety/\u2605\u2605": [[1,6]],
         "meta/program": [[1,6]],
         "style/imperative": [[1,6]]
       }
@@ -6955,12 +7259,14 @@
         "one_liner_style": [[1,2]],
         "scope:duration": [[1,2]],
         "single_assignment:duration": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/timeit": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -6992,12 +7298,14 @@
         "one_liner_style": [[1,1]],
         "scope:ok": [[1,1]],
         "single_assignment:ok": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/lower": [[1,1],[1,1]],
         "condition/belonging": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7028,10 +7336,12 @@
         "one_liner_style": [[1,1]],
         "scope:items": [[1,1]],
         "single_assignment:items": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7061,11 +7371,13 @@
         "update_by_member_call:items:x": [[1,1]],
         "update_by_member_call_with:remove": [[1,1]],
         "update_with:remove": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/mutable_duck/remove": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]]
@@ -7100,11 +7412,13 @@
         "scope:item": [[1,1]],
         "scope:newlist": [[1,1]],
         "single_assignment:newlist": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "condition/equality/not": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7132,11 +7446,13 @@
         "one_liner_style": [[1,1]],
         "scope:b": [[1,1]],
         "single_assignment:b": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/isdigit": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7167,11 +7483,13 @@
         "one_liner_style": [[1,2]],
         "scope:file": [[1,2]],
         "single_assignment:file": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/import/standard/tempfile": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -7201,11 +7519,13 @@
         "one_liner_style": [[1,2]],
         "scope:td": [[1,2]],
         "single_assignment:td": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/import/standard/tempfile": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -7239,11 +7559,13 @@
         "update_by_member_call:m:k": [[1,1]],
         "update_by_member_call_with:pop": [[1,1]],
         "update_with:pop": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/mutable_duck/pop": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7275,6 +7597,7 @@
         "node:For": [[1,2]],
         "node:Name": [[1,1],[1,1],[1,1],[2,2],[2,2]],
         "scope:x": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -7282,6 +7605,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/arithmetic/addition": [[1,1]],
         "style/imperative": [[1,2]],
@@ -7309,11 +7633,13 @@
         "one_liner_style": [[1,1]],
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/hex": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7347,6 +7673,7 @@
         "node:For": [[1,2]],
         "node:Name": [[1,1],[1,1],[1,1],[1,1],[2,2],[2,2]],
         "scope:pair": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -7355,6 +7682,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "var/assignment/implicit/iteration_variable": [[1,1]],
@@ -7387,12 +7715,14 @@
         "scope:b": [[1,2]],
         "single_assignment:b": [[2,2]],
         "value_attr:path": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -7426,6 +7756,7 @@
         "one_liner_style": [[1,2]],
         "scope:b": [[1,2]],
         "single_assignment:b": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -7433,6 +7764,7 @@
         "call/subroutine/method": [[2,2]],
         "def/import/standard/pathlib/Path": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -7482,6 +7814,7 @@
         "single_assignment:logger": [[5,5]],
         "value_attr:DEBUG": [[3,3]],
         "value_attr:stdout": [[3,3]],
+        "variety:\u2605\u2605": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -7490,6 +7823,7 @@
         "def/import/standard/logging": [[1,1]],
         "def/import/standard/sys": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
+        "meta/count/variety/\u2605\u2605": [[1,6]],
         "meta/program": [[1,6]],
         "style/imperative/flat": [[1,6]],
         "type/sequence/string/literal": [[3,3],[5,5]],
@@ -7533,6 +7867,7 @@
         "scope:s": [[1,4]],
         "single_assignment:f": [[4,4]],
         "single_assignment:s": [[2,2]],
+        "variety:\u2605\u2605": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -7540,6 +7875,7 @@
         "call/subroutine/method/locale/setlocale": [[3,3]],
         "def/import/standard/locale": [[1,1]],
         "meta/count/program/sloc/4": [[1,4]],
+        "meta/count/variety/\u2605\u2605": [[1,4]],
         "meta/program": [[1,4]],
         "style/imperative/flat": [[1,4]],
         "type/sequence/string/literal": [[2,2],[3,3]],
@@ -7567,11 +7903,13 @@
         "one_liner_style": [[1,1]],
         "scope:f": [[1,1]],
         "single_assignment:f": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/float": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7596,11 +7934,13 @@
         "node:Name": [[1,1]],
         "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/casting/float": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7638,12 +7978,14 @@
         "scope:t": [[1,2]],
         "single_assignment:t": [[2,2]],
         "special_literal_string:[^\\x00-\\x7f]": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/re": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -7677,6 +8019,7 @@
         "node:Expr": [[1,1]],
         "node:Name": [[1,1],[1,1],[1,1],[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
@@ -7687,6 +8030,7 @@
         "call/subroutine/method/sequence/string/split": [[1,1]],
         "call/subroutine/no_arguments": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/functional_trait/map": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -7717,11 +8061,13 @@
         "one_liner_style": [[1,1]],
         "scope:p": [[1,1]],
         "single_assignment:p": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/rstrip": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7771,6 +8117,7 @@
         "update_by_assignment:p:-1": [[3,3]],
         "update_by_assignment_with": [[3,3]],
         "update_with": [[3,3]],
+        "variety:\u2605\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -7778,6 +8125,7 @@
         "def/import/standard/os": [[1,1]],
         "flow/conditional/no_else": [[2,3]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative": [[1,3]],
         "subscript/slice/stop": [[3,3]],
@@ -7803,10 +8151,12 @@
         "one_liner_style": [[1,1]],
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7839,11 +8189,13 @@
         "one_liner_style": [[1,1]],
         "scope:t": [[1,1]],
         "single_assignment:t": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/format": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -7947,6 +8299,7 @@
         "slice_lower:p": [[1,1],[2,2]],
         "slice_step:": [[1,1],[2,2]],
         "slice_upper:_": [[1,1],[2,2]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -7954,6 +8307,7 @@
         "call/subroutine/builtin/range": [[1,1],[2,2]],
         "call/subroutine/method/sequence/string/format": [[3,3]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "operator/arithmetic/addition": [[1,1],[2,2],[3,3],[3,3],[3,3]],
         "operator/arithmetic/integer_division": [[3,3],[3,3],[3,3]],
@@ -8104,6 +8458,7 @@
         "update_by_assignment:self:numpy": [[9,9]],
         "update_by_assignment_with:astype": [[9,9]],
         "update_with:astype": [[9,9]],
+        "variety:\u2605\u2605\u2605\u2605\u2605": [[1,15]],
         "whole_span:15": [[1,15]]
       },
       "taxa": {
@@ -8128,6 +8483,7 @@
         "meta/count/program/sloc/15": [[1,15]],
         "meta/count/subroutine/sloc/3": [[8,10]],
         "meta/count/subroutine/sloc/5": [[3,7]],
+        "meta/count/variety/\u2605\u2605\u2605\u2605\u2605": [[1,15]],
         "meta/program": [[1,15]],
         "operator/arithmetic/addition": [[6,6],[15,15]],
         "operator/arithmetic/division": [[15,15]],
@@ -8178,12 +8534,14 @@
         "node:Name": [[2,2],[2,2],[2,2],[3,3]],
         "scope:path": [[1,3]],
         "single_assignment:path": [[2,2]],
+        "variety:\u2605\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
         "call/subroutine/method": [[3,3]],
         "def/import/standard/pathlib": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "var/assignment/explicit/single": [[2,2]],
@@ -8213,11 +8571,13 @@
         "one_liner_style": [[1,1]],
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/format": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -8242,10 +8602,12 @@
         "one_liner_style": [[1,1]],
         "scope:PLANET": [[1,1]],
         "single_assignment:PLANET": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -8283,12 +8645,14 @@
         "one_liner_style": [[1,2]],
         "scope:y": [[1,2]],
         "single_assignment:y": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -8336,6 +8700,7 @@
         "scope:prefix": [[2,5]],
         "scope:self": [[2,5]],
         "scope:value": [[2,5]],
+        "variety:\u2605\u2605": [[1,5]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -8346,6 +8711,7 @@
         "meta/count/class/methods/1": [[1,5]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/subroutine/sloc/4": [[2,5]],
+        "meta/count/variety/\u2605\u2605": [[1,5]],
         "meta/program": [[1,5]],
         "style/object_oriented": [[1,5]],
         "type/null/literal": [[2,2]],
@@ -8392,6 +8758,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[3,3],[5,5]],
         "node:Num": [[2,2],[2,2]],
+        "variety:\u2605\u2605": [[1,5]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -8401,6 +8768,7 @@
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
         "meta/count/program/sloc/5": [[1,5]],
+        "meta/count/variety/\u2605\u2605": [[1,5]],
         "meta/program": [[1,5]],
         "operator/arithmetic/power": [[2,2]],
         "style/imperative": [[1,5]],
@@ -8443,10 +8811,12 @@
         "update_by_assignment:elements:x": [[1,1]],
         "update_by_assignment_with": [[1,1]],
         "update_with": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/arithmetic/multiplication": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -8495,6 +8865,7 @@
         "slice_step:": [[2,2],[4,4]],
         "slice_upper:": [[2,2],[4,4]],
         "value_attr:argv": [[2,2],[4,4]],
+        "variety:\u2605\u2605": [[1,5]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -8503,6 +8874,7 @@
         "def/import/standard/sys": [[1,1]],
         "flow/conditional/no_else": [[2,3],[4,5]],
         "meta/count/program/sloc/5": [[1,5]],
+        "meta/count/variety/\u2605\u2605": [[1,5]],
         "meta/program": [[1,5]],
         "style/imperative": [[1,5]],
         "subscript/slice/start": [[2,2],[4,4]],
@@ -8544,6 +8916,7 @@
         "slice_lower:1": [[1,1]],
         "slice_step:2": [[1,1],[1,1]],
         "slice_upper:": [[1,1],[1,1]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -8552,6 +8925,7 @@
         "flow/loop/exit/late": [[1,2]],
         "flow/loop/for": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "subscript/slice/start": [[1,1]],
@@ -8632,6 +9006,7 @@
         "scope:iterable": [[2,5]],
         "shadowing_scope:a": [[2,5]],
         "shadowing_scope:b": [[2,5]],
+        "variety:\u2605\u2605\u2605": [[1,7]],
         "whole_span:7": [[1,7]]
       },
       "taxa": {
@@ -8646,6 +9021,7 @@
         "flow/loop/for": [[6,7]],
         "meta/count/program/sloc/7": [[1,7]],
         "meta/count/subroutine/sloc/4": [[2,5]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,7]],
         "meta/program": [[1,7]],
         "style/procedural": [[1,7]],
         "type/null/literal": [[4,4]],
@@ -8678,6 +9054,7 @@
         "node:Import": [[1,1]],
         "node:Name": [[2,2],[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -8685,6 +9062,7 @@
         "call/subroutine/method/webbrowser/open": [[2,2]],
         "def/import/standard/webbrowser": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]]
@@ -8712,10 +9090,12 @@
         "one_liner_style": [[1,1]],
         "scope:x": [[1,1]],
         "single_assignment:x": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -8747,10 +9127,12 @@
         "one_liner_style": [[1,1]],
         "scope:ab": [[1,1]],
         "single_assignment:ab": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/arithmetic/addition": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -8790,12 +9172,14 @@
         "slice_lower:_": [[1,1]],
         "slice_step:": [[1,1]],
         "slice_upper:": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/len": [[1,1]],
         "call/subroutine/method/sequence/string/startswith": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/boolean/and": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -8828,11 +9212,13 @@
         "one_liner_style": [[1,1]],
         "scope:t": [[1,1]],
         "single_assignment:t": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/lstrip": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -8873,11 +9259,13 @@
         "one_liner_style": [[1,1]],
         "scope:t": [[1,1]],
         "single_assignment:t": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/rsplit": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -8911,11 +9299,13 @@
         "one_liner_style": [[1,1]],
         "scope:t": [[1,1]],
         "single_assignment:t": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/string/rstrip": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -8944,11 +9334,13 @@
         "one_liner_style": [[1,1]],
         "scope:n": [[1,1]],
         "single_assignment:n": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/len": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -8976,11 +9368,13 @@
         "one_liner_style": [[1,1]],
         "scope:n": [[1,1]],
         "single_assignment:n": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/len": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -9009,11 +9403,13 @@
         "update_by_member_call:s:x": [[1,1]],
         "update_by_member_call_with:append": [[1,1]],
         "update_with:append": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/sequence/list/append": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -9038,10 +9434,12 @@
         "node:Subscript": [[1,1]],
         "one_liner_style": [[1,1]],
         "subscript_assignment:Index": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -9065,11 +9463,13 @@
         "node:Name": [[1,1]],
         "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -9092,11 +9492,13 @@
         "node:Name": [[1,1]],
         "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -9119,11 +9521,13 @@
         "node:Name": [[1,1]],
         "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -9187,6 +9591,7 @@
         "single_assignment:data": [[2,2]],
         "single_assignment:req": [[3,3]],
         "single_assignment:resp": [[4,4]],
+        "variety:\u2605": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -9196,6 +9601,7 @@
         "def/import/standard/urllib/parse": [[1,1]],
         "def/import/standard/urllib/request": [[1,1]],
         "meta/count/program/sloc/4": [[1,4]],
+        "meta/count/variety/\u2605": [[1,4]],
         "meta/program": [[1,4]],
         "style/imperative/flat": [[1,4]],
         "type/sequence/string": [[2,2]],
@@ -9223,11 +9629,13 @@
         "one_liner_style": [[1,1]],
         "scope:s": [[1,1]],
         "single_assignment:s": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/number/floating_point/hex": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -9258,11 +9666,13 @@
         "one_liner_style": [[1,1]],
         "scope:a": [[1,1]],
         "single_assignment:a": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/method/number/floating_point/fromhex": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -9324,6 +9734,7 @@
         "single_assignment:L": [[3,3]],
         "single_assignment:extensions": [[2,2]],
         "value_attr:path": [[3,3]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -9331,6 +9742,7 @@
         "condition/belonging": [[3,3]],
         "def/import/standard/os": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "subscript/index": [[3,3]],
@@ -9404,6 +9816,7 @@
         "scope:filenames": [[4,4]],
         "scope:filtered_files": [[1,7]],
         "single_assignment:filtered_files": [[3,3]],
+        "variety:\u2605\u2605": [[1,7]],
         "whole_span:7": [[1,7]]
       },
       "taxa": {
@@ -9412,6 +9825,7 @@
         "def/import/standard/os": [[2,2]],
         "def/import/standard/re": [[1,1]],
         "meta/count/program/sloc/7": [[1,7]],
+        "meta/count/variety/\u2605\u2605": [[1,7]],
         "meta/program": [[1,7]],
         "style/imperative/flat": [[1,7]],
         "type/sequence/string": [[4,4]],
@@ -9464,6 +9878,7 @@
         "one_liner_style": [[1,3]],
         "scope:ext": [[3,3]],
         "string_formatting_operator": [[3,3]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -9473,6 +9888,7 @@
         "def/import/standard/glob": [[1,1]],
         "def/import/standard/itertools": [[2,2]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "operator/string/format": [[3,3]],
         "style/imperative/flat": [[1,3]],
@@ -9516,12 +9932,14 @@
         "one_liner_style": [[1,1]],
         "scope:b": [[1,1]],
         "single_assignment:b": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "condition/inequality": [[1,1],[1,1],[1,1],[1,1]],
         "condition/inequality/chained/2": [[1,1],[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/boolean/and": [[1,1]],
         "style/imperative/flat": [[1,1]],
@@ -9561,10 +9979,12 @@
         "one_liner_style": [[1,1]],
         "scope:center": [[1,1]],
         "single_assignment:center": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "operator/arithmetic/addition": [[1,1],[1,1]],
         "operator/arithmetic/division": [[1,1],[1,1]],
@@ -9621,6 +10041,7 @@
         "scope:center": [[1,3]],
         "single_assignment:Point": [[2,2]],
         "single_assignment:center": [[3,3]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -9628,6 +10049,7 @@
         "call/subroutine": [[2,2]],
         "def/import/standard/collections/namedtuple": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "operator/arithmetic/addition": [[3,3],[3,3]],
         "operator/arithmetic/division": [[3,3],[3,3]],
@@ -9663,12 +10085,14 @@
         "one_liner_style": [[1,2]],
         "scope:x": [[1,2]],
         "single_assignment:x": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -9702,11 +10126,13 @@
         "scope:s": [[1,2]],
         "single_assignment:s": [[1,1]],
         "special_literal_string:s = %r\\nprint(s%%s)": [[1,1]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/arithmetic/modulo": [[2,2]],
         "style/imperative/flat": [[1,2]],
@@ -9779,12 +10205,14 @@
         "single_assignment:data": [[5,5]],
         "single_assignment:headers": [[4,4]],
         "single_assignment:r": [[6,6]],
+        "variety:\u2605\u2605": [[1,7]],
         "whole_span:7": [[1,7]]
       },
       "taxa": {
         "call/subroutine/method": [[6,6]],
         "def/import/third_party/requests": [[2,2]],
         "meta/count/program/sloc/7": [[1,7]],
+        "meta/count/variety/\u2605\u2605": [[1,7]],
         "meta/program": [[1,7]],
         "style/imperative/flat": [[1,7]],
         "type/non_sequence/dictionary/literal": [[4,4]],
@@ -9825,6 +10253,7 @@
         "node:Name": [[2,2],[2,2]],
         "node:Num": [[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -9833,6 +10262,7 @@
         "def/import/standard/datetime/date": [[1,1]],
         "def/import/standard/datetime/timedelta": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/arithmetic/addition": [[2,2]],
         "style/imperative/flat": [[1,2]],
@@ -9881,12 +10311,14 @@
         "node:Tuple": [[2,2]],
         "scope:timer": [[1,3]],
         "single_assignment:timer": [[2,2]],
+        "variety:\u2605": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
         "call/subroutine/method": [[3,3]],
         "def/import/standard/threading": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
+        "meta/count/variety/\u2605": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative/flat": [[1,3]],
         "type/number/floating_point/literal": [[2,2]],
@@ -9918,6 +10350,7 @@
         "node:Name": [[2,2]],
         "node:Num": [[2,2]],
         "one_liner_style": [[1,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -9925,6 +10358,7 @@
         "call/subroutine/method/sys/exit": [[2,2]],
         "def/import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -10038,6 +10472,7 @@
         "subscript_assignment:Index": [[9,9]],
         "unary_operator:Not": [[14,14]],
         "value_attr:p": [[6,6],[9,9],[9,9],[10,10]],
+        "variety:\u2605\u2605\u2605": [[1,15]],
         "whole_span:15": [[1,15]]
       },
       "taxa": {
@@ -10059,6 +10494,7 @@
         "meta/count/subroutine/sloc/2": [[11,12]],
         "meta/count/subroutine/sloc/3": [[2,4],[13,15]],
         "meta/count/subroutine/sloc/6": [[5,10]],
+        "meta/count/variety/\u2605\u2605\u2605": [[1,15]],
         "meta/program": [[1,15]],
         "operator/boolean/not": [[14,14]],
         "operator/list/replication": [[3,3]],
@@ -10099,11 +10535,13 @@
         "one_liner_style": [[1,2]],
         "scope:c": [[1,2]],
         "single_assignment:c": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "def/import/third_party/numpy": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "operator/matrix/multiplication": [[2,2]],
         "style/imperative/flat": [[1,2]],
@@ -10140,12 +10578,14 @@
         "one_liner_style": [[1,2]],
         "scope:c": [[1,2]],
         "single_assignment:c": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "def/import/third_party/numpy": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "style/one_liner": [[1,2]],
@@ -10184,11 +10624,13 @@
         "scope:e": [[1,1]],
         "scope:y": [[1,1]],
         "single_assignment:y": [[1,1]],
+        "variety:\u2605": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/class/construct": [[1,1],[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
+        "meta/count/variety/\u2605": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -10230,6 +10672,7 @@
         "node:If": [[1,2]],
         "node:Name": [[1,1],[1,1],[1,1],[1,1],[1,1],[2,2]],
         "scope:v": [[1,1]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
@@ -10238,6 +10681,7 @@
         "condition/inequality": [[1,1]],
         "flow/conditional/no_else": [[1,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative": [[1,2]],
         "var/assignment/implicit/iteration_variable": [[1,1]],
@@ -10267,12 +10711,14 @@
         "node:With": [[1,2]],
         "scope:lines": [[1,2]],
         "single_assignment:lines": [[2,2]],
+        "variety:\u2605": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/builtin/open": [[1,1]],
         "call/subroutine/method": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
+        "meta/count/variety/\u2605": [[1,2]],
         "meta/program": [[1,2]],
         "style/imperative/flat": [[1,2]],
         "var/assignment/explicit/single": [[2,2]],
@@ -20088,6 +20534,239 @@
     "value_attr:stdout": [
       "145.1822-print-log-line-with-datetime.py"
     ],
+    "variety:\u2605": [
+      "001.0003-print-hello-world.py",
+      "001.1159-print-hello-world.py",
+      "002.0011-print-hello-10-times.py",
+      "002.1493-print-hello-10-times.py",
+      "002.3117-print-hello-10-times.py",
+      "003.0019-create-a-procedure.py",
+      "003.2372-create-a-procedure.py",
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "006.0032-iterate-over-list-values.py",
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "008.0039-initialize-a-new-map-associative-array.py",
+      "010.0182-shuffle-a-list.py",
+      "010.1478-shuffle-a-list.py",
+      "011.0047-pick-a-random-element-from-a-list.py",
+      "012.0181-check-if-list-contains-a-value.py",
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "015.0184-pick-uniformly-a-random-integer-in-ab.py",
+      "019.0197-reverse-a-list.py",
+      "019.1983-reverse-a-list.py",
+      "019.3164-reverse-a-list.py",
+      "021.0084-swap-values-of-variables-a-and-b.py",
+      "022.0243-convert-string-to-integer.py",
+      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
+      "024.0664-assign-to-string-the-japanese-word-.py",
+      "026.0194-create-a-2-dimensional-array.py",
+      "027.0192-create-a-3-dimensional-array.py",
+      "027.0193-create-a-3-dimensional-array.py",
+      "028.0350-sort-by-a-property.py",
+      "029.0199-remove-item-from-list-by-its-index.py",
+      "032.0196-integer-exponentiation-by-squaring.py",
+      "034.0625-create-a-set-of-objects.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "038.0186-extract-a-substring.py",
+      "039.0571-check-if-string-contains-a-word.py",
+      "041.0187-reverse-a-string.py",
+      "041.2714-reverse-a-string.py",
+      "044.0190-insert-element-in-list.py",
+      "045.0570-pause-execution-for-5-seconds.py",
+      "046.0191-extract-beginning-of-string-prefix.py",
+      "047.0198-extract-string-suffix.py",
+      "048.0210-multi-line-string-literal.py",
+      "049.0242-split-a-space-separated-string.py",
+      "050.0572-make-an-infinite-loop.py",
+      "051.0230-check-if-map-contains-key.py",
+      "052.0666-check-if-map-contains-value.py",
+      "053.0240-join-a-list-of-strings.py",
+      "053.1933-join-a-list-of-strings.py",
+      "054.0241-compute-sum-of-integers.py",
+      "055.0575-convert-integer-to-string.py",
+      "057.0260-filter-list.py",
+      "057.3173-filter-list.py",
+      "058.0665-extract-file-content-to-a-string.py",
+      "059.0668-write-to-standard-error-stream.py",
+      "060.1084-read-command-line-argument.py",
+      "061.0576-get-current-date.py",
+      "062.1091-find-substring-position.py",
+      "063.1088-replace-fragment-of-a-string.py",
+      "064.0274-big-integer--value-3-power-247.py",
+      "065.1085-format-decimal-number.py",
+      "066.0672-big-integer-exponentiation.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "069.1086-seed-random-generator.py",
+      "070.1087-use-clock-as-random-generator-seed.py",
+      "071.0379-echo-program-implementation.py",
+      "073.0673-create-a-factory.py",
+      "074.0674-compute-gcd.py",
+      "075.0675-compute-lcm.py",
+      "076.1083-binary-digits-from-an-integer.py",
+      "077.1093-complex-number.py",
+      "079.1090-convert-integer-to-floating-point-number.py",
+      "080.1092-truncate-floating-point-number-to-integer.py",
+      "081.2270-round-floating-point-number-to-integer.py",
+      "082.1096-count-substring-occurrences.py",
+      "083.1805-regex-with-character-repetition.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py",
+      "085.1003-check-if-integer-addition-will-overflow.py",
+      "086.1004-check-if-integer-multiplication-will-overflow.py",
+      "087.1139-stop-program.py",
+      "088.2143-allocate-1m-bytes.py",
+      "089.1097-handle-invalid-argument.py",
+      "094.1101-print-type-of-variable.py",
+      "094.1864-print-type-of-variable.py",
+      "095.2140-get-file-size.py",
+      "096.1094-check-string-prefix.py",
+      "097.1095-check-string-suffix.py",
+      "098.2142-epoch-seconds-to-date-object.py",
+      "099.1429-format-date-yyyy-mm-dd.py",
+      "099.2693-format-date-yyyy-mm-dd.py",
+      "100.1142-sort-by-a-comparator.py",
+      "102.2173-load-from-http-get-request-into-a-file.py",
+      "103.2276-load-xml-file-into-struct.py",
+      "105.1804-current-executable-name.py",
+      "106.2039-get-program-working-directory.py",
+      "107.2139-get-folder-containing-current-program.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
+      "109.2280-number-of-bytes-of-a-type.py",
+      "110.1455-check-if-string-is-blank.py",
+      "111.2168-launch-other-program.py",
+      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "114.2273-test-deep-equality.py",
+      "115.2138-compare-dates.py",
+      "116.1257-remove-occurrences-of-word-from-string.py",
+      "117.1297-get-list-size.py",
+      "118.1254-list-to-set.py",
+      "118.3266-list-to-set.py",
+      "119.1253-deduplicate-list.py",
+      "120.1479-read-integer-from-stdin.py",
+      "122.1453-declare-enumeration.py",
+      "123.2146-assert-condition.py",
+      "126.2137-multiple-return-values.py",
+      "127.2274-source-code-inclusion.py",
+      "131.2083-successive-conditions.py",
+      "132.2040-measure-duration-of-procedure-execution.py",
+      "133.2160-case-insensitive-string-contains.py",
+      "134.1850-create-a-new-list.py",
+      "135.2158-remove-item-from-list-by-its-value.py",
+      "136.2141-remove-all-occurrences-of-a-value-from-a-list.py",
+      "137.1823-check-if-string-contains-only-digits.py",
+      "138.2161-create-temp-file.py",
+      "139.2162-create-temp-directory.py",
+      "140.2156-delete-map-entry.py",
+      "141.2159-iterate-in-sequence-over-two-lists.py",
+      "142.2151-hexadecimal-digits-of-an-integer.py",
+      "143.2256-iterate-alternatively-over-two-lists.py",
+      "144.2145-check-if-file-exists.py",
+      "144.2915-check-if-file-exists.py",
+      "146.1826-convert-string-to-floating-point-number.py",
+      "146.2739-convert-string-to-floating-point-number.py",
+      "147.2171-remove-all-non-ascii-characters.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "150.2154-remove-trailing-slash.py",
+      "152.2153-turn-a-character-into-a-string.py",
+      "153.1980-concatenate-string-with-integer.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "156.2148-format-integer-with-zero-padding.py",
+      "157.2150-declare-constant-string.py",
+      "158.2163-random-sublist.py",
+      "161.2098-multiply-all-the-elements-of-a-list.py",
+      "163.2170-print-list-elements-by-group-of-2.py",
+      "164.2169-open-url-in-default-browser.py",
+      "165.2149-last-element-of-list.py",
+      "166.2272-concatenate-two-lists.py",
+      "167.2611-trim-prefix.py",
+      "167.3175-trim-prefix.py",
+      "168.2277-trim-suffix.py",
+      "168.3174-trim-suffix.py",
+      "169.2233-string-length.py",
+      "170.2275-get-map-size.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py",
+      "172.2442-insert-entry-in-map.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
+      "174.2687-make-http-post-request.py",
+      "175.2613-bytes-to-hex-string.py",
+      "176.2614-hex-string-to-byte-array.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
+      "178.2615-check-if-point-is-inside-rectangle.py",
+      "179.2688-get-center-of-a-rectangle.py",
+      "179.2689-get-center-of-a-rectangle.py",
+      "180.2612-list-files-in-directory.py",
+      "182.2658-quine-program.py",
+      "184.2701-tomorrow.py",
+      "185.2820-execute-function-in-30-seconds.py",
+      "186.2699-exit-program-cleanly.py",
+      "188.3171-matrix-multiplication.py",
+      "188.3284-matrix-multiplication.py",
+      "189.3236-filter-and-transform-list.py",
+      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py",
+      "197.3457-get-a-list-of-lines-from-a-file.py"
+    ],
+    "variety:\u2605\u2605": [
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "017.1103-create-a-tree-data-structure.py",
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "020.0573-return-two-values.py",
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "033.1420-atomically-read-and-update-variable.py",
+      "043.2733-break-outer-loop.py",
+      "068.2271-create-a-bitset.py",
+      "091.1098-load-json-file-into-struct.py",
+      "092.1100-save-object-into-json-file.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "101.2172-load-from-http-get-request-into-a-string.py",
+      "121.3029-udp-listen-and-read.py",
+      "122.1454-declare-enumeration.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "125.2167-measure-function-call-duration.py",
+      "131.2766-successive-conditions.py",
+      "145.1822-print-log-line-with-datetime.py",
+      "146.1825-convert-string-to-floating-point-number.py",
+      "151.2166-remove-string-trailing-path-separator.py",
+      "155.2147-delete-file.py",
+      "159.2281-trie.py",
+      "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
+      "162.2164-execute-procedures-depending-on-options.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
+      "183.3025-make-http-put-request.py"
+    ],
+    "variety:\u2605\u2605\u2605": [
+      "005.0663-create-a-2d-point-data-structure.py",
+      "025.0195-send-a-value-to-another-thread.py",
+      "031.0188-recursive-factorial-simple.py",
+      "037.0671-currying.py",
+      "042.3168-continue-outer-loop.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "078.1089-do-while-loop.py",
+      "104.3264-save-object-into-xml-file.py",
+      "119.3263-deduplicate-list.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "variety:\u2605\u2605\u2605\u2605": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "042.1264-continue-outer-loop.py",
+      "043.0676-break-outer-loop.py",
+      "090.1099-read-only-outside.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py"
+    ],
+    "variety:\u2605\u2605\u2605\u2605\u2605": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
+    ],
     "whole_span:1": [
       "001.1159-print-hello-world.py",
       "002.1493-print-hello-10-times.py",
@@ -21615,6 +22294,239 @@
     ],
     "meta/count/subroutine/sloc/9": [
       "128.2085-breadth-first-traversing-of-a-tree.py"
+    ],
+    "meta/count/variety/\u2605": [
+      "001.0003-print-hello-world.py",
+      "001.1159-print-hello-world.py",
+      "002.0011-print-hello-10-times.py",
+      "002.1493-print-hello-10-times.py",
+      "002.3117-print-hello-10-times.py",
+      "003.0019-create-a-procedure.py",
+      "003.2372-create-a-procedure.py",
+      "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
+      "004.2921-create-a-function-which-returns-the-square-of-an-integer.py",
+      "006.0032-iterate-over-list-values.py",
+      "007.0183-iterate-over-list-indexes-and-values.py",
+      "008.0039-initialize-a-new-map-associative-array.py",
+      "010.0182-shuffle-a-list.py",
+      "010.1478-shuffle-a-list.py",
+      "011.0047-pick-a-random-element-from-a-list.py",
+      "012.0181-check-if-list-contains-a-value.py",
+      "013.0574-iterate-over-map-keys-and-values.py",
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "015.0184-pick-uniformly-a-random-integer-in-ab.py",
+      "019.0197-reverse-a-list.py",
+      "019.1983-reverse-a-list.py",
+      "019.3164-reverse-a-list.py",
+      "021.0084-swap-values-of-variables-a-and-b.py",
+      "022.0243-convert-string-to-integer.py",
+      "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
+      "024.0664-assign-to-string-the-japanese-word-.py",
+      "026.0194-create-a-2-dimensional-array.py",
+      "027.0192-create-a-3-dimensional-array.py",
+      "027.0193-create-a-3-dimensional-array.py",
+      "028.0350-sort-by-a-property.py",
+      "029.0199-remove-item-from-list-by-its-index.py",
+      "032.0196-integer-exponentiation-by-squaring.py",
+      "034.0625-create-a-set-of-objects.py",
+      "035.0667-first-class-function--compose.py",
+      "036.0670-first-class-function--generic-composition.py",
+      "038.0186-extract-a-substring.py",
+      "039.0571-check-if-string-contains-a-word.py",
+      "041.0187-reverse-a-string.py",
+      "041.2714-reverse-a-string.py",
+      "044.0190-insert-element-in-list.py",
+      "045.0570-pause-execution-for-5-seconds.py",
+      "046.0191-extract-beginning-of-string-prefix.py",
+      "047.0198-extract-string-suffix.py",
+      "048.0210-multi-line-string-literal.py",
+      "049.0242-split-a-space-separated-string.py",
+      "050.0572-make-an-infinite-loop.py",
+      "051.0230-check-if-map-contains-key.py",
+      "052.0666-check-if-map-contains-value.py",
+      "053.0240-join-a-list-of-strings.py",
+      "053.1933-join-a-list-of-strings.py",
+      "054.0241-compute-sum-of-integers.py",
+      "055.0575-convert-integer-to-string.py",
+      "057.0260-filter-list.py",
+      "057.3173-filter-list.py",
+      "058.0665-extract-file-content-to-a-string.py",
+      "059.0668-write-to-standard-error-stream.py",
+      "060.1084-read-command-line-argument.py",
+      "061.0576-get-current-date.py",
+      "062.1091-find-substring-position.py",
+      "063.1088-replace-fragment-of-a-string.py",
+      "064.0274-big-integer--value-3-power-247.py",
+      "065.1085-format-decimal-number.py",
+      "066.0672-big-integer-exponentiation.py",
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "069.1086-seed-random-generator.py",
+      "070.1087-use-clock-as-random-generator-seed.py",
+      "071.0379-echo-program-implementation.py",
+      "073.0673-create-a-factory.py",
+      "074.0674-compute-gcd.py",
+      "075.0675-compute-lcm.py",
+      "076.1083-binary-digits-from-an-integer.py",
+      "077.1093-complex-number.py",
+      "079.1090-convert-integer-to-floating-point-number.py",
+      "080.1092-truncate-floating-point-number-to-integer.py",
+      "081.2270-round-floating-point-number-to-integer.py",
+      "082.1096-count-substring-occurrences.py",
+      "083.1805-regex-with-character-repetition.py",
+      "084.1940-count-bits-set-in-integer-binary-representation.py",
+      "085.1003-check-if-integer-addition-will-overflow.py",
+      "086.1004-check-if-integer-multiplication-will-overflow.py",
+      "087.1139-stop-program.py",
+      "088.2143-allocate-1m-bytes.py",
+      "089.1097-handle-invalid-argument.py",
+      "094.1101-print-type-of-variable.py",
+      "094.1864-print-type-of-variable.py",
+      "095.2140-get-file-size.py",
+      "096.1094-check-string-prefix.py",
+      "097.1095-check-string-suffix.py",
+      "098.2142-epoch-seconds-to-date-object.py",
+      "099.1429-format-date-yyyy-mm-dd.py",
+      "099.2693-format-date-yyyy-mm-dd.py",
+      "100.1142-sort-by-a-comparator.py",
+      "102.2173-load-from-http-get-request-into-a-file.py",
+      "103.2276-load-xml-file-into-struct.py",
+      "105.1804-current-executable-name.py",
+      "106.2039-get-program-working-directory.py",
+      "107.2139-get-folder-containing-current-program.py",
+      "108.1291-determine-if-variable-name-is-defined.py",
+      "109.2280-number-of-bytes-of-a-type.py",
+      "110.1455-check-if-string-is-blank.py",
+      "111.2168-launch-other-program.py",
+      "112.2144-iterate-over-map-entries-ordered-by-keys.py",
+      "113.2157-iterate-over-map-entries-ordered-by-values.py",
+      "114.2273-test-deep-equality.py",
+      "115.2138-compare-dates.py",
+      "116.1257-remove-occurrences-of-word-from-string.py",
+      "117.1297-get-list-size.py",
+      "118.1254-list-to-set.py",
+      "118.3266-list-to-set.py",
+      "119.1253-deduplicate-list.py",
+      "120.1479-read-integer-from-stdin.py",
+      "122.1453-declare-enumeration.py",
+      "123.2146-assert-condition.py",
+      "126.2137-multiple-return-values.py",
+      "127.2274-source-code-inclusion.py",
+      "131.2083-successive-conditions.py",
+      "132.2040-measure-duration-of-procedure-execution.py",
+      "133.2160-case-insensitive-string-contains.py",
+      "134.1850-create-a-new-list.py",
+      "135.2158-remove-item-from-list-by-its-value.py",
+      "136.2141-remove-all-occurrences-of-a-value-from-a-list.py",
+      "137.1823-check-if-string-contains-only-digits.py",
+      "138.2161-create-temp-file.py",
+      "139.2162-create-temp-directory.py",
+      "140.2156-delete-map-entry.py",
+      "141.2159-iterate-in-sequence-over-two-lists.py",
+      "142.2151-hexadecimal-digits-of-an-integer.py",
+      "143.2256-iterate-alternatively-over-two-lists.py",
+      "144.2145-check-if-file-exists.py",
+      "144.2915-check-if-file-exists.py",
+      "146.1826-convert-string-to-floating-point-number.py",
+      "146.2739-convert-string-to-floating-point-number.py",
+      "147.2171-remove-all-non-ascii-characters.py",
+      "148.1829-read-list-of-integer-numbers-from-stdin.py",
+      "150.2154-remove-trailing-slash.py",
+      "152.2153-turn-a-character-into-a-string.py",
+      "153.1980-concatenate-string-with-integer.py",
+      "154.2155-halfway-between-two-hex-color-codes.py",
+      "156.2148-format-integer-with-zero-padding.py",
+      "157.2150-declare-constant-string.py",
+      "158.2163-random-sublist.py",
+      "161.2098-multiply-all-the-elements-of-a-list.py",
+      "163.2170-print-list-elements-by-group-of-2.py",
+      "164.2169-open-url-in-default-browser.py",
+      "165.2149-last-element-of-list.py",
+      "166.2272-concatenate-two-lists.py",
+      "167.2611-trim-prefix.py",
+      "167.3175-trim-prefix.py",
+      "168.2277-trim-suffix.py",
+      "168.3174-trim-suffix.py",
+      "169.2233-string-length.py",
+      "170.2275-get-map-size.py",
+      "171.2446-add-an-element-at-the-end-of-a-list.py",
+      "172.2442-insert-entry-in-map.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
+      "174.2687-make-http-post-request.py",
+      "175.2613-bytes-to-hex-string.py",
+      "176.2614-hex-string-to-byte-array.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
+      "178.2615-check-if-point-is-inside-rectangle.py",
+      "179.2688-get-center-of-a-rectangle.py",
+      "179.2689-get-center-of-a-rectangle.py",
+      "180.2612-list-files-in-directory.py",
+      "182.2658-quine-program.py",
+      "184.2701-tomorrow.py",
+      "185.2820-execute-function-in-30-seconds.py",
+      "186.2699-exit-program-cleanly.py",
+      "188.3171-matrix-multiplication.py",
+      "188.3284-matrix-multiplication.py",
+      "189.3236-filter-and-transform-list.py",
+      "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py",
+      "197.3457-get-a-list-of-lines-from-a-file.py"
+    ],
+    "meta/count/variety/\u2605\u2605": [
+      "009.1410-create-a-binary-tree-data-structure.py",
+      "009.3176-create-a-binary-tree-data-structure.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "017.1103-create-a-tree-data-structure.py",
+      "018.2084-depth-first-traversing-of-a-tree.py",
+      "020.0573-return-two-values.py",
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "033.1420-atomically-read-and-update-variable.py",
+      "043.2733-break-outer-loop.py",
+      "068.2271-create-a-bitset.py",
+      "091.1098-load-json-file-into-struct.py",
+      "092.1100-save-object-into-json-file.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py",
+      "101.2172-load-from-http-get-request-into-a-string.py",
+      "121.3029-udp-listen-and-read.py",
+      "122.1454-declare-enumeration.py",
+      "124.2152-binary-search-for-a-value-in-sorted-array.py",
+      "125.2167-measure-function-call-duration.py",
+      "131.2766-successive-conditions.py",
+      "145.1822-print-log-line-with-datetime.py",
+      "146.1825-convert-string-to-floating-point-number.py",
+      "151.2166-remove-string-trailing-path-separator.py",
+      "155.2147-delete-file.py",
+      "159.2281-trie.py",
+      "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
+      "162.2164-execute-procedures-depending-on-options.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
+      "183.3025-make-http-put-request.py"
+    ],
+    "meta/count/variety/\u2605\u2605\u2605": [
+      "005.0663-create-a-2d-point-data-structure.py",
+      "025.0195-send-a-value-to-another-thread.py",
+      "031.0188-recursive-factorial-simple.py",
+      "037.0671-currying.py",
+      "042.3168-continue-outer-loop.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
+      "078.1089-do-while-loop.py",
+      "104.3264-save-object-into-xml-file.py",
+      "119.3263-deduplicate-list.py",
+      "130.2283-depth-first-traversing-in-a-graph.py",
+      "163.3177-print-list-elements-by-group-of-2.py",
+      "187.3261-disjoint-set.py"
+    ],
+    "meta/count/variety/\u2605\u2605\u2605\u2605": [
+      "016.1530-depth-first-traversing-of-a-binary-tree.py",
+      "040.2279-graph-with-adjacency-lists.py",
+      "042.1264-continue-outer-loop.py",
+      "043.0676-break-outer-loop.py",
+      "090.1099-read-only-outside.py",
+      "128.2085-breadth-first-traversing-of-a-tree.py",
+      "129.2282-breadth-first-traversing-in-a-graph.py"
+    ],
+    "meta/count/variety/\u2605\u2605\u2605\u2605\u2605": [
+      "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "meta/program": [
       "001.0003-print-hello-world.py",

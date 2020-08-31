@@ -49,6 +49,7 @@
 | 0.1875 | `var/assignment/implicit/iteration_variable` | 3, 6 |
 | 0 | `var/scope/global` | 1-8 |
 | 0 | `meta/count/program/sloc/8` | 1-8 |
+| 0 | `meta/count/variety/★★★` | 1-8 |
 | 0 | `meta/program` | 1-8 |
 
 ---
@@ -82,6 +83,7 @@
 | 0.09375 | `var/assignment/explicit/parallel/slide` | 4 |
 | 0 | `var/scope/global` | 1-4 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
+| 0 | `meta/count/variety/★★` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -114,6 +116,7 @@
 | 0 | `var/scope/global` | 1-6 |
 | 0.125 | `var/scope/local` | 3 |
 | 0 | `meta/count/program/sloc/6` | 1-6 |
+| 0 | `meta/count/variety/★★★` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
 ---
@@ -160,6 +163,7 @@
 | 0.1875 | `var/assignment/implicit/iteration_variable` | 11 |
 | 0 | `var/scope/global` | 1-14 |
 | 0 | `meta/count/program/sloc/14` | 1-14 |
+| 0 | `meta/count/variety/★★★` | 1-14 |
 | 0 | `meta/program` | 1-14 |
 
 ---
@@ -207,6 +211,7 @@
 | 0.125 | `var/scope/local` | 2-7 |
 | 0 | `meta/count/program/sloc/11` | 1-11 |
 | 0 | `meta/count/subroutine/sloc/6` | 2-7 |
+| 0 | `meta/count/variety/★★★★★★` | 1-11 |
 | 0 | `meta/program` | 1-11 |
 
 ---
@@ -257,6 +262,7 @@
 | 0.1875 | `var/assignment/implicit/iteration_variable` | 12 |
 | 0 | `var/scope/global` | 1-17 |
 | 0 | `meta/count/program/sloc/17` | 1-17 |
+| 0 | `meta/count/variety/★★★★★` | 1-17 |
 | 0 | `meta/program` | 1-17 |
 
 ---
@@ -305,6 +311,7 @@
 | 0 | `meta/count/class/methods/4` | 1-9 |
 | 0 | `meta/count/program/sloc/12` | 1-12 |
 | 0 | `meta/count/subroutine/sloc/2` | 2-3, 4-5, 6-7, 8-9 |
+| 0 | `meta/count/variety/★★★★` | 1-12 |
 | 0 | `meta/program` | 1-12 |
 
 ---
@@ -360,6 +367,7 @@
 | 0 | `var/assignment/explicit/single` | 2, 3, 4, 7 |
 | 0 | `var/scope/global` | 1-18 |
 | 0 | `meta/count/program/sloc/18` | 1-18 |
+| 0 | `meta/count/variety/★★★★` | 1-18 |
 | 0 | `meta/program` | 1-18 |
 
 ---
@@ -400,6 +408,7 @@
 | 0.125 | `var/scope/local` | 1-7 |
 | 0 | `meta/count/program/sloc/7` | 1-7 |
 | 0 | `meta/count/subroutine/sloc/7` | 1-7 |
+| 0 | `meta/count/variety/★★` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
 ---

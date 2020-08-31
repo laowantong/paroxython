@@ -181,6 +181,10 @@ def fibonacci(n):                     # 2
 <td align="left">2-8</td>
 </tr>
 <tr>
+<td align="left"><code>meta/count/variety/★★★</code></td>
+<td align="left">2-8</td>
+</tr>
+<tr>
 <td align="left"><code>meta/program</code></td>
 <td align="left">2-8</td>
 </tr>
@@ -240,9 +244,10 @@ def fibonacci(n):                     # 2
 <li>an im<a href="https://en.wikipedia.org/wiki/Pure_function">pure function</a> (<code>def/subroutine/function/impure</code>);</li>
 <li>a <code>while</code> loop (<code>flow/loop/while</code>) with a late exit (<code>flow/loop/exit/late</code>);</li>
 <li>a little bit of voodoo on lists (<code>type/sequence/list/literal/empty</code> and <code>call/subroutine/method/sequence/list/append</code>);</li>
-<li>a simple <a href="https://openbookproject.net/thinkcs/python/english3e/tuples.html#tuple-assignment">tuple assignment</a> (<code>var/assignment/explicit/parallel</code>). Note that we distinguish between explicit (with <code>=</code>) and implicit (parameters and iteration variables) assignments;</li>
+<li>a simple <a href="https://en.wikibooks.org/wiki/Python_Programming/Tuples#Packing_and_Unpacking">tuple assignment</a> (<code>var/assignment/explicit/parallel</code>). Note that we distinguish between explicit (with <code>=</code>) and implicit (parameters and iteration variables) assignments;</li>
 <li>a “sliding” tuple assignment (<code>var/assignment/explicit/parallel/slide</code>). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of <a href="https://en.wikipedia.org/wiki/Constant-recursive_sequence">C-finite sequences</a> with C greater than 1, <a href="https://en.wikipedia.org/wiki/Greatest_common_divisor">Greatest Common Divisor</a>, <a href="https://en.wikipedia.org/wiki/Quicksort">Quicksort</a>, etc.</li>
-<li>four local variables (<code>var/scope/local</code>): <code>n</code>, <code>result</code>, <code>a</code>, <code>b</code>.</li>
+<li>four local variables (<code>var/scope/local</code>);</li>
+<li>an estimation of the variety of concepts involved (<code>meta/count/variety/★★★</code>), depending on the number of lines, features and distinct features.</li>
 </ul>
 <p>The magic command <code>%%paroxython</code> (corresponding to the subcommand <a href="https://laowantong.github.io/paroxython/cli_tag.html"><code>tag</code></a>) only scratches the surface of the system. As shown before, to estimate the learning cost of the features and get actionable recommendations, you will need first to construct the tag database with <a href="https://laowantong.github.io/paroxython/cli_collect.html"><code>collect</code></a>, and then call <a href="https://laowantong.github.io/paroxython/cli_recommend.html"><code>recommend</code></a> on a pipeline of yours.
 <br></p>

@@ -203,6 +203,7 @@
   - [Counts](#counts)
       - [Feature `class_method_count` (SQL)](#feature-class_method_count)
       - [Feature `function_line_count` (SQL)](#feature-function_line_count)
+      - [Feature `variety` (SQL)](#feature-variety)
   - [Others](#others)
       - [Feature `topic|technique|complexity`](#feature-topictechniquecomplexity)
 
@@ -7617,6 +7618,7 @@ Match a whole program, and suffix it by the number of its last line of code.
 [⬇️ feature `one_liner_style`](#feature-one_liner_style)  
 [⬇️ feature `procedural_style`](#feature-procedural_style)  
 [⬇️ feature `scope`](#feature-scope)  
+[⬇️ feature `variety`](#feature-variety)  
 
 ##### Specification
 
@@ -8359,6 +8361,46 @@ FROM t_function f
 | `function_line_count:2` | 13-14, 18-19, 21-22 |
 | `function_line_count:3` | 2-4, 9-11 |
 | `function_line_count:7` | 1-7 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `variety`
+
+Ratio of the number of distinct features to the number of features, multiplied by the SLOC count. On a typical collection of educational programs, this formula should give a number of stars between 1 and 10, with a median value of about 2.5 stars.
+
+##### Derivations
+
+[⬆️ feature `whole_span`](#feature-whole_span)  
+
+##### Specification
+
+```sql
+SELECT "variety",
+       printf('%.' || cast(count(DISTINCT t.span_start) * count(DISTINCT t.name_prefix) / (0.001 + count(t.name_prefix)) AS int) ||'c', '★'),
+       p.span,
+       p.path
+FROM t_whole_span p
+CROSS JOIN t
+WHERE t.name_prefix != "node"
+```
+
+##### Example
+
+```python
+1   def fibonacci(n):
+2       result = []
+3       (a, b) = (0, 1)
+4       while a < n:
+5           result.append(a)
+6           (a, b) = (b, a + b)
+7       return result
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `variety:★★★` | 1-7 |
 
 --------------------------------------------------------------------------------
 

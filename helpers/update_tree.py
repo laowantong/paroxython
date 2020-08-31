@@ -36,7 +36,7 @@ def dump_trees(directory, update_database=True):
     connexion = sqlite3.connect(str(db_path))  # str() for Python 3.6 compatibility
     c = connexion.cursor()
 
-    query = "SELECT taxon, count(*) FROM taxon WHERE taxon not LIKE 'meta/%/sloc/%' GROUP BY taxon"
+    query = "SELECT taxon, count(*) FROM taxon WHERE taxon not LIKE 'meta/count/%' GROUP BY taxon"
     table = c.execute(query).fetchall()
     result = [["node", "occurrences"]]
     for (taxon, count) in table:

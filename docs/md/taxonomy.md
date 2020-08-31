@@ -34,7 +34,7 @@ This comes[^tree_sql] straight from the tagging of the public repository [The Al
     ```
     SELECT taxon, count(*)
     FROM taxon
-    WHERE taxon not LIKE 'meta/%/sloc/%'
+    WHERE taxon not LIKE 'meta/count/%'
     GROUP BY taxon
     ```
     on the SQLite tag database.
