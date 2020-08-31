@@ -180,7 +180,7 @@ class DerivedLabelsDatabase:
         labels_spans: Dict[LabelName, Dict[Span, Any]] = defaultdict(dict)
         try:
             row_iterator = self.c.execute(query)
-        except Exception as exception:
+        except Exception as exception:  # pragma: no cover
             print_warning(f"problem in the following query:\n\n{query}\n")
             raise exception
         for (name_prefix, name_suffix, span_string, path) in row_iterator:

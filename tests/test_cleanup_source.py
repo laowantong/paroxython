@@ -187,7 +187,7 @@ def test_update_docstring():
         result.append(f"- {title}")
         result.append(fr"```python{indent}{original}{indent}```")
         result.append(fr"```python{indent}{expected}{indent}```")
-    result = indent.join(result)
+    result = regex.sub(f"(?m){indent}$", "\n", indent.join(result))
     path = Path("paroxython/preprocess_source.py")
     source = path.read_text()
     (source, n) = regex.subn(

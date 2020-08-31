@@ -142,7 +142,7 @@ class DerivedLabelsDatabase:
         labels_spans: Dict[LabelName, Dict[Span, Any]] = defaultdict(dict)
         try:
             row_iterator = self.c.execute(query)
-        except Exception as exception:
+        except Exception as exception: # pragma: no cover
             print_warning(f&#34;problem in the following query:\n\n{query}\n&#34;)
             raise exception
         for (name_prefix, name_suffix, span_string, path) in row_iterator:
@@ -244,7 +244,7 @@ class DerivedLabelsDatabase:
         labels_spans: Dict[LabelName, Dict[Span, Any]] = defaultdict(dict)
         try:
             row_iterator = self.c.execute(query)
-        except Exception as exception:
+        except Exception as exception: # pragma: no cover
             print_warning(f&#34;problem in the following query:\n\n{query}\n&#34;)
             raise exception
         for (name_prefix, name_suffix, span_string, path) in row_iterator:
@@ -449,7 +449,7 @@ as a prerequisite.</p></div>
     labels_spans: Dict[LabelName, Dict[Span, Any]] = defaultdict(dict)
     try:
         row_iterator = self.c.execute(query)
-    except Exception as exception:
+    except Exception as exception: # pragma: no cover
         print_warning(f&#34;problem in the following query:\n\n{query}\n&#34;)
         raise exception
     for (name_prefix, name_suffix, span_string, path) in row_iterator:
