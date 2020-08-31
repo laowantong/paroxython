@@ -197,8 +197,8 @@ def compute_stats():
         assert n > 0, f"Unable to create badge for '{directory}' SLOC."
     total = Path("paroxython/resources/spec.md").read_text().count("#### Feature")
     (readme_text, n) = regex.subn(
-        fr"(?m)(!\[spec features\].+?)~\d+(%20features)",
-        fr"\1~{total}\2",
+        fr"(?m)(!\[spec features\].+?)\d+(%20features)",
+        fr"\1{total}\2",
         readme_text,
     )
     assert n == 1
