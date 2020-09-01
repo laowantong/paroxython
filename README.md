@@ -25,7 +25,7 @@
 
 ## Introduction
 
-Paroxython is a set of command line tools which **tag** and **filter** by algorithmic features a collection of Python programming exercises.
+Paroxython is a set of command line tools which **tag** and **filter** by algorithmic features your collection of Python programming exercises.
 
 ### Audience
 

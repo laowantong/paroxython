@@ -76,7 +76,7 @@ class LearningCostAssessor:
                 - `"linear"`: `range_to_cost_linear`.
 
         Raises:
-            NotImplementedError: Raised in case of unknown assessment_strategy.
+            NotImplementedError: Raised in case of unknown `assessment_strategy`.
         """
         self.programs = programs
         if assessment_strategy.lower() == "zeno":
