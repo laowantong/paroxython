@@ -269,10 +269,10 @@ know more, we are restoring the previous representations with `backport_all_cons
 `unquote()` suppress the single quote delimiters after `=`. This makes for simpler regular
 expressions in `spec.md`.
 
-#### Correcting the span of decorated functions
+#### Correcting the span of decorated callable
 
-`correct_all_decorated_function_starts()` fixes a bug of `typed_ast` in which decorated functions
-would incorrectly be marked as starting from the line of their first decorator.
+`correct_all_decorated_callable_starts()` fixes a bug of `typed_ast` in which decorated functions
+and classes would incorrectly be marked as starting from the line of their first decorator.
 """
 
 
@@ -301,7 +301,7 @@ def select_ast_post_processing(strategy):
             flat_ast = suppress_kinds(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
             flat_ast = unquote(flat_ast)
-            flat_ast = correct_all_decorated_function_starts(flat_ast)
+            flat_ast = correct_all_decorated_callable_starts(flat_ast)
             return flat_ast
 
     else:
@@ -435,18 +435,18 @@ def replace_one_constant(m: Match) -> str:
         return f"{m[1]}/_type=Num{m[2]}\n{m[1]}/n={m[3]}"
 
 
-def correct_all_decorated_function_starts(
+def correct_all_decorated_callable_starts(
     flat_ast: str,
     sub: Callable = regex.compile(
         r"""(?mx)
-                     ^(.*?)/_type=FunctionDef
+                     ^(.*?)/_type=(FunctionDef|ClassDef)
             (\n(?:.+\n)*?\1/_pos=)\d+:(.*
             \n(?:.+\n)*?\1/decorator_list/_length=([^0]\d*)
             \n(?:.+\n)*?\1/decorator_list/1/_pos=(\d+))
         """
     ).sub,
 ) -> str:
-    """Make the span of a decorated function starting from `def`, not from the first decorator.
+    """Make the span of a decorated callable starting from `def`, not from the first decorator.
 
     ..note::
         The bug is present in the third-party module `typed_ast`, but fixed in Python 3.8's standard
@@ -454,13 +454,13 @@ def correct_all_decorated_function_starts(
 
     Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
     """
-    return sub(replace_one_decorated_function_start, flat_ast)
+    return sub(replace_one_decorated_callable_start, flat_ast)
 
 
-def replace_one_decorated_function_start(m: Match) -> str:
-    """Define the replacement function used in `correct_all_decorated_function_starts`."""
-    start = int(m[4]) + int(m[5])  # number of decorators + line number of the first decorator
-    return f"{m[1]}/_type=FunctionDef{m[2]}{start}:{m[3]}"
+def replace_one_decorated_callable_start(m: Match) -> str:
+    """Define the replacement function used in `correct_all_decorated_callable_starts`."""
+    start = int(m[5]) + int(m[6])  # number of decorators + line number of the first decorator
+    return f"{m[1]}/_type={m[2]}{m[3]}{start}:{m[4]}"
 
 
 def unquote(
