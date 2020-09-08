@@ -97,7 +97,7 @@ flow/loop/for/nested/triangular	triangular_nested_for
 flow/loop/for/throwaway	for:_
 flow/loop/while	loop:while
 flow/loop/while/infinite	infinite_while
-flow/null_operation	node:Pass
+flow/no_operation	no_operation
 meta/ast/\1	ast_construction:(.+)
 meta/complexity/\1	complexity:(.+)
 meta/count/class/methods/\1	class_method_count:(.+)
@@ -256,6 +256,7 @@ var/assignment/explicit/sequence/swap	swap_unpythonic
 var/assignment/explicit/single	single_assignment:.+
 var/assignment/explicit/slice	subscript_assignment:Slice
 var/assignment/explicit/throwaway	assignment_lhs_identifier:_
+var/assignment/expression	assignment_expression:_
 var/assignment/implicit/iteration_variable	iteration_variable:.+
 var/assignment/implicit/iteration_variable/throwaway	iteration_variable:_
 var/assignment/implicit/parameter	function_parameter_flavor:arg

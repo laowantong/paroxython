@@ -301,7 +301,7 @@ class Cleanup:
             r"\s*".join(regex.split(r"(\w+)", HINT_COMMENT.replace(" ", ""))) + r"\s*",
             regex.IGNORECASE,
         ).subn,
-    ) -> str:
+    ) -> Tuple[str, int]:
         r"""Replace and count all the hint comment strings, made space- and case-insensitive.
 
         For instance, if `HINT_COMMENT` is `"# paroxython:"` (its default value), the actual search

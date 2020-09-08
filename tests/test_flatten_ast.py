@@ -1,9 +1,8 @@
 import pytest
 import regex
-from typed_ast import ast3 as ast
 
 import context
-from paroxython.flatten_ast import flatten_ast, pseudo_hash
+from paroxython.flatten_ast import ast, flatten_ast, pseudo_hash
 
 sources = r"""
 <<< Examples of _type, _length, _pos and _hash (full output)
@@ -183,21 +182,18 @@ from . import f2
 /body/1/value/_hash=0x0001
 /body/1/value/_pos=1:1-0-
 /body/1/value/s=hello world # stripped from its quote delimiters
-/body/1/value/kind=
 /body/2/_type=Expr
 /body/2/_pos=2:2-
 /body/2/value/_type=Str
 /body/2/value/_hash=0x0002
 /body/2/value/_pos=2:2-0-
 /body/2/value/s= # an empty string is followed by an \n
-/body/2/value/kind=
 /body/3/_type=Expr
 /body/3/_pos=3:3-
 /body/3/value/_type=Str
 /body/3/value/_hash=0x0003
 /body/3/value/_pos=3:3-0-
 /body/3/value/s=\n # which is distinct from the string "\n"
-/body/3/value/kind=
 >>>
 
 <<< Examples of function call (full output)
@@ -220,7 +216,6 @@ print("hello, world")
 /body/1/value/args/1/_hash=0x0003
 /body/1/value/args/1/_pos=1:1-0-1-1-
 /body/1/value/args/1/s=hello, world
-/body/1/value/args/1/kind=
 /body/1/value/keywords/_length=0
 /type_ignores/_length=0
 >>>
@@ -234,177 +229,6 @@ print("hello, world")
 /body/1/value/_hash=0x0001
 /body/1/value/_pos=1:1-0-
 /body/1/value/n=-42
->>>
-
-<<< Example of complete program (full output)
-def fibonacci(n):
-    result = []
-    (a, b) = (0, 1)
-    while a < n:
-        result.append(a)
-        (a, b) = (b, a + b)
-    return result
----
-/_type=Module
-/body/_length=1
-/body/1/_type=FunctionDef
-/body/1/_pos=1:1-
-/body/1/name=fibonacci
-/body/1/args/_type=arguments
-/body/1/args/args/_length=1
-/body/1/args/args/1/_type=arg
-/body/1/args/args/1/_pos=1:1-1-0-1-
-/body/1/args/args/1/arg=n
-/body/1/args/args/1/annotation=None
-/body/1/args/args/1/type_comment=None
-/body/1/args/vararg=None
-/body/1/args/kwonlyargs/_length=0
-/body/1/args/kw_defaults/_length=0
-/body/1/args/kwarg=None
-/body/1/args/defaults/_length=0
-/body/1/decorator_list/_length=0
-/body/1/returns=None
-/body/1/type_comment=None
-/body/1/body/_length=4
-/body/1/body/1/_type=Assign
-/body/1/body/1/_pos=2:1-5-1-
-/body/1/body/1/assigntargets/_length=1
-/body/1/body/1/assigntargets/1/_type=Name
-/body/1/body/1/assigntargets/1/_hash=0x0001
-/body/1/body/1/assigntargets/1/_pos=2:1-5-1-0-1-
-/body/1/body/1/assigntargets/1/id=result
-/body/1/body/1/assigntargets/1/ctx/_type=Store
-/body/1/body/1/assignvalue/_type=List
-/body/1/body/1/assignvalue/_hash=0x0002
-/body/1/body/1/assignvalue/_pos=2:1-5-1-1-
-/body/1/body/1/assignvalue/elts/_length=0
-/body/1/body/1/assignvalue/ctx/_type=Load
-/body/1/body/1/type_comment=None
-/body/1/body/2/_type=Assign
-/body/1/body/2/_pos=3:1-5-2-
-/body/1/body/2/assigntargets/_length=1
-/body/1/body/2/assigntargets/1/_type=Tuple
-/body/1/body/2/assigntargets/1/_hash=0x0003
-/body/1/body/2/assigntargets/1/_pos=3:1-5-2-0-1-
-/body/1/body/2/assigntargets/1/elts/_length=2
-/body/1/body/2/assigntargets/1/elts/1/_type=Name
-/body/1/body/2/assigntargets/1/elts/1/_hash=0x0004
-/body/1/body/2/assigntargets/1/elts/1/_pos=3:1-5-2-0-1-0-1-
-/body/1/body/2/assigntargets/1/elts/1/id=a
-/body/1/body/2/assigntargets/1/elts/1/ctx/_type=Store
-/body/1/body/2/assigntargets/1/elts/2/_type=Name
-/body/1/body/2/assigntargets/1/elts/2/_hash=0x0005
-/body/1/body/2/assigntargets/1/elts/2/_pos=3:1-5-2-0-1-0-2-
-/body/1/body/2/assigntargets/1/elts/2/id=b
-/body/1/body/2/assigntargets/1/elts/2/ctx/_type=Store
-/body/1/body/2/assigntargets/1/ctx/_type=Store
-/body/1/body/2/assignvalue/_type=Tuple
-/body/1/body/2/assignvalue/_hash=0x0006
-/body/1/body/2/assignvalue/_pos=3:1-5-2-1-
-/body/1/body/2/assignvalue/elts/_length=2
-/body/1/body/2/assignvalue/elts/1/_type=Num
-/body/1/body/2/assignvalue/elts/1/_hash=0x0007
-/body/1/body/2/assignvalue/elts/1/_pos=3:1-5-2-1-0-1-
-/body/1/body/2/assignvalue/elts/1/n=0
-/body/1/body/2/assignvalue/elts/2/_type=Num
-/body/1/body/2/assignvalue/elts/2/_hash=0x0008
-/body/1/body/2/assignvalue/elts/2/_pos=3:1-5-2-1-0-2-
-/body/1/body/2/assignvalue/elts/2/n=1
-/body/1/body/2/assignvalue/ctx/_type=Load
-/body/1/body/2/type_comment=None
-/body/1/body/3/_type=While
-/body/1/body/3/_pos=4:1-5-3-
-/body/1/body/3/test/_type=Compare
-/body/1/body/3/test/_hash=0x0009
-/body/1/body/3/test/_pos=4:1-5-3-0-
-/body/1/body/3/test/left/_type=Name
-/body/1/body/3/test/left/_hash=0x0004
-/body/1/body/3/test/left/_pos=4:1-5-3-0-0-
-/body/1/body/3/test/left/id=a
-/body/1/body/3/test/left/ctx/_type=Load
-/body/1/body/3/test/ops/_length=1
-/body/1/body/3/test/ops/1/_type=Lt
-/body/1/body/3/test/comparators/_length=1
-/body/1/body/3/test/comparators/1/_type=Name
-/body/1/body/3/test/comparators/1/_hash=0x000a
-/body/1/body/3/test/comparators/1/_pos=4:1-5-3-0-2-1-
-/body/1/body/3/test/comparators/1/id=n
-/body/1/body/3/test/comparators/1/ctx/_type=Load
-/body/1/body/3/body/_length=2
-/body/1/body/3/body/1/_type=Expr
-/body/1/body/3/body/1/_pos=5:1-5-3-1-1-
-/body/1/body/3/body/1/value/_type=Call
-/body/1/body/3/body/1/value/_hash=0x000b
-/body/1/body/3/body/1/value/_pos=5:1-5-3-1-1-0-
-/body/1/body/3/body/1/value/func/_type=Attribute
-/body/1/body/3/body/1/value/func/_hash=0x000c
-/body/1/body/3/body/1/value/func/_pos=5:1-5-3-1-1-0-0-
-/body/1/body/3/body/1/value/func/value/_type=Name
-/body/1/body/3/body/1/value/func/value/_hash=0x0001
-/body/1/body/3/body/1/value/func/value/_pos=5:1-5-3-1-1-0-0-0-
-/body/1/body/3/body/1/value/func/value/id=result
-/body/1/body/3/body/1/value/func/value/ctx/_type=Load
-/body/1/body/3/body/1/value/func/attr=append
-/body/1/body/3/body/1/value/func/ctx/_type=Load
-/body/1/body/3/body/1/value/args/_length=1
-/body/1/body/3/body/1/value/args/1/_type=Name
-/body/1/body/3/body/1/value/args/1/_hash=0x0004
-/body/1/body/3/body/1/value/args/1/_pos=5:1-5-3-1-1-0-1-1-
-/body/1/body/3/body/1/value/args/1/id=a
-/body/1/body/3/body/1/value/args/1/ctx/_type=Load
-/body/1/body/3/body/1/value/keywords/_length=0
-/body/1/body/3/body/2/_type=Assign
-/body/1/body/3/body/2/_pos=6:1-5-3-1-2-
-/body/1/body/3/body/2/assigntargets/_length=1
-/body/1/body/3/body/2/assigntargets/1/_type=Tuple
-/body/1/body/3/body/2/assigntargets/1/_hash=0x0003
-/body/1/body/3/body/2/assigntargets/1/_pos=6:1-5-3-1-2-0-1-
-/body/1/body/3/body/2/assigntargets/1/elts/_length=2
-/body/1/body/3/body/2/assigntargets/1/elts/1/_type=Name
-/body/1/body/3/body/2/assigntargets/1/elts/1/_hash=0x0004
-/body/1/body/3/body/2/assigntargets/1/elts/1/_pos=6:1-5-3-1-2-0-1-0-1-
-/body/1/body/3/body/2/assigntargets/1/elts/1/id=a
-/body/1/body/3/body/2/assigntargets/1/elts/1/ctx/_type=Store
-/body/1/body/3/body/2/assigntargets/1/elts/2/_type=Name
-/body/1/body/3/body/2/assigntargets/1/elts/2/_hash=0x0005
-/body/1/body/3/body/2/assigntargets/1/elts/2/_pos=6:1-5-3-1-2-0-1-0-2-
-/body/1/body/3/body/2/assigntargets/1/elts/2/id=b
-/body/1/body/3/body/2/assigntargets/1/elts/2/ctx/_type=Store
-/body/1/body/3/body/2/assigntargets/1/ctx/_type=Store
-/body/1/body/3/body/2/assignvalue/_type=Tuple
-/body/1/body/3/body/2/assignvalue/_hash=0x000d
-/body/1/body/3/body/2/assignvalue/_pos=6:1-5-3-1-2-1-
-/body/1/body/3/body/2/assignvalue/elts/_length=2
-/body/1/body/3/body/2/assignvalue/elts/1/_type=Name
-/body/1/body/3/body/2/assignvalue/elts/1/_hash=0x0005
-/body/1/body/3/body/2/assignvalue/elts/1/_pos=6:1-5-3-1-2-1-0-1-
-/body/1/body/3/body/2/assignvalue/elts/1/id=b
-/body/1/body/3/body/2/assignvalue/elts/1/ctx/_type=Load
-/body/1/body/3/body/2/assignvalue/elts/2/_type=BinOp
-/body/1/body/3/body/2/assignvalue/elts/2/_hash=0x000e
-/body/1/body/3/body/2/assignvalue/elts/2/_pos=6:1-5-3-1-2-1-0-2-
-/body/1/body/3/body/2/assignvalue/elts/2/left/_type=Name
-/body/1/body/3/body/2/assignvalue/elts/2/left/_hash=0x0004
-/body/1/body/3/body/2/assignvalue/elts/2/left/_pos=6:1-5-3-1-2-1-0-2-0-
-/body/1/body/3/body/2/assignvalue/elts/2/left/id=a
-/body/1/body/3/body/2/assignvalue/elts/2/left/ctx/_type=Load
-/body/1/body/3/body/2/assignvalue/elts/2/op/_type=Add
-/body/1/body/3/body/2/assignvalue/elts/2/right/_type=Name
-/body/1/body/3/body/2/assignvalue/elts/2/right/_hash=0x0005
-/body/1/body/3/body/2/assignvalue/elts/2/right/_pos=6:1-5-3-1-2-1-0-2-2-
-/body/1/body/3/body/2/assignvalue/elts/2/right/id=b
-/body/1/body/3/body/2/assignvalue/elts/2/right/ctx/_type=Load
-/body/1/body/3/body/2/assignvalue/ctx/_type=Load
-/body/1/body/3/body/2/type_comment=None
-/body/1/body/3/loopelse/_length=0
-/body/1/body/4/_type=Return
-/body/1/body/4/_pos=7:1-5-4-
-/body/1/body/4/value/_type=Name
-/body/1/body/4/value/_hash=0x0001
-/body/1/body/4/value/_pos=7:1-5-4-0-
-/body/1/body/4/value/id=result
-/body/1/body/4/value/ctx/_type=Load
-/type_ignores/_length=0
 >>>
 """
 source_rex = regex.compile(r"(?ms)^<<< ([^\n]+)\n(.+?)\n---\n(.*?)\n>>>")

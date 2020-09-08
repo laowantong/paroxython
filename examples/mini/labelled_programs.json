@@ -160,11 +160,11 @@
       ],
       [
         "function_parameter:n",
-        [[1,1,"1-1-0-1-"]]
+        [[1,1,"1-1-1-1-"]]
       ],
       [
         "function_parameter_flavor:arg",
-        [[1,1,"1-1-0-1-"]]
+        [[1,1,"1-1-1-1-"]]
       ],
       [
         "function_returning_nothing:print_collatz",
@@ -280,7 +280,7 @@
       ],
       [
         "node:arg",
-        [[1,1,"1-1-0-1-"]]
+        [[1,1,"1-1-1-1-"]]
       ],
       [
         "procedural_style",
@@ -638,11 +638,11 @@
       ],
       [
         "function_parameter:n",
-        [[2,2,"2-1-0-1-"]]
+        [[2,2,"2-1-1-1-"]]
       ],
       [
         "function_parameter_flavor:arg",
-        [[2,2,"2-1-0-1-"]]
+        [[2,2,"2-1-1-1-"]]
       ],
       [
         "function_returning_something:is_even",
@@ -710,7 +710,7 @@
       ],
       [
         "node:arg",
-        [[2,2,"2-1-0-1-"]]
+        [[2,2,"2-1-1-1-"]]
       ],
       [
         "one_liner_style",

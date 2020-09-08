@@ -7,10 +7,9 @@ from time import perf_counter
 from typing import Callable, Dict, Iterator, List, Tuple
 
 import regex  # type: ignore
-from typed_ast import ast3 as ast
 
 from .derived_labels_db import DerivedLabelsDatabase
-from .flatten_ast import flatten_ast
+from .flatten_ast import ast, flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {

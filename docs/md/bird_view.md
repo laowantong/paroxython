@@ -32,14 +32,14 @@ This section mainly describes how the different parts of Paroxython (code, data,
 `paroxython.parse_program`
 :   This module mainly consists of a function which flattens a given (preprocessed) program, parses it along the specifications defined in `spec.md`, and returns the list of its labels with their spans.
 
-    **Warning.** The binding of a regular expression-specified multi-line feature with its spans may reveal somewhat tricky. Make sure to understand the explanations of `paroxython.parse_program.get_bindings` in the case where your home-made regular expression yields unexpected results.
+    **Warning.** The binding of a regular expression-specified multi-line feature with its spans may reveal somewhat tricky. Make sure to understand the explanations of `paroxython.parse_program.get_bindings` in case your home-made regular expression yields unexpected results.
 
 `paroxython.label_programs`
 :   The main function of this module not only maps `paroxython.parse_program` on the list returned by `paroxython.list_programs`, transforming it into a list of _labelled_ programs, but tweaks all the labels which mark an importation of an “internal” module, _i.e_, a program belonging to this very list. For instance, a label `"import:my_program"` would be transformed into `"import_internally:my_program"`, while `"import:itertools"` would be left untouched.
 
 `taxonomy.tsv` (click to browse the default taxonomy on GitHub)
 :   The labels produced so far are nothing more than an intermediate result. A number of them have only been useful for deriving other labels, and can now be ignored. Those that remain must be transformed into taxa.
-    A taxon is the structured version of one or more labels. For instance, the label `"if_without_else"` will maps onto the taxon `"flow/conditional/no_else"`, which conveniently tells us that a conditional without an else branch is a subcase of a conditional, itself being a subcase of a control flow.
+    A taxon is the structured version of one or more labels. For instance, the label `"if_without_else"` will maps onto the taxon `"flow/conditional/no_else"`, which conveniently tells us that a conditional without an else branch (`no_else`) is a subcase of a conditional (`conditional`), itself being a subcase of a control flow (`flow`).
 
     The file `taxonomy.tsv` is a simple two-columns associative TSV array which maps label _patterns_ onto taxa. Since some label patterns are rather long regular expressions, the columns are swapped: the _second_ column lists the labels patterns to search; the _first_ columns, the taxa to be substituted. For instance, the row:
 
@@ -60,7 +60,7 @@ This section mainly describes how the different parts of Paroxython (code, data,
     In the replacement pattern, `"\1"` denotes the 1st captured group (in parentheses) of the search pattern.
 
 `paroxython.map_taxonomy`
-:   In addition to applying the transformations defined in `taxonomy.tsv` to a given list of labels, the main method of this module, `paroxython.map_taxonomy.Taxonomy.to_taxa`, operates a deduplication of the resulting taxa.
+:   In addition to applying the transformations defined in `taxonomy.tsv` to a given list of labels, the main method of this module, `paroxython.map_taxonomy.Taxonomy.to_taxa`, deduplicates the resulting taxa.
 
     Indeed, a same feature is often described by several labels, for instance, the `for` loop of the following program:
 

@@ -287,7 +287,7 @@ class Cleanup:
             r&#34;\s*&#34;.join(regex.split(r&#34;(\w+)&#34;, HINT_COMMENT.replace(&#34; &#34;, &#34;&#34;))) + r&#34;\s*&#34;,
             regex.IGNORECASE,
         ).subn,
-    ) -&gt; str:
+    ) -&gt; Tuple[str, int]:
         return subn(f&#34;{HINT_COMMENT} &#34;, source)
 
     @staticmethod
@@ -854,7 +854,7 @@ has manually added [resp. suppressed].</dd>
             r&#34;\s*&#34;.join(regex.split(r&#34;(\w+)&#34;, HINT_COMMENT.replace(&#34; &#34;, &#34;&#34;))) + r&#34;\s*&#34;,
             regex.IGNORECASE,
         ).subn,
-    ) -&gt; str:
+    ) -&gt; Tuple[str, int]:
         return subn(f&#34;{HINT_COMMENT} &#34;, source)
 
     @staticmethod
@@ -1304,7 +1304,7 @@ def suppress_main_guard(
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.Cleanup.normalize_paroxython_comments"><code class="name flex">
-<span>def <span class="ident">normalize_paroxython_comments</span></span>(<span>source: str, <br>subn: Callable = &lt;built-in method subn of regex&gt;<br>) ‑> str</span>
+<span>def <span class="ident">normalize_paroxython_comments</span></span>(<span>source: str, <br>subn: Callable = &lt;built-in method subn of regex&gt;<br>) ‑> Tuple[str, int]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Replace and count all the hint comment strings, made space- and case-insensitive.</p>
@@ -1323,7 +1323,7 @@ def normalize_paroxython_comments(
         r&#34;\s*&#34;.join(regex.split(r&#34;(\w+)&#34;, HINT_COMMENT.replace(&#34; &#34;, &#34;&#34;))) + r&#34;\s*&#34;,
         regex.IGNORECASE,
     ).subn,
-) -&gt; str:
+) -&gt; Tuple[str, int]:
     return subn(f&#34;{HINT_COMMENT} &#34;, source)</code></pre>
 </details>
 </dd>

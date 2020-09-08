@@ -142,7 +142,7 @@ template = "hello, %s"
 s = template % world # false negative
 ```
 
-A string _literal_ on the right hand side of `%` is needed to recognize the latter as a string formatting operator. Paroxython does not try to guess the type of `template`.
+A string _literal_ on the left hand side of `%` is needed to recognize the latter as a string formatting operator. Paroxython does not try to guess the type of `template`.
 
 There are more interesting cases. For instance, the following code is correctly tagged `tail_recursive_function:gcd`: a function is tail recursive if and only if all its recursive calls return their results immediately, without any further calculation.
 

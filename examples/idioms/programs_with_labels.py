@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------
 # 001.0003-print-hello-world.py
 # ----------------------------------------------------------------------------------------
-from __future__ import print_function # flat_style (-> +1), imperative_style (-> +1), import:__future__:print_function, import_module:__future__, import_name:print_function, node:ImportFrom, one_liner_style (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+from __future__ import print_function # flat_style (-> +1), imperative_style (-> +1), import:__future__:print_function, import_module:__future__, import_name:print_function, node:ImportFrom, one_liner_style (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 print("Hello World") # argument:, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
@@ -28,14 +28,14 @@ print("Hello\n" * 10) # argument:, binary_operator:Mult, external_free_call:prin
 # ----------------------------------------------------------------------------------------
 # 003.0019-create-a-procedure.py
 # ----------------------------------------------------------------------------------------
-def finish(name): # function:finish (-> +1), function_line_count:2 (-> +1), function_parameter:name, function_parameter_flavor:arg, function_returning_nothing:finish (-> +1), local_scope:name (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), procedural_style (-> +1), scope:name (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+def finish(name): # function:finish (-> +1), function_line_count:2 (-> +1), function_parameter:name, function_parameter_flavor:arg, function_returning_nothing:finish (-> +1), local_scope:name (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), procedural_style (-> +1), scope:name (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
     print("My job here is done. Goodbye " + name) # argument:, binary_operator:Add, concatenation_operator:Str, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, loaded_variable:name, node:BinOp, node:Call, node:Expr, node:Name, node:Str
 
 # ----------------------------------------------------------------------------------------
 # 003.2372-create-a-procedure.py
 # ----------------------------------------------------------------------------------------
-def a(): # function:a (-> +1), function_line_count:2 (-> +1), function_returning_nothing:a (-> +1), function_without_parameters:a (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), procedural_style (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
-    pass # node:Pass
+def a(): # function:a (-> +1), function_line_count:2 (-> +1), function_returning_nothing:a (-> +1), function_without_parameters:a (-> +1), node:FunctionDef (-> +1), one_liner_style (-> +1), procedural_style (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
+    pass # no_operation, node:Pass
 
 # ----------------------------------------------------------------------------------------
 # 004.0024-create-a-function-which-returns-the-square-of-an-integer.py
@@ -46,15 +46,15 @@ def square(x): # function:square (-> +1), function_line_count:2 (-> +1), functio
 # ----------------------------------------------------------------------------------------
 # 004.2921-create-a-function-which-returns-the-square-of-an-integer.py
 # ----------------------------------------------------------------------------------------
-def square(x): # function:square (-> +1), function_line_count:2 (-> +1), function_parameter:x, function_parameter_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), scope:x (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+def square(x): # function:square (-> +1), function_line_count:2 (-> +1), function_parameter:x, function_parameter_flavor:arg, function_returning_something:square (-> +1), functional_style (-> +1), local_scope:x (-> +1), node:FunctionDef (-> +1), node:arg, one_liner_style (-> +1), pure_function:square (-> +1), scope:x (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
     return x ** 2 # binary_operator:Pow, literal:2, loaded_variable:x, node:BinOp, node:Name, node:Num, node:Return, return
 
 # ----------------------------------------------------------------------------------------
 # 005.0663-create-a-2d-point-data-structure.py
 # ----------------------------------------------------------------------------------------
-from dataclasses import dataclass # import:dataclasses:dataclass, import_module:dataclasses, import_name:dataclass, node:ImportFrom, object_oriented_style (-> +1), variety:*** (-> +1), whole_span:2 (-> +1)
-@dataclass # class:Point, loaded_variable:dataclass, node:ClassDef, node:Name
-class Point:
+from dataclasses import dataclass # import:dataclasses:dataclass, import_module:dataclasses, import_name:dataclass, node:ImportFrom, object_oriented_style (-> +4), variety:*** (-> +4), whole_span:5 (-> +4)
+@dataclass # loaded_variable:dataclass, node:Name
+class Point: # class:Point (-> +2), node:ClassDef (-> +2)
     x: float # loaded_variable:float, node:AnnAssign, node:Name
     y: float # loaded_variable:float, node:AnnAssign, node:Name
 
@@ -96,7 +96,7 @@ class Node: # class:Node (-> +4), class_method_count:1 (-> +4), node:ClassDef (-
 # ----------------------------------------------------------------------------------------
 # 010.0182-shuffle-a-list.py
 # ----------------------------------------------------------------------------------------
-from random import shuffle # flat_style (-> +1), imperative_style (-> +1), import:random:shuffle, import_module:random, import_name:shuffle, node:ImportFrom, one_liner_style (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+from random import shuffle # flat_style (-> +1), imperative_style (-> +1), import:random:shuffle, import_module:random, import_name:shuffle, node:ImportFrom, one_liner_style (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 shuffle(x) # argument:x, external_free_call:shuffle, free_call:shuffle, free_call_without_result:shuffle, loaded_variable:x, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
@@ -283,8 +283,8 @@ finally:
 # ----------------------------------------------------------------------------------------
 # 034.0625-create-a-set-of-objects.py
 # ----------------------------------------------------------------------------------------
-class T(object): # class:T (-> +1), global_scope:x (-> +2), loaded_variable:object, node:ClassDef (-> +1), node:Name, object_oriented_style (-> +2), scope:x (-> +2), variety:* (-> +2), whole_span:3 (-> +2)
-    pass # node:Pass
+class T(object): # class:T (-> +1), global_scope:x (-> +2), loaded_variable:object, node:ClassDef (-> +1), node:Name, object_oriented_style (-> +2), scope:x (-> +2), variety:** (-> +2), whole_span:3 (-> +2)
+    pass # no_operation, node:Pass
 x = set(T()) # argument:, assignment:set, assignment_lhs_identifier:x, composition, external_free_call:T, external_free_call:set, free_call:T, free_call:set, free_call_no_arguments:T, node:Assign, node:Call, node:Name, single_assignment:x
 
 # ----------------------------------------------------------------------------------------
@@ -324,7 +324,7 @@ ok = word in s # assignment, assignment_lhs_identifier:ok, assignment_rhs_atom:s
 # ----------------------------------------------------------------------------------------
 from collections import defaultdict # global_scope:G (-> +12), import:collections:defaultdict, import_module:collections, import_name:defaultdict, node:ImportFrom, object_oriented_style (-> +12), scope:G (-> +12), variety:**** (-> +12), whole_span:13 (-> +12)
 class Vertex(set): # class:Vertex (-> +1), class_method_count:2 (-> +1), loaded_variable:set, node:ClassDef (-> +1), node:Name
-    pass # node:Pass
+    pass # no_operation, node:Pass
 class Graph(defaultdict): # class:Graph (-> +8), class_method_count:2 (-> +8), loaded_variable:defaultdict, node:ClassDef (-> +8), node:Name
     def __init__(self, *paths): # function:__init__ (-> +3), function_line_count:4 (-> +3), function_parameter:paths, function_parameter:self, function_parameter_flavor:arg, function_parameter_flavor:vararg, function_returning_nothing:__init__ (-> +3), instance_method:__init__ (-> +3), local_scope:path (-> +3), local_scope:paths (-> +3), local_scope:self (-> +3), method:__init__ (-> +3), node:FunctionDef (-> +3), node:arg, scope:path (-> +3), scope:paths (-> +3), scope:self (-> +3)
         self.default_factory = Vertex # assignment, assignment_lhs_identifier:self, assignment_rhs_atom:Vertex, loaded_variable:Vertex, loaded_variable:self, node:Assign, node:Attribute, node:Name
@@ -370,8 +370,8 @@ for v in a: # for:v (-> +4), for_each:v (-> +4), global_scope:v (-> +4), global_
 # ----------------------------------------------------------------------------------------
 # 043.0676-break-outer-loop.py
 # ----------------------------------------------------------------------------------------
-class BreakOuterLoop(Exception): # class:BreakOuterLoop (-> +1), global_scope:column (-> +10), global_scope:position (-> +10), global_scope:row (-> +10), loaded_variable:Exception, node:ClassDef (-> +1), node:Name, object_oriented_style (-> +10), scope:column (-> +10), scope:position (-> +10), scope:row (-> +10), variety:**** (-> +10), whole_span:11 (-> +10)
-    pass # node:Pass
+class BreakOuterLoop(Exception): # class:BreakOuterLoop (-> +1), global_scope:column (-> +10), global_scope:position (-> +10), global_scope:row (-> +10), loaded_variable:Exception, node:ClassDef (-> +1), node:Name, object_oriented_style (-> +10), scope:column (-> +10), scope:position (-> +10), scope:row (-> +10), variety:***** (-> +10), whole_span:11 (-> +10)
+    pass # no_operation, node:Pass
 try: # node:Try (-> +8), try_except:BreakOuterLoop (-> +8), try_raise:BreakOuterLoop (-> +8)
     position = None # assignment:None, assignment_lhs_identifier:position, assignment_rhs_atom:None, literal:None, node:Assign, node:Name, node:NameConstant, single_assignment:position
     for row in m: # for:row (-> +4), for_each:row (-> +4), iteration_variable:row, loaded_variable:m, loop:for (-> +4), loop_with_early_exit:for:raise (-> +4), loop_with_raise:for (-> +4), node:For (-> +4), node:Name
@@ -380,7 +380,7 @@ try: # node:Try (-> +8), try_except:BreakOuterLoop (-> +8), try_raise:BreakOuter
                 position = (row, column) # assignment, assignment_lhs_identifier:position, assignment_rhs_atom:column, assignment_rhs_atom:row, if_then_branch (-> +1), literal:Tuple, loaded_variable:column, loaded_variable:row, node:Assign, node:Name, node:Tuple, single_assignment:position
                 raise BreakOuterLoop # loaded_variable:BreakOuterLoop, node:Name, node:Raise, raise:BreakOuterLoop
 except BreakOuterLoop: # except:BreakOuterLoop, loaded_variable:BreakOuterLoop, node:ExceptHandler (-> +1), node:Name
-    pass # node:Pass
+    pass # no_operation, node:Pass
 
 # ----------------------------------------------------------------------------------------
 # 043.2733-break-outer-loop.py
@@ -401,7 +401,7 @@ s.insert(i, x) # argument:i, argument:x, flat_style, imperative_style, loaded_va
 # ----------------------------------------------------------------------------------------
 # 045.0570-pause-execution-for-5-seconds.py
 # ----------------------------------------------------------------------------------------
-import time # flat_style (-> +1), imperative_style (-> +1), import:time, import_module:time, node:Import, one_liner_style (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import time # flat_style (-> +1), imperative_style (-> +1), import:time, import_module:time, node:Import, one_liner_style (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 time.sleep(5) # argument:5, literal:5, loaded_variable:time, magic_number:5, member_call:time:sleep, member_call_method:sleep, member_call_object:time, node:Attribute, node:Call, node:Expr, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
@@ -417,9 +417,9 @@ t = s[-5:] # assignment, assignment_lhs_identifier:t, assignment_rhs_atom:-5, as
 # ----------------------------------------------------------------------------------------
 # 048.0210-multi-line-string-literal.py
 # ----------------------------------------------------------------------------------------
-s = """Huey # assignment, assignment_lhs_identifier:s, flat_style (-> +2), global_scope:s (-> +2), imperative_style (-> +2), node:Assign (-> +2), node:Name, scope:s (-> +2), single_assignment:s, variety:* (-> +2), whole_span:3 (-> +2)
+s = """Huey # assignment, assignment_lhs_identifier:s, flat_style, global_scope:s, imperative_style, literal:Str, node:Assign, node:Name, node:Str, one_liner_style, scope:s, single_assignment:s, special_literal_string:Huey\nDewey\nLouie, variety:*, whole_span:1
 Dewey
-Louie""" # literal:Str, node:Str, special_literal_string:Huey\nDewey\nLouie
+Louie"""
 
 # ----------------------------------------------------------------------------------------
 # 049.0242-split-a-space-separated-string.py
@@ -429,8 +429,8 @@ chunks = s.split() # assignment:split, assignment_lhs_identifier:chunks, assignm
 # ----------------------------------------------------------------------------------------
 # 050.0572-make-an-infinite-loop.py
 # ----------------------------------------------------------------------------------------
-while True: # imperative_style (-> +1), infinite_while (-> +1), literal:True, loop:while (-> +1), loop_with_late_exit:while (-> +1), node:NameConstant, node:While (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
-    pass # node:Pass
+while True: # imperative_style (-> +1), infinite_while (-> +1), literal:True, loop:while (-> +1), loop_with_late_exit:while (-> +1), node:NameConstant, node:While (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
+    pass # no_operation, node:Pass
 
 # ----------------------------------------------------------------------------------------
 # 051.0230-check-if-map-contains-key.py
@@ -502,7 +502,7 @@ x = sys.argv[1] # assignment, assignment_lhs_identifier:x, assignment_rhs_atom:1
 # ----------------------------------------------------------------------------------------
 # 061.0576-get-current-date.py
 # ----------------------------------------------------------------------------------------
-import datetime # flat_style (-> +1), global_scope:d (-> +1), imperative_style (-> +1), import:datetime, import_module:datetime, node:Import, one_liner_style (-> +1), scope:d (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import datetime # flat_style (-> +1), global_scope:d (-> +1), imperative_style (-> +1), import:datetime, import_module:datetime, node:Import, one_liner_style (-> +1), scope:d (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 d = datetime.datetime.now() # assignment:now, assignment_lhs_identifier:d, assignment_rhs_atom:datetime, loaded_variable:datetime, member_call_method:now, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:d, value_attr:datetime
 
 # ----------------------------------------------------------------------------------------
@@ -553,7 +553,7 @@ rand = random.Random(s) # argument:s, assignment:Random, assignment_lhs_identifi
 # ----------------------------------------------------------------------------------------
 # 070.1087-use-clock-as-random-generator-seed.py
 # ----------------------------------------------------------------------------------------
-import random # flat_style (-> +1), global_scope:rand (-> +1), imperative_style (-> +1), import:random, import_module:random, node:Import, one_liner_style (-> +1), scope:rand (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import random # flat_style (-> +1), global_scope:rand (-> +1), imperative_style (-> +1), import:random, import_module:random, node:Import, one_liner_style (-> +1), scope:rand (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 rand = random.Random() # assignment:Random, assignment_lhs_identifier:rand, assignment_rhs_atom:random, loaded_variable:random, member_call_method:Random, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:rand
 
 # ----------------------------------------------------------------------------------------
@@ -595,7 +595,7 @@ y = x * 1j # assignment:Mult, assignment_lhs_identifier:y, assignment_rhs_atom:1
 # ----------------------------------------------------------------------------------------
 # 078.1089-do-while-loop.py
 # ----------------------------------------------------------------------------------------
-while True: # imperative_style (-> +3), infinite_while (-> +3), literal:True, loop:while (-> +3), loop_with_break:while (-> +3), loop_with_early_exit:while:break (-> +3), node:NameConstant, node:While (-> +3), variety:*** (-> +3), whole_span:4 (-> +3)
+while True: # imperative_style (-> +3), infinite_while (-> +3), literal:True, loop:while (-> +3), loop_with_break:while (-> +3), loop_with_early_exit:while:break (-> +3), node:NameConstant, node:While (-> +3), variety:**** (-> +3), whole_span:4 (-> +3)
     do_something() # external_free_call:do_something, free_call:do_something, free_call_no_arguments:do_something, free_call_without_result:do_something, node:Call, node:Expr, node:Name
     if not c: # if (-> +1), if_test_atom:c, if_without_else (-> +1), loaded_variable:c, node:If (-> +1), node:Name, node:UnaryOp, unary_operator:Not
         break # if_then_branch, node:Break
@@ -623,7 +623,7 @@ count = s.count(t) # argument:t, assignment:count, assignment_lhs_identifier:cou
 # ----------------------------------------------------------------------------------------
 # 083.1805-regex-with-character-repetition.py
 # ----------------------------------------------------------------------------------------
-import re # flat_style (-> +1), global_scope:r (-> +1), imperative_style (-> +1), import:re, import_module:re, node:Import, one_liner_style (-> +1), scope:r (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import re # flat_style (-> +1), global_scope:r (-> +1), imperative_style (-> +1), import:re, import_module:re, node:Import, one_liner_style (-> +1), scope:r (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 r = re.compile(r"htt+p") # argument:, assignment:compile, assignment_lhs_identifier:r, assignment_rhs_atom:re, literal:Str, loaded_variable:re, member_call_method:compile, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:r
 
 # ----------------------------------------------------------------------------------------
@@ -646,7 +646,7 @@ def multiplyWillOverflow(x, y): # function:multiplyWillOverflow (-> +1), functio
 # ----------------------------------------------------------------------------------------
 # 087.1139-stop-program.py
 # ----------------------------------------------------------------------------------------
-import sys # flat_style (-> +1), imperative_style (-> +1), import:sys, import_module:sys, node:Import, one_liner_style (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import sys # flat_style (-> +1), imperative_style (-> +1), import:sys, import_module:sys, node:Import, one_liner_style (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 sys.exit(1) # argument:1, literal:1, loaded_variable:sys, member_call:sys:exit, member_call_method:exit, member_call_object:sys, node:Attribute, node:Call, node:Expr, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------
@@ -665,8 +665,8 @@ raise ValueError("x is invalid") # argument:, external_free_call:ValueError, fla
 class Foo(object): # class:Foo (-> +5), class_method_count:2 (-> +5), loaded_variable:object, node:ClassDef (-> +5), node:Name, object_oriented_style (-> +5), variety:**** (-> +5), whole_span:6 (-> +5)
     def __init__(self): # function:__init__ (-> +1), function_line_count:2 (-> +1), function_parameter:self, function_parameter_flavor:arg, function_returning_nothing:__init__ (-> +1), instance_method:__init__ (-> +1), local_scope:self (-> +1), method:__init__ (-> +1), node:FunctionDef (-> +1), node:arg, scope:self (-> +1)
         self._x = 0 # assignment:0, assignment_lhs_identifier:self, assignment_rhs_atom:0, literal:0, loaded_variable:self, node:Assign, node:Attribute, node:Name, node:Num
-    @property # decorated_function:x (-> +2), function:x (-> +2), function_decorator:property (-> +2), function_line_count:3 (-> +2), function_returning_something:x (-> +2), instance_method:x (-> +2), loaded_variable:property, local_scope:self (-> +2), method:x (-> +2), node:FunctionDef (-> +2), node:Name, scope:self (-> +2)
-    def x(self): # function_parameter:self, function_parameter_flavor:arg, node:arg
+    @property # function_decorator:property (-> +2), loaded_variable:property, node:Name
+    def x(self): # decorated_function:x (-> +1), function:x (-> +1), function_line_count:2 (-> +1), function_parameter:self, function_parameter_flavor:arg, function_returning_something:x (-> +1), instance_method:x (-> +1), local_scope:self (-> +1), method:x (-> +1), node:FunctionDef (-> +1), node:arg, scope:self (-> +1)
         return self._x # loaded_variable:self, node:Attribute, node:Name, node:Return, return, value_attr:_x
 
 # ----------------------------------------------------------------------------------------
@@ -686,7 +686,7 @@ with open("data.json", "w") as output: # argument:, external_free_call:open, fre
 # ----------------------------------------------------------------------------------------
 # 093.1082-pass-a-runnable-procedure-as-parameter.py
 # ----------------------------------------------------------------------------------------
-from __future__ import print_function # functional_style (-> +2), import:__future__:print_function, import_module:__future__, import_name:print_function, node:ImportFrom, one_liner_style (-> +2), variety:** (-> +2), whole_span:3 (-> +2)
+from __future__ import print_function # functional_style (-> +2), import:__future__:print_function, import_module:__future__, import_name:print_function, node:ImportFrom, one_liner_style (-> +2), variety:*** (-> +2), whole_span:3 (-> +2)
 def control(f): # function:control (-> +1), function_line_count:2 (-> +1), function_parameter:f, function_parameter_flavor:arg, function_returning_something:control (-> +1), higher_order_function:f (-> +1), local_scope:f (-> +1), node:FunctionDef (-> +1), node:arg, pure_function:control (-> +1), scope:f (-> +1)
     return f() # external_free_call:f, free_call:f, free_call_no_arguments:f, free_tail_call:f, node:Call, node:Name, node:Return, return
 
@@ -757,7 +757,7 @@ filename, headers = urllib.request.urlretrieve(u, "result.txt") # argument:, arg
 # ----------------------------------------------------------------------------------------
 # 103.2276-load-xml-file-into-struct.py
 # ----------------------------------------------------------------------------------------
-import lxml.etree # flat_style (-> +1), global_scope:x (-> +1), imperative_style (-> +1), import:lxml.etree, import_module:lxml.etree, node:Import, one_liner_style (-> +1), scope:x (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import lxml.etree # flat_style (-> +1), global_scope:x (-> +1), imperative_style (-> +1), import:lxml.etree, import_module:lxml.etree, node:Import, one_liner_style (-> +1), scope:x (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 x = lxml.etree.parse("data.xml") # argument:, assignment:parse, assignment_lhs_identifier:x, assignment_rhs_atom:lxml, literal:Str, loaded_variable:lxml, member_call_method:parse, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:x, value_attr:etree
 
 # ----------------------------------------------------------------------------------------
@@ -785,7 +785,7 @@ s = sys.argv[0] # assignment, assignment_lhs_identifier:s, assignment_rhs_atom:0
 # ----------------------------------------------------------------------------------------
 # 106.2039-get-program-working-directory.py
 # ----------------------------------------------------------------------------------------
-import os # flat_style (-> +1), global_scope:dir (-> +1), imperative_style (-> +1), import:os, import_module:os, node:Import, one_liner_style (-> +1), scope:dir (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import os # flat_style (-> +1), global_scope:dir (-> +1), imperative_style (-> +1), import:os, import_module:os, node:Import, one_liner_style (-> +1), scope:dir (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 dir = os.getcwd() # assignment:getcwd, assignment_lhs_identifier:dir, assignment_rhs_atom:os, loaded_variable:os, member_call_method:getcwd, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:dir
 
 # ----------------------------------------------------------------------------------------
@@ -1030,13 +1030,13 @@ b = s.isdigit() # assignment:isdigit, assignment_lhs_identifier:b, assignment_rh
 # ----------------------------------------------------------------------------------------
 # 138.2161-create-temp-file.py
 # ----------------------------------------------------------------------------------------
-import tempfile # flat_style (-> +1), global_scope:file (-> +1), imperative_style (-> +1), import:tempfile, import_module:tempfile, node:Import, one_liner_style (-> +1), scope:file (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import tempfile # flat_style (-> +1), global_scope:file (-> +1), imperative_style (-> +1), import:tempfile, import_module:tempfile, node:Import, one_liner_style (-> +1), scope:file (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 file = tempfile.TemporaryFile() # assignment:TemporaryFile, assignment_lhs_identifier:file, assignment_rhs_atom:tempfile, loaded_variable:tempfile, member_call_method:TemporaryFile, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:file
 
 # ----------------------------------------------------------------------------------------
 # 139.2162-create-temp-directory.py
 # ----------------------------------------------------------------------------------------
-import tempfile # flat_style (-> +1), global_scope:td (-> +1), imperative_style (-> +1), import:tempfile, import_module:tempfile, node:Import, one_liner_style (-> +1), scope:td (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import tempfile # flat_style (-> +1), global_scope:td (-> +1), imperative_style (-> +1), import:tempfile, import_module:tempfile, node:Import, one_liner_style (-> +1), scope:td (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 td = tempfile.TemporaryDirectory() # assignment:TemporaryDirectory, assignment_lhs_identifier:td, assignment_rhs_atom:tempfile, loaded_variable:tempfile, member_call_method:TemporaryDirectory, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:td
 
 # ----------------------------------------------------------------------------------------
@@ -1070,7 +1070,7 @@ b = os.path.exists(fp) # argument:fp, assignment:exists, assignment_lhs_identifi
 # ----------------------------------------------------------------------------------------
 # 144.2915-check-if-file-exists.py
 # ----------------------------------------------------------------------------------------
-from pathlib import Path # flat_style (-> +1), global_scope:b (-> +1), imperative_style (-> +1), import:pathlib:Path, import_module:pathlib, import_name:Path, node:ImportFrom, one_liner_style (-> +1), scope:b (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+from pathlib import Path # flat_style (-> +1), global_scope:b (-> +1), imperative_style (-> +1), import:pathlib:Path, import_module:pathlib, import_name:Path, node:ImportFrom, one_liner_style (-> +1), scope:b (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 b = Path(fp).exists() # argument:fp, assignment:exists, assignment_lhs_identifier:b, assignment_rhs_atom:fp, external_free_call:Path, free_call:Path, loaded_variable:fp, member_call_method:exists, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:b
 
 # ----------------------------------------------------------------------------------------
@@ -1146,8 +1146,8 @@ c = "#{:02x}{:02x}{:02x}".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2)
 # ----------------------------------------------------------------------------------------
 import numpy # global_scope:c1 (-> +14), global_scope:c2 (-> +14), import:numpy, import_module:numpy, node:Import, object_oriented_style (-> +14), scope:c1 (-> +14), scope:c2 (-> +14), variety:***** (-> +14), whole_span:15 (-> +14)
 class RGB(numpy.ndarray): # class:RGB (-> +8), class_method_count:2 (-> +8), loaded_variable:numpy, node:Attribute, node:ClassDef (-> +8), node:Name
-    @classmethod # class_method:from_str (-> +4), decorated_function:from_str (-> +4), function:from_str (-> +4), function_decorator:classmethod (-> +4), function_line_count:5 (-> +4), function_returning_something:from_str (-> +4), loaded_variable:classmethod, local_scope:cls (-> +4), local_scope:rgbstr (-> +4), method:from_str (-> +4), node:FunctionDef (-> +4), node:Name, scope:cls (-> +4), scope:rgbstr (-> +4)
-    def from_str(cls, rgbstr): # function_parameter:cls, function_parameter:rgbstr, function_parameter_flavor:arg, node:arg
+    @classmethod # function_decorator:classmethod (-> +4), loaded_variable:classmethod, node:Name
+    def from_str(cls, rgbstr): # class_method:from_str (-> +3), decorated_function:from_str (-> +3), function:from_str (-> +3), function_line_count:4 (-> +3), function_parameter:cls, function_parameter:rgbstr, function_parameter_flavor:arg, function_returning_something:from_str (-> +3), local_scope:cls (-> +3), local_scope:rgbstr (-> +3), method:from_str (-> +3), node:FunctionDef (-> +3), node:arg, scope:cls (-> +3), scope:rgbstr (-> +3)
         return numpy.array( # composition, loaded_variable:numpy, member_call:numpy:array, member_call:numpy:view, member_call_method:array, member_call_method:view, member_call_object:numpy, method_chaining, node:Attribute, node:Attribute (-> +1), node:Call (-> +1), node:Call (-> +2), node:Name, node:Return (-> +2), return (-> +2)
             [int(rgbstr[i : i + 2], 16) for i in range(1, len(rgbstr), 2)] # addition_operator, argument:, argument:1, argument:16, argument:2, argument:rgbstr, binary_operator:Add, composition, comprehension:List, comprehension_for_count:1, external_free_call:int, external_free_call:len, external_free_call:range, free_call:int, free_call:len, free_call:range, iteration_variable:i, literal:1, literal:16, literal:2, loaded_variable:i, loaded_variable:rgbstr, local_scope:i, magic_number:16, node:BinOp, node:Call, node:ListComp, node:Name, node:Num, node:Subscript, range:1:_:2, scope:i, slice:i:_:, slice_lower:i, slice_step:, slice_upper:_
         ).view(cls) # argument:cls, loaded_variable:cls, node:Name
@@ -1291,17 +1291,17 @@ m[k] = v # assignment, assignment_lhs_identifier:m, assignment_rhs_atom:v, flat_
 # ----------------------------------------------------------------------------------------
 # 173.2427-format-a-number-with-grouped-thousands.py
 # ----------------------------------------------------------------------------------------
-print("f'{1000:,}'") # argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:Str, node:Call, node:Expr, node:Name, node:Str, one_liner_style, variety:*, whole_span:1
+print("f'{1000:,}'") # argument:"f'{1000:,}'", external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:"f'{1000:,}'", node:Call, node:Expr, node:Name, node:Num, one_liner_style, variety:*, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 173.2428-format-a-number-with-grouped-thousands.py
 # ----------------------------------------------------------------------------------------
-print("format(1000, ',')") # argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:Str, node:Call, node:Expr, node:Name, node:Str, one_liner_style, variety:*, whole_span:1
+print("format(1000, ',')") # argument:"format(1000, ',')", external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:"format(1000, ',')", node:Call, node:Expr, node:Name, node:Num, one_liner_style, variety:*, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 173.2429-format-a-number-with-grouped-thousands.py
 # ----------------------------------------------------------------------------------------
-print("'{:,}'.format(1000)") # argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:Str, node:Call, node:Expr, node:Name, node:Str, one_liner_style, variety:*, whole_span:1
+print("'{:,}'.format(1000)") # argument:"'{:,}'.format(1000)", external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:"'{:,}'.format(1000)", node:Call, node:Expr, node:Name, node:Num, one_liner_style, variety:*, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 174.2687-make-http-post-request.py
@@ -1333,8 +1333,8 @@ L = [f for f in os.listdir(D) if os.path.splitext(f)[1] in extensions] # argumen
 # ----------------------------------------------------------------------------------------
 import re # flat_style (-> +6), global_scope:filtered_files (-> +6), imperative_style (-> +6), import:re, import_module:re, node:Import, scope:filtered_files (-> +6), variety:** (-> +6), whole_span:7 (-> +6)
 import os # import:os, import_module:os, node:Import
-filtered_files = [ # assignment, assignment_lhs_identifier:filtered_files, node:Assign (-> +4), node:Name, single_assignment:filtered_files
-    "{}/{}".format(dirpath, filename) # argument:dirpath, argument:filename, assignment_rhs_atom:dirpath, assignment_rhs_atom:filename, comprehension:List, comprehension_for_count:2, literal:Str, loaded_variable:dirpath, loaded_variable:filename, local_scope:_, local_scope:dirpath, local_scope:filename, local_scope:filenames, member_call_method:format, node:Attribute, node:Call, node:ListComp (-> +3), node:Name, node:Str, scope:_, scope:dirpath, scope:filename, scope:filenames
+filtered_files = [ # assignment, assignment_lhs_identifier:filtered_files, comprehension:List, comprehension_for_count:2, local_scope:_, local_scope:dirpath, local_scope:filename, local_scope:filenames, node:Assign (-> +4), node:ListComp (-> +4), node:Name, scope:_, scope:dirpath, scope:filename, scope:filenames, single_assignment:filtered_files
+    "{}/{}".format(dirpath, filename) # argument:dirpath, argument:filename, assignment_rhs_atom:dirpath, assignment_rhs_atom:filename, literal:Str, loaded_variable:dirpath, loaded_variable:filename, member_call_method:format, node:Attribute, node:Call, node:Name, node:Str
     for dirpath, _, filenames in os.walk(D) # argument:D, assignment_rhs_atom:D, assignment_rhs_atom:_, assignment_rhs_atom:dirpath, assignment_rhs_atom:filenames, assignment_rhs_atom:os, iteration_variable:_, iteration_variable:dirpath, iteration_variable:filenames, literal:Tuple, loaded_variable:D, loaded_variable:os, member_call_method:walk, node:Attribute, node:Call, node:Name, node:Tuple
     for filename in filenames # assignment_rhs_atom:filename, assignment_rhs_atom:filenames, iteration_variable:filename, loaded_variable:filenames, node:Name
     if re.match(r"^.*\.(?:jpg|jpeg|png)$", filename) # argument:, argument:filename, assignment_rhs_atom:filename, assignment_rhs_atom:re, filtered_comprehension, literal:Str, loaded_variable:filename, loaded_variable:re, member_call_method:match, node:Attribute, node:Call, node:Name, node:Str
@@ -1403,7 +1403,7 @@ timer.start() # loaded_variable:timer, member_call:timer:start, member_call_meth
 # ----------------------------------------------------------------------------------------
 # 186.2699-exit-program-cleanly.py
 # ----------------------------------------------------------------------------------------
-import sys # flat_style (-> +1), imperative_style (-> +1), import:sys, import_module:sys, node:Import, one_liner_style (-> +1), variety:* (-> +1), whole_span:2 (-> +1)
+import sys # flat_style (-> +1), imperative_style (-> +1), import:sys, import_module:sys, node:Import, one_liner_style (-> +1), variety:** (-> +1), whole_span:2 (-> +1)
 sys.exit(0) # argument:0, literal:0, loaded_variable:sys, member_call:sys:exit, member_call_method:exit, member_call_object:sys, node:Attribute, node:Call, node:Expr, node:Name, node:Num
 
 # ----------------------------------------------------------------------------------------

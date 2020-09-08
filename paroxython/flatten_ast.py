@@ -11,8 +11,8 @@ tree) of the program to analyze. For instance, when the string:
 'print("hello, world")'
 ```
 
-... is fed to the function `ast3.parse()` of the module
-[`typed_ast`](https://github.com/python/typed_ast), the following object is returned:
+... is fed to the function `parse()` of the modules [`ast`](https://docs.python.org/3/library/ast.html)
+or [`typed_ast`](https://github.com/python/typed_ast), the following object is returned:
 
 ```plain
                            Module()
@@ -30,7 +30,7 @@ tree) of the program to analyze. For instance, when the string:
 Name(id='print', ctx=Load())     Str(s='hello, world', kind='')
 ```
 
-The purpose of the function `flatten_ast()` is to transform this nested structure into a
+The purpose of our function `flatten_ast()` is to transform this nested structure into a curated
 pre-ordered sequence of text lines, each of which consisting in a key-value pair. A key is the
 complete path from the root of the AST to either a node (e.g., `Name()`) or a node attribute
 (e.g., `id`). The associated value comes after an equals sign (`=`):
@@ -41,37 +41,36 @@ complete path from the root of the AST to either a node (e.g., `Name()`) or a no
 /body/1/_type=Expr
 /body/1/_pos=1:1-
 /body/1/value/_type=Call
-/body/1/value/_hash=0x00000001
+/body/1/value/_hash=0x0001
 /body/1/value/_pos=1:1-0-
 /body/1/value/func/_type=Name
-/body/1/value/func/_hash=0x00000002
+/body/1/value/func/_hash=0x0002
 /body/1/value/func/_pos=1:1-0-0-
 /body/1/value/func/id=print
 /body/1/value/func/ctx/_type=Load
 /body/1/value/args/_length=1
 /body/1/value/args/1/_type=Str
-/body/1/value/args/1/_hash=0x00000003
+/body/1/value/args/1/_hash=0x0003
 /body/1/value/args/1/_pos=1:1-0-1-1-
 /body/1/value/args/1/s=hello, world
-/body/1/value/args/1/kind=
 /body/1/value/keywords/_length=0
 /type_ignores/_length=0
 ```
 
-Obviously, such a representation is quite verbose. But it encapsulates in every single line the
-whole nesting information we need to understand its context. Since the recursion is linearly
-encoded, requesting it does not require recursion any more. Non-recursive[^regex-recursion]
-[regular expressions](https://en.wikipedia.org/wiki/Regular_expression) become a natural candidate
-for the request language. The current version of Paroxython explores this option. The regular
-expression patterns are processed in `paroxython.parse_program` on the basis of the definitions
-listed in `spec.md`.
+Obviously, such a representation is quite verbose. But every single line encapsulates most of the
+nesting information we need to understand its context. Since the recursion is linearly encoded,
+requesting it does not require recursion any more. Thus,
+[regular expressions](https://en.wikipedia.org/wiki/Regular_expression) become natural candidates
+for the request language[^regex-recursion]. The current version of Paroxython explores this option.
+The regular expression patterns are processed in `paroxython.parse_program` on the basis of the
+definitions listed in `spec.md`.
 
 [^regex-recursion]: Although nowadays, numerous flavours of regex engines support recursion,
 the complexity of writing, reading and maintaining any pattern using it would quickly go through the
 roof.
 
-For instance, the following regular expression matches and localizes nested function calls (e.g.,
-`foo(bar(42))`) without any recursion:
+For instance, the following regular expression matches and localizes the nested function calls
+(e.g., `foo(bar(42))`) without any recursion:
 
 ```re
            ^(.*)                    # Capture the path originating from the root...
@@ -91,20 +90,44 @@ of this text to make it more suitable for regular expression parsing.
 
 ## Implementation details
 
-### Field reordering
+### Libraries used
+
+When Paroxython is launched from Python 3.7 or lower, the parsing of source code into an AST is
+performed by the third-party library [typed-ast](https://github.com/python/typed_ast). To quote the
+README:
+
+> `typed_ast` is a Python 3 package that provides a [...] parser similar to the standard `ast` library.
+> Unlike `ast`, the parsers [...] are independent of the version of Python under which they are run.
+> [...] `typed_ast` runs on CPython 3.5-3.8
+
+So far so good. However:
+
+> `typed_ast` will not be updated to support parsing Python 3.8 and newer.
+
+This means that `typed_ast`, although convenient to parse Python 3.5, 3.6, 3.7 and 3.8, will chope on
+Python 3.8 specific syntax, as assignment expressions.
+
+This is the reason why, when launched from Python 3.8 or higher, Paroxython switches to the parser of
+the standard library [`ast`](https://docs.python.org/3/library/ast.html). However, the ASTs generated
+by the two libraries are not 100% identical. Wrapping their parsers requires us to erase the
+differences as much as possible. Some of the functions presented below are written for this purpose.
+
+### On the fly: modification of the AST
+
+#### Field reordering
 
 Somewhat counterintuitively, in the original AST, several pieces of information pertaining to a
 function signature or decoration are rejected _after_ the body of the function. As a result, we
 lose the interesting property that the line numbers cannot decrease. We fix this by making `body`
-the last field of a function definition
+the last field of a function or class definition
 (see [issue #4](https://github.com/laowantong/paroxython/issues/4)).
 
-### Children numbering
+#### Children numbering
 
-A counter is inserted between each node and its children. Starting from 1 makes possible to find
-the last one by matching its number with the (previously captured) length of the list.
+A counter is inserted between each node and its children. Starting from 1 enables us to find the
+last one by matching its number with the (previously captured) length of the list.
 
-### Field disambiguation
+#### Field disambiguation
 
 Accross the AST, the same fields are sometimes used in different contexts. To make it easier or
 even possible to detect certain features, their usage is disambiguated by applying the following
@@ -113,13 +136,13 @@ renaming rules:
 - `orelse`: used for both loop and conditional `else` branches. Replace the former with `loopelse`.
 - `target`: used for assignment, comprehension, etc. Replace the former with `assigntarget`.
 - `targets`: used for augmented assignment, deletion, etc. Replace the former with `assigntargets`.
-- `value`: used for assignment (augmented or not), comprehension, etc. Replace the former ones with
-  `assignvalue`.
+- `value`: used for assignment (augmented or not), comprehension, assignment-expressions, etc.
+  Replace the former ones with `assignvalue`.
 
 Thus, in the output, there is no more need to search for the context of a field in the previous or
 following lines.
 
-### Added fields
+#### Added fields
 
 - `_type`: stores the name of the node (e.g., `Module`, `Expr`, `Call`).
 - `_pos`: stores the line number (extracted from the attribute `lineno` of the node, if
@@ -132,7 +155,7 @@ following lines.
 [^lineno]: Numerous nodes, e.g. `Module`, `Store`, `Load`, `Lt`, `Add`, are not associated with a
     line number.
 
-### Expression decontextualization and hashing
+#### Expression decontextualization and hashing
 
 In order to detect certain features, such as
 [`swap`](https://repo/paroxython/resources/spec.md#feature-swap):
@@ -140,8 +163,8 @@ In order to detect certain features, such as
 ```python
 (a[i], a[j]) = (a[j], a[i])
 ```
-... we need to recognize a given expression accross its different occurrences. The function
-`typed_ast.ast3.dump()` is used for this. For instance, in the following statement:
+... we need to recognize a given expression accross its various occurrences. For this, we tweak the
+output of the library function `ast.dump()`. For instance, in the following statement:
 
 ```python
 a[i] = 42
@@ -153,7 +176,7 @@ a[i] = 42
 "Subscript(value=Name(id='a', ctx=Load()), slice=Index(value=Name(id='i', ctx=Load())), ctx=Store())"
 ```
 
-However, in the following statement:
+However, in:
 
 ```python
     return a[i]
@@ -177,9 +200,12 @@ They can now be represented by the same hash value[^pseudo-hash], stored in the 
 
 [^pseudo-hash]:
     Actually, to avoid dealing with hash randomization in the unit tests, we use a function which
-    merely increments a counter and associates it with any newly encountered string.
+    merely increments a counter and associates it with any newly encountered string
+    (see `PseudoHashFactory`).
 
-### Negative literal simplification
+### After the fact: modification of the flattened AST
+
+#### Negative literal simplification
 
 Normally, the AST structure of a numeric literal depends on its sign. For instance, 42 is parsed
 as:
@@ -218,23 +244,94 @@ into this one:
 /body/1/value/_pos=1:1-0-
 /body/1/value/n=-42
 ```
+
+#### Suppressing useless lines
+
+- Starting with Python 3.8, `kind` is an attribute of a constant allowing tools to distinguish
+certain flavors of the strings . Its possible values are `"rf"`, `"f"`, `"u"` and `""` in the
+third-party library `typed_ast`, but `"u"` and `None` in the Python 3.8 standard library `ast`.
+Since such details are of no interest to us, we don't bother making them consistent. The function
+`suppress_kinds` deletes from the flat AST any line ending with `kind=.*`.
+- Python 3.8 introduces [positional-only parameters](https://www.python.org/dev/peps/pep-0570/)
+to respond to “certain challenges for library authors and users of APIs”. This is far beyond our
+pedagogical scope: we are afraid we have no choice but to sell these lines for scientific
+experiments (`suppress_posonlyargs`).
+
+#### Reverting the representation of constants to the good ol' days
+
+Probably for excellent reasons, Python 3.8 has decided that `Num(n)`, `Str(s)`, `Bytes(s)`,
+`Ellipsis` and `NameConstant(value)` should all be unified under `Constant(value)`. As far as we
+are concerned, this change makes the type of the constants much harder to determine. Until we
+know more, we are restoring the previous representations with `backport_all_constants`.
+
+#### Unquoting strings
+
+`unquote()` suppress the single quote delimiters after `=`. This makes for simpler regular
+expressions in `spec.md`.
+
+#### Correcting the span of decorated functions
+
+`correct_all_decorated_function_starts()` fixes a bug of `typed_ast` in which decorated functions
+would incorrectly be marked as starting from the line of their first decorator.
 """
 
-from typed_ast import ast3 as ast
-from typing import Any, Callable
+
+import sys
+from typing import Any, Callable, Match
 
 import regex  # type: ignore
+
+
+def select_ast_post_processing(strategy):
+    """Customize the post-treatment of the AST depending on the parser used to create it."""
+
+    if strategy == "standard_ast":
+
+        def post_process(flat_ast):
+            flat_ast = suppress_kinds(flat_ast)
+            flat_ast = suppress_posonlyargs(flat_ast)
+            flat_ast = backport_all_constants(flat_ast)
+            flat_ast = simplify_negative_literals(flat_ast)
+            flat_ast = unquote(flat_ast)
+            return flat_ast
+
+    elif strategy == "typed_ast":
+
+        def post_process(flat_ast):
+            flat_ast = suppress_kinds(flat_ast)
+            flat_ast = simplify_negative_literals(flat_ast)
+            flat_ast = unquote(flat_ast)
+            flat_ast = correct_all_decorated_function_starts(flat_ast)
+            return flat_ast
+
+    else:
+
+        def post_process(flat_ast):
+            return flat_ast
+
+    return post_process
+
+
+# fmt: off
+if sys.version >= "3.8":
+    import ast
+    ast_strategy = "standard_ast"
+else:
+    from typed_ast import ast3 as ast # type: ignore
+    ast_strategy = "typed_ast"
+post_process = select_ast_post_processing(ast_strategy)
+# fmt: on
 
 
 def flatten_ast(tree) -> str:
     """Return a non-recursive, multiline dump of the AST (with some tweaks).
 
-    A simple wrapper around the recursive function `flatten_node`, with a call to
-    `simplify_negative_literals` as post-processing.
+    A simple wrapper around the recursive function `flatten_node`, with post-processing treatments
+    depending on the AST library (either the standard `ast` module or the third-party `typed_ast`).
     """
     pseudo_hash.reset()
     flat_ast = flatten_node(tree)
-    flat_ast = simplify_negative_literals(flat_ast)
+    flat_ast = post_process(flat_ast)
     return flat_ast
 
 
@@ -266,7 +363,7 @@ def flatten_node(
         if "lineno" in node._attributes:
             acc.append(f"{prefix}/_pos={node.lineno}:{path[2:]}\n")
         fields = ast.iter_fields(node)
-        if isinstance(node, ast.FunctionDef):
+        if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
             # make `body` the last item of a `def` clause
             fields = iter(sorted(fields, key=lambda c: c[0] == "body"))
         for (i, (name, x)) in enumerate(fields):
@@ -286,15 +383,15 @@ def flatten_node(
             acc.append(flatten_node(x, f"{prefix}/{i}", f"{path}{i}-"))
         return "".join(acc)
     else:
-        # If the node is a terminal value, dump it unquoted
-        return f"""{prefix}={repr(node).strip("'")}\n"""
+        # If the node is a terminal value, dump it
+        return f"""{prefix}={repr(node)}\n"""
 
 
 def simplify_negative_literals(
     flat_ast: str,
     sub: Callable = regex.compile(
         r"""(?mx)
-                    ^(.*?)/_type=UnaryOp
+                      ^(.*?)/_type=UnaryOp
             (\n(?:.+\n)*?)\1/op/_type=USub
              \n(?:.+\n)*? \1/operand/n=(.+)
         """
@@ -305,6 +402,98 @@ def simplify_negative_literals(
     Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
     """
     return sub(r"\1/_type=Num\2\1/n=-\3", flat_ast)
+
+
+def backport_all_constants(
+    flat_ast: str,
+    sub: Callable = regex.compile(
+        r"""(?mx)
+            ^(.*?)/_type=Constant
+            ((?:\n.+)+)
+              \n\1/value=(.+)
+        """
+    ).sub,
+) -> str:
+    """Restore the more detailed representation of constants used before Python 3.8.
+
+    Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
+    """
+    return sub(replace_one_constant, flat_ast)
+
+
+def replace_one_constant(m: Match) -> str:
+    """Define the replacement function used in `backport_all_constants`."""
+    if m[3].startswith("'"):
+        return f"{m[1]}/_type=Str{m[2]}\n{m[1]}/s={m[3]}"
+    elif m[3] in ("True", "False", "None"):
+        return f"{m[1]}/_type=NameConstant{m[2]}\n{m[1]}/value={m[3]}"
+    if m[3].startswith("b'"):
+        return f"{m[1]}/_type=Bytes{m[2]}\n{m[1]}/s={m[3]}"
+    if m[3] == "Ellipsis":
+        return f"{m[1]}/_type=Ellipsis{m[2]}"
+    else:
+        return f"{m[1]}/_type=Num{m[2]}\n{m[1]}/n={m[3]}"
+
+
+def correct_all_decorated_function_starts(
+    flat_ast: str,
+    sub: Callable = regex.compile(
+        r"""(?mx)
+                     ^(.*?)/_type=FunctionDef
+            (\n(?:.+\n)*?\1/_pos=)\d+:(.*
+            \n(?:.+\n)*?\1/decorator_list/_length=([^0]\d*)
+            \n(?:.+\n)*?\1/decorator_list/1/_pos=(\d+))
+        """
+    ).sub,
+) -> str:
+    """Make the span of a decorated function starting from `def`, not from the first decorator.
+
+    ..note::
+        The bug is present in the third-party module `typed_ast`, but fixed in Python 3.8's standard
+        library `ast`.
+
+    Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
+    """
+    return sub(replace_one_decorated_function_start, flat_ast)
+
+
+def replace_one_decorated_function_start(m: Match) -> str:
+    """Define the replacement function used in `correct_all_decorated_function_starts`."""
+    start = int(m[4]) + int(m[5])  # number of decorators + line number of the first decorator
+    return f"{m[1]}/_type=FunctionDef{m[2]}{start}:{m[3]}"
+
+
+def unquote(
+    flat_ast: str,
+    sub: Callable = regex.compile(r"='(.*)'\n").sub,
+) -> str:
+    """Suppress the quote delimiters after “=“ to simplify the regular expressions of `spec.md`.
+
+    Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
+    """
+    return sub(r"=\1\n", flat_ast)
+
+
+def suppress_kinds(
+    flat_ast: str,
+    sub: Callable = regex.compile(r"(?m)^.+/kind=.*\n").sub,
+) -> str:
+    """Suppress all leaves containing `/kind=`. They are useless in the following.
+
+    Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
+    """
+    return sub("", flat_ast)
+
+
+def suppress_posonlyargs(
+    flat_ast: str,
+    sub: Callable = regex.compile(r"(?m)^.+/args/posonlyargs/_length=\d+\n").sub,
+) -> str:
+    """Starting from Python 3.8, suppress positional-only parameters in function definitions.
+
+    Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
+    """
+    return sub("", flat_ast)
 
 
 __pdoc__ = {"PseudoHashFactory.__call__": True}

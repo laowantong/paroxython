@@ -156,7 +156,7 @@
 | 0.4375 | `type/non_sequence/set/literal` | 10 |
 | 0 | `type/sequence/string` | 14 |
 | 0 | `type/sequence/string/literal` | 10, 10, 11, 13, 14 |
-| 0 | `type/sequence/string/literal/special/\n` | 7 |
+| 0 | `type/sequence/string/literal/special/\n` | 1 |
 | 0.1875 | `type/sequence/tuple/literal` | 12 |
 | 0.09375 | `var/assignment/explicit/parallel/more_than_two` | 12 |
 | 0 | `var/assignment/explicit/single` | 1, 9, 10 |

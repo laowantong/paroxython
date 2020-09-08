@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L365" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L364" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -40,10 +40,9 @@ from time import perf_counter
 from typing import Callable, Dict, Iterator, List, Tuple
 
 import regex  # type: ignore
-from typed_ast import ast3 as ast
 
 from .derived_labels_db import DerivedLabelsDatabase
-from .flatten_ast import flatten_ast
+from .flatten_ast import ast, flatten_ast
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {
@@ -241,7 +240,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L24-L47" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L23-L46" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def find_all_features(
     specifications: str,
@@ -290,7 +289,7 @@ Span(1, 4, &quot;path_1&quot;)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L50-L76" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L49-L75" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def pos_to_span(pos: List[str]) -&gt; Span:
     (start, path) = pos[0].split(&#34;:&#34;)
@@ -406,7 +405,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L82-L210" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L81-L209" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_bindings(
     label_prefix: LabelName, captures: Dict[str, List[str]]
@@ -441,7 +440,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L213-L344" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L212-L343" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -557,7 +556,7 @@ pre-bind the appropriate method. Create an instance of the database of derived l
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L214-L245" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L213-L244" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
     self.spec_path = spec_path
@@ -617,7 +616,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L247-L334" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L246-L333" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     # If the program can be parsed and is nonempty, flatten its AST.
@@ -688,7 +687,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L336-L344" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L335-L343" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def print_performances(self):  # pragma: no cover
     result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)

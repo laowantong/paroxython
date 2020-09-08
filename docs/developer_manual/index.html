@@ -57,14 +57,14 @@
 <dt><code><a title="paroxython.parse_program" href="../parse_program.html">paroxython.parse_program</a></code></dt>
 <dd>
 <p>This module mainly consists of a function which flattens a given (preprocessed) program, parses it along the specifications defined in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>, and returns the list of its labels with their spans.</p>
-<p><strong>Warning.</strong> The binding of a regular expression-specified multi-line feature with its spans may reveal somewhat tricky. Make sure to understand the explanations of <code><a title="paroxython.parse_program.get_bindings" href="../parse_program.html#paroxython.parse_program.get_bindings">get_bindings()</a></code> in the case where your home-made regular expression yields unexpected results.</p>
+<p><strong>Warning.</strong> The binding of a regular expression-specified multi-line feature with its spans may reveal somewhat tricky. Make sure to understand the explanations of <code><a title="paroxython.parse_program.get_bindings" href="../parse_program.html#paroxython.parse_program.get_bindings">get_bindings()</a></code> in case your home-made regular expression yields unexpected results.</p>
 </dd>
 <dt><code><a title="paroxython.label_programs" href="../label_programs.html">paroxython.label_programs</a></code></dt>
 <dd>The main function of this module not only maps <code><a title="paroxython.parse_program" href="../parse_program.html">paroxython.parse_program</a></code> on the list returned by <code><a title="paroxython.list_programs" href="../list_programs.html">paroxython.list_programs</a></code>, transforming it into a list of <em>labelled</em> programs, but tweaks all the labels which mark an importation of an “internal” module, <em>i.e</em>, a program belonging to this very list. For instance, a label <code>"import:my_program"</code> would be transformed into <code>"import_internally:my_program"</code>, while <code>"import:itertools"</code> would be left untouched.</dd>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> (click to browse the default taxonomy on GitHub)</dt>
 <dd>
 <p>The labels produced so far are nothing more than an intermediate result. A number of them have only been useful for deriving other labels, and can now be ignored. Those that remain must be transformed into taxa.
-A taxon is the structured version of one or more labels. For instance, the label <code>"if_without_else"</code> will maps onto the taxon <code>"flow/conditional/no_else"</code>, which conveniently tells us that a conditional without an else branch is a subcase of a conditional, itself being a subcase of a control flow.</p>
+A taxon is the structured version of one or more labels. For instance, the label <code>"if_without_else"</code> will maps onto the taxon <code>"flow/conditional/no_else"</code>, which conveniently tells us that a conditional without an else branch (<code>no_else</code>) is a subcase of a conditional (<code>conditional</code>), itself being a subcase of a control flow (<code>flow</code>).</p>
 <p>The file <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> is a simple two-columns associative <abbr title="Tab Separated Values">TSV</abbr> array which maps label <em>patterns</em> onto taxa. Since some label patterns are rather long regular expressions, the columns are swapped: the <em>second</em> column lists the labels patterns to search; the <em>first</em> columns, the taxa to be substituted. For instance, the row:</p>
 <table>
 <thead>
@@ -75,7 +75,7 @@ A taxon is the structured version of one or more labels. For instance, the label
 </thead>
 <tbody>
 <tr>
-<td align="left"><code>flow/loop/exit/early/\1</code><sup id="fnref:match_group"><a class="footnote-ref" href="#fn:match_group" rel="footnote">1</a></sup></td>
+<td align="left"><code>flow/loop/exit/early/\1</code><sup id="fnref:match_group"><a class="footnote-ref" href="#fn:match_group">1</a></sup></td>
 <td align="left"><code>loop_with_early_exit:.+:(.+)</code></td>
 </tr>
 </tbody>
@@ -102,7 +102,7 @@ A taxon is the structured version of one or more labels. For instance, the label
 </dd>
 <dt><code><a title="paroxython.map_taxonomy" href="../map_taxonomy.html">paroxython.map_taxonomy</a></code></dt>
 <dd>
-<p>In addition to applying the transformations defined in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> to a given list of labels, the main method of this module, <code><a title="paroxython.map_taxonomy.Taxonomy.to_taxa" href="../map_taxonomy.html#paroxython.map_taxonomy.Taxonomy.to_taxa">Taxonomy.to_taxa()</a></code>, operates a deduplication of the resulting taxa.</p>
+<p>In addition to applying the transformations defined in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv"><code>taxonomy.tsv</code></a> to a given list of labels, the main method of this module, <code><a title="paroxython.map_taxonomy.Taxonomy.to_taxa" href="../map_taxonomy.html#paroxython.map_taxonomy.Taxonomy.to_taxa">Taxonomy.to_taxa()</a></code>, deduplicates the resulting taxa.</p>
 <p>Indeed, a same feature is often described by several labels, for instance, the <code>for</code> loop of the following program:</p>
 <pre><code>for x in range(10):
     print("foo")
@@ -140,7 +140,7 @@ A taxon is the structured version of one or more labels. For instance, the label
 <dd>
 <p>Generated by <code><a title="paroxython.make_db.TagDatabase.get_json" href="../make_db.html#paroxython.make_db.TagDatabase.get_json">TagDatabase.get_json()</a></code> as a dictionary (or, in <abbr title="JavaScript Object Notation">JSON</abbr> parlance, <em>object</em>) with the following keys:</p>
 <ul>
-<li><code>"programs"</code>: maps each program name to the timestamp of its last modification, its cleaned up source code, the list of its labels with their poor<sup id="fnref:poor_span"><a class="footnote-ref" href="#fn:poor_span" rel="footnote">2</a></sup> spans, and that of its taxa with their poor spans;</li>
+<li><code>"programs"</code>: maps each program name to the timestamp of its last modification, its cleaned up source code, the list of its labels with their poor<sup id="fnref:poor_span"><a class="footnote-ref" href="#fn:poor_span">2</a></sup> spans, and that of its taxa with their poor spans;</li>
 <li><code>"labels"</code>: maps each label to the programs that feature it;</li>
 <li><code>"taxa"</code>: maps each taxon to the programs that feature it;</li>
 <li><code>"importations"</code>: maps each program to the programs that import it;</li>
@@ -191,23 +191,25 @@ A taxon is the structured version of one or more labels. For instance, the label
 <p>At the end, a call to <code><a title="paroxython.recommend_programs.Recommendations.get_markdown" href="../recommend_programs.html#paroxython.recommend_programs.Recommendations.get_markdown">Recommendations.get_markdown()</a></code> creates a report of the results.</p>
 </dd>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_recommendations.md"><code>*_recommendations.md</code></a> (click to browse the report of the execution of the above <a href="https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_pipe.py">pipeline</a>)</dt>
-<dd>The final report sorts the recommended programs by increasing learning cost and <abbr title="Source Lines Of Code">SLOC</abbr>, and group them into predefined cost intervals<sup id="fnref:cost_bucket"><a class="footnote-ref" href="#fn:cost_bucket" rel="footnote">3</a></sup>. It includes a table of contents, and a summary of which program has been filtered at what stage of the pipeline execution.</dd>
+<dd>The final report sorts the recommended programs by increasing learning cost and <abbr title="Source Lines Of Code">SLOC</abbr>, and group them into predefined cost intervals<sup id="fnref:cost_bucket"><a class="footnote-ref" href="#fn:cost_bucket">3</a></sup>. It includes a table of contents, and a summary of which program has been filtered at what stage of the pipeline execution.</dd>
 </dl>
 <!-- Fake paragraph to avoid the footnote back button to be misplaced -->
 <p><br></p>
 <h1 id="helper-programs">Helper programs</h1>
-<p>During the development process of Paroxython, it proved useful to create a number of additional scripts to make the final program easier to write, test or understand. None of these scripts are meant to be run by the end user: as such they are are not included by <code>pip install</code>. But if you have to modify the source code to better meet your personal expectations, or are interested in collaborating on the project, some of them are definitely a must<sup id="fnref:disclaimer"><a class="footnote-ref" href="#fn:disclaimer" rel="footnote">4</a></sup>.</p>
+<p>During the development process of Paroxython, it proved useful to create a number of additional scripts to make the final program easier to write, test or understand. None of these scripts are meant to be run by the end user: as such they are are not included by <code>pip install</code>. But if you have to modify the source code to better meet your personal expectations, or are interested in collaborating on the project, some of them are definitely a must<sup id="fnref:disclaimer"><a class="footnote-ref" href="#fn:disclaimer">4</a></sup>.</p>
 <h2 id="code-generators">Code generators</h2>
 <dl>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_compare_spans.py"><code>make_compare_spans.py</code></a></dt>
 <dd>Generates the source code of the module <code><a title="paroxython.compare_spans" href="../compare_spans.html">paroxython.compare_spans</a></code>. Must be launched manually.</dd>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/reformat_spec.py"><code>reformat_spec.py</code></a></dt>
-<dd>Reads the contents of <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>, normalizes its formatting and writes it back. The goal is to ensure the consistency of the document and the validity of its numerous internal links, as well as to avoid authors wasting time with formatting details. Launched automatically by <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_parse_program.py"><code>test_parse_program.py</code></a>.</dd>
+<dd>Reads the contents of <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>, normalizes its formatting (Markdown and <abbr title="Structured Query Language">SQL</abbr>) and writes it back. The goal is to ensure the consistency of the document and the validity of its numerous internal links, as well as to avoid authors wasting time with formatting details. Launched automatically by <a href="https://github.com/laowantong/paroxython/blob/master/tests/test_parse_program.py"><code>test_parse_program.py</code></a>.</dd>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/suggest_regex.py"><code>suggest_regex.py</code></a></dt>
 <dd>The regular expression patterns of <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a> use a rather limited and repetitive array of techniques. This program aims to partially automate their production. Given the <code>flat_ast.txt</code> outputted by <a href="https://github.com/laowantong/paroxython/blob/master/helpers/parse_source.py"><code>parse_source.py</code></a> (cf. testing helper below), extract the lines that characterize the feature to be recognized, and save them in the <code>sandbox</code> folder under the name <code>flat_ast_selection.txt</code>. The script will then print a regular expression that matches this selection.</dd>
 </dl>
 <h2 id="testing">Testing</h2>
 <dl>
+<dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/dump_flat_asts.py"><code>dump_flat_asts.py</code></a></dt>
+<dd>Ensures that the flat tree generated by <code><a title="paroxython.flatten_ast.flatten_ast" href="../flatten_ast.html#paroxython.flatten_ast.flatten_ast">flatten_ast()</a></code> does not change significantly when using either the standard library <a href="https://docs.python.org/3/library/ast.html"><code>ast</code></a> (starting from Python 3.8) or the third-party library <a href="https://github.com/python/typed_ast"><code>typed-ast</code></a>(independent of the version of Python under which it is run, but incompatible with the syntax changes introduced by Python 3.8 and newer). Extracts from <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a> all the features specified by a regular expression, parses their examples into a flat <abbr title="Abstract Syntax Tree">AST</abbr>, and outputs the results as (currently) two Markdown files, to be compared with the appropriate tool (e.g., <a href="https://en.wikipedia.org/wiki/Diff"><code>diff</code></a>).</dd>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_dummy_db.py"><code>make_dummy_db.py</code></a></dt>
 <dd>Generates <a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/taxa_and_programs.txt"><code>taxa_and_programs.txt</code></a> and, from this file, <a href="https://github.com/laowantong/paroxython/blob/master/examples/dummy/programs_db.json"><code>programs_db.json</code></a>, used as a dummy example in various tests.</dd>
 <dt><a href="https://github.com/laowantong/paroxython/blob/master/helpers/make_programming_idioms_folder.py"><code>make_programming_idioms_folder.py</code></a></dt>
@@ -353,16 +355,16 @@ GROUP BY taxon, program
 <hr>
 <ol>
 <li id="fn:match_group">
-<p>In the replacement pattern, <code>"\1"</code> denotes the 1st captured group (in parentheses) of the search pattern.&#160;<a class="footnote-backref" href="#fnref:match_group" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>In the replacement pattern, <code>"\1"</code> denotes the 1st captured group (in parentheses) of the search pattern.&#160;<a class="footnote-backref" href="#fnref:match_group" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:poor_span">
-<p>The <em>poor</em> span of a feature's occurrence is its span, deprived from the last member (location in the <abbr title="Abstract Syntax Tree">AST</abbr>).&#160;<a class="footnote-backref" href="#fnref:poor_span" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p>The <em>poor</em> span of a feature's occurrence is its span, deprived from the last member (location in the <abbr title="Abstract Syntax Tree">AST</abbr>).&#160;<a class="footnote-backref" href="#fnref:poor_span" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:cost_bucket">
-<p>The intervals are predefined as <span><span class="MathJax_Preview">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</span><script type="math/tex">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</script></span> for all natural numbers <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>.&#160;<a class="footnote-backref" href="#fnref:cost_bucket" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<p>The intervals are predefined as <span><span class="MathJax_Preview">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</span><script type="math/tex">[0, 0], ]0, 0.25[, [2^{i-2}, 2^{i-1}[, \dots</script></span> for all natural numbers <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>.&#160;<a class="footnote-backref" href="#fnref:cost_bucket" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 <li id="fn:disclaimer">
-<p>However, in the current state of things, please don't expect the <s>Spanish inquisition</s> same level of code quality, documentation and testing than in the user-facing parts of the package.&#160;<a class="footnote-backref" href="#fnref:disclaimer" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+<p>However, in the current state of things, please don't expect the <s>Spanish inquisition</s> same level of code quality, documentation and testing than in the user-facing parts of the package.&#160;<a class="footnote-backref" href="#fnref:disclaimer" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

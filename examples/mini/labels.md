@@ -181,6 +181,7 @@
 - accumulate_inputs
 - accumulate_some_elements
 - argument
+- assignment_expression
 - assignment_lhs_identifier
 - assignment_rhs_atom
 - attribute_deletion
@@ -281,6 +282,7 @@
 - nested_function
 - nested_if
 - nested_index
+- no_operation
 - object_oriented_style
 - parallel_assignment
 - pure_function

@@ -17,8 +17,8 @@ from paroxython.user_types import Program, Span
 from helpers.reformat_spec import reformat_spec
 
 
-def extract_examples(feature_path):
-    text = feature_path.read_text()
+def extract_examples(spec_path):
+    text = spec_path.read_text()
     rex = r"""(?msx)
         ^\#{4}\s+Feature\s+`(.+?)` # capture the label's pattern
         .+?\#{5}\s+Example # ensure the next code is in the Example section
@@ -49,9 +49,13 @@ for match in extract_examples(parse.spec_path):
 def test_example(label_name, actual_results, expected_results):
     keys = set(actual_results.keys())
     for (expected_label_name, expected_spans) in expected_results:
+        expected_spans = expected_spans.split(" / ")
+        if keys == {"ast_construction:SyntaxError"}:
+            assert "SyntaxError" in expected_spans
+            continue
         assert expected_label_name in keys
         actual_spans = ", ".join(map(couple_to_string, actual_results[expected_label_name]))
-        assert actual_spans == expected_spans
+        assert actual_spans in expected_spans
         keys.discard(expected_label_name)
     for expected_label_name in keys:
         expected_name_prefix = expected_label_name.partition(":")[0]

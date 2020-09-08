@@ -97,12 +97,12 @@ else:
 # ----------------------------------------------------------------------------------------
 # 11_bottles.py
 # ----------------------------------------------------------------------------------------
-REFRAIN = """ # assignment, assignment_lhs_identifier:REFRAIN, global_scope:REFRAIN (-> +9), global_scope:bottles_of_beer (-> +9), imperative_style (-> +9), node:Assign (-> +5), node:Name, scope:REFRAIN (-> +9), scope:bottles_of_beer (-> +9), single_assignment:REFRAIN, variety:*** (-> +9), whole_span:10 (-> +9)
+REFRAIN = """ # assignment, assignment_lhs_identifier:REFRAIN, global_scope:REFRAIN (-> +9), global_scope:bottles_of_beer (-> +9), imperative_style (-> +9), literal:Str, node:Assign, node:Name, node:Str, scope:REFRAIN (-> +9), scope:bottles_of_beer (-> +9), single_assignment:REFRAIN, special_literal_string:\n%d bottles of beer on the wall,\n%d bottles of beer,\ntake one down, pass it around,\n%d bottles of beer on the wall!\n, variety:*** (-> +9), whole_span:10 (-> +9)
 %d bottles of beer on the wall,
 %d bottles of beer,
 take one down, pass it around,
 %d bottles of beer on the wall!
-""" # literal:Str, node:Str, special_literal_string:\n%d bottles of beer on the wall,\n%d bottles of beer,\ntake one down, pass it around,\n%d bottles of beer on the wall!\n
+"""
 bottles_of_beer = 9 # assignment:9, assignment_lhs_identifier:bottles_of_beer, assignment_rhs_atom:9, literal:9, magic_number:9, node:Assign, node:Name, node:Num, single_assignment:bottles_of_beer
 while bottles_of_beer > 1: # comparison_operator:Gt, literal:1, loaded_variable:bottles_of_beer, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:Compare, node:Name, node:Num, node:While (-> +2)
     print(REFRAIN % (bottles_of_beer, bottles_of_beer, bottles_of_beer - 1)) # argument:, binary_operator:Mod, binary_operator:Sub, external_free_call:print, free_call:print, free_call_without_result:print, literal:1, literal:Tuple, loaded_variable:REFRAIN, loaded_variable:bottles_of_beer, modulo_operator, node:BinOp, node:Call, node:Expr, node:Name, node:Num, node:Tuple
@@ -154,11 +154,11 @@ def median(pool): # function:median (-> +6), function_line_count:7 (-> +6), func
 # 15_itertools_groupby.py
 # ----------------------------------------------------------------------------------------
 from itertools import groupby # global_scope:frags (-> +8), global_scope:has_chars (-> +8), global_scope:lines (-> +8), imperative_style (-> +8), import:itertools:groupby, import_module:itertools, import_name:groupby, node:ImportFrom, scope:frags (-> +8), scope:has_chars (-> +8), scope:lines (-> +8), variety:*** (-> +8), whole_span:9 (-> +8)
-lines = """ # assignment:splitlines, assignment_lhs_identifier:lines, node:Assign (-> +4), node:Name, single_assignment:lines
+lines = """ # assignment:splitlines, assignment_lhs_identifier:lines, literal:Str, member_call_method:splitlines, node:Assign, node:Attribute, node:Call, node:Name, node:Str, single_assignment:lines, special_literal_string:\nThis is the\nfirst paragraph.\nThis is the second.\n
 This is the
 first paragraph.
 This is the second.
-""".splitlines() # literal:Str, member_call_method:splitlines, node:Attribute, node:Call, node:Str, special_literal_string:\nThis is the\nfirst paragraph.\nThis is the second.\n
+""".splitlines()
 for has_chars, frags in groupby(lines, bool): # argument:bool, argument:lines, external_free_call:groupby, for:frags (-> +2), for:has_chars (-> +2), free_call:groupby, iteration_variable:frags, iteration_variable:has_chars, literal:Tuple, loaded_variable:bool, loaded_variable:lines, loop:for (-> +2), loop_with_late_exit:for (-> +2), node:Call, node:For (-> +2), node:Name, node:Tuple
     if has_chars: # if (-> +1), if_without_else (-> +1), loaded_variable:has_chars, node:If (-> +1), node:Name
         print(" ".join(frags)) # argument:, argument:frags, composition, external_free_call:print, free_call:print, free_call_without_result:print, if_then_branch, literal:Str, loaded_variable:frags, member_call_method:join, node:Attribute, node:Call, node:Expr, node:Name, node:Str
@@ -200,8 +200,8 @@ def solve(n): # access_outer_scope:BOARD_SIZE (-> +8), body_recursive_function:s
     if n == 0: # comparison_operator:Eq, if (-> +1), if_guard (-> +1), if_test_atom:0, if_test_atom:n, if_without_else (-> +1), literal:0, loaded_variable:n, node:Compare, node:If (-> +1), node:Name, node:Num
         return [[]] # empty_literal:List, if_then_branch, literal:List, node:List, node:Return, return
     smaller_solutions = solve(n - 1) # argument:, assignment:solve, assignment_lhs_identifier:smaller_solutions, assignment_rhs_atom:1, assignment_rhs_atom:n, binary_operator:Sub, free_call:solve, internal_free_call:solve, literal:1, loaded_variable:n, node:Assign, node:BinOp, node:Call, node:Name, node:Num, single_assignment:smaller_solutions
-    return [ # node:Return (-> +4), return (-> +4)
-        solution + [(n, i + 1)] # binary_operator:Add, comprehension:List, comprehension_for_count:2, concatenation_operator:List, literal:1, literal:List, literal:Tuple, loaded_variable:i, loaded_variable:n, loaded_variable:solution, local_scope:i, local_scope:solution, node:BinOp, node:List, node:ListComp (-> +3), node:Name, node:Num, node:Tuple, scope:i, scope:solution
+    return [ # comprehension:List, comprehension_for_count:2, local_scope:i, local_scope:solution, node:ListComp (-> +4), node:Return (-> +4), return (-> +4), scope:i, scope:solution
+        solution + [(n, i + 1)] # binary_operator:Add, concatenation_operator:List, literal:1, literal:List, literal:Tuple, loaded_variable:i, loaded_variable:n, loaded_variable:solution, node:BinOp, node:List, node:Name, node:Num, node:Tuple
         for i in range(BOARD_SIZE) # argument:BOARD_SIZE, external_free_call:range, free_call:range, iteration_variable:i, loaded_variable:BOARD_SIZE, node:Call, node:Name, range:BOARD_SIZE
         for solution in smaller_solutions # iteration_variable:solution, loaded_variable:smaller_solutions, node:Name
         if not under_attack(i + 1, solution) # addition_operator, argument:, argument:solution, binary_operator:Add, filtered_comprehension, free_call:under_attack, internal_free_call:under_attack, literal:1, loaded_variable:i, loaded_variable:solution, node:BinOp, node:Call, node:Name, node:Num, node:UnaryOp, unary_operator:Not
@@ -227,13 +227,13 @@ for p in iter_primes(): # for:p (-> +3), free_call:iter_primes, free_call_no_arg
 # ----------------------------------------------------------------------------------------
 # 21_xml_html_parsing.py
 # ----------------------------------------------------------------------------------------
-dinner_recipe = """<html><body><table> # assignment, assignment_lhs_identifier:dinner_recipe, global_scope:amt (-> +13), global_scope:dinner_recipe (-> +13), global_scope:ingredient (-> +13), global_scope:item (-> +13), global_scope:pantry (-> +13), global_scope:tree (-> +13), global_scope:unit (-> +13), imperative_style (-> +13), node:Assign (-> +6), node:Name, scope:amt (-> +13), scope:dinner_recipe (-> +13), scope:ingredient (-> +13), scope:item (-> +13), scope:pantry (-> +13), scope:tree (-> +13), scope:unit (-> +13), single_assignment:dinner_recipe, variety:*** (-> +13), whole_span:14 (-> +13)
+dinner_recipe = """<html><body><table> # assignment, assignment_lhs_identifier:dinner_recipe, global_scope:amt (-> +13), global_scope:dinner_recipe (-> +13), global_scope:ingredient (-> +13), global_scope:item (-> +13), global_scope:pantry (-> +13), global_scope:tree (-> +13), global_scope:unit (-> +13), imperative_style (-> +13), literal:Str, node:Assign, node:Name, node:Str, scope:amt (-> +13), scope:dinner_recipe (-> +13), scope:ingredient (-> +13), scope:item (-> +13), scope:pantry (-> +13), scope:tree (-> +13), scope:unit (-> +13), single_assignment:dinner_recipe, special_literal_string:<html><body><table>\n<tr><th>amt</th><th>unit</th><th>item</th></tr>\n<tr><td>24</td><td>slices</td><td>baguette</td></tr>\n<tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>\n<tr><td>1</td><td>cup</td><td>tomatoes</td></tr>\n<tr><td>1</td><td>jar</td><td>pesto</td></tr>\n</table></body></html>, variety:*** (-> +13), whole_span:14 (-> +13)
 <tr><th>amt</th><th>unit</th><th>item</th></tr>
 <tr><td>24</td><td>slices</td><td>baguette</td></tr>
 <tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>
 <tr><td>1</td><td>cup</td><td>tomatoes</td></tr>
 <tr><td>1</td><td>jar</td><td>pesto</td></tr>
-</table></body></html>""" # literal:Str, node:Str, special_literal_string:<html><body><table>\n<tr><th>amt</th><th>unit</th><th>item</th></tr>\n<tr><td>24</td><td>slices</td><td>baguette</td></tr>\n<tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>\n<tr><td>1</td><td>cup</td><td>tomatoes</td></tr>\n<tr><td>1</td><td>jar</td><td>pesto</td></tr>\n</table></body></html>
+</table></body></html>"""
 import xml.etree.ElementTree as etree # import:xml.etree.ElementTree, import_module:xml.etree.ElementTree, node:Import
 tree = etree.fromstring(dinner_recipe) # argument:dinner_recipe, assignment:fromstring, assignment_lhs_identifier:tree, assignment_rhs_atom:dinner_recipe, assignment_rhs_atom:etree, loaded_variable:dinner_recipe, loaded_variable:etree, member_call_method:fromstring, node:Assign, node:Attribute, node:Call, node:Name, single_assignment:tree
 pantry = {"olive oil", "pesto"} # assignment, assignment_lhs_identifier:pantry, literal:Set, literal:Str, node:Assign, node:Name, node:Set, node:Str, single_assignment:pantry
@@ -247,7 +247,7 @@ for ingredient in tree.getiterator("tr"): # argument:, for:ingredient (-> +3), i
 # ----------------------------------------------------------------------------------------
 BOARD_SIZE = 8 # assignment:8, assignment_lhs_identifier:BOARD_SIZE, assignment_rhs_atom:8, global_scope:BOARD_SIZE (-> +23), global_scope:queens (-> +23), literal:8, node:Assign, node:Name, node:Num, object_oriented_style (-> +23), scope:BOARD_SIZE (-> +23), scope:queens (-> +23), single_assignment:BOARD_SIZE, variety:******* (-> +23), whole_span:24 (-> +23)
 class BailOut(Exception): # class:BailOut (-> +1), loaded_variable:Exception, node:ClassDef (-> +1), node:Name
-    pass # node:Pass
+    pass # no_operation, node:Pass
 def validate(queens): # function:validate (-> +5), function_line_count:6 (-> +5), function_parameter:queens, function_parameter_flavor:arg, function_returning_nothing:validate (-> +5), local_scope:col (-> +5), local_scope:left (-> +5), local_scope:queens (-> +5), local_scope:r (-> +5), local_scope:right (-> +5), node:FunctionDef (-> +5), node:arg, scope:col (-> +5), scope:left (-> +5), scope:queens (-> +5), scope:r (-> +5), scope:right (-> +5), shadowing_scope:queens (-> +5)
     left = right = col = queens[-1] # assignment, assignment_lhs_identifier:col, assignment_lhs_identifier:left, assignment_lhs_identifier:right, assignment_rhs_atom:-1, assignment_rhs_atom:queens, chained_assignment, index:-1, literal:-1, loaded_variable:queens, negative_index:-1, node:Assign, node:Name, node:Num, node:Subscript
     for r in reversed(queens[:-1]): # argument:, external_free_call:reversed, for:r (-> +3), free_call:reversed, iteration_variable:r, literal:-1, loaded_variable:queens, loop:for (-> +3), loop_with_early_exit:for:raise (-> +3), loop_with_raise:for (-> +3), node:Call, node:For (-> +3), node:Name, node:Num, node:Subscript, slice::-1:, slice_lower:, slice_step:, slice_upper:-1
@@ -264,7 +264,7 @@ def add_queen(queens): # access_outer_scope:BOARD_SIZE (-> +11), function:add_qu
             else:
                 return add_queen(test_queens) # argument:test_queens, free_call:add_queen, free_tail_call:add_queen, if_else_branch, internal_free_call:add_queen, loaded_variable:test_queens, node:Call, node:Name, node:Return, return
         except BailOut: # except:BailOut, loaded_variable:BailOut, node:ExceptHandler (-> +1), node:Name
-            pass # node:Pass
+            pass # no_operation, node:Pass
     raise BailOut # loaded_variable:BailOut, node:Name, node:Raise, raise:BailOut
 queens = add_queen([]) # argument:, assignment:add_queen, assignment_lhs_identifier:queens, empty_literal:List, free_call:add_queen, internal_free_call:add_queen, literal:List, node:Assign, node:Call, node:List, node:Name, single_assignment:queens
 print(queens) # argument:queens, external_free_call:print, free_call:print, free_call_without_result:print, loaded_variable:queens, node:Call, node:Expr, node:Name

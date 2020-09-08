@@ -63,6 +63,7 @@
       - [Feature `clamp_min_max`](#feature-clamp_min_max)
       - [Feature `clamp_ternary`](#feature-clamp_ternary)
 - [Statements](#statements)
+      - [Feature `no_operation`](#feature-no_operation)
   - [Bindings](#bindings)
       - [Feature `assignment`](#feature-assignment)
       - [Feature `subscript_assignment`](#feature-subscript_assignment)
@@ -71,6 +72,7 @@
       - [Feature `attribute_deletion`](#feature-attribute_deletion)
       - [Feature `single_assignment`](#feature-single_assignment)
       - [Feature `parallel_assignment`](#feature-parallel_assignment)
+      - [Feature `assignment_expression`](#feature-assignment_expression)
       - [Feature `augmented_assignment`](#feature-augmented_assignment)
       - [Feature `augmented_assignment_unpythonic`](#feature-augmented_assignment_unpythonic)
       - [Feature `subscript_augmented_assignment`](#feature-subscript_augmented_assignment)
@@ -438,6 +440,10 @@ Further categorization of numeric literals does not require to construct a sophi
 13  [1, {2, 3}, {"a": "b", "c": "d"}]
 14  [foo(4)]
 15  {"foo": "bar"}
+16  l = [
+17      first_line,
+18      second_line,
+19  ]
 ```
 
 ##### Matches
@@ -449,7 +455,7 @@ Further categorization of numeric literals does not require to construct a sophi
 | `literal:Str` | 3, 13, 13, 13, 13, 15, 15 |
 | `literal:1` | 4, 4, 7, 11, 13 |
 | `literal:Tuple` | 4 |
-| `literal:List` | 5, 11, 13, 14 |
+| `literal:List` | 5, 11, 13, 14, 16 |
 | `literal:Dict` | 6, 13, 15 |
 | `literal:2` | 7, 11, 13 |
 | `literal:3` | 7, 11, 13 |
@@ -529,6 +535,8 @@ _Remark._ To match escape sequences in the pipeline, you must prefix the string 
     },
 ```
 
+_Remark._ Due to a bug in third-party library `typed_ast` (corrected in Python 3.8 standard module `ast`), a multiline string is located on its last line, see example below, lines 6-9. There is no way to correct this at AST level since, apart from that, it is coded in exactly the same way as the string of line 10. The two possible resulting positions are separated by a slash in the Matches' table.
+
 ##### Specification
 
 ```re
@@ -541,10 +549,16 @@ _Remark._ To match escape sequences in the pipeline, you must prefix the string 
 
 ```python
 1   emoji = "😍"
-2   header = rf"Date\tStudent\tGrade\n"
+2   header = fr"Date\tStudent\tGrade\n"
 3   pound = "£"
 4   print("nothing special here!") # no match
 5   print("\U0001F60D")
+6   several_lines = """
+7       first
+8       second
+9   """
+10  several_lines_2 = "\n    first\n    second\n"
+11  bytes = b"\x20" # no match
 ```
 
 ##### Matches
@@ -554,6 +568,7 @@ _Remark._ To match escape sequences in the pipeline, you must prefix the string 
 | `special_literal_string:Date\\tStudent\\tGrade\\n` | 2 |
 | `special_literal_string:£` | 3 |
 | `special_literal_string:😍` | 1, 5 |
+| `special_literal_string:\n    first\n    second\n` | 6, 10 / 9, 10 |
 
 --------------------------------------------------------------------------------
 
@@ -2501,6 +2516,33 @@ _Limitation._ The number to be clamped must appear on the left hand side of the 
 
 # Statements
 
+--------------------------------------------------------------------------------
+
+#### Feature `no_operation`
+
+##### Specification
+
+```re
+^(.*/body/\d+(?:/value)?)/_type=(Ellipsis|Pass)
+\n(?:\1.+\n)*?         \1/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   pass
+2   ...
+3   [1, ..., 3] # no match
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `no_operation` | 1, 2 |
+
+--------------------------------------------------------------------------------
+
 ## Bindings
 
 --------------------------------------------------------------------------------
@@ -2765,6 +2807,39 @@ Match a tuple unpacking assignment, and suffix it with the tuple size.
 | Label | Lines |
 |:--|:--|
 | `parallel_assignment:2` | 4 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `assignment_expression`
+
+This is Python 3.8 specific and will raise a syntax error in older versions.
+
+##### Specification
+
+```re
+           ^(.*)/_type=NamedExpr
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/target/id=(?P<SUFFIX>.+)
+```
+
+##### Example
+
+```python
+1   if (match := pattern.search(data)) is not None:
+2       pass
+3   while chunk := file.read(8192):
+4      process(chunk)
+5   [y := f(x), y**2, y**3]
+6   filtered_data = [y for x in data if (y := f(x)) is not None]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `assignment_expression:match` | 1 / SyntaxError |
+| `assignment_expression:chunk` | 3 / SyntaxError |
+| `assignment_expression:y` | 5, 6 / SyntaxError |
 
 --------------------------------------------------------------------------------
 
@@ -3800,7 +3875,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
 |:--|:--|
 | `function:foo` | 1-7 |
 | `function:fizz` | 2-4 |
-| `function:christmas_tree` | 9-11 |
+| `function:christmas_tree` | 10-11 |
 | `function:function_with_types` | 13-14 |
 | `function:bar` | 18-19 |
 | `function:generator` | 21-22 |
@@ -3908,13 +3983,20 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
 10      @classmethod
 11      def a_class_method(cls, d, e):
 12          pass
+13
+14  @dataclass
+15  class Point:
+16      x: float
+17      y: float
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
+| `node:ClassDef` | 1-12, 15-17 |
 | `class:MyClass` | 1-12 |
+| `class:Point` | 15-17 |
 
 --------------------------------------------------------------------------------
 
@@ -3962,8 +4044,8 @@ JOIN t_function f ON (f.path GLOB c.path || "*-*-")
 | Label | Lines |
 |:--|:--|
 | `method:an_instance_method` | 3-4 |
-| `method:a_static_method` | 6-8 |
-| `method:a_class_method` | 10-12 |
+| `method:a_static_method` | 7-8 |
+| `method:a_class_method` | 11-12 |
 
 --------------------------------------------------------------------------------
 
@@ -4015,8 +4097,8 @@ _Remark._: the presence of a decorator `classmethod` or `staticmethod` is unchec
 | Label | Lines |
 |:--|:--|
 | `instance_method:an_instance_method` | 3-4 |
-| `class_method:a_class_method` | 6-8 |
-| `static_method:a_static_method` | 10-12 |
+| `class_method:a_class_method` | 7-8 |
+| `static_method:a_static_method` | 11-12 |
 
 --------------------------------------------------------------------------------
 
@@ -4542,7 +4624,7 @@ _Remark._ The span starts from the first decorator.
 
 | Label | Lines |
 |:--|:--|
-| `decorated_function:qux` | 1-5 |
+| `decorated_function:qux` | 4-5 |
 
 --------------------------------------------------------------------------------
 
@@ -4552,12 +4634,11 @@ _Remark._ The span starts from the first decorator.
 
 ```re
            ^(.*)/_type=FunctionDef
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)*?\1/(?P<_1>decorator_list/\d+)/_pos=(?P<POS>.+)  # force len(d["POS"]) != len(d["SUFFIX"])
 \n(?:\1.+\n)*?\1/(?P=_1)                   /id=(?P<SUFFIX>.+)
 )+
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/body/.+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -4574,7 +4655,7 @@ _Remark._ The span starts from the first decorator.
 9       pass
 ```
 
-_Remark._ The span and the path are the same as those of the function.
+_Remark._ The span and the path start with the first decorator and end with the function.
 
 ##### Matches
 
@@ -4582,9 +4663,9 @@ _Remark._ The span and the path are the same as those of the function.
 |:--|:--|
 | `function_decorator:bar` | 1-5 |
 | `function_decorator:bizz` | 1-5 |
+| `function_decorator:foo` | 1-5 |
 | `function_decorator:clip` | 6-9 |
 | `function_decorator:crap` | 6-9 |
-| `function_decorator:foo` | 1-5 |
 
 --------------------------------------------------------------------------------
 
@@ -8358,8 +8439,8 @@ FROM t_function f
 
 | Label | Lines |
 |:--|:--|
-| `function_line_count:2` | 13-14, 18-19, 21-22 |
-| `function_line_count:3` | 2-4, 9-11 |
+| `function_line_count:2` | 10-11, 13-14, 18-19, 21-22 |
+| `function_line_count:3` | 2-4 |
 | `function_line_count:7` | 1-7 |
 
 --------------------------------------------------------------------------------

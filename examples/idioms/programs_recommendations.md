@@ -61,7 +61,7 @@
     - [`045.0570-pause-execution-for-5-seconds.py`](#program-0450570-pause-execution-for-5-secondspy-learning-cost-621875)
     - [`046.0191-extract-beginning-of-string-prefix.py`](#program-0460191-extract-beginning-of-string-prefixpy-learning-cost-6125)
     - [`047.0198-extract-string-suffix.py`](#program-0470198-extract-string-suffixpy-learning-cost-6125)
-    - [`048.0210-multi-line-string-literal.py`](#program-0480210-multi-line-string-literalpy-learning-cost-3671875)
+    - [`048.0210-multi-line-string-literal.py`](#program-0480210-multi-line-string-literalpy-learning-cost-4421875)
     - [`049.0242-split-a-space-separated-string.py`](#program-0490242-split-a-space-separated-stringpy-learning-cost-5296875)
     - [`050.0572-make-an-infinite-loop.py`](#program-0500572-make-an-infinite-looppy-learning-cost-43125)
     - [`051.0230-check-if-map-contains-key.py`](#program-0510230-check-if-map-contains-keypy-learning-cost-2375)
@@ -199,9 +199,9 @@
     - [`170.2275-get-map-size.py`](#program-1702275-get-map-sizepy-learning-cost-4375)
     - [`171.2446-add-an-element-at-the-end-of-a-list.py`](#program-1712446-add-an-element-at-the-end-of-a-listpy-learning-cost-3484375)
     - [`172.2442-insert-entry-in-map.py`](#program-1722442-insert-entry-in-mappy-learning-cost-33125)
-    - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-35)
-    - [`173.2428-format-a-number-with-grouped-thousands.py`](#program-1732428-format-a-number-with-grouped-thousandspy-learning-cost-35)
-    - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-35)
+    - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-25625)
+    - [`173.2428-format-a-number-with-grouped-thousands.py`](#program-1732428-format-a-number-with-grouped-thousandspy-learning-cost-25625)
+    - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-25625)
     - [`174.2687-make-http-post-request.py`](#program-1742687-make-http-post-requestpy-learning-cost-9234375)
     - [`175.2613-bytes-to-hex-string.py`](#program-1752613-bytes-to-hex-stringpy-learning-cost-5296875)
     - [`176.2614-hex-string-to-byte-array.py`](#program-1762614-hex-string-to-byte-arraypy-learning-cost-5296875)
@@ -242,7 +242,7 @@
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/sequence/string/literal` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -351,7 +351,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -367,12 +367,12 @@
 |----|----|----|
 | 0.875 | `def/subroutine/no_parameter` | 1-2 |
 | 0.875 | `def/subroutine/procedure` | 1-2 |
-| 0.75 | `flow/null_operation` | 2 |
+| 0.75 | `flow/no_operation` | 2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.75 | `style/procedural` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -421,7 +421,7 @@
 | 0.875 | `var/scope/local` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -438,12 +438,12 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.75 | `def/class` | 2 |
+| 0.75 | `def/class` | 3-5 |
 | 0.96875 | `def/import/standard/dataclasses/dataclass` | 1 |
-| 0.75 | `style/object_oriented` | 1-2 |
-| 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/***` | 1-2 |
-| 0 | `meta/program` | 1-2 |
+| 0.75 | `style/object_oriented` | 1-5 |
+| 0 | `meta/count/program/sloc/5` | 1-5 |
+| 0 | `meta/count/variety/***` | 1-5 |
+| 0 | `meta/program` | 1-5 |
 
 ---
 
@@ -585,7 +585,7 @@
 | 0.875 | `style/imperative/flat` | 1-2 |
 | 0.75 | `style/one_liner` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -1260,13 +1260,13 @@
 | 0.75 | `call/composition` | 3 |
 | 0.96875 | `call/subroutine/builtin/casting/set` | 3 |
 | 0.75 | `def/class` | 1-2 |
-| 0.75 | `flow/null_operation` | 2 |
+| 0.75 | `flow/no_operation` | 2 |
 | 0.75 | `style/object_oriented` | 1-3 |
 | 0.875 | `type/non_sequence/set` | 3 |
 | 0.9375 | `var/assignment/explicit/single` | 3 |
 | 0.875 | `var/scope/global` | 1-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/*` | 1-3 |
+| 0 | `meta/count/variety/**` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -1433,7 +1433,7 @@
 | 0.9375 | `flow/loop/exit/late` | 7-8, 10-12 |
 | 0.875 | `flow/loop/for` | 10-12 |
 | 0.9375 | `flow/loop/for/elements` | 7-8 |
-| 0.75 | `flow/null_operation` | 3 |
+| 0.75 | `flow/no_operation` | 3 |
 | 0.75 | `style/object_oriented` | 1-13 |
 | 0.75 | `subscript/index` | 11, 12 |
 | 0.875 | `subscript/slice/start` | 10 |
@@ -1590,7 +1590,7 @@
 | 0.96875 | `flow/loop/exit/early/raise` | 5-9, 6-9 |
 | 0.9375 | `flow/loop/for/elements` | 5-9 |
 | 0.96875 | `flow/loop/for/nested/1` | 6-9 |
-| 0.75 | `flow/null_operation` | 2, 11 |
+| 0.75 | `flow/no_operation` | 2, 11 |
 | 0.75 | `style/object_oriented` | 1-11 |
 | 0.75 | `subscript/index` | 6, 7 |
 | 0.9375 | `subscript/index/shape/2` | 7 |
@@ -1600,7 +1600,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 5, 6 |
 | 0.875 | `var/scope/global` | 1-11 |
 | 0 | `meta/count/program/sloc/11` | 1-11 |
-| 0 | `meta/count/variety/****` | 1-11 |
+| 0 | `meta/count/variety/*****` | 1-11 |
 | 0 | `meta/program` | 1-11 |
 
 ---
@@ -1682,7 +1682,7 @@
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0.875 | `type/number/magic` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -1729,7 +1729,7 @@
 
 ---
 
-### Program `048.0210-multi-line-string-literal.py` (learning cost 3.671875)
+### Program `048.0210-multi-line-string-literal.py` (learning cost 4.421875)
 
 ```python
 1   s = """Huey
@@ -1739,13 +1739,14 @@
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `style/imperative/flat` | 1-3 |
-| 0.984375 | `type/sequence/string/literal/special/\n` | 3 |
+| 0.875 | `style/imperative/flat` | 1 |
+| 0.75 | `style/one_liner` | 1 |
+| 0.984375 | `type/sequence/string/literal/special/\n` | 1 |
 | 0.9375 | `var/assignment/explicit/single` | 1 |
-| 0.875 | `var/scope/global` | 1-3 |
-| 0 | `meta/count/program/sloc/3` | 1-3 |
-| 0 | `meta/count/variety/*` | 1-3 |
-| 0 | `meta/program` | 1-3 |
+| 0.875 | `var/scope/global` | 1 |
+| 0 | `meta/count/program/sloc/1` | 1 |
+| 0 | `meta/count/variety/*` | 1 |
+| 0 | `meta/program` | 1 |
 
 ---
 
@@ -1780,11 +1781,11 @@
 |----|----|----|
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.9375 | `flow/loop/while/infinite` | 1-2 |
-| 0.75 | `flow/null_operation` | 2 |
+| 0.75 | `flow/no_operation` | 2 |
 | 0.75 | `style/imperative` | 1-2 |
 | 0.9375 | `type/boolean/literal/True` | 1 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2060,7 +2061,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2259,7 +2260,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2423,7 +2424,7 @@
 | 0.75 | `style/imperative` | 1-4 |
 | 0.9375 | `type/boolean/literal/True` | 1 |
 | 0 | `meta/count/program/sloc/4` | 1-4 |
-| 0 | `meta/count/variety/***` | 1-4 |
+| 0 | `meta/count/variety/****` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
 ---
@@ -2528,7 +2529,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2617,7 +2618,7 @@
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.9375 | `type/number/integer/literal` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -2675,9 +2676,9 @@
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `def/class` | 1-6 |
-| 0.875 | `def/subroutine/decorated` | 4-6 |
-| 0.875 | `def/subroutine/function` | 4-6 |
-| 0.96875 | `def/subroutine/method/flavor/instance` | 2-3, 4-6 |
+| 0.875 | `def/subroutine/decorated` | 5-6 |
+| 0.875 | `def/subroutine/function` | 5-6 |
+| 0.96875 | `def/subroutine/method/flavor/instance` | 2-3, 5-6 |
 | 0.984375 | `def/subroutine/method/naming/magic/__init__` | 2-3 |
 | 0.875 | `def/subroutine/procedure` | 2-3 |
 | 0.9375 | `def/subroutine/return/something` | 6 |
@@ -2685,11 +2686,10 @@
 | 0.96875 | `type/number/integer/literal/zero` | 3 |
 | 0.875 | `var/assignment/explicit` | 3 |
 | 0.96875 | `var/assignment/implicit/parameter/self` | 2, 5 |
-| 0.875 | `var/scope/local` | 2-3, 4-6 |
+| 0.875 | `var/scope/local` | 2-3, 5-6 |
 | 0 | `meta/count/class/methods/2` | 1-6 |
 | 0 | `meta/count/program/sloc/6` | 1-6 |
-| 0 | `meta/count/subroutine/sloc/2` | 2-3 |
-| 0 | `meta/count/subroutine/sloc/3` | 4-6 |
+| 0 | `meta/count/subroutine/sloc/2` | 2-3, 5-6 |
 | 0 | `meta/count/variety/****` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
@@ -2763,7 +2763,7 @@
 | 0.875 | `var/scope/local` | 2-3 |
 | 0 | `meta/count/program/sloc/3` | 1-3 |
 | 0 | `meta/count/subroutine/sloc/2` | 2-3 |
-| 0 | `meta/count/variety/**` | 1-3 |
+| 0 | `meta/count/variety/***` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
 ---
@@ -3011,7 +3011,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3099,7 +3099,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -3988,7 +3988,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4008,7 +4008,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4132,7 +4132,7 @@
 | 0.9375 | `var/assignment/explicit/single` | 2 |
 | 0.875 | `var/scope/global` | 1-2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
@@ -4428,9 +4428,9 @@
 | 0.984375 | `call/subroutine/method/sequence/string/join` | 10 |
 | 0.75 | `def/class` | 2-10 |
 | 0.9375 | `def/import/third_party/numpy` | 1 |
-| 0.875 | `def/subroutine/decorated` | 3-7 |
-| 0.875 | `def/subroutine/function` | 3-7, 8-10 |
-| 0.96875 | `def/subroutine/method/flavor/class` | 3-7 |
+| 0.875 | `def/subroutine/decorated` | 4-7 |
+| 0.875 | `def/subroutine/function` | 4-7, 8-10 |
+| 0.96875 | `def/subroutine/method/flavor/class` | 4-7 |
 | 0.96875 | `def/subroutine/method/flavor/instance` | 8-10 |
 | 0.984375 | `def/subroutine/method/naming/magic/__str__` | 8-10 |
 | 0.9375 | `def/subroutine/return/something` | 5-7, 10 |
@@ -4451,11 +4451,11 @@
 | 0.9375 | `var/assignment/implicit/parameter` | 4, 4 |
 | 0.96875 | `var/assignment/implicit/parameter/self` | 8 |
 | 0.875 | `var/scope/global` | 1-15 |
-| 0.875 | `var/scope/local` | 3-7, 6, 8-10, 10 |
+| 0.875 | `var/scope/local` | 4-7, 6, 8-10, 10 |
 | 0 | `meta/count/class/methods/2` | 2-10 |
 | 0 | `meta/count/program/sloc/15` | 1-15 |
 | 0 | `meta/count/subroutine/sloc/3` | 8-10 |
-| 0 | `meta/count/subroutine/sloc/5` | 3-7 |
+| 0 | `meta/count/subroutine/sloc/4` | 4-7 |
 | 0 | `meta/count/variety/*****` | 1-15 |
 | 0 | `meta/program` | 1-15 |
 
@@ -4931,7 +4931,7 @@
 
 ---
 
-### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 3.5)
+### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 2.5625)
 
 ```python
 1   print("f'{1000:,}'")
@@ -4942,14 +4942,13 @@
 | 0.9375 | `call/subroutine/builtin/print` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
 
-### Program `173.2428-format-a-number-with-grouped-thousands.py` (learning cost 3.5)
+### Program `173.2428-format-a-number-with-grouped-thousands.py` (learning cost 2.5625)
 
 ```python
 1   print("format(1000, ',')")
@@ -4960,14 +4959,13 @@
 | 0.9375 | `call/subroutine/builtin/print` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
 
-### Program `173.2429-format-a-number-with-grouped-thousands.py` (learning cost 3.5)
+### Program `173.2429-format-a-number-with-grouped-thousands.py` (learning cost 2.5625)
 
 ```python
 1   print("'{:,}'.format(1000)")
@@ -4978,7 +4976,6 @@
 | 0.9375 | `call/subroutine/builtin/print` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
-| 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
@@ -5108,7 +5105,7 @@
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 5, 5, 6 |
 | 0.96875 | `var/assignment/implicit/iteration_variable/throwaway` | 5 |
 | 0.875 | `var/scope/global` | 1-7 |
-| 0.875 | `var/scope/local` | 4 |
+| 0.875 | `var/scope/local` | 3 |
 | 0 | `meta/count/program/sloc/7` | 1-7 |
 | 0 | `meta/count/variety/**` | 1-7 |
 | 0 | `meta/program` | 1-7 |
@@ -5349,7 +5346,7 @@
 | 0.75 | `style/one_liner` | 1-2 |
 | 0.96875 | `type/number/integer/literal/zero` | 2 |
 | 0 | `meta/count/program/sloc/2` | 1-2 |
-| 0 | `meta/count/variety/*` | 1-2 |
+| 0 | `meta/count/variety/**` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
 ---
