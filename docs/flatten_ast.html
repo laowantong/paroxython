@@ -222,9 +222,9 @@ know more, we are restoring the previous representations with <code><a title="pa
 <h4 id="unquoting-strings">Unquoting strings</h4>
 <p><code><a title="paroxython.flatten_ast.unquote" href="#paroxython.flatten_ast.unquote">unquote()</a></code> suppress the single quote delimiters after <code>=</code>. This makes for simpler regular
 expressions in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
-<h4 id="correcting-the-span-of-decorated-functions">Correcting the span of decorated functions</h4>
-<p><code><a title="paroxython.flatten_ast.correct_all_decorated_function_starts" href="#paroxython.flatten_ast.correct_all_decorated_function_starts">correct_all_decorated_function_starts()</a></code> fixes a bug of <code>typed_ast</code> in which decorated functions
-would incorrectly be marked as starting from the line of their first decorator.</p>
+<h4 id="correcting-the-span-of-decorated-callable">Correcting the span of decorated callable</h4>
+<p><code><a title="paroxython.flatten_ast.correct_all_decorated_callable_starts" href="#paroxython.flatten_ast.correct_all_decorated_callable_starts">correct_all_decorated_callable_starts()</a></code> fixes a bug of <code>typed_ast</code> in which decorated functions
+and classes would incorrectly be marked as starting from the line of their first decorator.</p>
 <div class="footnote">
 <hr>
 <ol>
@@ -272,12 +272,12 @@ def select_ast_post_processing(strategy):
             flat_ast = suppress_kinds(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
             flat_ast = unquote(flat_ast)
-            flat_ast = correct_all_decorated_function_starts(flat_ast)
+            flat_ast = correct_all_decorated_callable_starts(flat_ast)
             return flat_ast
 
     else:
 
-        def post_process(flat_ast):
+        def post_process(flat_ast): # pragma: no cover
             return flat_ast
 
     return post_process
@@ -368,17 +368,17 @@ def replace_one_constant(m: Match) -&gt; str:
         return f&#34;{m[1]}/_type=Num{m[2]}\n{m[1]}/n={m[3]}&#34;
 
 
-def correct_all_decorated_function_starts(
+def correct_all_decorated_callable_starts(
     flat_ast: str,
     sub: Callable = regex.compile(
     ).sub,
 ) -&gt; str:
-    return sub(replace_one_decorated_function_start, flat_ast)
+    return sub(replace_one_decorated_callable_start, flat_ast)
 
 
-def replace_one_decorated_function_start(m: Match) -&gt; str:
-    start = int(m[4]) + int(m[5])  # number of decorators + line number of the first decorator
-    return f&#34;{m[1]}/_type=FunctionDef{m[2]}{start}:{m[3]}&#34;
+def replace_one_decorated_callable_start(m: Match) -&gt; str:
+    start = int(m[5]) + int(m[6])  # number of decorators + line number of the first decorator
+    return f&#34;{m[1]}/_type={m[2]}{m[3]}{start}:{m[4]}&#34;
 
 
 def unquote(
@@ -463,12 +463,12 @@ if __name__ == &#34;__main__&#34;:
             flat_ast = suppress_kinds(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
             flat_ast = unquote(flat_ast)
-            flat_ast = correct_all_decorated_function_starts(flat_ast)
+            flat_ast = correct_all_decorated_callable_starts(flat_ast)
             return flat_ast
 
     else:
 
-        def post_process(flat_ast):
+        def post_process(flat_ast): # pragma: no cover
             return flat_ast
 
     return post_process</code></pre>
@@ -640,11 +640,11 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
         return f&#34;{m[1]}/_type=Num{m[2]}\n{m[1]}/n={m[3]}&#34;</code></pre>
 </details>
 </dd>
-<dt id="paroxython.flatten_ast.correct_all_decorated_function_starts"><code class="name flex">
-<span>def <span class="ident">correct_all_decorated_function_starts</span></span>(<span>flat_ast: str, <br>sub: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
+<dt id="paroxython.flatten_ast.correct_all_decorated_callable_starts"><code class="name flex">
+<span>def <span class="ident">correct_all_decorated_callable_starts</span></span>(<span>flat_ast: str, <br>sub: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Make the span of a decorated function starting from <code>def</code>, not from the first decorator.</p>
+<div class="desc"><p>Make the span of a decorated callable starting from <code>def</code>, not from the first decorator.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The bug is present in the third-party module <code>typed_ast</code>, but fixed in Python 3.8's standard
@@ -656,27 +656,27 @@ library <code>ast</code>.</p>
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L438-L457" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def correct_all_decorated_function_starts(
+<pre><code class="python">def correct_all_decorated_callable_starts(
     flat_ast: str,
     sub: Callable = regex.compile(
     ).sub,
 ) -&gt; str:
-    return sub(replace_one_decorated_function_start, flat_ast)</code></pre>
+    return sub(replace_one_decorated_callable_start, flat_ast)</code></pre>
 </details>
 </dd>
-<dt id="paroxython.flatten_ast.replace_one_decorated_function_start"><code class="name flex">
-<span>def <span class="ident">replace_one_decorated_function_start</span></span>(<span>m: Match) ‑> str</span>
+<dt id="paroxython.flatten_ast.replace_one_decorated_callable_start"><code class="name flex">
+<span>def <span class="ident">replace_one_decorated_callable_start</span></span>(<span>m: Match) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Define the replacement function used in <code><a title="paroxython.flatten_ast.correct_all_decorated_function_starts" href="#paroxython.flatten_ast.correct_all_decorated_function_starts">correct_all_decorated_function_starts()</a></code>.</p></div>
+<div class="desc"><p>Define the replacement function used in <code><a title="paroxython.flatten_ast.correct_all_decorated_callable_starts" href="#paroxython.flatten_ast.correct_all_decorated_callable_starts">correct_all_decorated_callable_starts()</a></code>.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L460-L463" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def replace_one_decorated_function_start(m: Match) -&gt; str:
-    start = int(m[4]) + int(m[5])  # number of decorators + line number of the first decorator
-    return f&#34;{m[1]}/_type=FunctionDef{m[2]}{start}:{m[3]}&#34;</code></pre>
+<pre><code class="python">def replace_one_decorated_callable_start(m: Match) -&gt; str:
+    start = int(m[5]) + int(m[6])  # number of decorators + line number of the first decorator
+    return f&#34;{m[1]}/_type={m[2]}{m[3]}{start}:{m[4]}&#34;</code></pre>
 </details>
 </dd>
 <dt id="paroxython.flatten_ast.unquote"><code class="name flex">
@@ -828,7 +828,7 @@ library <code>ast</code>.</p>
 <li><a href="#suppressing-useless-lines">Suppressing useless lines</a></li>
 <li><a href="#reverting-the-representation-of-constants-to-the-good-ol-days">Reverting the representation of constants to the good ol' days</a></li>
 <li><a href="#unquoting-strings">Unquoting strings</a></li>
-<li><a href="#correcting-the-span-of-decorated-functions">Correcting the span of decorated functions</a></li>
+<li><a href="#correcting-the-span-of-decorated-callable">Correcting the span of decorated callable</a></li>
 </ul>
 </li>
 </ul>
@@ -850,8 +850,8 @@ library <code>ast</code>.</p>
 <li><code><a title="paroxython.flatten_ast.simplify_negative_literals" href="#paroxython.flatten_ast.simplify_negative_literals">simplify_negative_literals</a></code></li>
 <li><code><a title="paroxython.flatten_ast.backport_all_constants" href="#paroxython.flatten_ast.backport_all_constants">backport_all_constants</a></code></li>
 <li><code><a title="paroxython.flatten_ast.replace_one_constant" href="#paroxython.flatten_ast.replace_one_constant">replace_one_constant</a></code></li>
-<li><code><a title="paroxython.flatten_ast.correct_all_decorated_function_starts" href="#paroxython.flatten_ast.correct_all_decorated_function_starts">correct_all_decorated_function_starts</a></code></li>
-<li><code><a title="paroxython.flatten_ast.replace_one_decorated_function_start" href="#paroxython.flatten_ast.replace_one_decorated_function_start">replace_one_decorated_function_start</a></code></li>
+<li><code><a title="paroxython.flatten_ast.correct_all_decorated_callable_starts" href="#paroxython.flatten_ast.correct_all_decorated_callable_starts">correct_all_decorated_callable_starts</a></code></li>
+<li><code><a title="paroxython.flatten_ast.replace_one_decorated_callable_start" href="#paroxython.flatten_ast.replace_one_decorated_callable_start">replace_one_decorated_callable_start</a></code></li>
 <li><code><a title="paroxython.flatten_ast.unquote" href="#paroxython.flatten_ast.unquote">unquote</a></code></li>
 <li><code><a title="paroxython.flatten_ast.suppress_kinds" href="#paroxython.flatten_ast.suppress_kinds">suppress_kinds</a></code></li>
 <li><code><a title="paroxython.flatten_ast.suppress_posonlyargs" href="#paroxython.flatten_ast.suppress_posonlyargs">suppress_posonlyargs</a></code></li>

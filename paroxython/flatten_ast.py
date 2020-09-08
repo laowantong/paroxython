@@ -306,7 +306,7 @@ def select_ast_post_processing(strategy):
 
     else:
 
-        def post_process(flat_ast):
+        def post_process(flat_ast):  # pragma: no cover
             return flat_ast
 
     return post_process
