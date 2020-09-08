@@ -15,7 +15,7 @@
 [![Downloads](https://pepy.tech/badge/paroxython/week)](https://pepy.tech/project/paroxython/week)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Band-aid](https://img.shields.io/badge/not%C2%A0%C2%A0%F0%9F%85%B3%F0%9F%85%B4%F0%9F%85%B0%F0%9F%85%B3-yet-%23F3D9C5?labelColor=%23F3D9C5)](https://youtu.be/QcbR1J_4ICg?t=54)
+[![Band-aid](https://badgen.net/badge/not%C2%A0%C2%A0%F0%9F%85%B3%F0%9F%85%B4%F0%9F%85%B0%F0%9F%85%B3/yet/F3D9C5?labelColor=F3D9C5)](https://youtu.be/QcbR1J_4ICg?t=54)
 
 <p align="center">
   <a href="https://laowantong.github.io/paroxython/index.html">
