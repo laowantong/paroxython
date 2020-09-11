@@ -220,7 +220,7 @@ experiments (<code><a title="paroxython.flatten_ast.suppress_posonlyargs" href="
 are concerned, this change makes the type of the constants much harder to determine. Until we
 know more, we are restoring the previous representations with <code><a title="paroxython.flatten_ast.backport_all_constants" href="#paroxython.flatten_ast.backport_all_constants">backport_all_constants()</a></code>.</p>
 <h4 id="unquoting-strings">Unquoting strings</h4>
-<p><code><a title="paroxython.flatten_ast.unquote" href="#paroxython.flatten_ast.unquote">unquote()</a></code> suppress the single quote delimiters after <code>=</code>. This makes for simpler regular
+<p><code><a title="paroxython.flatten_ast.unquote" href="#paroxython.flatten_ast.unquote">unquote()</a></code> suppress the single or double quotes delimiters after <code>=</code>. This makes for simpler regular
 expressions in <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md"><code>spec.md</code></a>.</p>
 <h4 id="correcting-the-span-of-decorated-callable">Correcting the span of decorated callable</h4>
 <p><code><a title="paroxython.flatten_ast.correct_all_decorated_callable_starts" href="#paroxython.flatten_ast.correct_all_decorated_callable_starts">correct_all_decorated_callable_starts()</a></code> fixes a bug of <code>typed_ast</code> in which decorated functions
@@ -277,7 +277,7 @@ def select_ast_post_processing(strategy):
 
     else:
 
-        def post_process(flat_ast): # pragma: no cover
+        def post_process(flat_ast):  # pragma: no cover
             return flat_ast
 
     return post_process
@@ -356,7 +356,7 @@ def backport_all_constants(
 
 
 def replace_one_constant(m: Match) -&gt; str:
-    if m[3].startswith(&#34;&#39;&#34;):
+    if m[3].startswith((&#34;&#39;&#34;, &#39;&#34;&#39;)):
         return f&#34;{m[1]}/_type=Str{m[2]}\n{m[1]}/s={m[3]}&#34;
     elif m[3] in (&#34;True&#34;, &#34;False&#34;, &#34;None&#34;):
         return f&#34;{m[1]}/_type=NameConstant{m[2]}\n{m[1]}/value={m[3]}&#34;
@@ -383,7 +383,7 @@ def replace_one_decorated_callable_start(m: Match) -&gt; str:
 
 def unquote(
     flat_ast: str,
-    sub: Callable = regex.compile(r&#34;=&#39;(.*)&#39;\n&#34;).sub,
+    sub: Callable = regex.compile(r&#34;&#34;&#34;=[&#34;&#39;](.*)[&#39;&#34;]\n&#34;&#34;&#34;).sub,
 ) -&gt; str:
     return sub(r&#34;=\1\n&#34;, flat_ast)
 
@@ -468,7 +468,7 @@ if __name__ == &#34;__main__&#34;:
 
     else:
 
-        def post_process(flat_ast): # pragma: no cover
+        def post_process(flat_ast):  # pragma: no cover
             return flat_ast
 
     return post_process</code></pre>
@@ -628,7 +628,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L424-L435" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def replace_one_constant(m: Match) -&gt; str:
-    if m[3].startswith(&#34;&#39;&#34;):
+    if m[3].startswith((&#34;&#39;&#34;, &#39;&#34;&#39;)):
         return f&#34;{m[1]}/_type=Str{m[2]}\n{m[1]}/s={m[3]}&#34;
     elif m[3] in (&#34;True&#34;, &#34;False&#34;, &#34;None&#34;):
         return f&#34;{m[1]}/_type=NameConstant{m[2]}\n{m[1]}/value={m[3]}&#34;
@@ -692,7 +692,7 @@ library <code>ast</code>.</p>
 </summary>
 <pre><code class="python">def unquote(
     flat_ast: str,
-    sub: Callable = regex.compile(r&#34;=&#39;(.*)&#39;\n&#34;).sub,
+    sub: Callable = regex.compile(r&#34;&#34;&#34;=[&#34;&#39;](.*)[&#39;&#34;]\n&#34;&#34;&#34;).sub,
 ) -&gt; str:
     return sub(r&#34;=\1\n&#34;, flat_ast)</code></pre>
 </details>

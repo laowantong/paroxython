@@ -9456,17 +9456,17 @@
       "timestamp": "",
       "source": "print(\"f'{1000:,}'\")",
       "labels": {
-        "argument:\"f'{1000:,}'\"": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
         "free_call_without_result:print": [[1,1]],
         "imperative_style": [[1,1]],
-        "literal:\"f'{1000:,}'\"": [[1,1]],
+        "literal:Str": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
         "node:Name": [[1,1]],
-        "node:Num": [[1,1]],
+        "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
         "variety:*": [[1,1]],
         "whole_span:1": [[1,1]]
@@ -9477,24 +9477,25 @@
         "meta/count/variety/*": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
-        "style/one_liner": [[1,1]]
+        "style/one_liner": [[1,1]],
+        "type/sequence/string/literal": [[1,1]]
       }
     },
     "173.2428-format-a-number-with-grouped-thousands.py": {
       "timestamp": "",
       "source": "print(\"format(1000, ',')\")",
       "labels": {
-        "argument:\"format(1000, ',')\"": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
         "free_call_without_result:print": [[1,1]],
         "imperative_style": [[1,1]],
-        "literal:\"format(1000, ',')\"": [[1,1]],
+        "literal:Str": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
         "node:Name": [[1,1]],
-        "node:Num": [[1,1]],
+        "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
         "variety:*": [[1,1]],
         "whole_span:1": [[1,1]]
@@ -9505,24 +9506,25 @@
         "meta/count/variety/*": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
-        "style/one_liner": [[1,1]]
+        "style/one_liner": [[1,1]],
+        "type/sequence/string/literal": [[1,1]]
       }
     },
     "173.2429-format-a-number-with-grouped-thousands.py": {
       "timestamp": "",
       "source": "print(\"'{:,}'.format(1000)\")",
       "labels": {
-        "argument:\"'{:,}'.format(1000)\"": [[1,1]],
+        "argument:": [[1,1]],
         "external_free_call:print": [[1,1]],
         "flat_style": [[1,1]],
         "free_call:print": [[1,1]],
         "free_call_without_result:print": [[1,1]],
         "imperative_style": [[1,1]],
-        "literal:\"'{:,}'.format(1000)\"": [[1,1]],
+        "literal:Str": [[1,1]],
         "node:Call": [[1,1]],
         "node:Expr": [[1,1]],
         "node:Name": [[1,1]],
-        "node:Num": [[1,1]],
+        "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
         "variety:*": [[1,1]],
         "whole_span:1": [[1,1]]
@@ -9533,7 +9535,8 @@
         "meta/count/variety/*": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
-        "style/one_liner": [[1,1]]
+        "style/one_liner": [[1,1]],
+        "type/sequence/string/literal": [[1,1]]
       }
     },
     "174.2687-make-http-post-request.py": {
@@ -10817,6 +10820,9 @@
       "154.2292-halfway-between-two-hex-color-codes.py",
       "156.2148-format-integer-with-zero-padding.py",
       "163.2170-print-list-elements-by-group-of-2.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py",
@@ -10825,15 +10831,6 @@
       "185.2820-execute-function-in-30-seconds.py",
       "187.3261-disjoint-set.py",
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
-    ],
-    "argument:\"'{:,}'.format(1000)\"": [
-      "173.2429-format-a-number-with-grouped-thousands.py"
-    ],
-    "argument:\"f'{1000:,}'\"": [
-      "173.2427-format-a-number-with-grouped-thousands.py"
-    ],
-    "argument:\"format(1000, ',')\"": [
-      "173.2428-format-a-number-with-grouped-thousands.py"
     ],
     "argument:0": [
       "128.2085-breadth-first-traversing-of-a-tree.py",
@@ -15586,15 +15583,6 @@
     "keyword_argument:target": [
       "025.0195-send-a-value-to-another-thread.py"
     ],
-    "literal:\"'{:,}'.format(1000)\"": [
-      "173.2429-format-a-number-with-grouped-thousands.py"
-    ],
-    "literal:\"f'{1000:,}'\"": [
-      "173.2427-format-a-number-with-grouped-thousands.py"
-    ],
-    "literal:\"format(1000, ',')\"": [
-      "173.2428-format-a-number-with-grouped-thousands.py"
-    ],
     "literal:-1": [
       "019.1983-reverse-a-list.py",
       "041.0187-reverse-a-string.py",
@@ -15817,6 +15805,9 @@
       "156.2148-format-integer-with-zero-padding.py",
       "157.2150-declare-constant-string.py",
       "162.2164-execute-procedures-depending-on-options.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
@@ -18791,9 +18782,6 @@
       "163.2170-print-list-elements-by-group-of-2.py",
       "165.2149-last-element-of-list.py",
       "168.2277-trim-suffix.py",
-      "173.2427-format-a-number-with-grouped-thousands.py",
-      "173.2428-format-a-number-with-grouped-thousands.py",
-      "173.2429-format-a-number-with-grouped-thousands.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "179.2688-get-center-of-a-rectangle.py",
       "179.2689-get-center-of-a-rectangle.py",
@@ -18892,6 +18880,9 @@
       "156.2148-format-integer-with-zero-padding.py",
       "157.2150-declare-constant-string.py",
       "162.2164-execute-procedures-depending-on-options.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
@@ -23584,6 +23575,9 @@
       "156.2148-format-integer-with-zero-padding.py",
       "157.2150-declare-constant-string.py",
       "162.2164-execute-procedures-depending-on-options.py",
+      "173.2427-format-a-number-with-grouped-thousands.py",
+      "173.2428-format-a-number-with-grouped-thousands.py",
+      "173.2429-format-a-number-with-grouped-thousands.py",
       "174.2687-make-http-post-request.py",
       "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
       "177.2725-find-files-with-a-given-list-of-filename-extensions.py",

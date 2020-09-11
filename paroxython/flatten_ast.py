@@ -266,7 +266,7 @@ know more, we are restoring the previous representations with `backport_all_cons
 
 #### Unquoting strings
 
-`unquote()` suppress the single quote delimiters after `=`. This makes for simpler regular
+`unquote()` suppress the single or double quotes delimiters after `=`. This makes for simpler regular
 expressions in `spec.md`.
 
 #### Correcting the span of decorated callable
@@ -423,7 +423,7 @@ def backport_all_constants(
 
 def replace_one_constant(m: Match) -> str:
     """Define the replacement function used in `backport_all_constants`."""
-    if m[3].startswith("'"):
+    if m[3].startswith(("'", '"')):
         return f"{m[1]}/_type=Str{m[2]}\n{m[1]}/s={m[3]}"
     elif m[3] in ("True", "False", "None"):
         return f"{m[1]}/_type=NameConstant{m[2]}\n{m[1]}/value={m[3]}"
@@ -465,7 +465,7 @@ def replace_one_decorated_callable_start(m: Match) -> str:
 
 def unquote(
     flat_ast: str,
-    sub: Callable = regex.compile(r"='(.*)'\n").sub,
+    sub: Callable = regex.compile(r"""=["'](.*)['"]\n""").sub,
 ) -> str:
     """Suppress the quote delimiters after “=“ to simplify the regular expressions of `spec.md`.
 

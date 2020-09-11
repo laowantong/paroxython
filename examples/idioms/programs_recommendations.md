@@ -199,9 +199,9 @@
     - [`170.2275-get-map-size.py`](#program-1702275-get-map-sizepy-learning-cost-4375)
     - [`171.2446-add-an-element-at-the-end-of-a-list.py`](#program-1712446-add-an-element-at-the-end-of-a-listpy-learning-cost-3484375)
     - [`172.2442-insert-entry-in-map.py`](#program-1722442-insert-entry-in-mappy-learning-cost-33125)
-    - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-25625)
-    - [`173.2428-format-a-number-with-grouped-thousands.py`](#program-1732428-format-a-number-with-grouped-thousandspy-learning-cost-25625)
-    - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-25625)
+    - [`173.2427-format-a-number-with-grouped-thousands.py`](#program-1732427-format-a-number-with-grouped-thousandspy-learning-cost-35)
+    - [`173.2428-format-a-number-with-grouped-thousands.py`](#program-1732428-format-a-number-with-grouped-thousandspy-learning-cost-35)
+    - [`173.2429-format-a-number-with-grouped-thousands.py`](#program-1732429-format-a-number-with-grouped-thousandspy-learning-cost-35)
     - [`174.2687-make-http-post-request.py`](#program-1742687-make-http-post-requestpy-learning-cost-9234375)
     - [`175.2613-bytes-to-hex-string.py`](#program-1752613-bytes-to-hex-stringpy-learning-cost-5296875)
     - [`176.2614-hex-string-to-byte-array.py`](#program-1762614-hex-string-to-byte-arraypy-learning-cost-5296875)
@@ -4931,7 +4931,7 @@
 
 ---
 
-### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 2.5625)
+### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 3.5)
 
 ```python
 1   print("f'{1000:,}'")
@@ -4942,13 +4942,14 @@
 | 0.9375 | `call/subroutine/builtin/print` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
+| 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
 
-### Program `173.2428-format-a-number-with-grouped-thousands.py` (learning cost 2.5625)
+### Program `173.2428-format-a-number-with-grouped-thousands.py` (learning cost 3.5)
 
 ```python
 1   print("format(1000, ',')")
@@ -4959,13 +4960,14 @@
 | 0.9375 | `call/subroutine/builtin/print` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
+| 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |
 
 ---
 
-### Program `173.2429-format-a-number-with-grouped-thousands.py` (learning cost 2.5625)
+### Program `173.2429-format-a-number-with-grouped-thousands.py` (learning cost 3.5)
 
 ```python
 1   print("'{:,}'.format(1000)")
@@ -4976,6 +4978,7 @@
 | 0.9375 | `call/subroutine/builtin/print` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
+| 0.9375 | `type/sequence/string/literal` | 1 |
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/*` | 1 |
 | 0 | `meta/program` | 1 |

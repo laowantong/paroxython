@@ -444,6 +444,7 @@ Further categorization of numeric literals does not require to construct a sophi
 17      first_line,
 18      second_line,
 19  ]
+20  single_quotes = "rock'n'roll"
 ```
 
 ##### Matches
@@ -452,7 +453,7 @@ Further categorization of numeric literals does not require to construct a sophi
 |:--|:--|
 | `literal:42` | 1 |
 | `literal:42.0` | 2 |
-| `literal:Str` | 3, 13, 13, 13, 13, 15, 15 |
+| `literal:Str` | 3, 13, 13, 13, 13, 15, 15, 20 |
 | `literal:1` | 4, 4, 7, 11, 13 |
 | `literal:Tuple` | 4 |
 | `literal:List` | 5, 11, 13, 14, 16 |

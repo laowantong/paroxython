@@ -1291,17 +1291,17 @@ m[k] = v # assignment, assignment_lhs_identifier:m, assignment_rhs_atom:v, flat_
 # ----------------------------------------------------------------------------------------
 # 173.2427-format-a-number-with-grouped-thousands.py
 # ----------------------------------------------------------------------------------------
-print("f'{1000:,}'") # argument:"f'{1000:,}'", external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:"f'{1000:,}'", node:Call, node:Expr, node:Name, node:Num, one_liner_style, variety:*, whole_span:1
+print("f'{1000:,}'") # argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:Str, node:Call, node:Expr, node:Name, node:Str, one_liner_style, variety:*, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 173.2428-format-a-number-with-grouped-thousands.py
 # ----------------------------------------------------------------------------------------
-print("format(1000, ',')") # argument:"format(1000, ',')", external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:"format(1000, ',')", node:Call, node:Expr, node:Name, node:Num, one_liner_style, variety:*, whole_span:1
+print("format(1000, ',')") # argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:Str, node:Call, node:Expr, node:Name, node:Str, one_liner_style, variety:*, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 173.2429-format-a-number-with-grouped-thousands.py
 # ----------------------------------------------------------------------------------------
-print("'{:,}'.format(1000)") # argument:"'{:,}'.format(1000)", external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:"'{:,}'.format(1000)", node:Call, node:Expr, node:Name, node:Num, one_liner_style, variety:*, whole_span:1
+print("'{:,}'.format(1000)") # argument:, external_free_call:print, flat_style, free_call:print, free_call_without_result:print, imperative_style, literal:Str, node:Call, node:Expr, node:Name, node:Str, one_liner_style, variety:*, whole_span:1
 
 # ----------------------------------------------------------------------------------------
 # 174.2687-make-http-post-request.py
