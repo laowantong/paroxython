@@ -4356,6 +4356,13 @@ GROUP BY f.rowid
 54
 55  def poor_print(bar): # no match (returns nothing)
 56      print(bar)
+57  
+58  def gray(n): # paroxython: -impure_function:gray... +pure_function:gray...
+59      if n <= 0:
+60          return [""]
+61      else:
+62          previous = gray(n - 1)
+63          return prefix_all(previous, "0") + prefix_all(reversed(previous), "1")  # paroxython: ...impure_function:gray ...pure_function:gray
 ```
 
 ##### Matches
@@ -4370,6 +4377,7 @@ GROUP BY f.rowid
 | `pure_function:power_list` | 26-30 |
 | `impure_function:belongs_to` | 32-36 |
 | `impure_function:accept` | 38-43 |
+| `pure_function:gray` | 58-63 |
 
 --------------------------------------------------------------------------------
 
@@ -4406,6 +4414,13 @@ GROUP BY f.rowid
 1   def foo():
 2       a = "see the examples for `pure_function` immediately above"
 3       return a
+4   
+5   def gray(n): # paroxython: -impure_function:gray... +pure_function:gray...
+6       if n <= 0:
+7           return [""]
+8       else:
+9           previous = gray(n - 1)
+10          return prefix_all(previous, "0") + prefix_all(reversed(previous), "1")  # paroxython: ...impure_function:gray ...pure_function:gray
 ```
 
 ##### Matches

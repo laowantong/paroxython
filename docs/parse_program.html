@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L364" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L373" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -137,8 +137,8 @@ class ProgramParser:
             for match in finditer(self.flat_ast, overlapped=True):
                 failed_match = False
                 for (label_name, span) in get_bindings(label_prefix, match.capturesdict()):
-                    try:  # Unless this binding is scheduled for deletion...
-                        program.deletion[label_name].remove(Span(span.start, span.end))
+                    try:  # Unless this binding (without its path) is scheduled for deletion...
+                        program.deletion[label_name].remove(Span(span.start, span.end))  # (no path)
                     except (KeyError, ValueError):  # ... actually bind the name with the span.
                         labels[label_name].append(span)
             elapsed = perf_counter() - start
@@ -162,6 +162,15 @@ class ProgramParser:
             elapsed = perf_counter() - start
             self.times[label_name] += elapsed
             self.times[LabelName(&#34;TOTAL&#34;)] += elapsed
+            # Suppress the labels scheduled for deletion
+            labels.clear()  # reuse the dictionary associating each label name to its spans
+            for label in derived_labels:
+                for span in label.spans:
+                    try:  # Unless this binding (without its path) is scheduled for deletion...
+                        program.deletion[label.name].remove(Span(span.start, span.end))
+                    except (KeyError, ValueError):  # ... actually bind the name with the span.
+                        labels[label.name].append(span)
+            derived_labels = [Label(*item) for item in labels.items()]
             if derived_labels:
                 # Bingo! update the DB state and the result with the new labels.
                 self.derived_labels_database.update(derived_labels)
@@ -440,7 +449,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L212-L343" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L212-L352" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -485,8 +494,8 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
             for match in finditer(self.flat_ast, overlapped=True):
                 failed_match = False
                 for (label_name, span) in get_bindings(label_prefix, match.capturesdict()):
-                    try:  # Unless this binding is scheduled for deletion...
-                        program.deletion[label_name].remove(Span(span.start, span.end))
+                    try:  # Unless this binding (without its path) is scheduled for deletion...
+                        program.deletion[label_name].remove(Span(span.start, span.end))  # (no path)
                     except (KeyError, ValueError):  # ... actually bind the name with the span.
                         labels[label_name].append(span)
             elapsed = perf_counter() - start
@@ -510,6 +519,15 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
             elapsed = perf_counter() - start
             self.times[label_name] += elapsed
             self.times[LabelName(&#34;TOTAL&#34;)] += elapsed
+            # Suppress the labels scheduled for deletion
+            labels.clear()  # reuse the dictionary associating each label name to its spans
+            for label in derived_labels:
+                for span in label.spans:
+                    try:  # Unless this binding (without its path) is scheduled for deletion...
+                        program.deletion[label.name].remove(Span(span.start, span.end))
+                    except (KeyError, ValueError):  # ... actually bind the name with the span.
+                        labels[label.name].append(span)
+            derived_labels = [Label(*item) for item in labels.items()]
             if derived_labels:
                 # Bingo! update the DB state and the result with the new labels.
                 self.derived_labels_database.update(derived_labels)
@@ -616,7 +634,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L246-L333" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L246-L342" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     # If the program can be parsed and is nonempty, flatten its AST.
@@ -642,8 +660,8 @@ which is executed each time the tests are launched.</p></div>
         for match in finditer(self.flat_ast, overlapped=True):
             failed_match = False
             for (label_name, span) in get_bindings(label_prefix, match.capturesdict()):
-                try:  # Unless this binding is scheduled for deletion...
-                    program.deletion[label_name].remove(Span(span.start, span.end))
+                try:  # Unless this binding (without its path) is scheduled for deletion...
+                    program.deletion[label_name].remove(Span(span.start, span.end))  # (no path)
                 except (KeyError, ValueError):  # ... actually bind the name with the span.
                     labels[label_name].append(span)
         elapsed = perf_counter() - start
@@ -667,6 +685,15 @@ which is executed each time the tests are launched.</p></div>
         elapsed = perf_counter() - start
         self.times[label_name] += elapsed
         self.times[LabelName(&#34;TOTAL&#34;)] += elapsed
+        # Suppress the labels scheduled for deletion
+        labels.clear()  # reuse the dictionary associating each label name to its spans
+        for label in derived_labels:
+            for span in label.spans:
+                try:  # Unless this binding (without its path) is scheduled for deletion...
+                    program.deletion[label.name].remove(Span(span.start, span.end))
+                except (KeyError, ValueError):  # ... actually bind the name with the span.
+                    labels[label.name].append(span)
+        derived_labels = [Label(*item) for item in labels.items()]
         if derived_labels:
             # Bingo! update the DB state and the result with the new labels.
             self.derived_labels_database.update(derived_labels)
@@ -687,7 +714,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L335-L343" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L344-L352" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def print_performances(self):  # pragma: no cover
     result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)

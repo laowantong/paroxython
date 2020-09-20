@@ -30,7 +30,7 @@ This section mainly describes how the different parts of Paroxython (code, data,
 :   As they are found in a given source code, the features described by `spec.md` are stored in an in-memory database, as labels with a prefix, possibly a suffix, and a span (consisting of their first and last line numbers, as well as a unique identifier to pinpoint their precise location within the AST). The storage of these labels is used dynamically to search for so-called derived features, which themselves are necessarily specified by SQL queries.
 
 `paroxython.parse_program`
-:   This module mainly consists of a function which flattens a given (preprocessed) program, parses it along the specifications defined in `spec.md`, and returns the list of its labels with their spans.
+:   This module mainly consists of a function which flattens a given (preprocessed) program, parses it along the specifications defined in `spec.md`, and returns the list of its labels with their spans, plus/minus those scheduled for addition/deletion.
 
     **Warning.** The binding of a regular expression-specified multi-line feature with its spans may reveal somewhat tricky. Make sure to understand the explanations of `paroxython.parse_program.get_bindings` in case your home-made regular expression yields unexpected results.
 

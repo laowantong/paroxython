@@ -296,8 +296,8 @@ class ProgramParser:
             for match in finditer(self.flat_ast, overlapped=True):
                 failed_match = False
                 for (label_name, span) in get_bindings(label_prefix, match.capturesdict()):
-                    try:  # Unless this binding is scheduled for deletion...
-                        program.deletion[label_name].remove(Span(span.start, span.end))
+                    try:  # Unless this binding (without its path) is scheduled for deletion...
+                        program.deletion[label_name].remove(Span(span.start, span.end))  # (no path)
                     except (KeyError, ValueError):  # ... actually bind the name with the span.
                         labels[label_name].append(span)
             elapsed = perf_counter() - start
@@ -321,6 +321,15 @@ class ProgramParser:
             elapsed = perf_counter() - start
             self.times[label_name] += elapsed
             self.times[LabelName("TOTAL")] += elapsed
+            # Suppress the labels scheduled for deletion
+            labels.clear()  # reuse the dictionary associating each label name to its spans
+            for label in derived_labels:
+                for span in label.spans:
+                    try:  # Unless this binding (without its path) is scheduled for deletion...
+                        program.deletion[label.name].remove(Span(span.start, span.end))
+                    except (KeyError, ValueError):  # ... actually bind the name with the span.
+                        labels[label.name].append(span)
+            derived_labels = [Label(*item) for item in labels.items()]
             if derived_labels:
                 # Bingo! update the DB state and the result with the new labels.
                 self.derived_labels_database.update(derived_labels)
