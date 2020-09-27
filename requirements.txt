@@ -1,6 +1,6 @@
 docopt==0.6.2
 pytest==6.0.2
-regex==2020.7.14
+regex==2020.9.27
 sqlparse==0.3.1
 typed-ast==1.4.1
 typing-extensions==3.7.4.3
