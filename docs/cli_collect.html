@@ -40,7 +40,7 @@
                     • none: no transformation is applied.
 -e --skip=REGEX     Filter out any file whose name fully matches this
                     regular expression. NB: --glob precedes --skip.
-                    [default: &quot;^(__init__|setup|.*[-_]tests?)\.py$&quot;]
+                    [default: (__init__|setup|.*[-_]tests?)\.py]
 -g --glob=PATTERN   The names of the collected files must match this Unix-
                     like glob pattern (not a regular expression). Special
                     syntax: &quot;**/&quot; prefix means “this directory and all
@@ -55,7 +55,7 @@
 -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa. If not
                     specified, use the &quot;taxonomy.tsv&quot; present in DIRECTORY's
                     parent. If absent, use the included default taxonomy:
-                    &lt;https://github.com/laowantong/paroxython/blob/0.5.0/paroxython/resources/taxonomy.tsv&gt;
+                    &lt;https://github.com/laowantong/paroxython/blob/0.5.1/paroxython/resources/taxonomy.tsv&gt;
 </code></pre>
 <details class="source">
 <summary>

@@ -52,7 +52,7 @@ def list_programs(
     result: Programs = []
     cleanup = Cleanup(cleanup_strategy)
     glob_pattern = glob_pattern or &#34;**/*.py&#34;
-    skip_pattern = skip_pattern or r&#34;^(__init__|setup|.*[-_]tests?)\.py$&#34;
+    skip_pattern = skip_pattern or r&#34;(__init__|setup|.*[-_]tests?)\.py&#34;
     match_excluded = regex.compile(skip_pattern).fullmatch
     for program_path in sorted(directory.glob(glob_pattern)):
         if not match_excluded(program_path.name):
@@ -152,7 +152,7 @@ skip any file whose name is <code>"__init__.py"</code>, <code>"setup.py"</code> 
     result: Programs = []
     cleanup = Cleanup(cleanup_strategy)
     glob_pattern = glob_pattern or &#34;**/*.py&#34;
-    skip_pattern = skip_pattern or r&#34;^(__init__|setup|.*[-_]tests?)\.py$&#34;
+    skip_pattern = skip_pattern or r&#34;(__init__|setup|.*[-_]tests?)\.py&#34;
     match_excluded = regex.compile(skip_pattern).fullmatch
     for program_path in sorted(directory.glob(glob_pattern)):
         if not match_excluded(program_path.name):
