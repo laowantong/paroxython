@@ -58,12 +58,13 @@ class Cleanup:
         Description:
             1. Suppress initial comments.
             2. Suppress `if __name__ == '__main__'` part.
-            3. Replace tabulations with spaces.
-            4. Normalize Paroxython hint comments.
-            5. Replace docstrings with `pass` statements (most of which being suppressed at the end
+            3. Suppress `sys.path` injections (frequently used to simplify `import` behavior).
+            4. Replace tabulations with spaces.
+            5. Normalize Paroxython hint comments.
+            6. Replace docstrings with `pass` statements (most of which being suppressed at the end
                of the process).
-            6. Suppress empty or blank lines.
-            7. Suppress useless `pass` statements.
+            7. Suppress empty or blank lines.
+            8. Suppress useless `pass` statements.
 
         Examples:
             - Empty or blank lines are suppressed.

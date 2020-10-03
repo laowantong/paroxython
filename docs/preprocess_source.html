@@ -49,7 +49,7 @@ information is just stored: <code><a title="paroxython.parse_program.ProgramPars
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L563" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L565" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -76,12 +76,13 @@ class Cleanup:
         Description:
             1. Suppress initial comments.
             2. Suppress `if __name__ == &#39;__main__&#39;` part.
-            3. Replace tabulations with spaces.
-            4. Normalize Paroxython hint comments.
-            5. Replace docstrings with `pass` statements (most of which being suppressed at the end
+            3. Suppress `sys.path` injections (frequently used to simplify `import` behavior).
+            4. Replace tabulations with spaces.
+            5. Normalize Paroxython hint comments.
+            6. Replace docstrings with `pass` statements (most of which being suppressed at the end
                of the process).
-            6. Suppress empty or blank lines.
-            7. Suppress useless `pass` statements.
+            7. Suppress empty or blank lines.
+            8. Suppress useless `pass` statements.
 
         Examples:
             - Empty or blank lines are suppressed.
@@ -291,7 +292,8 @@ class Cleanup:
 
     @staticmethod
     def suppress_sys_path_injection(
-        source: str, sub: Callable = regex.compile(r&#39;(?m)^__import__\(&#34;sys&#34;\)\.path\[0:0\] = .+\n&#39;).sub
+        source: str,
+        sub: Callable = regex.compile(r&#39;(?m)^__import__\(&#34;sys&#34;\)\.path\[0:0\] = .+\n&#39;).sub,
     ) -&gt; str:
         return sub(&#34;&#34;, source)
 
@@ -480,7 +482,7 @@ fizz = [
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L353-L439" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L355-L441" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def centrifugate_hints(
     source: Source, match_isolated_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
@@ -565,7 +567,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L476-L553" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L478-L555" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_hints(
     source: Source,
@@ -609,7 +611,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L556-L564" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L558-L566" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def remove_hints(
     source: Source,
@@ -643,7 +645,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L39-L350" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L39-L352" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Cleanup:
     def __init__(self, cleanup_strategy: str):
@@ -658,12 +660,13 @@ has manually added [resp. suppressed].</dd>
         Description:
             1. Suppress initial comments.
             2. Suppress `if __name__ == &#39;__main__&#39;` part.
-            3. Replace tabulations with spaces.
-            4. Normalize Paroxython hint comments.
-            5. Replace docstrings with `pass` statements (most of which being suppressed at the end
+            3. Suppress `sys.path` injections (frequently used to simplify `import` behavior).
+            4. Replace tabulations with spaces.
+            5. Normalize Paroxython hint comments.
+            6. Replace docstrings with `pass` statements (most of which being suppressed at the end
                of the process).
-            6. Suppress empty or blank lines.
-            7. Suppress useless `pass` statements.
+            7. Suppress empty or blank lines.
+            8. Suppress useless `pass` statements.
 
         Examples:
             - Empty or blank lines are suppressed.
@@ -873,7 +876,8 @@ has manually added [resp. suppressed].</dd>
 
     @staticmethod
     def suppress_sys_path_injection(
-        source: str, sub: Callable = regex.compile(r&#39;(?m)^__import__\(&#34;sys&#34;\)\.path\[0:0\] = .+\n&#39;).sub
+        source: str,
+        sub: Callable = regex.compile(r&#39;(?m)^__import__\(&#34;sys&#34;\)\.path\[0:0\] = .+\n&#39;).sub,
     ) -&gt; str:
         return sub(&#34;&#34;, source)
 
@@ -909,6 +913,7 @@ has manually added [resp. suppressed].</dd>
 <ol>
 <li>Suppress initial comments.</li>
 <li>Suppress <code>if __name__ == '__main__'</code> part.</li>
+<li>Suppress <code>sys.path</code> injections (frequently used to simplify <code>import</code> behavior).</li>
 <li>Replace tabulations with spaces.</li>
 <li>Normalize Paroxython hint comments.</li>
 <li>Replace docstrings with <code>pass</code> statements (most of which being suppressed at the end
@@ -1103,7 +1108,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L54-L284" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L54-L285" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def full_cleaning(source: Source) -&gt; Source:
@@ -1112,12 +1117,13 @@ def full_cleaning(source: Source) -&gt; Source:
     Description:
         1. Suppress initial comments.
         2. Suppress `if __name__ == &#39;__main__&#39;` part.
-        3. Replace tabulations with spaces.
-        4. Normalize Paroxython hint comments.
-        5. Replace docstrings with `pass` statements (most of which being suppressed at the end
+        3. Suppress `sys.path` injections (frequently used to simplify `import` behavior).
+        4. Replace tabulations with spaces.
+        5. Normalize Paroxython hint comments.
+        6. Replace docstrings with `pass` statements (most of which being suppressed at the end
            of the process).
-        6. Suppress empty or blank lines.
-        7. Suppress useless `pass` statements.
+        7. Suppress empty or blank lines.
+        8. Suppress useless `pass` statements.
 
     Examples:
         - Empty or blank lines are suppressed.
@@ -1323,7 +1329,7 @@ def full_cleaning(source: Source) -&gt; Source:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L286-L294" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L287-L295" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_first_comments(
@@ -1341,7 +1347,7 @@ def suppress_first_comments(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L296-L304" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L297-L305" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_main_guard(
@@ -1359,11 +1365,12 @@ def suppress_main_guard(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L306-L314" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L307-L316" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_sys_path_injection(
-    source: str, sub: Callable = regex.compile(r&#39;(?m)^__import__\(&#34;sys&#34;\)\.path\[0:0\] = .+\n&#39;).sub
+    source: str,
+    sub: Callable = regex.compile(r&#39;(?m)^__import__\(&#34;sys&#34;\)\.path\[0:0\] = .+\n&#39;).sub,
 ) -&gt; str:
     return sub(&#34;&#34;, source)</code></pre>
 </details>
@@ -1379,7 +1386,7 @@ pattern will be <code>r"(?i)#\s*paroxython\s*:\s*"</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L316-L331" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L318-L333" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def normalize_paroxython_comments(
@@ -1401,7 +1408,7 @@ def normalize_paroxython_comments(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L333-L339" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L335-L341" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&#34;).sub) -&gt; str:
@@ -1417,7 +1424,7 @@ def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L341-L350" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L343-L352" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_useless_pass_statements(
@@ -1438,7 +1445,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L442-L473" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L444-L475" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class HintBuffer:
     def __init__(self, description: str) -&gt; None:
@@ -1475,7 +1482,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L450-L452" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L452-L454" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(line_number, line_number))</code></pre>
@@ -1489,7 +1496,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L454-L456" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L456-L458" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.stack[label_name].append(line_number)</code></pre>
@@ -1503,7 +1510,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L458-L460" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L460-L462" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
     return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
@@ -1517,7 +1524,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L462-L464" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L464-L466" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))</code></pre>
@@ -1531,7 +1538,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L466-L469" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L468-L471" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
     if any(self.stack.values()):
@@ -1546,7 +1553,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L471-L473" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L473-L475" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
     return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
