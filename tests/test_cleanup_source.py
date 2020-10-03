@@ -163,6 +163,13 @@ if __name__ == "__main__":
 ---
 foo = bar
 >>>
+
+<<< `sys.path` injections are suppressed.
+__import__("sys").path[0:0] = ["programs"]
+(28433 * 2**7830457 + 1) % 10**10
+---
+(28433 * 2**7830457 + 1) % 10**10
+>>>
 '''
 
 source_rex = regex.compile(r"(?ms)^<<< ([^\n]+)\n(.+?)\n---\n(.+?)\n>>>")

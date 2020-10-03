@@ -234,6 +234,14 @@ class Cleanup:
             ```python
             foo = bar
             ```
+            - `sys.path` injections are suppressed.
+            ```python
+            __import__("sys").path[0:0] = ["programs"]
+            (28433 * 2**7830457 + 1) % 10**10
+            ```
+            ```python
+            (28433 * 2**7830457 + 1) % 10**10
+            ```
 
             All examples above automatically extracted from
             [test_cleanup_source.py](https://repo/tests/test_cleanup_source.py).
@@ -248,6 +256,7 @@ class Cleanup:
         text = str(source)
         text = Cleanup.suppress_first_comments(text)
         text = Cleanup.suppress_main_guard(text)
+        text = Cleanup.suppress_sys_path_injection(text)
         text = text.replace("\t", "    ")
         lines = iter(text.split("\n"))
         for token_info in generate_tokens(lambda: next(lines) + "\n"):
@@ -289,6 +298,17 @@ class Cleanup:
         source: str, sub: Callable = regex.compile(r"(?ms)^if +__name__ *== *.__main__. *:.+").sub
     ) -> str:
         """Suppress `if __name__ == '__main__'` part.
+
+        Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
+        """
+        return sub("", source)
+
+    @staticmethod
+    def suppress_sys_path_injection(
+        source: str,
+        sub: Callable = regex.compile(r'(?m)^__import__\("sys"\)\.path\[0:0\] = .+\n').sub,
+    ) -> str:
+        """Suppress lines starting with `__import__("sys").path[0:0] = `.
 
         Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
         """
