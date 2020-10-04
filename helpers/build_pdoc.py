@@ -360,6 +360,15 @@ def inject_taxonomy():
     index_path.write_text(text)
 
 
+def disable_cli_code_syntax_hightlighting():
+    base_path = Path("docs")
+    for path in base_path.glob("cli*.html"):
+        print(path)
+        source = path.read_text()
+        source = regex.sub('(?s)<code class="plain">(.+?)</code>', r"\1", source)
+        path.write_text(source)
+
+
 def main():
     update_readme_example()
     update_version_number()
@@ -375,6 +384,7 @@ def main():
     inject_flow_diagram_in_nav()
     link_manuals()
     inject_taxonomy()
+    disable_cli_code_syntax_hightlighting()
     compute_stats()
 
 
