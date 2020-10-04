@@ -114,6 +114,7 @@ def test_recommend_dummy_programs():
     pipe_path = Path("examples/dummy/pipe.py")
     db_path = Path("examples/dummy/programs_db.json")
     result_path = Path("examples/dummy/temp_recommendations.md")
+
     run(f"recommend -o {result_path} -p {pipe_path} {db_path}")
     result_text = result_path.read_text()
     assert result_text == Path("examples/dummy/programs_recommendations.md").read_text()
@@ -139,9 +140,16 @@ def test_recommend_dummy_programs():
 
 def test_recommend_simple_programs():
     run("collect --no_timestamp examples/simple/programs")
-    run("recommend examples/simple/programs_db.json")
+    run("recommend examples/simple/programs")  # abbreviated form
     output = run("recommend -o stdout examples/simple/programs_db.json")
     assert len(output.strip().split("\n")) == 9
+
+
+def test_recommend_failures():
+    with pytest.raises(subprocess.CalledProcessError):
+        run(f"recommend foobar")  # non existing file or directory
+    with pytest.raises(subprocess.CalledProcessError):
+        run(f"recommend examples/simple")  # no tag database in the parent directory
 
 
 if __name__ == "__main__":

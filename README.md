@@ -121,7 +121,7 @@ Writing programs_db.json.
 Then, filter it through [this pipeline](https://github.com/laowantong/paroxython/blob/master/examples/simple/programs_pipe.py):
 
 ```shell
-> paroxython recommend -p programs_pipe.py programs_db.json
+> paroxython recommend programs
 Processing 5 commands on 21 programs.
   19 programs remaining after operation 1 (impart).
   18 programs remaining after operation 2 (exclude).
