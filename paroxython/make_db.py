@@ -11,7 +11,7 @@ from typing import Callable, List, Optional, Tuple, Dict
 
 import regex  # type: ignore
 
-from .goodies import add_line_numbers
+from .goodies import add_line_numbers, print_success
 from .label_programs import labelled_programs, iterate_and_print_programs
 from .map_taxonomy import Taxonomy
 from .user_types import (
@@ -145,8 +145,8 @@ class TagDatabase:
                 directory. Defaults to `None`.
         """
         db_path = db_path or self.directory.parent / f"{self.directory.name}_db.json"
-        print(f"Writing {db_path}.")
         db_path.write_text(self.get_json())
+        print_success(f"Dumped: {db_path.absolute()}.")
 
     def write_sqlite(self, db_path: Optional[Path] = None) -> None:
         """Dump the constructed `TagDatabase` object as a SQLite database (experimental).
@@ -161,7 +161,6 @@ class TagDatabase:
             [in the user manual](user_manual/index.html#the-sqlite-database).
         """
         db_path = db_path or self.directory.parent / f"{self.directory.name}_db.sqlite"
-        print(f"Writing {db_path}.")
         program_rows: List[Tuple] = []
         label_rows: List[Tuple] = []
         taxon_rows: List[Tuple] = []
@@ -240,6 +239,8 @@ class TagDatabase:
 
         connexion.commit()
         connexion.close()
+
+        print_success(f"Dumped: {db_path.absolute()}.")
 
 
 def collect_labels(programs: Programs) -> LabelInfos:

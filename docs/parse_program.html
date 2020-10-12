@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L373" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L0-L374" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from os.path import dirname
@@ -43,6 +43,7 @@ import regex  # type: ignore
 
 from .derived_labels_db import DerivedLabelsDatabase
 from .flatten_ast import ast, flatten_ast
+from .goodies import print_fail
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {
@@ -103,14 +104,14 @@ class ProgramParser:
         self.times: Dict[LabelName, float] = {LabelName(&#34;TOTAL&#34;): 0.0}
         for (label_name, language, specification) in find_all_features(text):
             if label_name in self.features:  # pragma: no cover
-                raise ValueError(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)
+                print_fail(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)
             self.times[label_name] = 0.0
             if language == &#34;re&#34;:
                 self.features[label_name] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
             elif language == &#34;sql&#34;:
                 self.queries[label_name] = Query(specification)
             elif specification.strip() != &#34;&#34;:  # pragma: no cover
-                raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
+                print_fail(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
         self.derived_labels_database = DerivedLabelsDatabase()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
@@ -249,7 +250,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L23-L46" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L24-L47" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def find_all_features(
     specifications: str,
@@ -298,7 +299,7 @@ Span(1, 4, &quot;path_1&quot;)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L49-L75" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L50-L76" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def pos_to_span(pos: List[str]) -&gt; Span:
     (start, path) = pos[0].split(&#34;:&#34;)
@@ -414,7 +415,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L81-L209" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L82-L210" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_bindings(
     label_prefix: LabelName, captures: Dict[str, List[str]]
@@ -449,7 +450,7 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L212-L352" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L213-L353" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class ProgramParser:
     def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
@@ -460,14 +461,14 @@ ends of the list, they are ignored by <code><a title="paroxython.parse_program.p
         self.times: Dict[LabelName, float] = {LabelName(&#34;TOTAL&#34;): 0.0}
         for (label_name, language, specification) in find_all_features(text):
             if label_name in self.features:  # pragma: no cover
-                raise ValueError(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)
+                print_fail(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)
             self.times[label_name] = 0.0
             if language == &#34;re&#34;:
                 self.features[label_name] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
             elif language == &#34;sql&#34;:
                 self.queries[label_name] = Query(specification)
             elif specification.strip() != &#34;&#34;:  # pragma: no cover
-                raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
+                print_fail(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
         self.derived_labels_database = DerivedLabelsDatabase()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
@@ -574,7 +575,7 @@ pre-bind the appropriate method. Create an instance of the database of derived l
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L213-L244" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L214-L245" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __init__(self, spec_path: Path = DEFAULT_SPEC_PATH) -&gt; None:
     self.spec_path = spec_path
@@ -584,14 +585,14 @@ pre-bind the appropriate method. Create an instance of the database of derived l
     self.times: Dict[LabelName, float] = {LabelName(&#34;TOTAL&#34;): 0.0}
     for (label_name, language, specification) in find_all_features(text):
         if label_name in self.features:  # pragma: no cover
-            raise ValueError(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)
+            print_fail(f&#34;Duplicated name &#39;{label_name}&#39;!&#34;)
         self.times[label_name] = 0.0
         if language == &#34;re&#34;:
             self.features[label_name] = regex.compile(f&#34;(?mx){specification}&#34;).finditer
         elif language == &#34;sql&#34;:
             self.queries[label_name] = Query(specification)
         elif specification.strip() != &#34;&#34;:  # pragma: no cover
-            raise ValueError(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
+            print_fail(f&#34;Unknow language &#39;{language}&#39; for &#39;{label_name}&#39;!&#34;)
     self.derived_labels_database = DerivedLabelsDatabase()</code></pre>
 </details>
 </dd>
@@ -634,7 +635,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L246-L342" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L247-L343" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, program: Program, yield_failed_matches: bool = False) -&gt; Labels:
     # If the program can be parsed and is nonempty, flatten its AST.
@@ -714,7 +715,7 @@ which is executed each time the tests are launched.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L344-L352" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/parse_program.py#L345-L353" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def print_performances(self):  # pragma: no cover
     result = sorted(self.times.items(), key=lambda item: item[1], reverse=True)

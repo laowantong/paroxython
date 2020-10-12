@@ -83,13 +83,14 @@ from pathlib import Path
 import regex  # type: ignore
 from typed_ast.ast3 import literal_eval
 
+from .goodies import print_success, print_exit
 from .recommend_programs import Recommendations
 
 
 def cli_wrapper(args):
     db_path = Path(args["DB_PATH"])
     if not db_path.exists():
-        sys.exit(f"No file or directory at '{db_path}': aborted.")
+        print_exit(f"no file or directory at '{db_path.absolute()}': aborted.")
     parent_path = db_path.parent
     if db_path.is_dir():
         for suffix in ("_db", "-db"):
@@ -97,7 +98,7 @@ def cli_wrapper(args):
             if db_path.is_file():
                 break
         else:
-            sys.exit(f"Unable to locate a tag database in '{parent_path}': aborted.")
+            print_exit(f"unable to locate a tag database in '{parent_path}': aborted.")
     m = regex.fullmatch(r"(.+[_-])db\.json", db_path.name)
     prefix = m[1] if m else ""
     pipeline_path = Path(args["--pipe"] or parent_path / f"{prefix}pipe.py")
@@ -105,9 +106,9 @@ def cli_wrapper(args):
         try:
             commands = literal_eval(pipeline_path.read_text())
         except Exception:  # Too many possible exceptions
-            sys.exit(f"The pipeline '{pipeline_path}' is malformed: aborted.")
+            print_exit(f"the pipeline '{pipeline_path}' is malformed: aborted.")
     elif args["--pipe"]:
-        sys.exit(f"No pipeline at '{pipeline_path}': aborted.")
+        print_exit(f"no pipeline at '{pipeline_path}': aborted.")
     else:
         commands = []
     stdout_backup = sys.stdout
@@ -135,4 +136,4 @@ def cli_wrapper(args):
         return print("\n".join(sorted(rec.selected_programs - rec.hidden_programs)))
     output_path = Path(args["--output"] or parent_path / f"{prefix}recommendations.md")
     output_path.write_text(rec.get_markdown())
-    print(f"Dumped: {output_path.resolve()}.\n")
+    print_success(f"Dumped: {output_path.resolve()}.\n")

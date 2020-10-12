@@ -11,6 +11,12 @@ import regex  # type: ignore
 
 from .user_types import Span
 
+# ANSI color codes
+OK = "\033[92m"
+WARNING = "\033[1m\033[38;5;166m"
+FAIL = "\033[1m\033[91m"
+RESET = "\033[0m"
+
 
 def title_to_slug_factory() -> Callable:
     """Return a function mapping a string to the appropriate slug, optionally disambiguated.
@@ -150,6 +156,22 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -> str:
     return f"{couple[0]}" + ("" if couple[0] == couple[1] else f"-{couple[1]}")
 
 
+def print_success(message: str):
+    """Print the given message of success."""
+    print(f"{OK}{message}{RESET}")
+
+
 def print_warning(message: str):
     """Print the given message on `sys.stderr`."""
-    print(f"Warning: {message}", file=sys.stderr)
+    print(f"{WARNING}Warning: {message}{RESET}", file=sys.stderr)
+
+
+def print_fail(message: str):
+    """Print the given message on `sys.stderr` and raise a ValueError."""
+    print(f"{FAIL}Error: {message}{RESET}", file=sys.stderr)
+    raise ValueError(message)
+
+
+def print_exit(message: str):
+    """Print the given message on `sys.stderr` and exit."""
+    sys.exit(f"{FAIL}Error: {message}{RESET}")

@@ -43,7 +43,7 @@ recommend   Read and execute a pipeline of commands and report the learning
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli.py#L0-L47" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli.py#L0-L48" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">#! /usr/bin/env python
 import sys
@@ -53,20 +53,21 @@ import regex  # type: ignore
 from docopt import docopt  # type: ignore
 
 from . import PAROXYTHON_VERSION
+from .goodies import print_exit
 
 if sys.version &lt; &#34;3.6&#34;:  # pragma: no cover
-    sys.exit(f&#34;Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.&#34;)
+    print_exit(f&#34;Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.&#34;)
 
 
 def main():
     doc = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
     args = docopt(doc, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
     if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
-        sys.exit(doc)
+        print_exit(doc)
     command_name = args[&#34;COMMAND&#34;].lower()
     command_args = [command_name] + args[&#34;ARGS&#34;]
     if command_name not in (&#34;tag&#34;, &#34;recommend&#34;, &#34;collect&#34;):
-        sys.exit(f&#34;{command_name} is not a valid command. Type &#39;paroxython --help&#39;.&#34;)
+        print_exit(f&#34;{command_name} is not a valid command. Type &#39;paroxython --help&#39;.&#34;)
     command = import_module(f&#34;paroxython.cli_{command_name}&#34;, &#34;cli_wrapper&#34;)
     command.__doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, command.__doc__)
     command.cli_wrapper(docopt(command.__doc__, argv=command_args))
@@ -91,17 +92,17 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli.py#L33-L44" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli.py#L34-L45" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def main():
     doc = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, __doc__)  # suppress Markdown code delimiters
     args = docopt(doc, version=f&#34;paroxython version {PAROXYTHON_VERSION}&#34;, options_first=True)
     if not args.get(&#34;COMMAND&#34;):  # pragma: no cover
-        sys.exit(doc)
+        print_exit(doc)
     command_name = args[&#34;COMMAND&#34;].lower()
     command_args = [command_name] + args[&#34;ARGS&#34;]
     if command_name not in (&#34;tag&#34;, &#34;recommend&#34;, &#34;collect&#34;):
-        sys.exit(f&#34;{command_name} is not a valid command. Type &#39;paroxython --help&#39;.&#34;)
+        print_exit(f&#34;{command_name} is not a valid command. Type &#39;paroxython --help&#39;.&#34;)
     command = import_module(f&#34;paroxython.cli_{command_name}&#34;, &#34;cli_wrapper&#34;)
     command.__doc__ = regex.sub(r&#34;(?m)^ *```.*\n&#34;, &#34;&#34;, command.__doc__)
     command.cli_wrapper(docopt(command.__doc__, argv=command_args))</code></pre>

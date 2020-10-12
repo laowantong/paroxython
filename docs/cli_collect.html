@@ -60,15 +60,18 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_collect.py#L0-L64" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_collect.py#L0-L67" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 
+from .goodies import print_exit
 from .make_db import TagDatabase
 
 
 def cli_wrapper(args):
     directory = Path(args[&#34;DIRECTORY&#34;])
+    if not directory.is_dir():
+        print_exit(f&#34;no directory at &#39;{directory.absolute()}&#39;: aborted.&#34;)
     taxonomy = args.get(&#34;--taxonomy&#34;)
     if taxonomy:
         taxonomy_path = Path(taxonomy)
@@ -108,10 +111,12 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_collect.py#L42-L65" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_collect.py#L43-L68" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     directory = Path(args[&#34;DIRECTORY&#34;])
+    if not directory.is_dir():
+        print_exit(f&#34;no directory at &#39;{directory.absolute()}&#39;: aborted.&#34;)
     taxonomy = args.get(&#34;--taxonomy&#34;)
     if taxonomy:
         taxonomy_path = Path(taxonomy)

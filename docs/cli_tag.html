@@ -42,13 +42,13 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_tag.py#L0-L68" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_tag.py#L0-L72" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 from typing import List, Tuple, Optional
 from typing_extensions import Literal
 
-from .goodies import couple_to_string
+from .goodies import couple_to_string, print_exit
 from .parse_program import ProgramParser
 from .list_programs import get_program
 from .map_taxonomy import Taxonomy
@@ -87,8 +87,12 @@ def main(
 
 def cli_wrapper(args):
     path = Path(args[&#34;FILENAME&#34;])
+    try:
+        source = path.read_text()
+    except Exception as e:
+        print_exit(str(e))
     result = main(
-        source=Source(path.read_text()),
+        source=Source(source),
         tags=&#34;Label&#34; if args[&#34;--labels&#34;] else &#34;Taxon&#34;,
         relative_path=path.parent,
         output_format=args[&#34;--format&#34;],
@@ -152,12 +156,16 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_tag.py#L60-L69" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_tag.py#L60-L73" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     path = Path(args[&#34;FILENAME&#34;])
+    try:
+        source = path.read_text()
+    except Exception as e:
+        print_exit(str(e))
     result = main(
-        source=Source(path.read_text()),
+        source=Source(source),
         tags=&#34;Label&#34; if args[&#34;--labels&#34;] else &#34;Taxon&#34;,
         relative_path=path.parent,
         output_format=args[&#34;--format&#34;],

@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L0-L154" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L0-L176" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import sys
 from collections import defaultdict
@@ -43,6 +43,12 @@ from unicodedata import normalize
 import regex  # type: ignore
 
 from .user_types import Span
+
+# ANSI color codes
+OK = &#34;\033[92m&#34;
+WARNING = &#34;\033[1m\033[38;5;166m&#34;
+FAIL = &#34;\033[1m\033[91m&#34;
+RESET = &#34;\033[0m&#34;
 
 
 def title_to_slug_factory() -&gt; Callable:
@@ -113,8 +119,21 @@ def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
     return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)
 
 
+def print_success(message: str):
+    print(f&#34;{OK}{message}{RESET}&#34;)
+
+
 def print_warning(message: str):
-    print(f&#34;Warning: {message}&#34;, file=sys.stderr)</code></pre>
+    print(f&#34;{WARNING}Warning: {message}{RESET}&#34;, file=sys.stderr)
+
+
+def print_fail(message: str):
+    print(f&#34;{FAIL}Error: {message}{RESET}&#34;, file=sys.stderr)
+    raise ValueError(message)
+
+
+def print_exit(message: str):
+    sys.exit(f&#34;{FAIL}Error: {message}{RESET}&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -142,7 +161,7 @@ so on.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L15-L47" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L21-L53" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def title_to_slug_factory() -&gt; Callable:
     slug_counts: Dict[str, int] = defaultdict(int)
@@ -176,7 +195,7 @@ so on.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L50-L54" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L56-L60" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def add_line_numbers(source: str) -&gt; str:
     if not source:
@@ -243,7 +262,7 @@ Defaults to <code>3</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L57-L110" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L63-L116" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def enumeration_to_txt_factory(
     width: int = 20,
@@ -282,7 +301,7 @@ recommendation report.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L113-L136" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L119-L142" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cost_bucket(cost: int) -&gt; str:
     if cost == 0:
@@ -314,10 +333,24 @@ recommendation report.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L139-L150" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L145-L156" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def couple_to_string(couple: Union[Span, Tuple[int, int]]) -&gt; str:
     return f&#34;{couple[0]}&#34; + (&#34;&#34; if couple[0] == couple[1] else f&#34;-{couple[1]}&#34;)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.print_success"><code class="name flex">
+<span>def <span class="ident">print_success</span></span>(<span>message: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print the given message of success.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L159-L161" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def print_success(message: str):
+    print(f&#34;{OK}{message}{RESET}&#34;)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.goodies.print_warning"><code class="name flex">
@@ -328,10 +361,39 @@ recommendation report.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L153-L155" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L164-L166" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def print_warning(message: str):
-    print(f&#34;Warning: {message}&#34;, file=sys.stderr)</code></pre>
+    print(f&#34;{WARNING}Warning: {message}{RESET}&#34;, file=sys.stderr)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.print_fail"><code class="name flex">
+<span>def <span class="ident">print_fail</span></span>(<span>message: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print the given message on <code>sys.stderr</code> and raise a ValueError.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L169-L172" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def print_fail(message: str):
+    print(f&#34;{FAIL}Error: {message}{RESET}&#34;, file=sys.stderr)
+    raise ValueError(message)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.goodies.print_exit"><code class="name flex">
+<span>def <span class="ident">print_exit</span></span>(<span>message: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print the given message on <code>sys.stderr</code> and exit.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/goodies.py#L175-L177" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def print_exit(message: str):
+    sys.exit(f&#34;{FAIL}Error: {message}{RESET}&#34;)</code></pre>
 </details>
 </dd>
 </dl>
@@ -362,7 +424,10 @@ recommendation report.</p>
 <li><code><a title="paroxython.goodies.enumeration_to_txt_factory" href="#paroxython.goodies.enumeration_to_txt_factory">enumeration_to_txt_factory</a></code></li>
 <li><code><a title="paroxython.goodies.cost_bucket" href="#paroxython.goodies.cost_bucket">cost_bucket</a></code></li>
 <li><code><a title="paroxython.goodies.couple_to_string" href="#paroxython.goodies.couple_to_string">couple_to_string</a></code></li>
+<li><code><a title="paroxython.goodies.print_success" href="#paroxython.goodies.print_success">print_success</a></code></li>
 <li><code><a title="paroxython.goodies.print_warning" href="#paroxython.goodies.print_warning">print_warning</a></code></li>
+<li><code><a title="paroxython.goodies.print_fail" href="#paroxython.goodies.print_fail">print_fail</a></code></li>
+<li><code><a title="paroxython.goodies.print_exit" href="#paroxython.goodies.print_exit">print_exit</a></code></li>
 </ul>
 </li>
 </ul>

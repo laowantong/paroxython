@@ -95,7 +95,7 @@ paroxython recommend -o stdout path/to/programs_db.json \
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_recommend.py#L0-L137" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_recommend.py#L0-L138" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sys
@@ -104,13 +104,14 @@ from pathlib import Path
 import regex  # type: ignore
 from typed_ast.ast3 import literal_eval
 
+from .goodies import print_success, print_exit
 from .recommend_programs import Recommendations
 
 
 def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
     if not db_path.exists():
-        sys.exit(f&#34;No file or directory at &#39;{db_path}&#39;: aborted.&#34;)
+        print_exit(f&#34;no file or directory at &#39;{db_path.absolute()}&#39;: aborted.&#34;)
     parent_path = db_path.parent
     if db_path.is_dir():
         for suffix in (&#34;_db&#34;, &#34;-db&#34;):
@@ -118,7 +119,7 @@ def cli_wrapper(args):
             if db_path.is_file():
                 break
         else:
-            sys.exit(f&#34;Unable to locate a tag database in &#39;{parent_path}&#39;: aborted.&#34;)
+            print_exit(f&#34;unable to locate a tag database in &#39;{parent_path}&#39;: aborted.&#34;)
     m = regex.fullmatch(r&#34;(.+[_-])db\.json&#34;, db_path.name)
     prefix = m[1] if m else &#34;&#34;
     pipeline_path = Path(args[&#34;--pipe&#34;] or parent_path / f&#34;{prefix}pipe.py&#34;)
@@ -126,9 +127,9 @@ def cli_wrapper(args):
         try:
             commands = literal_eval(pipeline_path.read_text())
         except Exception:  # Too many possible exceptions
-            sys.exit(f&#34;The pipeline &#39;{pipeline_path}&#39; is malformed: aborted.&#34;)
+            print_exit(f&#34;the pipeline &#39;{pipeline_path}&#39; is malformed: aborted.&#34;)
     elif args[&#34;--pipe&#34;]:
-        sys.exit(f&#34;No pipeline at &#39;{pipeline_path}&#39;: aborted.&#34;)
+        print_exit(f&#34;no pipeline at &#39;{pipeline_path}&#39;: aborted.&#34;)
     else:
         commands = []
     stdout_backup = sys.stdout
@@ -156,7 +157,7 @@ def cli_wrapper(args):
         return print(&#34;\n&#34;.join(sorted(rec.selected_programs - rec.hidden_programs)))
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
-    print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
+    print_success(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -174,12 +175,12 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_recommend.py#L89-L138" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_recommend.py#L90-L139" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
     if not db_path.exists():
-        sys.exit(f&#34;No file or directory at &#39;{db_path}&#39;: aborted.&#34;)
+        print_exit(f&#34;no file or directory at &#39;{db_path.absolute()}&#39;: aborted.&#34;)
     parent_path = db_path.parent
     if db_path.is_dir():
         for suffix in (&#34;_db&#34;, &#34;-db&#34;):
@@ -187,7 +188,7 @@ def cli_wrapper(args):
             if db_path.is_file():
                 break
         else:
-            sys.exit(f&#34;Unable to locate a tag database in &#39;{parent_path}&#39;: aborted.&#34;)
+            print_exit(f&#34;unable to locate a tag database in &#39;{parent_path}&#39;: aborted.&#34;)
     m = regex.fullmatch(r&#34;(.+[_-])db\.json&#34;, db_path.name)
     prefix = m[1] if m else &#34;&#34;
     pipeline_path = Path(args[&#34;--pipe&#34;] or parent_path / f&#34;{prefix}pipe.py&#34;)
@@ -195,9 +196,9 @@ def cli_wrapper(args):
         try:
             commands = literal_eval(pipeline_path.read_text())
         except Exception:  # Too many possible exceptions
-            sys.exit(f&#34;The pipeline &#39;{pipeline_path}&#39; is malformed: aborted.&#34;)
+            print_exit(f&#34;the pipeline &#39;{pipeline_path}&#39; is malformed: aborted.&#34;)
     elif args[&#34;--pipe&#34;]:
-        sys.exit(f&#34;No pipeline at &#39;{pipeline_path}&#39;: aborted.&#34;)
+        print_exit(f&#34;no pipeline at &#39;{pipeline_path}&#39;: aborted.&#34;)
     else:
         commands = []
     stdout_backup = sys.stdout
@@ -225,7 +226,7 @@ def cli_wrapper(args):
         return print(&#34;\n&#34;.join(sorted(rec.selected_programs - rec.hidden_programs)))
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
-    print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
+    print_success(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
 </details>
 </dd>
 </dl>

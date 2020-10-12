@@ -49,7 +49,7 @@ information is just stored: <code><a title="paroxython.parse_program.ProgramPars
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L565" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L0-L566" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from collections import defaultdict
 from token import DEDENT, INDENT, NEWLINE, STRING
@@ -58,6 +58,7 @@ from typing import Callable, Dict, List, Tuple, Set
 
 import regex  # type: ignore
 
+from .goodies import print_fail
 from .user_types import LabelName, LabelsSpans, Source, Span
 
 HINT_COMMENT = &#34;# paroxython:&#34;
@@ -361,7 +362,7 @@ class HintBuffer:
 
     def ensure_stack_is_empty(self) -&gt; None:
         if any(self.stack.values()):
-            raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)
+            print_fail(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)
 
     def get_result(self) -&gt; LabelsSpans:
         return {k: sorted(v) for (k, v) in self.result.items()}
@@ -380,7 +381,7 @@ def collect_hints(
         for hint in hints.split():
             m = match_label(hint)
             if m is None:
-                raise ValueError(f&#34;Malformed hint &#39;{hint}&#39; on line {i}.&#34;)
+                print_fail(f&#34;Malformed hint &#39;{hint}&#39; on line {i}.&#34;)
             (before, label, after) = m.groups()
             if before in (&#34;&#34;, &#34;+&#34;, &#34;-&#34;):
                 buffer = deletion if before == &#34;-&#34; else addition
@@ -390,10 +391,10 @@ def collect_hints(
                     buffer.append_hint(label, i)
             else:  # `before` is in (&#34;...&#34;, &#34;…&#34;)
                 if after:
-                    raise ValueError(f&#34;Illegal last part for hint {m.groups()} on line {i}.&#34;)
+                    print_fail(f&#34;Illegal last part for hint {m.groups()} on line {i}.&#34;)
                 champions = addition.get_champion(label) + deletion.get_champion(label)
                 if not champions:
-                    raise ValueError(f&#34;Unmatched closing hint {m.groups()} on line {i}.&#34;)
+                    print_fail(f&#34;Unmatched closing hint {m.groups()} on line {i}.&#34;)
                 max(champions)[1].close_hint(label, i)
     addition.ensure_stack_is_empty()
     deletion.ensure_stack_is_empty()
@@ -482,7 +483,7 @@ fizz = [
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L355-L441" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L356-L442" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def centrifugate_hints(
     source: Source, match_isolated_hints: Callable = regex.compile(fr&#34;\s*{HINT_COMMENT} (.+)&#34;).match
@@ -567,7 +568,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L478-L555" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L479-L556" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_hints(
     source: Source,
@@ -582,7 +583,7 @@ has manually added [resp. suppressed].</dd>
         for hint in hints.split():
             m = match_label(hint)
             if m is None:
-                raise ValueError(f&#34;Malformed hint &#39;{hint}&#39; on line {i}.&#34;)
+                print_fail(f&#34;Malformed hint &#39;{hint}&#39; on line {i}.&#34;)
             (before, label, after) = m.groups()
             if before in (&#34;&#34;, &#34;+&#34;, &#34;-&#34;):
                 buffer = deletion if before == &#34;-&#34; else addition
@@ -592,10 +593,10 @@ has manually added [resp. suppressed].</dd>
                     buffer.append_hint(label, i)
             else:  # `before` is in (&#34;...&#34;, &#34;…&#34;)
                 if after:
-                    raise ValueError(f&#34;Illegal last part for hint {m.groups()} on line {i}.&#34;)
+                    print_fail(f&#34;Illegal last part for hint {m.groups()} on line {i}.&#34;)
                 champions = addition.get_champion(label) + deletion.get_champion(label)
                 if not champions:
-                    raise ValueError(f&#34;Unmatched closing hint {m.groups()} on line {i}.&#34;)
+                    print_fail(f&#34;Unmatched closing hint {m.groups()} on line {i}.&#34;)
                 max(champions)[1].close_hint(label, i)
     addition.ensure_stack_is_empty()
     deletion.ensure_stack_is_empty()
@@ -611,7 +612,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L558-L566" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L559-L567" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def remove_hints(
     source: Source,
@@ -645,7 +646,7 @@ has manually added [resp. suppressed].</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L39-L352" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L40-L353" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Cleanup:
     def __init__(self, cleanup_strategy: str):
@@ -1108,7 +1109,7 @@ indentation level.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L54-L285" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L55-L286" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def full_cleaning(source: Source) -&gt; Source:
@@ -1329,7 +1330,7 @@ def full_cleaning(source: Source) -&gt; Source:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L287-L295" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L288-L296" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_first_comments(
@@ -1347,7 +1348,7 @@ def suppress_first_comments(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L297-L305" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L298-L306" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_main_guard(
@@ -1365,7 +1366,7 @@ def suppress_main_guard(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L307-L316" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L308-L317" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_sys_path_injection(
@@ -1386,7 +1387,7 @@ pattern will be <code>r"(?i)#\s*paroxython\s*:\s*"</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L318-L333" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L319-L334" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def normalize_paroxython_comments(
@@ -1408,7 +1409,7 @@ def normalize_paroxython_comments(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L335-L341" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L336-L342" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&#34;).sub) -&gt; str:
@@ -1424,7 +1425,7 @@ def suppress_blank_lines(source: str, sub: Callable = regex.compile(r&#34;\s*\n&
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L343-L352" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L344-L353" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">@staticmethod
 def suppress_useless_pass_statements(
@@ -1445,7 +1446,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L444-L475" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L445-L476" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class HintBuffer:
     def __init__(self, description: str) -&gt; None:
@@ -1467,7 +1468,7 @@ def suppress_useless_pass_statements(
 
     def ensure_stack_is_empty(self) -&gt; None:
         if any(self.stack.values()):
-            raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)
+            print_fail(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)
 
     def get_result(self) -&gt; LabelsSpans:
         return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>
@@ -1482,7 +1483,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L452-L454" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L453-L455" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def append_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(line_number, line_number))</code></pre>
@@ -1496,7 +1497,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L456-L458" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L457-L459" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def open_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.stack[label_name].append(line_number)</code></pre>
@@ -1510,7 +1511,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L460-L462" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L461-L463" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_champion(self, label_name: LabelName) -&gt; List[Tuple[int, &#34;HintBuffer&#34;]]:
     return [(self.stack[label_name][-1], self)] if self.stack[label_name] else []</code></pre>
@@ -1524,7 +1525,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L464-L466" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L465-L467" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def close_hint(self, label_name: LabelName, line_number: int) -&gt; None:
     self.result[label_name].append(Span(self.stack[label_name].pop(), line_number))</code></pre>
@@ -1538,11 +1539,11 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L468-L471" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L469-L472" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def ensure_stack_is_empty(self) -&gt; None:
     if any(self.stack.values()):
-        raise ValueError(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)</code></pre>
+        print_fail(f&#34;Unmatched opening hints for {self.description}: {self.stack}.&#34;)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.preprocess_source.HintBuffer.get_result"><code class="name flex">
@@ -1553,7 +1554,7 @@ def suppress_useless_pass_statements(
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L473-L475" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/preprocess_source.py#L474-L476" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_result(self) -&gt; LabelsSpans:
     return {k: sorted(v) for (k, v) in self.result.items()}</code></pre>

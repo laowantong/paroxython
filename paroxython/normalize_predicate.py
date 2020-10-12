@@ -5,7 +5,7 @@ from typing import Callable, Tuple
 import regex  # type: ignore
 
 from .compare_spans import compare_spans
-from .goodies import print_warning
+from .goodies import print_warning, print_fail
 from .user_types import Predicate
 
 
@@ -79,5 +79,5 @@ def normalize_predicate(
         if original != predicate:
             print_warning(f"predicate '{original}' normalized into '{predicate}'.")
         if predicate not in compare_spans:
-            raise ValueError(f"Malformed predicate '{predicate}' in the pipeline.")
+            print_fail(f"Malformed predicate '{predicate}' in the pipeline.")
     return (compare_spans[predicate], negated)

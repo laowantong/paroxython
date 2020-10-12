@@ -10,6 +10,7 @@ import regex  # type: ignore
 
 from .derived_labels_db import DerivedLabelsDatabase
 from .flatten_ast import ast, flatten_ast
+from .goodies import print_fail
 from .user_types import Label, LabelName, Labels, LabelsSpans, Program, Query, Source, Span
 
 __pdoc__ = {
@@ -233,14 +234,14 @@ class ProgramParser:
         self.times: Dict[LabelName, float] = {LabelName("TOTAL"): 0.0}
         for (label_name, language, specification) in find_all_features(text):
             if label_name in self.features:  # pragma: no cover
-                raise ValueError(f"Duplicated name '{label_name}'!")
+                print_fail(f"Duplicated name '{label_name}'!")
             self.times[label_name] = 0.0
             if language == "re":
                 self.features[label_name] = regex.compile(f"(?mx){specification}").finditer
             elif language == "sql":
                 self.queries[label_name] = Query(specification)
             elif specification.strip() != "":  # pragma: no cover
-                raise ValueError(f"Unknow language '{language}' for '{label_name}'!")
+                print_fail(f"Unknow language '{language}' for '{label_name}'!")
         self.derived_labels_database = DerivedLabelsDatabase()
 
     def __call__(self, program: Program, yield_failed_matches: bool = False) -> Labels:

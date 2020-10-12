@@ -38,7 +38,7 @@
 import regex  # type: ignore
 
 from .compare_spans import compare_spans
-from .goodies import print_warning
+from .goodies import print_warning, print_fail
 from .user_types import Predicate
 
 
@@ -73,7 +73,7 @@ def normalize_predicate(
         if original != predicate:
             print_warning(f&#34;predicate &#39;{original}&#39; normalized into &#39;{predicate}&#39;.&#34;)
         if predicate not in compare_spans:
-            raise ValueError(f&#34;Malformed predicate &#39;{predicate}&#39; in the pipeline.&#34;)
+            print_fail(f&#34;Malformed predicate &#39;{predicate}&#39; in the pipeline.&#34;)
     return (compare_spans[predicate], negated)</code></pre>
 </details>
 </section>
@@ -178,7 +178,7 @@ the result of this predicate must be negated.</dd>
         if original != predicate:
             print_warning(f&#34;predicate &#39;{original}&#39; normalized into &#39;{predicate}&#39;.&#34;)
         if predicate not in compare_spans:
-            raise ValueError(f&#34;Malformed predicate &#39;{predicate}&#39; in the pipeline.&#34;)
+            print_fail(f&#34;Malformed predicate &#39;{predicate}&#39; in the pipeline.&#34;)
     return (compare_spans[predicate], negated)</code></pre>
 </details>
 </dd>

@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import List, Tuple, Optional
 from typing_extensions import Literal
 
-from .goodies import couple_to_string
+from .goodies import couple_to_string, print_exit
 from .parse_program import ProgramParser
 from .list_programs import get_program
 from .map_taxonomy import Taxonomy
@@ -59,8 +59,12 @@ def main(
 
 def cli_wrapper(args):
     path = Path(args["FILENAME"])
+    try:
+        source = path.read_text()
+    except Exception as e:
+        print_exit(str(e))
     result = main(
-        source=Source(path.read_text()),
+        source=Source(source),
         tags="Label" if args["--labels"] else "Taxon",
         relative_path=path.parent,
         output_format=args["--format"],

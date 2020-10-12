@@ -25,20 +25,21 @@ import regex  # type: ignore
 from docopt import docopt  # type: ignore
 
 from . import PAROXYTHON_VERSION
+from .goodies import print_exit
 
 if sys.version < "3.6":  # pragma: no cover
-    sys.exit(f"Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.")
+    print_exit(f"Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.")
 
 
 def main():
     doc = regex.sub(r"(?m)^ *```.*\n", "", __doc__)  # suppress Markdown code delimiters
     args = docopt(doc, version=f"paroxython version {PAROXYTHON_VERSION}", options_first=True)
     if not args.get("COMMAND"):  # pragma: no cover
-        sys.exit(doc)
+        print_exit(doc)
     command_name = args["COMMAND"].lower()
     command_args = [command_name] + args["ARGS"]
     if command_name not in ("tag", "recommend", "collect"):
-        sys.exit(f"{command_name} is not a valid command. Type 'paroxython --help'.")
+        print_exit(f"{command_name} is not a valid command. Type 'paroxython --help'.")
     command = import_module(f"paroxython.cli_{command_name}", "cli_wrapper")
     command.__doc__ = regex.sub(r"(?m)^ *```.*\n", "", command.__doc__)
     command.cli_wrapper(docopt(command.__doc__, argv=command_args))

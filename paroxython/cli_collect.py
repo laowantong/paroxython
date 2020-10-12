@@ -36,11 +36,14 @@ OPTIONS:
 
 from pathlib import Path
 
+from .goodies import print_exit
 from .make_db import TagDatabase
 
 
 def cli_wrapper(args):
     directory = Path(args["DIRECTORY"])
+    if not directory.is_dir():
+        print_exit(f"no directory at '{directory.absolute()}': aborted.")
     taxonomy = args.get("--taxonomy")
     if taxonomy:
         taxonomy_path = Path(taxonomy)

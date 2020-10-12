@@ -44,7 +44,7 @@ from typing import Callable, List, Optional, Tuple, Dict
 
 import regex  # type: ignore
 
-from .goodies import add_line_numbers
+from .goodies import add_line_numbers, print_success
 from .label_programs import labelled_programs, iterate_and_print_programs
 from .map_taxonomy import Taxonomy
 from .user_types import (
@@ -106,12 +106,11 @@ class TagDatabase:
 
     def write_json(self, db_path: Optional[Path] = None) -&gt; None:
         db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
-        print(f&#34;Writing {db_path}.&#34;)
         db_path.write_text(self.get_json())
+        print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)
 
     def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
         db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.sqlite&#34;
-        print(f&#34;Writing {db_path}.&#34;)
         program_rows: List[Tuple] = []
         label_rows: List[Tuple] = []
         taxon_rows: List[Tuple] = []
@@ -191,6 +190,7 @@ class TagDatabase:
         connexion.commit()
         connexion.close()
 
+        print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)
 
 def collect_labels(programs: Programs) -&gt; LabelInfos:
     result: LabelInfos = defaultdict(list)
@@ -586,7 +586,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L37-L242" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L37-L243" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class TagDatabase:
     def __init__(self, directory: Path, ignore_timestamps: bool = False, **kwargs) -&gt; None:
@@ -627,12 +627,11 @@ simple couples of integers.</p>
 
     def write_json(self, db_path: Optional[Path] = None) -&gt; None:
         db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
-        print(f&#34;Writing {db_path}.&#34;)
         db_path.write_text(self.get_json())
+        print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)
 
     def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
         db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.sqlite&#34;
-        print(f&#34;Writing {db_path}.&#34;)
         program_rows: List[Tuple] = []
         label_rows: List[Tuple] = []
         taxon_rows: List[Tuple] = []
@@ -710,7 +709,9 @@ simple couples of integers.</p>
         c.executemany(f&#34;INSERT INTO taxon VALUES ({fill(taxon_columns)})&#34;, taxon_rows)
 
         connexion.commit()
-        connexion.close()</code></pre>
+        connexion.close()
+
+        print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -854,8 +855,8 @@ directory. Defaults to <code>None</code>.</dd>
 </summary>
 <pre><code class="python">def write_json(self, db_path: Optional[Path] = None) -&gt; None:
     db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
-    print(f&#34;Writing {db_path}.&#34;)
-    db_path.write_text(self.get_json())</code></pre>
+    db_path.write_text(self.get_json())
+    print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.make_db.TagDatabase.write_sqlite"><code class="name flex">
@@ -876,11 +877,10 @@ and the directory provided to the class constructor is <code>"foobar"</code>, fa
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L151-L242" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L151-L243" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
     db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.sqlite&#34;
-    print(f&#34;Writing {db_path}.&#34;)
     program_rows: List[Tuple] = []
     label_rows: List[Tuple] = []
     taxon_rows: List[Tuple] = []
@@ -958,7 +958,9 @@ and the directory provided to the class constructor is <code>"foobar"</code>, fa
     c.executemany(f&#34;INSERT INTO taxon VALUES ({fill(taxon_columns)})&#34;, taxon_rows)
 
     connexion.commit()
-    connexion.close()</code></pre>
+    connexion.close()
+
+    print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)</code></pre>
 </details>
 </dd>
 </dl>

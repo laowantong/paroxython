@@ -31,6 +31,7 @@ from typing import Callable, Dict, List, Tuple, Set
 
 import regex  # type: ignore
 
+from .goodies import print_fail
 from .user_types import LabelName, LabelsSpans, Source, Span
 
 HINT_COMMENT = "# paroxython:"
@@ -468,7 +469,7 @@ class HintBuffer:
     def ensure_stack_is_empty(self) -> None:
         """Raise an error iff there remains at least one open label."""
         if any(self.stack.values()):
-            raise ValueError(f"Unmatched opening hints for {self.description}: {self.stack}.")
+            print_fail(f"Unmatched opening hints for {self.description}: {self.stack}.")
 
     def get_result(self) -> LabelsSpans:
         """Return the result with sorted spans."""
@@ -535,7 +536,7 @@ def collect_hints(
         for hint in hints.split():
             m = match_label(hint)
             if m is None:
-                raise ValueError(f"Malformed hint '{hint}' on line {i}.")
+                print_fail(f"Malformed hint '{hint}' on line {i}.")
             (before, label, after) = m.groups()
             if before in ("", "+", "-"):
                 buffer = deletion if before == "-" else addition
@@ -545,10 +546,10 @@ def collect_hints(
                     buffer.append_hint(label, i)
             else:  # `before` is in ("...", "…")
                 if after:
-                    raise ValueError(f"Illegal last part for hint {m.groups()} on line {i}.")
+                    print_fail(f"Illegal last part for hint {m.groups()} on line {i}.")
                 champions = addition.get_champion(label) + deletion.get_champion(label)
                 if not champions:
-                    raise ValueError(f"Unmatched closing hint {m.groups()} on line {i}.")
+                    print_fail(f"Unmatched closing hint {m.groups()} on line {i}.")
                 max(champions)[1].close_hint(label, i)
     addition.ensure_stack_is_empty()
     deletion.ensure_stack_is_empty()
