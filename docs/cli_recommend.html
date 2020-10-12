@@ -69,7 +69,8 @@ tag database at DIRECTORY/../DIRECTORY_db.json.
                     missing or malformed, no filter is applied. [default: ]
 -f --format=STR     The format of program titles in the report. This string
                     can contains the following identifiers (between braces):
-                    • name: keys of the dictionary &quot;programs&quot; in the DB.
+                    • name: filename of the program.
+                    • path: program key in the DB &quot;programs&quot; dictionary.
                     • prefix: name of DB_PATH, minus any &quot;_db.json&quot; suffix.
                     • absolute: absolute path to DB_PATH's parent folder.
                     • relative: relative path to DB_PATH's parent folder.
@@ -94,7 +95,7 @@ paroxython recommend -o stdout path/to/programs_db.json \
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_recommend.py#L0-L135" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_recommend.py#L0-L137" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sys
@@ -135,9 +136,10 @@ def cli_wrapper(args):
         sys.stdout = sys.stderr
     title_format = args[&#34;--format&#34;]
     if title_format.lower() == &#34;vscode&#34;:
-        title_format = &#34;[`{name}`](vscode://file/{absolute}/{prefix}/{name})&#34;
+        title_format = &#34;[`{name}`](vscode://file/{absolute}/{prefix}/{path})&#34;
     title_format = title_format.format(
         name=&#34;{name}&#34;,
+        path=&#34;{path}&#34;,
         prefix=prefix.rstrip(&#34;_-&#34;),
         absolute=parent_path.resolve(),
         relative=parent_path,
@@ -172,7 +174,7 @@ def cli_wrapper(args):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_recommend.py#L88-L136" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/cli_recommend.py#L89-L138" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def cli_wrapper(args):
     db_path = Path(args[&#34;DB_PATH&#34;])
@@ -203,9 +205,10 @@ def cli_wrapper(args):
         sys.stdout = sys.stderr
     title_format = args[&#34;--format&#34;]
     if title_format.lower() == &#34;vscode&#34;:
-        title_format = &#34;[`{name}`](vscode://file/{absolute}/{prefix}/{name})&#34;
+        title_format = &#34;[`{name}`](vscode://file/{absolute}/{prefix}/{path})&#34;
     title_format = title_format.format(
         name=&#34;{name}&#34;,
+        path=&#34;{path}&#34;,
         prefix=prefix.rstrip(&#34;_-&#34;),
         absolute=parent_path.resolve(),
         relative=parent_path,

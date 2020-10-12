@@ -114,7 +114,7 @@ def test_deduplicated_taxa_with_deletion():
 def test_call():
     programs = [
         Program(
-            name="algo1",
+            path="algo1",
             labels=[
                 Label("if", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("if_else", [S(1, 1), S(2, 5)]),
@@ -125,7 +125,7 @@ def test_call():
             deletion={},
         ),
         Program(
-            name="algo2",
+            path="algo2",
             labels=[
                 Label("member_call_method:difference_update", [S(1, 1), S(1, 1), S(2, 5)]),
                 Label("literal:Set", [S(1, 1), S(2, 5)]),
@@ -135,7 +135,7 @@ def test_call():
             deletion={},
         ),
     ]
-    result = {program.name: t.to_taxa(program.labels) for program in programs}
+    result = {program.path: t.to_taxa(program.labels) for program in programs}
     print(result)
     assert result == {
         "algo1": [
@@ -156,7 +156,7 @@ def test_snapshot_mini_taxa(capsys):
     programs = labelled_programs(Path("examples/mini/programs"))
     for program in programs:
         taxa = taxonomy.to_taxa(program.labels)
-        acc[program.name] = {
+        acc[program.path] = {
             name: " ".join(map(couple_to_string, sorted(set(spans)))) for (name, spans) in taxa
         }
     result = json.dumps(acc, indent=2)

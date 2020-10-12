@@ -131,12 +131,9 @@ print("hello, world")
 For these reasons, choosing to root our taxonomy in the four basic notions of the typed lambda calculus should be seen more as a tribute than a formal commitment. More specifically:
 
 - `var` will essentially bring together everything relating to the concept of assignment and scoping;
-- `def` will accommodate not only lambda functions, but named ones, methods, generators and even classes, defined in place or by importation. Note that this does _not_ include variable definitions[^import_var].
+- `def` will accommodate not only lambda functions, but named ones, methods, generators and even classes. Note that this does _not_ include variable definitions.
 - `call` will cover any call to anything with a `__call__()` method, which Python calls a callable (sorry);
 - finally, `type` will welcome all types, no purity required.
-
-[^import_var]:
-    However, imported variables are incorrectly classified under `def`.
 
 ### Imperative needs: `flow`
 
@@ -151,6 +148,10 @@ Again, those are mainly practical choices. After all, an `operator` is nothing m
 
 [^condition]:
     A _condition_ is a boolean expression, not to be confused with a _conditional_ (control structure).
+
+### Importations
+
+Previously classified under `def`, since version 0.6.0, the `import` statement has now its own root in the taxonomy.
 
 ### Zooming out: `pattern`
 

@@ -5,6 +5,7 @@
 - don't name things like a first year student (follow PEP 8, good practices and common sense);
 - aim at the simplest style. Don't try to outsmart Paroxython: you're sure to win... a lot of false negatives;
 - the system is not capable of inference: be direct;
+- for the same reason, prefer `from foo import bar; bar()` to `import foo; foo.bar()`;
 - do use:
     - early exits when alternative versions are less clear;
     - infinite loops when you deal with an unpredictable stream of inputs;
@@ -170,6 +171,38 @@ The result of the recursive call is now assigned to variable `a`. There is no fu
         def gcd(a, b):
             return (gcd(b, a % b) if b else a)
 
+### Importations
+
+So far, the preferred form is:
+
+```python
+from a.b.c import d
+```
+
+For instance, writing:
+
+```python
+from math import cos, sin
+cos(1) - sin(1)
+```
+
+... makes Paroxython able to produce the following (correct) taxa:
+
+- `import/standard/math/cos`
+- `import/standard/math/sin`
+- `call/subroutine`
+
+But writing:
+
+```python
+import math
+math.cos(1) - math.sin(1)
+```
+
+... yields subpar results:
+
+- `import/standard/math` (less specific)
+- `call/subroutine/method` (wrong)
 
 ### Early exits
 

@@ -6,7 +6,7 @@ from typing import Iterator
 import regex  # type: ignore
 
 from .preprocess_source import Cleanup, centrifugate_hints, collect_hints, remove_hints
-from .user_types import Program, ProgramName, Programs, Source
+from .user_types import Program, ProgramPath, Programs, Source
 
 
 def list_programs(
@@ -40,10 +40,10 @@ def list_programs(
     glob_pattern = glob_pattern or "**/*.py"
     skip_pattern = skip_pattern or r"(__init__|setup|.*[-_]tests?)\.py"
     match_excluded = regex.compile(skip_pattern).fullmatch
-    for program_path in sorted(directory.glob(glob_pattern)):
-        if not match_excluded(program_path.name):
-            source = cleanup.run(Source(program_path.read_text()))
-            relative_path = program_path.relative_to(directory)
+    for path in sorted(directory.glob(glob_pattern)):
+        if not match_excluded(path.name):
+            source = cleanup.run(Source(path.read_text()))
+            relative_path = path.relative_to(directory)
             result.append(get_program(source, relative_path))
     return result
 
@@ -71,7 +71,7 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
 
     Returns:
         Program: A `NamedTuple` consisting in the following fields:
-        - `name` (type `ProgramName`, derived from `str`): the program path, either empty or
+        - `path` (type `ProgramPath`, derived from `str`): the program path, either empty or
             relative to the directory passed to `list_programs()`;
         - `source` (type `Source`, derived from `str`): its code source, fully cleaned up;
         - `addition` (type `Dict[LabelName, List[Span]]`): the manual hints scheduled for addition;
@@ -87,7 +87,7 @@ def get_program(source: Source, relative_path: Path = None) -> Program:
     (addition, deletion) = collect_hints(source)
     source = remove_hints(source)
     return Program(
-        name=ProgramName(str(relative_path or Path())),
+        path=ProgramPath(str(relative_path or Path())),
         source=source,
         addition=addition,
         deletion=deletion,
@@ -112,8 +112,8 @@ def iterate_and_print_programs(programs: Programs) -> Iterator[Program]:
     """
     blanks = ""
     for (i, program) in enumerate(programs, 1):
-        print(end=f"\r{blanks}\r{i: 5} {program.name}", flush=True)
-        blanks = " " * (len(program.name) + 7)
+        print(end=f"\r{blanks}\r{i: 5} {program.path}", flush=True)
+        blanks = " " * (len(program.path) + 7)
         if i == len(programs):  # Placed after the loop, the next line would not be executed.
             print(end=f"\r{blanks}\r", flush=True)
         yield program
@@ -127,7 +127,7 @@ if __name__ == "__main__":
         skip_pattern=r"^(__init__|setup|.*[-_]tests?|quiz_.*)\.py$",
         cleanup_strategy="full",
     ):
-        path = directory / program.name
+        path = directory / program.path
         print(datetime.fromtimestamp(path.stat().st_mtime))
         print(program.source)
         print("-" * 80)

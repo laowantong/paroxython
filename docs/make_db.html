@@ -52,8 +52,8 @@ from .user_types import (
     Labels,
     LabelsPoorSpans,
     ProgramInfos,
-    ProgramName,
-    ProgramNameSet,
+    ProgramPath,
+    ProgramPathSet,
     Programs,
     ProgramToPrograms,
     TaxonInfos,
@@ -85,8 +85,8 @@ class TagDatabase:
             get_timestamp = lambda path: &#34;&#34;
         self.programs_infos: ProgramInfos = {}
         for program in programs:
-            self.programs_infos[program.name] = {
-                &#34;timestamp&#34;: get_timestamp(directory / program.name),
+            self.programs_infos[program.path] = {
+                &#34;timestamp&#34;: get_timestamp(directory / program.path),
                 &#34;source&#34;: program.source,
                 &#34;labels&#34;: prepared_labels(program.labels),
                 &#34;taxa&#34;: prepared_taxa(program.taxa),
@@ -196,7 +196,7 @@ def collect_labels(programs: Programs) -&gt; LabelInfos:
     result: LabelInfos = defaultdict(list)
     for program in programs:
         for label in program.labels:
-            result[label.name].append(program.name)
+            result[label.name].append(program.path)
     return result
 
 
@@ -211,44 +211,44 @@ def collect_taxa(programs: Programs) -&gt; TaxonInfos:
     result: TaxonInfos = defaultdict(list)
     for program in programs:
         for taxon in program.taxa:
-            result[taxon.name].append(program.name)
+            result[taxon.name].append(program.path)
     return result
 
 
 def compute_direct_importations(
     programs: Programs, match_import: Callable = regex.compile(r&#34;import_internally:([^:]+)&#34;).match
 ) -&gt; ProgramToPrograms:
-    importations: Dict = {program.name: set() for program in programs}
+    importations: Dict = {program.path: set() for program in programs}
     for program in programs:
         for label in program.labels:
             match = match_import(label.name)
             if match:  # Python 3.8: use assignement-expression
-                importations[program.name].add(f&#34;{match[1]}.py&#34;)
+                importations[program.path].add(f&#34;{match[1]}.py&#34;)
     return importations
 
 
 def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     @lru_cache(maxsize=None)
-    def complete_internal_imports(program_name: ProgramName) -&gt; ProgramNameSet:
-        result: ProgramNameSet = set(importations.get(program_name, []))
+    def complete_internal_imports(program_path: ProgramPath) -&gt; ProgramPathSet:
+        result: ProgramPathSet = set(importations.get(program_path, []))
         for imported in list(result):  # traverse a copy
             result.update(complete_internal_imports(imported))
         return result
 
     completed_importations: ProgramToPrograms = {}
-    for program_name in list(importations.keys()):
-        completed_importations[program_name] = sorted(complete_internal_imports(program_name))
+    for program_path in list(importations.keys()):
+        completed_importations[program_path] = sorted(complete_internal_imports(program_path))
     return completed_importations
 
 
 def compute_and_collect_exportations(
     programs: Programs, importations: ProgramToPrograms
 ) -&gt; ProgramToPrograms:
-    exportations: ProgramToPrograms = {program.name: [] for program in programs}
-    for (importing_name, imported_names) in importations.items():
-        for imported_name in imported_names:
-            if importing_name not in exportations[imported_name]:
-                insort(exportations[imported_name], importing_name)
+    exportations: ProgramToPrograms = {program.path: [] for program in programs}
+    for (importing_path, imported_paths) in importations.items():
+        for imported_path in imported_paths:
+            if importing_path not in exportations[imported_path]:
+                insort(exportations[imported_path], importing_path)
     return exportations
 
 
@@ -290,7 +290,7 @@ if __name__ == &#34;__main__&#34;:
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="paroxython.make_db.collect_labels"><code class="name flex">
-<span>def <span class="ident">collect_labels</span></span>(<span>programs: List[Program]) ‑> Dict[LabelName, List[ProgramName]]</span>
+<span>def <span class="ident">collect_labels</span></span>(<span>programs: List[Program]) ‑> Dict[LabelName, List[ProgramPath]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Iterate through the given programs to collect all their labels.</p>
@@ -314,7 +314,7 @@ already populated.</dd>
     result: LabelInfos = defaultdict(list)
     for program in programs:
         for label in program.labels:
-            result[label.name].append(program.name)
+            result[label.name].append(program.path)
     return result</code></pre>
 </details>
 </dd>
@@ -342,7 +342,7 @@ already populated.</dd>
 </details>
 </dd>
 <dt id="paroxython.make_db.collect_taxa"><code class="name flex">
-<span>def <span class="ident">collect_taxa</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramName]]</span>
+<span>def <span class="ident">collect_taxa</span></span>(<span>programs: List[Program]) ‑> Dict[TaxonName, List[ProgramPath]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Iterate through the given programs to collect all their taxa.</p>
@@ -366,12 +366,12 @@ already populated.</dd>
     result: TaxonInfos = defaultdict(list)
     for program in programs:
         for taxon in program.taxa:
-            result[taxon.name].append(program.name)
+            result[taxon.name].append(program.path)
     return result</code></pre>
 </details>
 </dd>
 <dt id="paroxython.make_db.compute_direct_importations"><code class="name flex">
-<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs: List[Program], <br>match_import: Callable = &lt;built-in method match of regex&gt;<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
+<span>def <span class="ident">compute_direct_importations</span></span>(<span>programs: List[Program], <br>match_import: Callable = &lt;built-in method match of regex&gt;<br>) ‑> Dict[ProgramPath, List[ProgramPath]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Associate each given labelled program to the set of its direct internal imports.</p>
@@ -391,7 +391,7 @@ first group is the name of the imported program.
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>ProgramToPrograms</code></dt>
-<dd>A dictionary mapping every program name to the list of the names of
+<dd>A dictionary mapping every program path to the list of the paths of
 the internal programs it imports directly.</dd>
 </dl></div>
 <details class="source">
@@ -402,31 +402,31 @@ the internal programs it imports directly.</dd>
 <pre><code class="python">def compute_direct_importations(
     programs: Programs, match_import: Callable = regex.compile(r&#34;import_internally:([^:]+)&#34;).match
 ) -&gt; ProgramToPrograms:
-    importations: Dict = {program.name: set() for program in programs}
+    importations: Dict = {program.path: set() for program in programs}
     for program in programs:
         for label in program.labels:
             match = match_import(label.name)
             if match:  # Python 3.8: use assignement-expression
-                importations[program.name].add(f&#34;{match[1]}.py&#34;)
+                importations[program.path].add(f&#34;{match[1]}.py&#34;)
     return importations</code></pre>
 </details>
 </dd>
 <dt id="paroxython.make_db.complete_and_collect_importations"><code class="name flex">
-<span>def <span class="ident">complete_and_collect_importations</span></span>(<span>importations: Dict[ProgramName, List[ProgramName]]<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
+<span>def <span class="ident">complete_and_collect_importations</span></span>(<span>importations: Dict[ProgramPath, List[ProgramPath]]<br>) ‑> Dict[ProgramPath, List[ProgramPath]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Complete the direct internal imports with indirect ones.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>importations</code></strong> :&ensp;<code>ProgramToPrograms</code></dt>
-<dd>A dictionary mapping every program name to the list
-of the names of the internal programs it imports directly.</dd>
+<dd>A dictionary mapping every program path to the list
+of the paths of the internal programs it imports directly.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>ProgramToPrograms</code></dt>
-<dd>A dictionary mapping every program name to the sorted list of the
-names of the internal programs it imports either directly or indirectly.</dd>
+<dd>A dictionary mapping every program path to the sorted list of the
+paths of the internal programs it imports either directly or indirectly.</dd>
 </dl></div>
 <details class="source">
 <summary>
@@ -435,20 +435,20 @@ names of the internal programs it imports either directly or indirectly.</dd>
 </summary>
 <pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     @lru_cache(maxsize=None)
-    def complete_internal_imports(program_name: ProgramName) -&gt; ProgramNameSet:
-        result: ProgramNameSet = set(importations.get(program_name, []))
+    def complete_internal_imports(program_path: ProgramPath) -&gt; ProgramPathSet:
+        result: ProgramPathSet = set(importations.get(program_path, []))
         for imported in list(result):  # traverse a copy
             result.update(complete_internal_imports(imported))
         return result
 
     completed_importations: ProgramToPrograms = {}
-    for program_name in list(importations.keys()):
-        completed_importations[program_name] = sorted(complete_internal_imports(program_name))
+    for program_path in list(importations.keys()):
+        completed_importations[program_path] = sorted(complete_internal_imports(program_path))
     return completed_importations</code></pre>
 </details>
 </dd>
 <dt id="paroxython.make_db.compute_and_collect_exportations"><code class="name flex">
-<span>def <span class="ident">compute_and_collect_exportations</span></span>(<span>programs: List[Program], <br>importations: Dict[ProgramName, List[ProgramName]]<br>) ‑> Dict[ProgramName, List[ProgramName]]</span>
+<span>def <span class="ident">compute_and_collect_exportations</span></span>(<span>programs: List[Program], <br>importations: Dict[ProgramPath, List[ProgramPath]]<br>) ‑> Dict[ProgramPath, List[ProgramPath]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Invert <code>importations</code> to construct <code>exportations</code>.</p>
@@ -457,13 +457,13 @@ names of the internal programs it imports either directly or indirectly.</dd>
 <dt><strong><code>programs</code></strong> :&ensp;<code>Programs</code></dt>
 <dd>A list of named <code>Program</code> objects.</dd>
 <dt><strong><code>importations</code></strong> :&ensp;<code>ProgramToPrograms</code></dt>
-<dd>A dictionary mapping every program name to the list of
-the names of the internal programs it imports either directly or indirectly.</dd>
+<dd>A dictionary mapping every program path to the list of
+the paths of the internal programs it imports either directly or indirectly.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>ProgramToPrograms</code></dt>
-<dd>A dictionary mapping every program name to the sorted list of the names
+<dd>A dictionary mapping every program path to the sorted list of the paths
 of the internal programs it is imported by, either directly or indirectly.</dd>
 </dl></div>
 <details class="source">
@@ -474,11 +474,11 @@ of the internal programs it is imported by, either directly or indirectly.</dd>
 <pre><code class="python">def compute_and_collect_exportations(
     programs: Programs, importations: ProgramToPrograms
 ) -&gt; ProgramToPrograms:
-    exportations: ProgramToPrograms = {program.name: [] for program in programs}
-    for (importing_name, imported_names) in importations.items():
-        for imported_name in imported_names:
-            if importing_name not in exportations[imported_name]:
-                insort(exportations[imported_name], importing_name)
+    exportations: ProgramToPrograms = {program.path: [] for program in programs}
+    for (importing_path, imported_paths) in importations.items():
+        for imported_path in imported_paths:
+            if importing_path not in exportations[imported_path]:
+                insort(exportations[imported_path], importing_path)
     return exportations</code></pre>
 </details>
 </dd>
@@ -606,8 +606,8 @@ simple couples of integers.</p>
             get_timestamp = lambda path: &#34;&#34;
         self.programs_infos: ProgramInfos = {}
         for program in programs:
-            self.programs_infos[program.name] = {
-                &#34;timestamp&#34;: get_timestamp(directory / program.name),
+            self.programs_infos[program.path] = {
+                &#34;timestamp&#34;: get_timestamp(directory / program.path),
                 &#34;source&#34;: program.source,
                 &#34;labels&#34;: prepared_labels(program.labels),
                 &#34;taxa&#34;: prepared_taxa(program.taxa),
@@ -752,13 +752,13 @@ programs featuring it (<code><a title="paroxython.make_db.collect_labels" href="
 <code>taxa</code> of <code>programs</code> (<code><a title="paroxython.make_db.map_labels_on_taxa" href="#paroxython.make_db.map_labels_on_taxa">map_labels_on_taxa()</a></code>).</li>
 <li>Create a dictionary <code>self.taxa</code> mapping each taxon name to the names of the
 programs featuring it (<code><a title="paroxython.make_db.collect_taxa" href="#paroxython.make_db.collect_taxa">collect_taxa()</a></code>).</li>
-<li>Create a dictionary <code>self.importations</code> mapping each program name to the names
+<li>Create a dictionary <code>self.importations</code> mapping each program path to the paths
 of the programs importing it, both directly (<code><a title="paroxython.make_db.compute_direct_importations" href="#paroxython.make_db.compute_direct_importations">compute_direct_importations()</a></code>) and
 indirectly (<code><a title="paroxython.make_db.complete_and_collect_importations" href="#paroxython.make_db.complete_and_collect_importations">complete_and_collect_importations()</a></code>).</li>
 <li>Invert the previous dictionary to create a dictionary <code>self.exportations</code>
 (<code><a title="paroxython.make_db.compute_and_collect_exportations" href="#paroxython.make_db.compute_and_collect_exportations">compute_and_collect_exportations()</a></code>).</li>
 <li>Gather in <code>self.programs_infos</code> each program timestamp, source, labels and taxa as
-a serialization-ready dictionary indexed by program names.</li>
+a serialization-ready dictionary indexed by program paths.</li>
 </ol></div>
 <details class="source">
 <summary>
@@ -782,8 +782,8 @@ a serialization-ready dictionary indexed by program names.</li>
         get_timestamp = lambda path: &#34;&#34;
     self.programs_infos: ProgramInfos = {}
     for program in programs:
-        self.programs_infos[program.name] = {
-            &#34;timestamp&#34;: get_timestamp(directory / program.name),
+        self.programs_infos[program.path] = {
+            &#34;timestamp&#34;: get_timestamp(directory / program.path),
             &#34;source&#34;: program.source,
             &#34;labels&#34;: prepared_labels(program.labels),
             &#34;taxa&#34;: prepared_taxa(program.taxa),

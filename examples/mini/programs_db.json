@@ -202,12 +202,12 @@
         "call/subroutine/builtin/print": [[4,4],[6,6],[8,8],[10,10]],
         "call/subroutine/builtin/range": [[2,2]],
         "condition/equality": [[3,3],[5,5],[7,7]],
-        "def/import/personal": [[1,1]],
         "flow/conditional": [[3,10],[5,10],[7,10]],
         "flow/conditional/else": [[10,10]],
         "flow/conditional/else/if": [[6,6],[8,8]],
         "flow/loop/exit/late": [[2,10]],
         "flow/loop/for/arithmetic/start": [[2,10]],
+        "import/personal": [[1,1]],
         "meta/count/program/sloc/10": [[1,10]],
         "meta/count/variety/***": [[1,10]],
         "meta/program": [[1,10]],
@@ -259,10 +259,10 @@
       "taxa": {
         "condition/divisibility/parity": [[3,3]],
         "condition/equality": [[3,3]],
-        "def/import/personal": [[1,1]],
         "def/subroutine/function/predicate": [[2,3]],
         "def/subroutine/function/pure": [[2,3]],
         "def/subroutine/return/something": [[3,3]],
+        "import/personal": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/subroutine/sloc/2": [[2,3]],
         "meta/count/variety/**": [[1,3]],
@@ -739,10 +739,6 @@
     "condition/equality/not": [
       "collatz.py"
     ],
-    "def/import/personal": [
-      "fizzbuzz.py",
-      "is_even.py"
-    ],
     "def/subroutine/function/predicate": [
       "is_even.py"
     ],
@@ -775,6 +771,10 @@
     ],
     "flow/loop/while": [
       "collatz.py"
+    ],
+    "import/personal": [
+      "fizzbuzz.py",
+      "is_even.py"
     ],
     "meta/count/program/sloc/1": [
       "assignment.py"

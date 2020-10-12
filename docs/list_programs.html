@@ -39,7 +39,7 @@ from typing import Iterator
 import regex  # type: ignore
 
 from .preprocess_source import Cleanup, centrifugate_hints, collect_hints, remove_hints
-from .user_types import Program, ProgramName, Programs, Source
+from .user_types import Program, ProgramPath, Programs, Source
 
 
 def list_programs(
@@ -54,10 +54,10 @@ def list_programs(
     glob_pattern = glob_pattern or &#34;**/*.py&#34;
     skip_pattern = skip_pattern or r&#34;(__init__|setup|.*[-_]tests?)\.py&#34;
     match_excluded = regex.compile(skip_pattern).fullmatch
-    for program_path in sorted(directory.glob(glob_pattern)):
-        if not match_excluded(program_path.name):
-            source = cleanup.run(Source(program_path.read_text()))
-            relative_path = program_path.relative_to(directory)
+    for path in sorted(directory.glob(glob_pattern)):
+        if not match_excluded(path.name):
+            source = cleanup.run(Source(path.read_text()))
+            relative_path = path.relative_to(directory)
             result.append(get_program(source, relative_path))
     return result
 
@@ -67,7 +67,7 @@ def get_program(source: Source, relative_path: Path = None) -&gt; Program:
     (addition, deletion) = collect_hints(source)
     source = remove_hints(source)
     return Program(
-        name=ProgramName(str(relative_path or Path())),
+        path=ProgramPath(str(relative_path or Path())),
         source=source,
         addition=addition,
         deletion=deletion,
@@ -79,8 +79,8 @@ def get_program(source: Source, relative_path: Path = None) -&gt; Program:
 def iterate_and_print_programs(programs: Programs) -&gt; Iterator[Program]:
     blanks = &#34;&#34;
     for (i, program) in enumerate(programs, 1):
-        print(end=f&#34;\r{blanks}\r{i: 5} {program.name}&#34;, flush=True)
-        blanks = &#34; &#34; * (len(program.name) + 7)
+        print(end=f&#34;\r{blanks}\r{i: 5} {program.path}&#34;, flush=True)
+        blanks = &#34; &#34; * (len(program.path) + 7)
         if i == len(programs):  # Placed after the loop, the next line would not be executed.
             print(end=f&#34;\r{blanks}\r&#34;, flush=True)
         yield program
@@ -94,7 +94,7 @@ if __name__ == &#34;__main__&#34;:
         skip_pattern=r&#34;^(__init__|setup|.*[-_]tests?|quiz_.*)\.py$&#34;,
         cleanup_strategy=&#34;full&#34;,
     ):
-        path = directory / program.name
+        path = directory / program.path
         print(datetime.fromtimestamp(path.stat().st_mtime))
         print(program.source)
         print(&#34;-&#34; * 80)</code></pre>
@@ -154,10 +154,10 @@ skip any file whose name is <code>"__init__.py"</code>, <code>"setup.py"</code> 
     glob_pattern = glob_pattern or &#34;**/*.py&#34;
     skip_pattern = skip_pattern or r&#34;(__init__|setup|.*[-_]tests?)\.py&#34;
     match_excluded = regex.compile(skip_pattern).fullmatch
-    for program_path in sorted(directory.glob(glob_pattern)):
-        if not match_excluded(program_path.name):
-            source = cleanup.run(Source(program_path.read_text()))
-            relative_path = program_path.relative_to(directory)
+    for path in sorted(directory.glob(glob_pattern)):
+        if not match_excluded(path.name):
+            source = cleanup.run(Source(path.read_text()))
+            relative_path = path.relative_to(directory)
             result.append(get_program(source, relative_path))
     return result</code></pre>
 </details>
@@ -194,7 +194,7 @@ the contents of a Jupyter Notebook's cell. Defaults to None.</dd>
 <dd>A <code>NamedTuple</code> consisting in the following fields:</dd>
 </dl>
 <ul>
-<li><code>name</code> (type <code>ProgramName</code>, derived from <code>str</code>): the program path, either empty or
+<li><code>path</code> (type <code>ProgramPath</code>, derived from <code>str</code>): the program path, either empty or
 relative to the directory passed to <code><a title="paroxython.list_programs.list_programs" href="#paroxython.list_programs.list_programs">list_programs()</a></code>;</li>
 <li><code>source</code> (type <code>Source</code>, derived from <code>str</code>): its code source, fully cleaned up;</li>
 <li><code>addition</code> (type <code>Dict[LabelName, List[Span]]</code>): the manual hints scheduled for addition;</li>
@@ -216,7 +216,7 @@ spans). This list is created empty here, to be later calculated from the labels 
     (addition, deletion) = collect_hints(source)
     source = remove_hints(source)
     return Program(
-        name=ProgramName(str(relative_path or Path())),
+        path=ProgramPath(str(relative_path or Path())),
         source=source,
         addition=addition,
         deletion=deletion,
@@ -252,8 +252,8 @@ does not support <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI e
 <pre><code class="python">def iterate_and_print_programs(programs: Programs) -&gt; Iterator[Program]:
     blanks = &#34;&#34;
     for (i, program) in enumerate(programs, 1):
-        print(end=f&#34;\r{blanks}\r{i: 5} {program.name}&#34;, flush=True)
-        blanks = &#34; &#34; * (len(program.name) + 7)
+        print(end=f&#34;\r{blanks}\r{i: 5} {program.path}&#34;, flush=True)
+        blanks = &#34; &#34; * (len(program.path) + 7)
         if i == len(programs):  # Placed after the loop, the next line would not be executed.
             print(end=f&#34;\r{blanks}\r&#34;, flush=True)
         yield program</code></pre>

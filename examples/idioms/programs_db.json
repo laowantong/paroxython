@@ -25,7 +25,7 @@
       },
       "taxa": {
         "call/subroutine/builtin/print": [[2,2]],
-        "def/import/standard/__future__/print_function": [[1,1]],
+        "import/standard/__future__/print_function": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -367,7 +367,7 @@
       },
       "taxa": {
         "def/class": [[3,5]],
-        "def/import/standard/dataclasses/dataclass": [[1,1]],
+        "import/standard/dataclasses/dataclass": [[1,1]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/variety/***": [[1,5]],
         "meta/program": [[1,5]],
@@ -639,7 +639,7 @@
       },
       "taxa": {
         "call/subroutine": [[2,2]],
-        "def/import/standard/random/shuffle": [[1,1]],
+        "import/standard/random/shuffle": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -673,7 +673,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/random/shuffle": [[2,2]],
-        "def/import/standard/random": [[1,1]],
+        "import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -707,7 +707,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/random/choice": [[2,2]],
-        "def/import/standard/random": [[1,1]],
+        "import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -830,9 +830,9 @@
       "taxa": {
         "call/subroutine/method": [[3,3]],
         "call/subroutine/method/random/randrange": [[3,3]],
-        "def/import/standard/random": [[1,1]],
         "def/subroutine/function/pure": [[2,3]],
         "def/subroutine/return/something": [[3,3]],
+        "import/standard/random": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/subroutine/sloc/2": [[2,3]],
         "meta/count/variety/**": [[1,3]],
@@ -872,7 +872,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/random/uniform": [[2,2]],
-        "def/import/standard/random": [[1,1]],
+        "import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -908,7 +908,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/random/randint": [[2,2]],
-        "def/import/standard/random": [[1,1]],
+        "import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -1496,7 +1496,7 @@
       "taxa": {
         "call/class/construct": [[2,2],[3,3]],
         "call/subroutine/method": [[5,5],[6,6]],
-        "def/import/third_party/Queue": [[1,1]],
+        "import/third_party/Queue": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
         "meta/count/variety/***": [[1,6]],
         "meta/program": [[1,6]],
@@ -1657,7 +1657,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/third_party/numpy": [[1,1]],
+        "import/third_party/numpy": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -1803,9 +1803,9 @@
         "call/class/construct": [[2,2]],
         "call/subroutine/builtin/range": [[3,3]],
         "call/subroutine/method": [[4,4]],
-        "def/import/standard/multiprocessing/Pool": [[1,1]],
         "flow/loop/exit/late": [[3,4]],
         "flow/loop/for/arithmetic/start": [[3,4]],
+        "import/standard/multiprocessing/Pool": [[1,1]],
         "meta/count/program/sloc/4": [[1,4]],
         "meta/count/variety/**": [[1,4]],
         "meta/program": [[1,4]],
@@ -1975,7 +1975,7 @@
       "taxa": {
         "call/subroutine": [[5,5]],
         "call/subroutine/method": [[3,3],[7,7]],
-        "def/import/standard/threading": [[1,1]],
+        "import/standard/threading": [[1,1]],
         "meta/count/program/sloc/7": [[1,7]],
         "meta/count/variety/**": [[1,7]],
         "meta/program": [[1,7]],
@@ -2205,10 +2205,10 @@
         "call/composition": [[6,6]],
         "call/subroutine": [[6,6]],
         "call/subroutine/builtin/print": [[6,6]],
-        "def/import/standard/functools/partial": [[1,1]],
         "def/subroutine/function/pure": [[2,5],[3,4]],
         "def/subroutine/nested/closure": [[2,5]],
         "def/subroutine/return/something": [[4,4]],
+        "import/standard/functools/partial": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
         "meta/count/subroutine/sloc/2": [[3,4]],
         "meta/count/subroutine/sloc/4": [[2,5]],
@@ -2414,7 +2414,6 @@
         "call/subroutine/method": [[8,8]],
         "call/subroutine/method/non_sequence/set/add": [[11,11],[12,12]],
         "def/class": [[2,3],[4,12]],
-        "def/import/standard/collections/defaultdict": [[1,1]],
         "def/subroutine/method/flavor/instance": [[5,8],[9,12]],
         "def/subroutine/method/naming/magic/__init__": [[5,8]],
         "def/subroutine/procedure": [[5,8],[9,12]],
@@ -2422,6 +2421,7 @@
         "flow/loop/for": [[10,12]],
         "flow/loop/for/elements": [[7,8]],
         "flow/no_operation": [[3,3]],
+        "import/standard/collections/defaultdict": [[1,1]],
         "meta/count/class/methods/2": [[2,3],[4,12]],
         "meta/count/program/sloc/13": [[1,13]],
         "meta/count/subroutine/sloc/4": [[5,8],[9,12]],
@@ -2952,7 +2952,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/time/sleep": [[2,2]],
-        "def/import/standard/time": [[1,1]],
+        "import/standard/time": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -3408,8 +3408,8 @@
         "call/subroutine/builtin/print": [[6,6]],
         "call/subroutine/builtin/range": [[5,5]],
         "call/subroutine/method": [[5,5]],
-        "def/import/standard/multiprocessing/Pool": [[1,1]],
         "def/subroutine/procedure": [[2,3]],
+        "import/standard/multiprocessing/Pool": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
         "meta/count/subroutine/sloc/2": [[2,3]],
         "meta/count/variety/***": [[1,6]],
@@ -3573,7 +3573,7 @@
       },
       "taxa": {
         "call/subroutine/builtin/print/file": [[2,2]],
-        "def/import/standard/sys": [[1,1]],
+        "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -3612,7 +3612,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/import/standard/sys": [[1,1]],
+        "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -3652,7 +3652,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/datetime": [[1,1]],
+        "import/standard/datetime": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -3892,9 +3892,9 @@
       },
       "taxa": {
         "call/subroutine/method": [[3,3],[3,3],[3,3]],
-        "def/import/standard/math": [[1,1]],
         "def/subroutine/function/pure": [[2,3]],
         "def/subroutine/return/something": [[3,3]],
+        "import/standard/math": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/subroutine/sloc/2": [[2,3]],
         "meta/count/variety/*": [[1,3]],
@@ -3956,8 +3956,8 @@
         "call/subroutine/builtin/casting/bytearray": [[3,3]],
         "call/subroutine/builtin/casting/int": [[3,3]],
         "call/subroutine/method": [[3,3]],
-        "def/import/standard/__future__/division": [[1,1]],
-        "def/import/standard/math": [[2,2]],
+        "import/standard/__future__/division": [[1,1]],
+        "import/standard/math": [[2,2]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/**": [[1,3]],
         "meta/program": [[1,3]],
@@ -4000,7 +4000,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/import/standard/random": [[1,1]],
+        "import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -4036,7 +4036,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/import/standard/random": [[1,1]],
+        "import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -4084,7 +4084,7 @@
         "call/composition": [[2,2]],
         "call/subroutine/builtin/print": [[2,2]],
         "call/subroutine/method/sequence/string/join": [[2,2]],
-        "def/import/standard/sys": [[1,1]],
+        "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -4189,7 +4189,7 @@
       },
       "taxa": {
         "call/subroutine": [[2,2]],
-        "def/import/standard/fractions/gcd": [[1,1]],
+        "import/standard/fractions/gcd": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -4235,7 +4235,7 @@
       },
       "taxa": {
         "call/subroutine": [[2,2]],
-        "def/import/standard/fractions/gcd": [[1,1]],
+        "import/standard/fractions/gcd": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -4558,7 +4558,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/re": [[1,1]],
+        "import/standard/re": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -4718,7 +4718,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/sys/exit": [[2,2]],
-        "def/import/standard/sys": [[1,1]],
+        "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -4892,7 +4892,7 @@
       "taxa": {
         "call/subroutine/builtin/open": [[2,2]],
         "call/subroutine/method": [[3,3]],
-        "def/import/standard/json": [[1,1]],
+        "import/standard/json": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/**": [[1,3]],
         "meta/program": [[1,3]],
@@ -4936,7 +4936,7 @@
         "call/subroutine/builtin/open": [[2,2]],
         "call/subroutine/method": [[3,3]],
         "call/subroutine/method/json/dump": [[3,3]],
-        "def/import/standard/json": [[1,1]],
+        "import/standard/json": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/**": [[1,3]],
         "meta/program": [[1,3]],
@@ -4978,10 +4978,10 @@
       },
       "taxa": {
         "call/subroutine/no_arguments": [[3,3]],
-        "def/import/standard/__future__/print_function": [[1,1]],
         "def/subroutine/function/pure": [[2,3]],
         "def/subroutine/higher_order": [[2,3]],
         "def/subroutine/return/something": [[3,3]],
+        "import/standard/__future__/print_function": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/subroutine/sloc/2": [[2,3]],
         "meta/count/variety/***": [[1,3]],
@@ -5086,7 +5086,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/os": [[1,1]],
+        "import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -5201,7 +5201,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/datetime": [[1,1]],
+        "import/standard/datetime": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -5262,7 +5262,7 @@
       "taxa": {
         "call/subroutine": [[2,2]],
         "call/subroutine/method": [[3,3]],
-        "def/import/standard/datetime/date": [[1,1]],
+        "import/standard/datetime/date": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/*": [[1,3]],
         "meta/program": [[1,3]],
@@ -5309,7 +5309,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2],[3,3]],
-        "def/import/standard/datetime/date": [[1,1]],
+        "import/standard/datetime/date": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/*": [[1,3]],
         "meta/program": [[1,3]],
@@ -5380,7 +5380,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2],[3,3]],
-        "def/import/standard/urllib.request": [[1,1]],
+        "import/standard/urllib.request": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/**": [[1,3]],
         "meta/program": [[1,3]],
@@ -5428,7 +5428,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/urllib": [[1,1]],
+        "import/standard/urllib": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -5471,7 +5471,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/third_party/lxml.etree": [[1,1]],
+        "import/third_party/lxml.etree": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -5580,10 +5580,10 @@
         "call/subroutine/builtin/print": [[12,12]],
         "call/subroutine/method": [[11,11]],
         "def/class": [[2,9]],
-        "def/import/third_party/pyxser": [[1,1]],
         "def/subroutine/method/flavor/instance": [[6,9]],
         "def/subroutine/method/naming/magic/__init__": [[6,9]],
         "def/subroutine/procedure": [[6,9]],
+        "import/third_party/pyxser": [[1,1]],
         "meta/count/class/methods/1": [[2,9]],
         "meta/count/program/sloc/12": [[1,12]],
         "meta/count/subroutine/sloc/4": [[6,9]],
@@ -5631,7 +5631,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/import/standard/sys": [[1,1]],
+        "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -5670,7 +5670,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/os": [[1,1]],
+        "import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -5715,7 +5715,7 @@
       "taxa": {
         "call/composition": [[2,2]],
         "call/subroutine/method": [[2,2],[2,2]],
-        "def/import/standard/os": [[1,1]],
+        "import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -5796,7 +5796,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/third_party/pympler.asizeof": [[1,1]],
+        "import/third_party/pympler.asizeof": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -5876,7 +5876,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/subprocess/call": [[2,2]],
-        "def/import/standard/subprocess": [[1,1]],
+        "import/standard/subprocess": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -6055,7 +6055,7 @@
       },
       "taxa": {
         "condition/inequality": [[2,2]],
-        "def/import/standard/datetime": [[1,1]],
+        "import/standard/datetime": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -6461,9 +6461,9 @@
       "taxa": {
         "call/subroutine/builtin/print": [[7,7]],
         "call/subroutine/method": [[3,3],[4,4],[6,6]],
-        "def/import/standard/socket": [[1,1]],
         "flow/loop/exit/late": [[5,7]],
         "flow/loop/while/infinite": [[5,7]],
+        "import/standard/socket": [[1,1]],
         "meta/count/program/sloc/7": [[1,7]],
         "meta/count/variety/**": [[1,7]],
         "meta/program": [[1,7]],
@@ -6581,7 +6581,7 @@
       },
       "taxa": {
         "def/class": [[2,6]],
-        "def/import/standard/enum/Enum": [[1,1]],
+        "import/standard/enum/Enum": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
         "meta/count/variety/**": [[1,6]],
         "meta/program": [[1,6]],
@@ -6674,9 +6674,9 @@
         "call/subroutine/method": [[3,3]],
         "condition/equality": [[4,4]],
         "condition/equality/not": [[4,4]],
-        "def/import/standard/bisect": [[1,1]],
         "def/subroutine/function/impure": [[2,4]],
         "def/subroutine/return/something": [[4,4]],
+        "import/standard/bisect": [[1,1]],
         "meta/count/program/sloc/4": [[1,4]],
         "meta/count/subroutine/sloc/3": [[2,4]],
         "meta/count/variety/**": [[1,4]],
@@ -6738,7 +6738,7 @@
         "call/subroutine/builtin/print": [[5,5]],
         "call/subroutine/method": [[2,2],[4,4]],
         "call/subroutine/no_arguments": [[3,3]],
-        "def/import/standard/time": [[1,1]],
+        "import/standard/time": [[1,1]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/variety/**": [[1,5]],
         "meta/program": [[1,5]],
@@ -6822,7 +6822,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/imp/load_module": [[2,2]],
-        "def/import/standard/imp": [[1,1]],
+        "import/standard/imp": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -7039,11 +7039,11 @@
         "call/subroutine/method/sequence/list/extend": [[9,9]],
         "call/subroutine/no_arguments": [[3,3]],
         "condition/belonging/not": [[9,9]],
-        "def/import/standard/collections/deque": [[1,1]],
         "def/subroutine/higher_order": [[2,9]],
         "def/subroutine/procedure": [[2,9]],
         "flow/loop/exit/late": [[5,9]],
         "flow/loop/while": [[5,9]],
+        "import/standard/collections/deque": [[1,1]],
         "meta/count/program/sloc/9": [[1,9]],
         "meta/count/subroutine/sloc/8": [[2,9]],
         "meta/count/variety/****": [[1,9]],
@@ -7269,7 +7269,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/timeit": [[1,1]],
+        "import/standard/timeit": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -7492,7 +7492,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/import/standard/tempfile": [[1,1]],
+        "import/standard/tempfile": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -7528,7 +7528,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/import/standard/tempfile": [[1,1]],
+        "import/standard/tempfile": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -7725,7 +7725,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/os": [[1,1]],
+        "import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -7767,7 +7767,7 @@
       "taxa": {
         "call/class/construct": [[2,2]],
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/pathlib/Path": [[1,1]],
+        "import/standard/pathlib/Path": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -7825,8 +7825,8 @@
       "taxa": {
         "call/subroutine/method": [[2,2],[5,5],[6,6]],
         "call/subroutine/method/logging/basicConfig": [[2,2]],
-        "def/import/standard/logging": [[1,1]],
-        "def/import/standard/sys": [[1,1]],
+        "import/standard/logging": [[1,1]],
+        "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
         "meta/count/variety/**": [[1,6]],
         "meta/program": [[1,6]],
@@ -7878,7 +7878,7 @@
       "taxa": {
         "call/subroutine/method": [[3,3],[4,4]],
         "call/subroutine/method/locale/setlocale": [[3,3]],
-        "def/import/standard/locale": [[1,1]],
+        "import/standard/locale": [[1,1]],
         "meta/count/program/sloc/4": [[1,4]],
         "meta/count/variety/**": [[1,4]],
         "meta/program": [[1,4]],
@@ -7988,7 +7988,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/re": [[1,1]],
+        "import/standard/re": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -8127,8 +8127,8 @@
       },
       "taxa": {
         "call/subroutine/method/sequence/string/endswith": [[2,2]],
-        "def/import/standard/os": [[1,1]],
         "flow/conditional/no_else": [[2,3]],
+        "import/standard/os": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/**": [[1,3]],
         "meta/program": [[1,3]],
@@ -8477,13 +8477,13 @@
         "call/subroutine/method/chaining": [[5,5]],
         "call/subroutine/method/sequence/string/join": [[10,10]],
         "def/class": [[2,10]],
-        "def/import/third_party/numpy": [[1,1]],
         "def/subroutine/decorated": [[4,7]],
         "def/subroutine/function": [[4,7],[8,10]],
         "def/subroutine/method/flavor/class": [[4,7]],
         "def/subroutine/method/flavor/instance": [[8,10]],
         "def/subroutine/method/naming/magic/__str__": [[8,10]],
         "def/subroutine/return/something": [[5,7],[10,10]],
+        "import/third_party/numpy": [[1,1]],
         "meta/count/class/methods/2": [[2,10]],
         "meta/count/program/sloc/15": [[1,15]],
         "meta/count/subroutine/sloc/3": [[8,10]],
@@ -8544,7 +8544,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[3,3]],
-        "def/import/standard/pathlib": [[1,1]],
+        "import/standard/pathlib": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/**": [[1,3]],
         "meta/program": [[1,3]],
@@ -8655,7 +8655,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/random": [[1,1]],
+        "import/standard/random": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -8769,9 +8769,9 @@
       "taxa": {
         "call/subroutine/no_arguments": [[3,3],[5,5]],
         "condition/inequality": [[2,2]],
-        "def/import/standard/sys": [[1,1]],
         "flow/conditional": [[2,5]],
         "flow/conditional/else": [[5,5]],
+        "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/variety/**": [[1,5]],
         "meta/program": [[1,5]],
@@ -8876,8 +8876,8 @@
       "taxa": {
         "call/subroutine/no_arguments": [[3,3],[5,5]],
         "condition/belonging": [[2,2],[4,4]],
-        "def/import/standard/sys": [[1,1]],
         "flow/conditional/no_else": [[2,3],[4,5]],
+        "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/variety/**": [[1,5]],
         "meta/program": [[1,5]],
@@ -9019,11 +9019,11 @@
         "call/subroutine/builtin/next": [[4,4]],
         "call/subroutine/builtin/print": [[7,7]],
         "call/subroutine/builtin/zip": [[5,5]],
-        "def/import/standard/itertools/tee": [[1,1]],
         "def/subroutine/function/impure": [[2,5]],
         "def/subroutine/return/something": [[5,5]],
         "flow/loop/exit/late": [[6,7]],
         "flow/loop/for": [[6,7]],
+        "import/standard/itertools/tee": [[1,1]],
         "meta/count/program/sloc/7": [[1,7]],
         "meta/count/subroutine/sloc/4": [[2,5]],
         "meta/count/variety/***": [[1,7]],
@@ -9065,7 +9065,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/webbrowser/open": [[2,2]],
-        "def/import/standard/webbrowser": [[1,1]],
+        "import/standard/webbrowser": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -9603,8 +9603,8 @@
         "call/subroutine/method": [[2,2],[4,4]],
         "call/subroutine/method/chaining": [[2,2]],
         "call/subroutine/method/sequence/string/encode": [[2,2]],
-        "def/import/standard/urllib/parse": [[1,1]],
-        "def/import/standard/urllib/request": [[1,1]],
+        "import/standard/urllib/parse": [[1,1]],
+        "import/standard/urllib/request": [[1,1]],
         "meta/count/program/sloc/4": [[1,4]],
         "meta/count/variety/*": [[1,4]],
         "meta/program": [[1,4]],
@@ -9745,7 +9745,7 @@
       "taxa": {
         "call/subroutine/method": [[3,3],[3,3]],
         "condition/belonging": [[3,3]],
-        "def/import/standard/os": [[1,1]],
+        "import/standard/os": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/*": [[1,3]],
         "meta/program": [[1,3]],
@@ -9827,8 +9827,8 @@
       "taxa": {
         "call/subroutine/method": [[5,5],[7,7]],
         "call/subroutine/method/sequence/string/format": [[4,4]],
-        "def/import/standard/os": [[2,2]],
-        "def/import/standard/re": [[1,1]],
+        "import/standard/os": [[2,2]],
+        "import/standard/re": [[1,1]],
         "meta/count/program/sloc/7": [[1,7]],
         "meta/count/variety/**": [[1,7]],
         "meta/program": [[1,7]],
@@ -9890,8 +9890,8 @@
         "call/composition": [[3,3],[3,3]],
         "call/subroutine/builtin/casting/list": [[3,3]],
         "call/subroutine/method": [[3,3],[3,3]],
-        "def/import/standard/glob": [[1,1]],
-        "def/import/standard/itertools": [[2,2]],
+        "import/standard/glob": [[1,1]],
+        "import/standard/itertools": [[2,2]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/*": [[1,3]],
         "meta/program": [[1,3]],
@@ -10052,7 +10052,7 @@
       "taxa": {
         "call/class/construct": [[3,3]],
         "call/subroutine": [[2,2]],
-        "def/import/standard/collections/namedtuple": [[1,1]],
+        "import/standard/collections/namedtuple": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/*": [[1,3]],
         "meta/program": [[1,3]],
@@ -10095,7 +10095,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/os": [[1,1]],
+        "import/standard/os": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -10215,7 +10215,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[6,6]],
-        "def/import/third_party/requests": [[2,2]],
+        "import/third_party/requests": [[2,2]],
         "meta/count/program/sloc/7": [[1,7]],
         "meta/count/variety/**": [[1,7]],
         "meta/program": [[1,7]],
@@ -10264,8 +10264,8 @@
       "taxa": {
         "call/subroutine": [[2,2]],
         "call/subroutine/method": [[2,2]],
-        "def/import/standard/datetime/date": [[1,1]],
-        "def/import/standard/datetime/timedelta": [[1,1]],
+        "import/standard/datetime/date": [[1,1]],
+        "import/standard/datetime/timedelta": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -10321,7 +10321,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[3,3]],
-        "def/import/standard/threading": [[1,1]],
+        "import/standard/threading": [[1,1]],
         "meta/count/program/sloc/3": [[1,3]],
         "meta/count/variety/*": [[1,3]],
         "meta/program": [[1,3]],
@@ -10361,7 +10361,7 @@
       "taxa": {
         "call/subroutine/method": [[2,2]],
         "call/subroutine/method/sys/exit": [[2,2]],
-        "def/import/standard/sys": [[1,1]],
+        "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/**": [[1,2]],
         "meta/program": [[1,2]],
@@ -10544,7 +10544,7 @@
         "whole_span:2": [[1,2]]
       },
       "taxa": {
-        "def/import/third_party/numpy": [[1,1]],
+        "import/third_party/numpy": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -10588,7 +10588,7 @@
       },
       "taxa": {
         "call/subroutine/method": [[2,2]],
-        "def/import/third_party/numpy": [[1,1]],
+        "import/third_party/numpy": [[1,1]],
         "meta/count/program/sloc/2": [[1,2]],
         "meta/count/variety/*": [[1,2]],
         "meta/program": [[1,2]],
@@ -21534,183 +21534,6 @@
       "159.2281-trie.py",
       "187.3261-disjoint-set.py"
     ],
-    "def/import/standard/__future__/division": [
-      "068.2271-create-a-bitset.py"
-    ],
-    "def/import/standard/__future__/print_function": [
-      "001.0003-print-hello-world.py",
-      "093.1082-pass-a-runnable-procedure-as-parameter.py"
-    ],
-    "def/import/standard/bisect": [
-      "124.2152-binary-search-for-a-value-in-sorted-array.py"
-    ],
-    "def/import/standard/collections/defaultdict": [
-      "040.2279-graph-with-adjacency-lists.py"
-    ],
-    "def/import/standard/collections/deque": [
-      "129.2282-breadth-first-traversing-in-a-graph.py"
-    ],
-    "def/import/standard/collections/namedtuple": [
-      "179.2689-get-center-of-a-rectangle.py"
-    ],
-    "def/import/standard/dataclasses/dataclass": [
-      "005.0663-create-a-2d-point-data-structure.py"
-    ],
-    "def/import/standard/datetime": [
-      "061.0576-get-current-date.py",
-      "098.2142-epoch-seconds-to-date-object.py",
-      "115.2138-compare-dates.py"
-    ],
-    "def/import/standard/datetime/date": [
-      "099.1429-format-date-yyyy-mm-dd.py",
-      "099.2693-format-date-yyyy-mm-dd.py",
-      "184.2701-tomorrow.py"
-    ],
-    "def/import/standard/datetime/timedelta": [
-      "184.2701-tomorrow.py"
-    ],
-    "def/import/standard/enum/Enum": [
-      "122.1454-declare-enumeration.py"
-    ],
-    "def/import/standard/fractions/gcd": [
-      "074.0674-compute-gcd.py",
-      "075.0675-compute-lcm.py"
-    ],
-    "def/import/standard/functools/partial": [
-      "037.0671-currying.py"
-    ],
-    "def/import/standard/glob": [
-      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "def/import/standard/imp": [
-      "127.2274-source-code-inclusion.py"
-    ],
-    "def/import/standard/itertools": [
-      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "def/import/standard/itertools/tee": [
-      "163.3177-print-list-elements-by-group-of-2.py"
-    ],
-    "def/import/standard/json": [
-      "091.1098-load-json-file-into-struct.py",
-      "092.1100-save-object-into-json-file.py"
-    ],
-    "def/import/standard/locale": [
-      "146.1825-convert-string-to-floating-point-number.py"
-    ],
-    "def/import/standard/logging": [
-      "145.1822-print-log-line-with-datetime.py"
-    ],
-    "def/import/standard/math": [
-      "067.1426-binomial-coefficient-n-choose-k.py",
-      "068.2271-create-a-bitset.py"
-    ],
-    "def/import/standard/multiprocessing/Pool": [
-      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
-      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
-    ],
-    "def/import/standard/os": [
-      "095.2140-get-file-size.py",
-      "106.2039-get-program-working-directory.py",
-      "107.2139-get-folder-containing-current-program.py",
-      "144.2145-check-if-file-exists.py",
-      "151.2166-remove-string-trailing-path-separator.py",
-      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
-      "180.2612-list-files-in-directory.py"
-    ],
-    "def/import/standard/pathlib": [
-      "155.2147-delete-file.py"
-    ],
-    "def/import/standard/pathlib/Path": [
-      "144.2915-check-if-file-exists.py"
-    ],
-    "def/import/standard/random": [
-      "010.1478-shuffle-a-list.py",
-      "011.0047-pick-a-random-element-from-a-list.py",
-      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
-      "015.0184-pick-uniformly-a-random-integer-in-ab.py",
-      "069.1086-seed-random-generator.py",
-      "070.1087-use-clock-as-random-generator-seed.py",
-      "158.2163-random-sublist.py"
-    ],
-    "def/import/standard/random/shuffle": [
-      "010.0182-shuffle-a-list.py"
-    ],
-    "def/import/standard/re": [
-      "083.1805-regex-with-character-repetition.py",
-      "147.2171-remove-all-non-ascii-characters.py",
-      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
-    ],
-    "def/import/standard/socket": [
-      "121.3029-udp-listen-and-read.py"
-    ],
-    "def/import/standard/subprocess": [
-      "111.2168-launch-other-program.py"
-    ],
-    "def/import/standard/sys": [
-      "059.0668-write-to-standard-error-stream.py",
-      "060.1084-read-command-line-argument.py",
-      "071.0379-echo-program-implementation.py",
-      "087.1139-stop-program.py",
-      "105.1804-current-executable-name.py",
-      "145.1822-print-log-line-with-datetime.py",
-      "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
-      "162.2164-execute-procedures-depending-on-options.py",
-      "186.2699-exit-program-cleanly.py"
-    ],
-    "def/import/standard/tempfile": [
-      "138.2161-create-temp-file.py",
-      "139.2162-create-temp-directory.py"
-    ],
-    "def/import/standard/threading": [
-      "033.1420-atomically-read-and-update-variable.py",
-      "185.2820-execute-function-in-30-seconds.py"
-    ],
-    "def/import/standard/time": [
-      "045.0570-pause-execution-for-5-seconds.py",
-      "125.2167-measure-function-call-duration.py"
-    ],
-    "def/import/standard/timeit": [
-      "132.2040-measure-duration-of-procedure-execution.py"
-    ],
-    "def/import/standard/urllib": [
-      "102.2173-load-from-http-get-request-into-a-file.py"
-    ],
-    "def/import/standard/urllib.request": [
-      "101.2172-load-from-http-get-request-into-a-string.py"
-    ],
-    "def/import/standard/urllib/parse": [
-      "174.2687-make-http-post-request.py"
-    ],
-    "def/import/standard/urllib/request": [
-      "174.2687-make-http-post-request.py"
-    ],
-    "def/import/standard/webbrowser": [
-      "164.2169-open-url-in-default-browser.py"
-    ],
-    "def/import/third_party/Queue": [
-      "025.0195-send-a-value-to-another-thread.py"
-    ],
-    "def/import/third_party/lxml.etree": [
-      "103.2276-load-xml-file-into-struct.py"
-    ],
-    "def/import/third_party/numpy": [
-      "027.0193-create-a-3-dimensional-array.py",
-      "154.2292-halfway-between-two-hex-color-codes.py",
-      "188.3171-matrix-multiplication.py",
-      "188.3284-matrix-multiplication.py"
-    ],
-    "def/import/third_party/pympler.asizeof": [
-      "109.2280-number-of-bytes-of-a-type.py"
-    ],
-    "def/import/third_party/pyxser": [
-      "104.3264-save-object-into-xml-file.py"
-    ],
-    "def/import/third_party/requests": [
-      "183.3025-make-http-put-request.py"
-    ],
     "def/subroutine/decorated": [
       "090.1099-read-only-outside.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
@@ -21988,6 +21811,183 @@
       "040.2279-graph-with-adjacency-lists.py",
       "043.0676-break-outer-loop.py",
       "050.0572-make-an-infinite-loop.py"
+    ],
+    "import/standard/__future__/division": [
+      "068.2271-create-a-bitset.py"
+    ],
+    "import/standard/__future__/print_function": [
+      "001.0003-print-hello-world.py",
+      "093.1082-pass-a-runnable-procedure-as-parameter.py"
+    ],
+    "import/standard/bisect": [
+      "124.2152-binary-search-for-a-value-in-sorted-array.py"
+    ],
+    "import/standard/collections/defaultdict": [
+      "040.2279-graph-with-adjacency-lists.py"
+    ],
+    "import/standard/collections/deque": [
+      "129.2282-breadth-first-traversing-in-a-graph.py"
+    ],
+    "import/standard/collections/namedtuple": [
+      "179.2689-get-center-of-a-rectangle.py"
+    ],
+    "import/standard/dataclasses/dataclass": [
+      "005.0663-create-a-2d-point-data-structure.py"
+    ],
+    "import/standard/datetime": [
+      "061.0576-get-current-date.py",
+      "098.2142-epoch-seconds-to-date-object.py",
+      "115.2138-compare-dates.py"
+    ],
+    "import/standard/datetime/date": [
+      "099.1429-format-date-yyyy-mm-dd.py",
+      "099.2693-format-date-yyyy-mm-dd.py",
+      "184.2701-tomorrow.py"
+    ],
+    "import/standard/datetime/timedelta": [
+      "184.2701-tomorrow.py"
+    ],
+    "import/standard/enum/Enum": [
+      "122.1454-declare-enumeration.py"
+    ],
+    "import/standard/fractions/gcd": [
+      "074.0674-compute-gcd.py",
+      "075.0675-compute-lcm.py"
+    ],
+    "import/standard/functools/partial": [
+      "037.0671-currying.py"
+    ],
+    "import/standard/glob": [
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "import/standard/imp": [
+      "127.2274-source-code-inclusion.py"
+    ],
+    "import/standard/itertools": [
+      "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "import/standard/itertools/tee": [
+      "163.3177-print-list-elements-by-group-of-2.py"
+    ],
+    "import/standard/json": [
+      "091.1098-load-json-file-into-struct.py",
+      "092.1100-save-object-into-json-file.py"
+    ],
+    "import/standard/locale": [
+      "146.1825-convert-string-to-floating-point-number.py"
+    ],
+    "import/standard/logging": [
+      "145.1822-print-log-line-with-datetime.py"
+    ],
+    "import/standard/math": [
+      "067.1426-binomial-coefficient-n-choose-k.py",
+      "068.2271-create-a-bitset.py"
+    ],
+    "import/standard/multiprocessing/Pool": [
+      "030.0189-parallelize-execution-of-1000-independent-tasks.py",
+      "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "import/standard/os": [
+      "095.2140-get-file-size.py",
+      "106.2039-get-program-working-directory.py",
+      "107.2139-get-folder-containing-current-program.py",
+      "144.2145-check-if-file-exists.py",
+      "151.2166-remove-string-trailing-path-separator.py",
+      "177.2709-find-files-with-a-given-list-of-filename-extensions.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py",
+      "180.2612-list-files-in-directory.py"
+    ],
+    "import/standard/pathlib": [
+      "155.2147-delete-file.py"
+    ],
+    "import/standard/pathlib/Path": [
+      "144.2915-check-if-file-exists.py"
+    ],
+    "import/standard/random": [
+      "010.1478-shuffle-a-list.py",
+      "011.0047-pick-a-random-element-from-a-list.py",
+      "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
+      "015.0184-pick-uniformly-a-random-integer-in-ab.py",
+      "069.1086-seed-random-generator.py",
+      "070.1087-use-clock-as-random-generator-seed.py",
+      "158.2163-random-sublist.py"
+    ],
+    "import/standard/random/shuffle": [
+      "010.0182-shuffle-a-list.py"
+    ],
+    "import/standard/re": [
+      "083.1805-regex-with-character-repetition.py",
+      "147.2171-remove-all-non-ascii-characters.py",
+      "177.2725-find-files-with-a-given-list-of-filename-extensions.py"
+    ],
+    "import/standard/socket": [
+      "121.3029-udp-listen-and-read.py"
+    ],
+    "import/standard/subprocess": [
+      "111.2168-launch-other-program.py"
+    ],
+    "import/standard/sys": [
+      "059.0668-write-to-standard-error-stream.py",
+      "060.1084-read-command-line-argument.py",
+      "071.0379-echo-program-implementation.py",
+      "087.1139-stop-program.py",
+      "105.1804-current-executable-name.py",
+      "145.1822-print-log-line-with-datetime.py",
+      "160.2165-detect-if-32-bit-or-64-bit-architecture.py",
+      "162.2164-execute-procedures-depending-on-options.py",
+      "186.2699-exit-program-cleanly.py"
+    ],
+    "import/standard/tempfile": [
+      "138.2161-create-temp-file.py",
+      "139.2162-create-temp-directory.py"
+    ],
+    "import/standard/threading": [
+      "033.1420-atomically-read-and-update-variable.py",
+      "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "import/standard/time": [
+      "045.0570-pause-execution-for-5-seconds.py",
+      "125.2167-measure-function-call-duration.py"
+    ],
+    "import/standard/timeit": [
+      "132.2040-measure-duration-of-procedure-execution.py"
+    ],
+    "import/standard/urllib": [
+      "102.2173-load-from-http-get-request-into-a-file.py"
+    ],
+    "import/standard/urllib.request": [
+      "101.2172-load-from-http-get-request-into-a-string.py"
+    ],
+    "import/standard/urllib/parse": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "import/standard/urllib/request": [
+      "174.2687-make-http-post-request.py"
+    ],
+    "import/standard/webbrowser": [
+      "164.2169-open-url-in-default-browser.py"
+    ],
+    "import/third_party/Queue": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
+    "import/third_party/lxml.etree": [
+      "103.2276-load-xml-file-into-struct.py"
+    ],
+    "import/third_party/numpy": [
+      "027.0193-create-a-3-dimensional-array.py",
+      "154.2292-halfway-between-two-hex-color-codes.py",
+      "188.3171-matrix-multiplication.py",
+      "188.3284-matrix-multiplication.py"
+    ],
+    "import/third_party/pympler.asizeof": [
+      "109.2280-number-of-bytes-of-a-type.py"
+    ],
+    "import/third_party/pyxser": [
+      "104.3264-save-object-into-xml-file.py"
+    ],
+    "import/third_party/requests": [
+      "183.3025-make-http-put-request.py"
     ],
     "meta/count/class/methods/1": [
       "009.1410-create-a-binary-tree-data-structure.py",

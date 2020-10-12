@@ -51,7 +51,7 @@ from .user_types import (
     Criterion,
     JsonTagDatabase,
     Operation,
-    ProgramNames,
+    ProgramPaths,
 )
 
 __pdoc__ = {
@@ -108,7 +108,7 @@ class Recommendations:
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs, **kwargs)
-        self.result: List[Tuple[int, Operation, ProgramNames]] = []
+        self.result: List[Tuple[int, Operation, ProgramPaths]] = []
 
     def run_pipeline(self, commands: Optional[List[Command]] = None) -> None:
         """Evolve the state of the filter accross pipeline commands.
@@ -133,7 +133,7 @@ class Recommendations:
                 - `"operation"`: a string among `"include"`, `"exclude"`, `"impart"` and `"hide"`,
                     with an optional suffix `" any"` (implicit) or `" all"`.
                 - `"data"`: either a string consisting in a shell command, or an heterogeneous list
-                    of _criteria_: patterns (matching either program names or taxon names) or
+                    of _criteria_: patterns (matching either program paths or taxon names) or
                     semantic triples (of the form subject, predicate, object).
 
                 Defaults to `None`, which is treated as an empty list.
@@ -251,30 +251,31 @@ class Recommendations:
         # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
 
         toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
-        for (cost, program_name) in self.assessed_programs:
-            if program_name in self.hidden_programs:
+        for (cost, program_path) in self.assessed_programs:
+            if program_path in self.hidden_programs:
                 continue
-            toc_data[grouping_key(cost)].append((cost, program_name))
-        for costs_and_program_names in toc_data.values():
-            costs_and_program_names.sort(key=sorting_key)
+            toc_data[grouping_key(cost)].append((cost, program_path))
+        for costs_and_program_paths in toc_data.values():
+            costs_and_program_paths.sort(key=sorting_key)
 
         # Accumulate simultaneously the TOC and the contents.
 
         toc: List[str] = ["# Table of contents"]
         contents: List[str] = ["# Recommended programs"]
 
-        for (bounds, costs_and_program_names) in toc_data.items():
+        for (bounds, costs_and_program_paths) in toc_data.items():
 
-            title = f"{display_count(len(costs_and_program_names))} of learning cost {bounds}"
+            title = f"{display_count(len(costs_and_program_paths))} of learning cost {bounds}"
             toc.append(f"- [`{title}`](#{title_to_slug(title)})")
             contents.append(f"\n## {title}")
 
-            for (cost, program_name) in costs_and_program_names:
-                program_info = self.db_programs[program_name]
-                program_title = self.title_format.format(name=program_name)
+            for (cost, program_path) in costs_and_program_paths:
+                program_info = self.db_programs[program_path]
+                name = regex.sub(r"(?:.+/)?(.+)", r"\1", program_path)  # last segment of the path
+                program_title = self.title_format.format(path=program_path, name=name)
                 title = f"Program {program_title} (learning cost {cost})"
-                slug = title_to_slug(f"Program {program_name} (learning cost {cost})")
-                toc.append(f"    - [`{program_name}`](#{slug})")
+                slug = title_to_slug(f"Program {name} (learning cost {cost})")
+                toc.append(f"    - [`{name}`](#{slug})")
                 contents.append(f"\n### {title}")
                 contents.append(f"\n```python\n{add_line_numbers(program_info['source'])}\n```")
                 contents.append("\n| Cost  | Taxon | Location |")
@@ -291,7 +292,7 @@ class Recommendations:
                     contents.append(f"| {taxon_cost} | `{taxon_name}` | {s} |")
                 contents.append("\n---")
 
-        def programs_to_html(description: str, programs: ProgramNames) -> str:
+        def programs_to_html(description: str, programs: ProgramPaths) -> str:
             details = []
             if programs:
                 description = description.replace(" 1 programs", " 1 program")
@@ -320,12 +321,12 @@ class Recommendations:
 if __name__ == "__main__":
     ast = __import__("ast")
     json = __import__("json")
-    program_path = Path("../algo/programs")
+    path = Path("../algo/programs")
     rec = Recommendations(
-        db=json.loads(Path(f"{program_path}_db.json").read_text()),
-        base_path=program_path.parent,
+        db=json.loads(Path(f"{path}_db.json").read_text()),
+        base_path=path.parent,
     )
-    rec.run_pipeline(ast.literal_eval(Path(f"{program_path}_pipe.py").read_text()))
-    output_path = Path(f"{program_path}_recommendations.md")
+    rec.run_pipeline(ast.literal_eval(Path(f"{path}_pipe.py").read_text()))
+    output_path = Path(f"{path}_recommendations.md")
     output_path.write_text(rec.get_markdown())
     print(f"Dumped: {output_path.resolve()}.\n")

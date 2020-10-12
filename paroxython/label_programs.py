@@ -12,7 +12,7 @@ from .user_types import Label, LabelName, Programs, Source
 
 def labelled_programs(
     directory: Path,
-    search_imported_program_name: Callable = regex.compile(r"import(?:_module)?:([^:]+)").search,
+    search_imported_program_path: Callable = regex.compile(r"import(?:_module)?:([^:]+)").search,
     print_performances: bool = False,
     **kwargs,
 ) -> Programs:
@@ -20,7 +20,7 @@ def labelled_programs(
 
     Args:
         directory (Path): The directory to walk, containing some Python programs.
-        search_imported_program_name (Callable, optional): A function taking a label name and, in
+        search_imported_program_path (Callable, optional): A function taking a label name and, in
             the case it starts with `"import:"` or `"import_module:"`, returns a match object
             whose first group is the name of the imported program.
             [Not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
@@ -35,16 +35,17 @@ def labelled_programs(
         `"import_internally:my_program"`, while `"import:itertools"` would be left untouched.
     """
     programs: Programs = list_programs(directory, **kwargs)
-    internal_program_names = {p.name for p in programs}
+    internal_program_paths = {p.path.replace("/", ".") for p in programs}  # path sep -> import sep
     parse = ProgramParser()
     print(f"Labelling {len(programs)} programs.")
     for program in iterate_and_print_programs(programs):
         program.labels[:] = parse(program)  # populate this field in place with [:]
         for (i, label) in enumerate(program.labels):
-            m = search_imported_program_name(label.name)
-            if m and f"{m[1]}.py" in internal_program_names:
-                tweaked_label_name = LabelName(label.name.replace(":", "_internally:", 1))
-                program.labels[i] = Label(name=tweaked_label_name, spans=label.spans)
+            m = search_imported_program_path(label.name)
+            if m and f"{m[1]}.py" in internal_program_paths:
+                tweaked_label_name = label.name.replace(":", "_internally:", 1)
+                tweaked_label_name = tweaked_label_name.replace(".", "/")  # import sep -> path sep
+                program.labels[i] = Label(name=LabelName(tweaked_label_name), spans=label.spans)
     if print_performances:  # pragma: no cover
         parse.print_performances()
     return programs
@@ -65,7 +66,7 @@ def generate_labelled_sources(programs: Programs) -> Iterator:
     """
     separator = "-" * 88
     for program in programs:
-        yield Source(f"# {separator}\n# {program.name}\n# {separator}")
+        yield Source(f"# {separator}\n# {program.path}\n# {separator}")
         lines = program.source.splitlines()
         if lines:
             comments: List[Set[str]] = [set() for _ in lines]

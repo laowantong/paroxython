@@ -27,8 +27,8 @@ from .user_types import (
     Operation,
     Predicate,
     ProgramInfos,
-    ProgramName,
-    ProgramNameSet,
+    ProgramPath,
+    ProgramPathSet,
     ProgramToPrograms,
     TaxonInfos,
     TaxonName,
@@ -61,10 +61,10 @@ class ProgramFilter:
 
     def init_filter_state(self) -> None:
         """Select all programs and define the imparted knowledge as empty."""
-        self.selected_programs: ProgramNameSet = set(self.db_programs)
+        self.selected_programs: ProgramPathSet = set(self.db_programs)
         self.imparted_knowledge: TaxonNameSet = set()
         self.hidden_taxa: TaxonNameSet = set()
-        self.hidden_programs: ProgramNameSet = set()
+        self.hidden_programs: ProgramPathSet = set()
 
     def add_imported_taxa(self) -> None:
         """Copy under each program the taxa it featured by importation.
@@ -114,7 +114,7 @@ class ProgramFilter:
                     if exported_taxon not in importer_taxa:
                         importer_taxa[exported_taxon] = []
 
-    # Get the set of taxon names or program names matching the given pattern.
+    # Get the set of taxon names or program paths matching the given pattern.
 
     def taxa_of_pattern(self, pattern: str) -> TaxonNameSet:
         """Find all the existing taxa matching the given regular expression pattern.
@@ -128,25 +128,25 @@ class ProgramFilter:
             print_warning(f"the pattern '{pattern}' doesn't match any existing taxon.")
         return result
 
-    def programs_of_pattern(self, pattern: str) -> ProgramNameSet:
+    def programs_of_pattern(self, pattern: str) -> ProgramPathSet:
         """Find all the existing programs matching the given regular expression pattern.
 
         Note:
             All programs are searched, not just the selected ones.
         """
         match = regex.compile(fr"{pattern}").match
-        result: ProgramNameSet = set(filter(match, self.db_programs))
+        result: ProgramPathSet = set(filter(match, self.db_programs))
         if not result:
             print_warning(f"the pattern '{pattern}' doesn't match any existing program.")
         return result
 
     # Select programs from the taxa they feature, and vice versa.
 
-    def taxa_of_programs(self, programs: ProgramNameSet, follow: bool = False) -> TaxonNameSet:
+    def taxa_of_programs(self, programs: ProgramPathSet, follow: bool = False) -> TaxonNameSet:
         """Return the taxa featured (or optionally imported) by any given program.
 
         Args:
-            programs (ProgramNameSet): Program names. The non-existing ones are silently ignored.
+            programs (ProgramPathSet): Program paths. The non-existing ones are silently ignored.
             follow (bool, optional): If true, include the taxa featured by the imported programs.
                 Defaults to `False`.
 
@@ -169,7 +169,7 @@ class ProgramFilter:
                         taxa.add(taxon)
         return taxa
 
-    def programs_of_taxa(self, taxa: TaxonNameSet, follow: bool = False) -> ProgramNameSet:
+    def programs_of_taxa(self, taxa: TaxonNameSet, follow: bool = False) -> ProgramPathSet:
         """Return the programs featuring (or optionally importing) any given taxon.
 
         Args:
@@ -184,7 +184,7 @@ class ProgramFilter:
             >>> programs_of_taxa({t}, follow=True)
             {p1, p2, p3}
         """
-        programs: ProgramNameSet = set()
+        programs: ProgramPathSet = set()
         for taxon in taxa:
             programs.update(self.db_taxa.get(taxon, []))
         if follow:
@@ -247,13 +247,13 @@ class ProgramFilter:
 
     def programs_and_taxa_of_patterns(
         self, patterns: List[str]
-    ) -> Tuple[ProgramNameSet, TaxonNameSet]:
+    ) -> Tuple[ProgramPathSet, TaxonNameSet]:
         """Calculate the sets of programs and taxa matching at least one of the patterns.
 
         Description:
             Each pattern is a string which is interpreted either as:
 
-            - a program name pattern (ending with `".py"`). All programs matching it are accumulated
+            - a program path pattern (ending with `".py"`). All programs matching it are accumulated
                 in the result, _along with any taxon they feature, directly or by importation, this
                 being the only difference with `ProgramFilter.programs_or_taxa_of_patterns`_;
             - or a taxon name pattern. All taxa matching it are accumulated in the result.
@@ -262,10 +262,10 @@ class ProgramFilter:
             patterns (List[str]): A list of regular expression patterns (strings).
 
         Returns:
-            Tuple[ProgramNameSet, TaxonNameSet]: The couple of accumulated programs and taxa.
+            Tuple[ProgramPathSet, TaxonNameSet]: The couple of accumulated programs and taxa.
         """
         resulting_taxa: TaxonNameSet = set()
-        resulting_programs: ProgramNameSet = set()
+        resulting_programs: ProgramPathSet = set()
         for pattern in patterns:
             if pattern.endswith(".py"):
                 programs = self.programs_of_pattern(pattern)
@@ -278,10 +278,10 @@ class ProgramFilter:
 
     def programs_or_taxa_of_patterns(
         self, patterns: List[str]
-    ) -> Tuple[ProgramNameSet, TaxonNameSet]:
+    ) -> Tuple[ProgramPathSet, TaxonNameSet]:
         """See `ProgramFilter.programs_and_taxa_of_patterns`, minus the part in _italics_."""
         resulting_taxa: TaxonNameSet = set()
-        resulting_programs: ProgramNameSet = set()
+        resulting_programs: ProgramPathSet = set()
         for pattern in patterns:
             if pattern.endswith(".py"):
                 resulting_programs.update(self.programs_of_pattern(pattern))
@@ -289,14 +289,14 @@ class ProgramFilter:
                 resulting_taxa.update(self.taxa_of_pattern(pattern))
         return (resulting_programs, resulting_taxa)
 
-    def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -> Counter[ProgramName]:
+    def programs_of_criteria(self, criteria: List[Criterion], follow: bool) -> Counter[ProgramPath]:
         """Calculate the set of programs that meet at least one of the criteria.
 
         Description:
             Each criterion may be either:
 
             - a string, which will be interpreted either as:
-                - a program name pattern (ending with `".py"`). All programs matching it are
+                - a program path pattern (ending with `".py"`). All programs matching it are
                     accumulated in the result;
                 - or a taxon name pattern. All programs featuring at least one taxon matching it
                     are accumulated in the result. If the operation is `"exclude"`, this set is
@@ -314,10 +314,10 @@ class ProgramFilter:
                 directly or by transitivity) at least one program meeting a criterion.
 
         Returns:
-            Counter[ProgramName]: A bag (multiset) counting, for each resulting program, the number
+            Counter[ProgramPath]: A bag (multiset) counting, for each resulting program, the number
                 of criteria it meets.
         """
-        resulting_programs: Counter[ProgramName] = counter()
+        resulting_programs: Counter[ProgramPath] = counter()
         for criterion in criteria:
             if isinstance(criterion, str):  # the criterion is a pattern
                 if criterion.endswith(".py"):  # the pattern is a program pattern
@@ -350,21 +350,21 @@ class ProgramFilter:
                 prefix = "/".join(edges[: i + 1])
                 self.imparted_knowledge.add(TaxonName(prefix))
 
-    def include_programs(self, programs: ProgramNameSet) -> None:
+    def include_programs(self, programs: ProgramPathSet) -> None:
         """Deselect the programs not found among the given ones.
 
         Args:
-            programs (ProgramNameSet): The set of programs to keep (provided they are already in
+            programs (ProgramPathSet): The set of programs to keep (provided they are already in
                 `self.selected_programs`). All other programs of `self.selected_programs` will be
                 filtered out.
         """
         self.selected_programs.intersection_update(programs)
 
-    def exclude_programs(self, programs: ProgramNameSet, follow: bool) -> None:
+    def exclude_programs(self, programs: ProgramPathSet, follow: bool) -> None:
         """Deselect the programs found among the given ones or (optionally) importing them.
 
         Args:
-            programs (ProgramNameSet): The set of programs to exclude.
+            programs (ProgramPathSet): The set of programs to exclude.
             follow (bool): If `True`, exclude also all programs which import (either directly or
                 by transitivity) at least one member of the given `programs`.
         """
@@ -380,7 +380,7 @@ class ProgramFilter:
         taxon_pattern_1: str,
         predicate: Predicate,
         taxon_pattern_2: str,
-    ) -> ProgramNameSet:
+    ) -> ProgramPathSet:
         """Return the programs where two given taxa satisfy a given predicate.
 
         Args:
@@ -392,14 +392,14 @@ class ProgramFilter:
                 semantic triple.
 
         Returns:
-            ProgramNameSet: The programs featuring at least one span `s_1` of `taxon_1` and one
+            ProgramPathSet: The programs featuring at least one span `s_1` of `taxon_1` and one
                 span `s_2` of `taxon_2` for which `predicate(s_1, s_2)` is verified.
         """
         taxa_1 = self.taxa_of_pattern(taxon_pattern_1)
         taxa_2 = self.taxa_of_pattern(taxon_pattern_2)
         programs_1 = self.programs_of_taxa(taxa_1)
         programs_2 = self.programs_of_taxa(taxa_2)
-        result: ProgramNameSet = set()
+        result: ProgramPathSet = set()
         for program in programs_1 & programs_2:  # for each program featuring both taxon sets
             spans = self.db_programs[program]["taxa"]
             for (span_1, span_2) in self.iterate_on_spans(spans, taxa_1, taxa_2):
@@ -413,7 +413,7 @@ class ProgramFilter:
         taxon_pattern_1: str,
         predicate: Predicate,
         taxon_pattern_2: str,
-    ) -> ProgramNameSet:
+    ) -> ProgramPathSet:
         r"""Return the programs where the given predicate is not satisfied.
 
         Args:
@@ -421,7 +421,7 @@ class ProgramFilter:
             predicate is expressed in **positive** form.
 
         Returns:
-            ProgramNameSet: The set of programs which feature at least one taxon matching
+            ProgramPathSet: The set of programs which feature at least one taxon matching
                 `taxon_pattern_1`, and such that, for any  span `s_1` of such a taxon, there exists
                 no span `s_2` of a taxon matching `taxon_pattern_2` for which `predicate(s_1, s_2)`
                 is verified.
@@ -433,7 +433,7 @@ class ProgramFilter:
         taxa_2 = self.taxa_of_pattern(taxon_pattern_2)
         programs_1 = self.programs_of_taxa(taxa_1)
         programs_2 = self.programs_of_taxa(taxa_2)
-        result: ProgramNameSet = programs_1  # by default, keep all programs featuring taxon_1
+        result: ProgramPathSet = programs_1  # by default, keep all programs featuring taxon_1
         for program in programs_1 & programs_2:  # for each program featuring both taxon sets
             spans = self.db_programs[program]["taxa"]
             exists_span_2_satisfying_predicate: Dict[Tuple, bool] = defaultdict(bool)

@@ -19,8 +19,8 @@ from .user_types import (
     Labels,
     LabelsPoorSpans,
     ProgramInfos,
-    ProgramName,
-    ProgramNameSet,
+    ProgramPath,
+    ProgramPathSet,
     Programs,
     ProgramToPrograms,
     TaxonInfos,
@@ -63,13 +63,13 @@ class TagDatabase:
               `taxa` of `programs` (`map_labels_on_taxa`).
             4. Create a dictionary `self.taxa` mapping each taxon name to the names of the
               programs featuring it (`collect_taxa`).
-            5. Create a dictionary `self.importations` mapping each program name to the names
+            5. Create a dictionary `self.importations` mapping each program path to the paths
               of the programs importing it, both directly (`compute_direct_importations`) and
               indirectly (`complete_and_collect_importations`).
             6. Invert the previous dictionary to create a dictionary `self.exportations`
               (`compute_and_collect_exportations`).
             7. Gather in `self.programs_infos` each program timestamp, source, labels and taxa as
-              a serialization-ready dictionary indexed by program names.
+              a serialization-ready dictionary indexed by program paths.
         """
 
         self.directory = directory
@@ -88,8 +88,8 @@ class TagDatabase:
             get_timestamp = lambda path: ""
         self.programs_infos: ProgramInfos = {}
         for program in programs:
-            self.programs_infos[program.name] = {
-                "timestamp": get_timestamp(directory / program.name),
+            self.programs_infos[program.path] = {
+                "timestamp": get_timestamp(directory / program.path),
                 "source": program.source,
                 "labels": prepared_labels(program.labels),
                 "taxa": prepared_taxa(program.taxa),
@@ -255,7 +255,7 @@ def collect_labels(programs: Programs) -> LabelInfos:
     result: LabelInfos = defaultdict(list)
     for program in programs:
         for label in program.labels:
-            result[label.name].append(program.name)
+            result[label.name].append(program.path)
     return result
 
 
@@ -285,7 +285,7 @@ def collect_taxa(programs: Programs) -> TaxonInfos:
     result: TaxonInfos = defaultdict(list)
     for program in programs:
         for taxon in program.taxa:
-            result[taxon.name].append(program.name)
+            result[taxon.name].append(program.path)
     return result
 
 
@@ -306,15 +306,15 @@ def compute_direct_importations(
             [Not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
 
     Returns:
-        ProgramToPrograms: A dictionary mapping every program name to the list of the names of
+        ProgramToPrograms: A dictionary mapping every program path to the list of the paths of
             the internal programs it imports directly.
     """
-    importations: Dict = {program.name: set() for program in programs}
+    importations: Dict = {program.path: set() for program in programs}
     for program in programs:
         for label in program.labels:
             match = match_import(label.name)
             if match:  # Python 3.8: use assignement-expression
-                importations[program.name].add(f"{match[1]}.py")
+                importations[program.path].add(f"{match[1]}.py")
     return importations
 
 
@@ -322,24 +322,24 @@ def complete_and_collect_importations(importations: ProgramToPrograms) -> Progra
     """Complete the direct internal imports with indirect ones.
 
     Args:
-        importations (ProgramToPrograms): A dictionary mapping every program name to the list
-            of the names of the internal programs it imports directly.
+        importations (ProgramToPrograms): A dictionary mapping every program path to the list
+            of the paths of the internal programs it imports directly.
 
     Returns:
-        ProgramToPrograms: A dictionary mapping every program name to the sorted list of the
-            names of the internal programs it imports either directly or indirectly.
+        ProgramToPrograms: A dictionary mapping every program path to the sorted list of the
+            paths of the internal programs it imports either directly or indirectly.
     """
 
     @lru_cache(maxsize=None)
-    def complete_internal_imports(program_name: ProgramName) -> ProgramNameSet:
-        result: ProgramNameSet = set(importations.get(program_name, []))
+    def complete_internal_imports(program_path: ProgramPath) -> ProgramPathSet:
+        result: ProgramPathSet = set(importations.get(program_path, []))
         for imported in list(result):  # traverse a copy
             result.update(complete_internal_imports(imported))
         return result
 
     completed_importations: ProgramToPrograms = {}
-    for program_name in list(importations.keys()):
-        completed_importations[program_name] = sorted(complete_internal_imports(program_name))
+    for program_path in list(importations.keys()):
+        completed_importations[program_path] = sorted(complete_internal_imports(program_path))
     return completed_importations
 
 
@@ -350,18 +350,18 @@ def compute_and_collect_exportations(
 
     Args:
         programs (Programs):  A list of named `Program` objects.
-        importations (ProgramToPrograms): A dictionary mapping every program name to the list of
-            the names of the internal programs it imports either directly or indirectly.
+        importations (ProgramToPrograms): A dictionary mapping every program path to the list of
+            the paths of the internal programs it imports either directly or indirectly.
 
     Returns:
-        ProgramToPrograms: A dictionary mapping every program name to the sorted list of the names
+        ProgramToPrograms: A dictionary mapping every program path to the sorted list of the paths
             of the internal programs it is imported by, either directly or indirectly.
     """
-    exportations: ProgramToPrograms = {program.name: [] for program in programs}
-    for (importing_name, imported_names) in importations.items():
-        for imported_name in imported_names:
-            if importing_name not in exportations[imported_name]:
-                insort(exportations[imported_name], importing_name)
+    exportations: ProgramToPrograms = {program.path: [] for program in programs}
+    for (importing_path, imported_paths) in importations.items():
+        for imported_path in imported_paths:
+            if importing_path not in exportations[imported_path]:
+                insort(exportations[imported_path], importing_path)
     return exportations
 
 

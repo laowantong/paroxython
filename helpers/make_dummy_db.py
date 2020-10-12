@@ -58,18 +58,21 @@ def dump_dummy_taxa_and_programs():
 def dump_dummy_db():
     text = Path("examples/dummy/taxa_and_programs.txt").read_text()
     taxon_names = regex.search(r"(?ms)^TAXONS\n(.+?)\n\n", text)[1].split()
-    program_names_and_sources = regex.findall(r"(?ms)^(prg\d+\.py)\n(.+?)\n\n", text)
+    program_paths_and_sources = regex.findall(r"(?ms)^(prg\d+\.py)\n(.+?)\n\n", text)
     data = {
         "programs": {
-            program_name: {"source": source, "taxa": defaultdict(list),}
-            for (program_name, source) in program_names_and_sources
+            program_path: {
+                "source": source,
+                "taxa": defaultdict(list),
+            }
+            for (program_path, source) in program_paths_and_sources
         },
         "taxa": {taxon_name: set() for taxon_name in taxon_names},
-        "importations": {p: [] for (p, _) in program_names_and_sources},
-        "exportations": {p: [] for (p, _) in program_names_and_sources},
+        "importations": {p: [] for (p, _) in program_paths_and_sources},
+        "exportations": {p: [] for (p, _) in program_paths_and_sources},
     }
-    for (program_name, source) in program_names_and_sources:
-        program = data["programs"][program_name]
+    for (program_path, source) in program_paths_and_sources:
+        program = data["programs"][program_path]
         for line in source.split("\n"):
             (i, *taxa) = line.split()
             i = int(i)
@@ -77,9 +80,9 @@ def dump_dummy_db():
                 (taxon_name, _, length) = taxon.partition("+")
                 span = (i, i + int(length)) if length else (i, i)
                 program["taxa"][taxon_name].append(span)
-                data["taxa"][taxon_name].add(program_name)
-    for (taxon_name, program_names) in data["taxa"].items():
-        data["taxa"][taxon_name] = sorted(program_names)
+                data["taxa"][taxon_name].add(program_path)
+    for (taxon_name, program_paths) in data["taxa"].items():
+        data["taxa"][taxon_name] = sorted(program_paths)
     text = json.dumps(data, indent=2)
     text = regex.sub(r"\s*\[\s+(\d+),\s+(\d+)\s+\](,?)\s+", r"[\1,\2]\3", text)
     output_path = Path("examples/dummy/programs_db.json")

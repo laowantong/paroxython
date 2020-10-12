@@ -102,7 +102,7 @@ def test_label_presence(capsys):
             if spans:
                 present_names.add(name)
                 result.append(
-                    name + f" / {program.name} / " + ", ".join(map(couple_to_string, spans))
+                    name + f" / {program.path} / " + ", ".join(map(couple_to_string, spans))
                 )
     present = "\n- ".join(sorted(result))
     absent = "\n- ".join(sorted(all_names - present_names))

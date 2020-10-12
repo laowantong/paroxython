@@ -49,7 +49,8 @@ OPTIONS:
                         missing or malformed, no filter is applied. [default: ]
     -f --format=STR     The format of program titles in the report. This string
                         can contains the following identifiers (between braces):
-                        • name: keys of the dictionary "programs" in the DB.
+                        • name: filename of the program.
+                        • path: program key in the DB "programs" dictionary.
                         • prefix: name of DB_PATH, minus any "_db.json" suffix.
                         • absolute: absolute path to DB_PATH's parent folder.
                         • relative: relative path to DB_PATH's parent folder.
@@ -114,9 +115,10 @@ def cli_wrapper(args):
         sys.stdout = sys.stderr
     title_format = args["--format"]
     if title_format.lower() == "vscode":
-        title_format = "[`{name}`](vscode://file/{absolute}/{prefix}/{name})"
+        title_format = "[`{name}`](vscode://file/{absolute}/{prefix}/{path})"
     title_format = title_format.format(
         name="{name}",
+        path="{path}",
         prefix=prefix.rstrip("_-"),
         absolute=parent_path.resolve(),
         relative=parent_path,

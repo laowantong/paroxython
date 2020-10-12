@@ -8,12 +8,12 @@ from make_snapshot import make_snapshot
 
 import context
 from paroxython.label_programs import labelled_programs, generate_labelled_sources
-from paroxython.user_types import Span, ProgramName
+from paroxython.user_types import Span, ProgramPath
 
 
 class ProgramEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, type(ProgramName)):
+        if isinstance(obj, type(ProgramPath)):
             return str(obj)
         if isinstance(obj, Span):
             return obj.to_couple()

@@ -51,7 +51,7 @@ from .user_types import (
     AssessedPrograms,
     AssessmentStrategy,
     ProgramInfos,
-    ProgramNameSet,
+    ProgramPathSet,
     TaxonName,
     TaxonNameSet,
 )
@@ -101,13 +101,13 @@ class LearningCostAssessor:
                     break
         return self.range_to_cost(start, stop)
 
-    def __call__(self, selected_programs: ProgramNameSet) -&gt; AssessedPrograms:
+    def __call__(self, selected_programs: ProgramPathSet) -&gt; AssessedPrograms:
         result = []
-        for program_name in selected_programs:
+        for program_path in selected_programs:
             total_cost = 0.0
-            for taxon_name in self.programs[program_name][&#34;taxa&#34;]:
+            for taxon_name in self.programs[program_path][&#34;taxa&#34;]:
                 total_cost += self.taxon_cost(taxon_name)
-            result.append((total_cost, program_name))
+            result.append((total_cost, program_path))
         return sorted(result)</code></pre>
 </details>
 </section>
@@ -202,19 +202,19 @@ def range_to_cost_zeno(start: int, stop: int) -&gt; float:
                     break
         return self.range_to_cost(start, stop)
 
-    def __call__(self, selected_programs: ProgramNameSet) -&gt; AssessedPrograms:
+    def __call__(self, selected_programs: ProgramPathSet) -&gt; AssessedPrograms:
         result = []
-        for program_name in selected_programs:
+        for program_path in selected_programs:
             total_cost = 0.0
-            for taxon_name in self.programs[program_name][&#34;taxa&#34;]:
+            for taxon_name in self.programs[program_path][&#34;taxa&#34;]:
                 total_cost += self.taxon_cost(taxon_name)
-            result.append((total_cost, program_name))
+            result.append((total_cost, program_path))
         return sorted(result)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
 <dt id="paroxython.assess_costs.LearningCostAssessor.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, programs: Dict[ProgramName, ProgramRecord], assessment_strategy: Literal['zeno', 'linear'] = 'zeno')</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, programs: Dict[ProgramPath, ProgramRecord], assessment_strategy: Literal['zeno', 'linear'] = 'zeno')</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set the programs and the function to be used for the learning cost calculation.</p>
@@ -296,32 +296,32 @@ def taxon_cost(self, taxon: TaxonName) -&gt; float:
 </details>
 </dd>
 <dt id="paroxython.assess_costs.LearningCostAssessor.__call__"><code class="name flex">
-<span>def <span class="ident">__call__</span></span>(<span>self, <br>selected_programs: Set[ProgramName]<br>) ‑> List[Tuple[float, ProgramName]]</span>
+<span>def <span class="ident">__call__</span></span>(<span>self, <br>selected_programs: Set[ProgramPath]<br>) ‑> List[Tuple[float, ProgramPath]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Associate the given selected programs with the total learning cost of their taxa.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>selected_programs</code></strong> :&ensp;<code>ProgramNameSet</code></dt>
-<dd>A set of program names.</dd>
+<dt><strong><code>selected_programs</code></strong> :&ensp;<code>ProgramPathSet</code></dt>
+<dd>A set of program paths.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>AssessedPrograms</code></dt>
-<dd>A list of tuples <code>(total_cost, ProgramName)</code> sorted by increasing cost.</dd>
+<dd>A list of tuples <code>(total_cost, ProgramPath)</code> sorted by increasing cost.</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 <a href="https://github.com/laowantong/paroxython/blob/master/paroxython/assess_costs.py#L115-L130" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">def __call__(self, selected_programs: ProgramNameSet) -&gt; AssessedPrograms:
+<pre><code class="python">def __call__(self, selected_programs: ProgramPathSet) -&gt; AssessedPrograms:
     result = []
-    for program_name in selected_programs:
+    for program_path in selected_programs:
         total_cost = 0.0
-        for taxon_name in self.programs[program_name][&#34;taxa&#34;]:
+        for taxon_name in self.programs[program_path][&#34;taxa&#34;]:
             total_cost += self.taxon_cost(taxon_name)
-        result.append((total_cost, program_name))
+        result.append((total_cost, program_path))
     return sorted(result)</code></pre>
 </details>
 </dd>

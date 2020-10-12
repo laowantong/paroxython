@@ -61,21 +61,20 @@ TaxonPatterns = List[TaxonPattern]
 # Programs
 # --------------------------------------------------------------------------------------------------
 
-ProgramName = NewType("ProgramName", str)  # In fact, relative path of a user's program in the
-                                           # directory to search.
-ProgramNames = List[ProgramName]
-ProgramNameSet = Set[ProgramName]
+ProgramPath = NewType("ProgramPath", str)  # relative path of a program in the directory to search
+ProgramPaths = List[ProgramPath]
+ProgramPathSet = Set[ProgramPath]
 
 class Program(NamedTuple):  # All the information pertaining to a program.
     labels: Labels
     taxa: Taxa
     addition: LabelsSpans  # Features scheduled for addition.
     deletion: LabelsSpans  # Features scheduled for deletion.
-    name: ProgramName = ProgramName("")
+    path: ProgramPath = ProgramPath("")
     source: Source = Source("")
 
 Programs = List[Program]
-ProgramTaxa = Dict[ProgramName, Taxa]
+ProgramTaxa = Dict[ProgramPath, Taxa]
 
 
 # --------------------------------------------------------------------------------------------------
@@ -92,10 +91,10 @@ class ProgramRecord(TypedDict):
     labels: LabelsPoorSpans
     taxa: TaxaPoorSpans
 
-ProgramInfos = Dict[ProgramName, ProgramRecord]
-LabelInfos = Dict[LabelName, ProgramNames]
-TaxonInfos = Dict[TaxonName, ProgramNames]
-ProgramToPrograms = Dict[ProgramName, ProgramNames]  # For import-export stuff.
+ProgramInfos = Dict[ProgramPath, ProgramRecord]
+LabelInfos = Dict[LabelName, ProgramPaths]
+TaxonInfos = Dict[TaxonName, ProgramPaths]
+ProgramToPrograms = Dict[ProgramPath, ProgramPaths]  # For import-export stuff.
 
 class JsonTagDatabase(TypedDict):  # Schema of the JSON version of a tag database.
     programs: ProgramInfos
@@ -124,7 +123,7 @@ Predicate = Callable[[PoorSpan, PoorSpan], bool] # A value of the dictionary `co
 # Recommendations
 # --------------------------------------------------------------------------------------------------
 
-AssessedPrograms = List[Tuple[float, ProgramName]] # Associative array between costs and programs
+AssessedPrograms = List[Tuple[float, ProgramPath]] # Associative array between costs and programs
 AssessmentStrategy = Literal["zeno", "linear"]
 
 # fmt:on

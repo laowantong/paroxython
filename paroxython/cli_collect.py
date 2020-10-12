@@ -30,7 +30,7 @@ OPTIONS:
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa. If not
                         specified, use the "taxonomy.tsv" present in DIRECTORY's
                         parent. If absent, use the included default taxonomy:
-                        https://github.com/laowantong/paroxython/blob/0.5.3/paroxython/resources/taxonomy.tsv
+                        https://github.com/laowantong/paroxython/blob/0.6.0/paroxython/resources/taxonomy.tsv
     ```
 """
 

@@ -21,7 +21,7 @@ from .user_types import (
     AssessedPrograms,
     AssessmentStrategy,
     ProgramInfos,
-    ProgramNameSet,
+    ProgramPathSet,
     TaxonName,
     TaxonNameSet,
 )
@@ -112,19 +112,19 @@ class LearningCostAssessor:
                     break
         return self.range_to_cost(start, stop)
 
-    def __call__(self, selected_programs: ProgramNameSet) -> AssessedPrograms:
+    def __call__(self, selected_programs: ProgramPathSet) -> AssessedPrograms:
         """Associate the given selected programs with the total learning cost of their taxa.
 
         Args:
-            selected_programs (ProgramNameSet): A set of program names.
+            selected_programs (ProgramPathSet): A set of program paths.
 
         Returns:
-            AssessedPrograms: A list of tuples `(total_cost, ProgramName)` sorted by increasing cost.
+            AssessedPrograms: A list of tuples `(total_cost, ProgramPath)` sorted by increasing cost.
         """
         result = []
-        for program_name in selected_programs:
+        for program_path in selected_programs:
             total_cost = 0.0
-            for taxon_name in self.programs[program_name]["taxa"]:
+            for taxon_name in self.programs[program_path]["taxa"]:
                 total_cost += self.taxon_cost(taxon_name)
-            result.append((total_cost, program_name))
+            result.append((total_cost, program_path))
         return sorted(result)

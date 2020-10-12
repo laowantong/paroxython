@@ -1,21 +1,21 @@
 # Table of contents
 - [`1 program of learning cost in [1, 2[`](#1-program-of-learning-cost-in-1-2)
-    - [`09_indent.py`](#program-09_indentpy-learning-cost-10)
-- [`4 programs of learning cost in [2, 4[`](#4-programs-of-learning-cost-in-2-4)
+    - [`09_indent.py`](#program-09_indentpy-learning-cost-14375)
+- [`2 programs of learning cost in [2, 4[`](#2-programs-of-learning-cost-in-2-4)
     - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-253125)
-    - [`08_arguments.py`](#program-08_argumentspy-learning-cost-26875)
-    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-359375)
-    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-3625)
-- [`4 programs of learning cost in [4, 8[`](#4-programs-of-learning-cost-in-4-8)
-    - [`10_time.py`](#program-10_timepy-learning-cost-403125)
+    - [`08_arguments.py`](#program-08_argumentspy-learning-cost-3125)
+- [`6 programs of learning cost in [4, 8[`](#6-programs-of-learning-cost-in-4-8)
+    - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-403125)
+    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-40625)
+    - [`10_time.py`](#program-10_timepy-learning-cost-45)
     - [`12_classes.py`](#program-12_classespy-learning-cost-4640625)
-    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-4875)
+    - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-53125)
     - [`14_median.py`](#program-14_medianpy-learning-cost-5625)
 # Recommended programs
 
 ## 1 program of learning cost in [1, 2[
 
-### Program `09_indent.py` (learning cost 1.0)
+### Program `09_indent.py` (learning cost 1.4375)
 
 ```python
 1   import glob
@@ -36,11 +36,11 @@
 | 0 | `call/subroutine/method` | 2 |
 | 0 | `call/subroutine/method/sequence/string/rstrip` | 7 |
 | 0 | `call/subroutine/no_arguments` | 8 |
-| 0.4375 | `def/import/standard/glob` | 1 |
 | 0 | `flow/loop/exit/late` | 3-8, 6-7 |
 | 0 | `flow/loop/for` | 3-8 |
 | 0 | `flow/loop/for/elements` | 6-7 |
 | 0 | `flow/loop/for/nested/1` | 6-7 |
+| 0.875 | `import/standard/glob` | 1 |
 | 0.125 | `operator/string/concatenation` | 4, 7 |
 | 0 | `style/imperative` | 1-8 |
 | 0 | `type/sequence/string` | 7 |
@@ -54,7 +54,7 @@
 
 ---
 
-## 4 programs of learning cost in [2, 4[
+## 2 programs of learning cost in [2, 4[
 
 ### Program `04_fibonacci.py` (learning cost 2.53125)
 
@@ -88,7 +88,7 @@
 
 ---
 
-### Program `08_arguments.py` (learning cost 2.6875)
+### Program `08_arguments.py` (learning cost 3.125)
 
 ```python
 1   import sys
@@ -104,8 +104,8 @@
 | 0.25 | `call/composition` | 3 |
 | 0 | `call/subroutine/builtin/casting/int` | 3 |
 | 0 | `call/subroutine/builtin/sum` | 3 |
-| 0.4375 | `def/import/standard/sys` | 1 |
 | 0 | `flow/exception/catch/ValueError` | 2-6 |
+| 0.875 | `import/standard/sys` | 1 |
 | 0 | `style/imperative` | 1-6 |
 | 0.875 | `subscript/slice/start` | 3 |
 | 0.375 | `type/number/integer` | 3 |
@@ -121,7 +121,9 @@
 
 ---
 
-### Program `21_xml_html_parsing.py` (learning cost 3.59375)
+## 6 programs of learning cost in [4, 8[
+
+### Program `21_xml_html_parsing.py` (learning cost 4.03125)
 
 ```python
 1   dinner_recipe = """<html><body><table>
@@ -147,10 +149,10 @@
 | 0 | `call/subroutine/method/sequence/string/format` | 14 |
 | 0.875 | `condition/belonging/not` | 13 |
 | 0.75 | `condition/equality` | 13 |
-| 0.4375 | `def/import/standard/xml.etree.ElementTree` | 8 |
 | 0 | `flow/conditional/no_else` | 13-14 |
 | 0 | `flow/loop/exit/late` | 11-14 |
 | 0 | `flow/loop/for` | 11-14 |
+| 0.875 | `import/standard/xml.etree.ElementTree` | 8 |
 | 0.375 | `operator/boolean/and` | 13 |
 | 0 | `style/imperative` | 1-14 |
 | 0.4375 | `type/non_sequence/set/literal` | 10 |
@@ -168,7 +170,7 @@
 
 ---
 
-### Program `20_prime_numbers.py` (learning cost 3.625)
+### Program `20_prime_numbers.py` (learning cost 4.0625)
 
 ```python
 1   import itertools
@@ -191,7 +193,6 @@
 | 0 | `call/subroutine/method/sequence_duck/count` | 3 |
 | 0 | `call/subroutine/no_arguments` | 8 |
 | 0.75 | `condition/inequality` | 9 |
-| 0.4375 | `def/import/standard/itertools` | 1 |
 | 0.125 | `def/subroutine/generator` | 2-7 |
 | 0.125 | `def/subroutine/no_parameter` | 2-7 |
 | 0 | `flow/conditional/no_else` | 9-10 |
@@ -199,6 +200,7 @@
 | 0 | `flow/loop/exit/late` | 4-7 |
 | 0 | `flow/loop/for` | 8-11 |
 | 0 | `flow/loop/while/infinite` | 4-7 |
+| 0.875 | `import/standard/itertools` | 1 |
 | 0.375 | `style/functional_trait/filter` | 7 |
 | 0.25 | `style/procedural` | 1-11 |
 | 0.4375 | `type/boolean/literal/True` | 4 |
@@ -216,9 +218,7 @@
 
 ---
 
-## 4 programs of learning cost in [4, 8[
-
-### Program `10_time.py` (learning cost 4.03125)
+### Program `10_time.py` (learning cost 4.5)
 
 ```python
 1   from time import localtime
@@ -247,10 +247,10 @@
 | 0 | `call/subroutine/method/non_sequence/dictionary/keys` | 12 |
 | 0 | `call/subroutine/no_arguments` | 10 |
 | 0.75 | `condition/inequality` | 13 |
-| 0.46875 | `def/import/standard/time/localtime` | 1 |
 | 0 | `flow/conditional/no_else` | 13-15 |
 | 0 | `flow/loop/exit/early/break/else` | 12-17 |
 | 0 | `flow/loop/for` | 12-17 |
+| 0.9375 | `import/standard/time/localtime` | 1 |
 | 0 | `style/imperative` | 1-17 |
 | 0.75 | `subscript/index` | 14 |
 | 0.375 | `type/non_sequence/dictionary` | 12 |
@@ -316,7 +316,7 @@
 
 ---
 
-### Program `33_guess_the_number.py` (learning cost 4.875)
+### Program `33_guess_the_number.py` (learning cost 5.3125)
 
 ```python
 1   import random
@@ -348,12 +348,12 @@
 | 0 | `call/subroutine/method/sequence/string/format` | 5, 16, 18 |
 | 0.75 | `condition/equality` | 13, 15 |
 | 0.75 | `condition/inequality` | 6, 9, 11 |
-| 0.4375 | `def/import/standard/random` | 1 |
 | 0 | `flow/conditional` | 15-18 |
 | 0 | `flow/conditional/else` | 18 |
 | 0 | `flow/conditional/no_else` | 9-10, 11-12, 13-14 |
 | 0 | `flow/loop/exit/early/break` | 6-14 |
 | 0 | `flow/loop/while` | 6-14 |
+| 0.875 | `import/standard/random` | 1 |
 | 0.9375 | `pattern/states/accumulate/count` | 6-14 |
 | 0 | `style/imperative` | 1-18 |
 | 0.375 | `type/number/integer` | 7 |

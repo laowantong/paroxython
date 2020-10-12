@@ -8,7 +8,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/laowantong/paroxython)
 [![paroxython SLOC](https://img.shields.io/badge/main%20program-~1800%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython)
 [![tests SLOC](https://img.shields.io/badge/tests-~2550%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/tests)
-[![helpers SLOC](https://img.shields.io/badge/helpers-~900%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/helpers)
+[![helpers SLOC](https://img.shields.io/badge/helpers-~950%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/helpers)
 [![spec features](https://img.shields.io/badge/spec-171%20features-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
 [![taxonomy mappings](https://img.shields.io/badge/taxonomy-276%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)
@@ -158,7 +158,7 @@ If you use Jupyter notebook/lab, you've also just installed a so-called magic co
 %load_ext paroxython
 ```
 
-This should print `"paroxython 0.5.3 loaded."`. Run it on a cell of Python code:
+This should print `"paroxython 0.6.0 loaded."`. Run it on a cell of Python code:
 
 ```python
 %%paroxython                          # Lines

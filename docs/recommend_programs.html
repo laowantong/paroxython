@@ -56,7 +56,7 @@ increasing total cost and <a href="https://en.wikipedia.org/wiki/Source_lines_of
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L330" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L331" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -81,7 +81,7 @@ from .user_types import (
     Criterion,
     JsonTagDatabase,
     Operation,
-    ProgramNames,
+    ProgramPaths,
 )
 
 __pdoc__ = {
@@ -116,7 +116,7 @@ class Recommendations:
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs, **kwargs)
-        self.result: List[Tuple[int, Operation, ProgramNames]] = []
+        self.result: List[Tuple[int, Operation, ProgramPaths]] = []
 
     def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
         commands = commands or []
@@ -205,30 +205,31 @@ class Recommendations:
         # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
 
         toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
-        for (cost, program_name) in self.assessed_programs:
-            if program_name in self.hidden_programs:
+        for (cost, program_path) in self.assessed_programs:
+            if program_path in self.hidden_programs:
                 continue
-            toc_data[grouping_key(cost)].append((cost, program_name))
-        for costs_and_program_names in toc_data.values():
-            costs_and_program_names.sort(key=sorting_key)
+            toc_data[grouping_key(cost)].append((cost, program_path))
+        for costs_and_program_paths in toc_data.values():
+            costs_and_program_paths.sort(key=sorting_key)
 
         # Accumulate simultaneously the TOC and the contents.
 
         toc: List[str] = [&#34;# Table of contents&#34;]
         contents: List[str] = [&#34;# Recommended programs&#34;]
 
-        for (bounds, costs_and_program_names) in toc_data.items():
+        for (bounds, costs_and_program_paths) in toc_data.items():
 
-            title = f&#34;{display_count(len(costs_and_program_names))} of learning cost {bounds}&#34;
+            title = f&#34;{display_count(len(costs_and_program_paths))} of learning cost {bounds}&#34;
             toc.append(f&#34;- [`{title}`](#{title_to_slug(title)})&#34;)
             contents.append(f&#34;\n## {title}&#34;)
 
-            for (cost, program_name) in costs_and_program_names:
-                program_info = self.db_programs[program_name]
-                program_title = self.title_format.format(name=program_name)
+            for (cost, program_path) in costs_and_program_paths:
+                program_info = self.db_programs[program_path]
+                name = regex.sub(r&#34;(?:.+/)?(.+)&#34;, r&#34;\1&#34;, program_path)  # last segment of the path
+                program_title = self.title_format.format(path=program_path, name=name)
                 title = f&#34;Program {program_title} (learning cost {cost})&#34;
-                slug = title_to_slug(f&#34;Program {program_name} (learning cost {cost})&#34;)
-                toc.append(f&#34;    - [`{program_name}`](#{slug})&#34;)
+                slug = title_to_slug(f&#34;Program {name} (learning cost {cost})&#34;)
+                toc.append(f&#34;    - [`{name}`](#{slug})&#34;)
                 contents.append(f&#34;\n### {title}&#34;)
                 contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
                 contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
@@ -245,7 +246,7 @@ class Recommendations:
                     contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
                 contents.append(&#34;\n---&#34;)
 
-        def programs_to_html(description: str, programs: ProgramNames) -&gt; str:
+        def programs_to_html(description: str, programs: ProgramPaths) -&gt; str:
             details = []
             if programs:
                 description = description.replace(&#34; 1 programs&#34;, &#34; 1 program&#34;)
@@ -274,13 +275,13 @@ class Recommendations:
 if __name__ == &#34;__main__&#34;:
     ast = __import__(&#34;ast&#34;)
     json = __import__(&#34;json&#34;)
-    program_path = Path(&#34;../algo/programs&#34;)
+    path = Path(&#34;../algo/programs&#34;)
     rec = Recommendations(
-        db=json.loads(Path(f&#34;{program_path}_db.json&#34;).read_text()),
-        base_path=program_path.parent,
+        db=json.loads(Path(f&#34;{path}_db.json&#34;).read_text()),
+        base_path=path.parent,
     )
-    rec.run_pipeline(ast.literal_eval(Path(f&#34;{program_path}_pipe.py&#34;).read_text()))
-    output_path = Path(f&#34;{program_path}_recommendations.md&#34;)
+    rec.run_pipeline(ast.literal_eval(Path(f&#34;{path}_pipe.py&#34;).read_text()))
+    output_path = Path(f&#34;{path}_recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
     print(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
 </details>
@@ -302,7 +303,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L317" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L318" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -325,7 +326,7 @@ if __name__ == &#34;__main__&#34;:
         self.update_filter = program_filter.update_filter
 
         self.assess = LearningCostAssessor(self.db_programs, **kwargs)
-        self.result: List[Tuple[int, Operation, ProgramNames]] = []
+        self.result: List[Tuple[int, Operation, ProgramPaths]] = []
 
     def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
         commands = commands or []
@@ -414,30 +415,31 @@ if __name__ == &#34;__main__&#34;:
         # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
 
         toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
-        for (cost, program_name) in self.assessed_programs:
-            if program_name in self.hidden_programs:
+        for (cost, program_path) in self.assessed_programs:
+            if program_path in self.hidden_programs:
                 continue
-            toc_data[grouping_key(cost)].append((cost, program_name))
-        for costs_and_program_names in toc_data.values():
-            costs_and_program_names.sort(key=sorting_key)
+            toc_data[grouping_key(cost)].append((cost, program_path))
+        for costs_and_program_paths in toc_data.values():
+            costs_and_program_paths.sort(key=sorting_key)
 
         # Accumulate simultaneously the TOC and the contents.
 
         toc: List[str] = [&#34;# Table of contents&#34;]
         contents: List[str] = [&#34;# Recommended programs&#34;]
 
-        for (bounds, costs_and_program_names) in toc_data.items():
+        for (bounds, costs_and_program_paths) in toc_data.items():
 
-            title = f&#34;{display_count(len(costs_and_program_names))} of learning cost {bounds}&#34;
+            title = f&#34;{display_count(len(costs_and_program_paths))} of learning cost {bounds}&#34;
             toc.append(f&#34;- [`{title}`](#{title_to_slug(title)})&#34;)
             contents.append(f&#34;\n## {title}&#34;)
 
-            for (cost, program_name) in costs_and_program_names:
-                program_info = self.db_programs[program_name]
-                program_title = self.title_format.format(name=program_name)
+            for (cost, program_path) in costs_and_program_paths:
+                program_info = self.db_programs[program_path]
+                name = regex.sub(r&#34;(?:.+/)?(.+)&#34;, r&#34;\1&#34;, program_path)  # last segment of the path
+                program_title = self.title_format.format(path=program_path, name=name)
                 title = f&#34;Program {program_title} (learning cost {cost})&#34;
-                slug = title_to_slug(f&#34;Program {program_name} (learning cost {cost})&#34;)
-                toc.append(f&#34;    - [`{program_name}`](#{slug})&#34;)
+                slug = title_to_slug(f&#34;Program {name} (learning cost {cost})&#34;)
+                toc.append(f&#34;    - [`{name}`](#{slug})&#34;)
                 contents.append(f&#34;\n### {title}&#34;)
                 contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
                 contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
@@ -454,7 +456,7 @@ if __name__ == &#34;__main__&#34;:
                     contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
                 contents.append(&#34;\n---&#34;)
 
-        def programs_to_html(description: str, programs: ProgramNames) -&gt; str:
+        def programs_to_html(description: str, programs: ProgramPaths) -&gt; str:
             details = []
             if programs:
                 description = description.replace(&#34; 1 programs&#34;, &#34; 1 program&#34;)
@@ -534,7 +536,7 @@ spans. Exception: the taxa starting with <code>"meta/"</code> are not imported.<
     self.update_filter = program_filter.update_filter
 
     self.assess = LearningCostAssessor(self.db_programs, **kwargs)
-    self.result: List[Tuple[int, Operation, ProgramNames]] = []</code></pre>
+    self.result: List[Tuple[int, Operation, ProgramPaths]] = []</code></pre>
 </details>
 </dd>
 <dt id="paroxython.recommend_programs.Recommendations.run_pipeline"><code class="name flex">
@@ -564,7 +566,7 @@ entries:</p>
 <li><code>"operation"</code>: a string among <code>"include"</code>, <code>"exclude"</code>, <code>"impart"</code> and <code>"hide"</code>,
 with an optional suffix <code>" any"</code> (implicit) or <code>" all"</code>.</li>
 <li><code>"data"</code>: either a string consisting in a shell command, or an heterogeneous list
-of <em>criteria</em>: patterns (matching either program names or taxon names) or
+of <em>criteria</em>: patterns (matching either program paths or taxon names) or
 semantic triples (of the form subject, predicate, object).</li>
 </ul>
 <p>Defaults to <code>None</code>, which is treated as an empty list.</p>
@@ -685,7 +687,7 @@ be interpreted.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L227-L317" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L227-L318" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
@@ -712,30 +714,31 @@ be interpreted.</dd>
     # Group resulting programs into cost buckets, and sort each group by increasing difficulty.
 
     toc_data: Dict[str, AssessedPrograms] = defaultdict(list)
-    for (cost, program_name) in self.assessed_programs:
-        if program_name in self.hidden_programs:
+    for (cost, program_path) in self.assessed_programs:
+        if program_path in self.hidden_programs:
             continue
-        toc_data[grouping_key(cost)].append((cost, program_name))
-    for costs_and_program_names in toc_data.values():
-        costs_and_program_names.sort(key=sorting_key)
+        toc_data[grouping_key(cost)].append((cost, program_path))
+    for costs_and_program_paths in toc_data.values():
+        costs_and_program_paths.sort(key=sorting_key)
 
     # Accumulate simultaneously the TOC and the contents.
 
     toc: List[str] = [&#34;# Table of contents&#34;]
     contents: List[str] = [&#34;# Recommended programs&#34;]
 
-    for (bounds, costs_and_program_names) in toc_data.items():
+    for (bounds, costs_and_program_paths) in toc_data.items():
 
-        title = f&#34;{display_count(len(costs_and_program_names))} of learning cost {bounds}&#34;
+        title = f&#34;{display_count(len(costs_and_program_paths))} of learning cost {bounds}&#34;
         toc.append(f&#34;- [`{title}`](#{title_to_slug(title)})&#34;)
         contents.append(f&#34;\n## {title}&#34;)
 
-        for (cost, program_name) in costs_and_program_names:
-            program_info = self.db_programs[program_name]
-            program_title = self.title_format.format(name=program_name)
+        for (cost, program_path) in costs_and_program_paths:
+            program_info = self.db_programs[program_path]
+            name = regex.sub(r&#34;(?:.+/)?(.+)&#34;, r&#34;\1&#34;, program_path)  # last segment of the path
+            program_title = self.title_format.format(path=program_path, name=name)
             title = f&#34;Program {program_title} (learning cost {cost})&#34;
-            slug = title_to_slug(f&#34;Program {program_name} (learning cost {cost})&#34;)
-            toc.append(f&#34;    - [`{program_name}`](#{slug})&#34;)
+            slug = title_to_slug(f&#34;Program {name} (learning cost {cost})&#34;)
+            toc.append(f&#34;    - [`{name}`](#{slug})&#34;)
             contents.append(f&#34;\n### {title}&#34;)
             contents.append(f&#34;\n```python\n{add_line_numbers(program_info[&#39;source&#39;])}\n```&#34;)
             contents.append(&#34;\n| Cost  | Taxon | Location |&#34;)
@@ -752,7 +755,7 @@ be interpreted.</dd>
                 contents.append(f&#34;| {taxon_cost} | `{taxon_name}` | {s} |&#34;)
             contents.append(&#34;\n---&#34;)
 
-    def programs_to_html(description: str, programs: ProgramNames) -&gt; str:
+    def programs_to_html(description: str, programs: ProgramPaths) -&gt; str:
         details = []
         if programs:
             description = description.replace(&#34; 1 programs&#34;, &#34; 1 program&#34;)
