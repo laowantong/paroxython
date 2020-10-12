@@ -59,6 +59,11 @@ def test_tag_options():
     assert "| `flow/conditional` | 4-11, 6-11, 8-11 |" in result
 
 
+def test_tag_failures():
+    with pytest.raises(subprocess.CalledProcessError):
+        run("tag foobar.py")
+
+
 def test_collect():
     db_path = Path("examples/mini/programs_db.json")
     result = run(
@@ -111,6 +116,11 @@ def test_collect_options():
     assert f"{db_path}." in result
     assert db_path.is_file()
     db_path.unlink()
+
+
+def test_collect_failures():
+    with pytest.raises(subprocess.CalledProcessError):
+        run("collect foobar")
 
 
 def test_recommend_dummy_programs():
