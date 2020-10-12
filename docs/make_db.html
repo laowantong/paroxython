@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L453" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L0-L454" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import json
 import sqlite3
@@ -192,6 +192,7 @@ class TagDatabase:
 
         print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)
 
+
 def collect_labels(programs: Programs) -&gt; LabelInfos:
     result: LabelInfos = defaultdict(list)
     for program in programs:
@@ -308,7 +309,7 @@ already populated.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L245-L259" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L246-L260" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_labels(programs: Programs) -&gt; LabelInfos:
     result: LabelInfos = defaultdict(list)
@@ -333,7 +334,7 @@ already populated.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L262-L271" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L263-L272" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def map_labels_on_taxa(programs: Programs, taxonomy: Taxonomy) -&gt; None:
     print(f&#34;Mapping taxonomy on {len(programs)} programs.&#34;)
@@ -360,7 +361,7 @@ already populated.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L275-L289" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L276-L290" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def collect_taxa(programs: Programs) -&gt; TaxonInfos:
     result: TaxonInfos = defaultdict(list)
@@ -397,7 +398,7 @@ the internal programs it imports directly.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L292-L318" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L293-L319" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_direct_importations(
     programs: Programs, match_import: Callable = regex.compile(r&#34;import_internally:([^:]+)&#34;).match
@@ -431,7 +432,7 @@ paths of the internal programs it imports either directly or indirectly.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L321-L343" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L322-L344" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def complete_and_collect_importations(importations: ProgramToPrograms) -&gt; ProgramToPrograms:
     @lru_cache(maxsize=None)
@@ -469,7 +470,7 @@ of the internal programs it is imported by, either directly or indirectly.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L346-L365" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L347-L366" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def compute_and_collect_exportations(
     programs: Programs, importations: ProgramToPrograms
@@ -519,7 +520,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L368-L402" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L369-L403" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared_labels(labels: Labels) -&gt; LabelsPoorSpans:
     result: LabelsPoorSpans = {}
@@ -564,7 +565,7 @@ simple couples of integers.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L405-L438" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/make_db.py#L406-L439" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def prepared_taxa(taxa: Taxa) -&gt; TaxaPoorSpans:
     result: TaxaPoorSpans = {}
