@@ -645,16 +645,15 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 ```re
            ^(.*)(?<!/annotation)/_type=Subscript
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/_type=Index
-\n            \1/slice/value
+\n(?:\1.+\n)*?\1/slice
 (
-                            /_type=Name
-\n(?:\1.+\n)* \1/slice/value/id=(?P<SUFFIX>.+)
+                      /_type=Name
+\n(?:\1.+\n)* \1/slice/id=(?P<SUFFIX>.+)
 |
-                            /_type=Num
-\n(?:\1.+\n)* \1/slice/value/n=(?P<SUFFIX>.+)
+                      /_type=Num
+\n(?:\1.+\n)* \1/slice/n=(?P<SUFFIX>.+)
 |
-                            /(?P<SUFFIX>_)type=.+
+                      /(?P<SUFFIX>_)type=(?!Slice).+
 )$
 ```
 
@@ -667,6 +666,7 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 4   a[i + 1]
 5   def abs(l: List[int]) -> int: # no match
 6       pass
+7   a[i]
 ```
 
 ##### Matches
@@ -676,6 +676,7 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 | `index:42` | 1 |
 | `index:key` | 2 |
 | `index:_` | 4 |
+| `index:i` | 7 |
 
 --------------------------------------------------------------------------------
 
@@ -734,9 +735,8 @@ ORDER BY i1.path
 
 ```re
            ^(.*)/_type=Subscript
-\n(?:\1.+\n)*?\1/slice/_type=Index
-\n(?:\1.+\n)*?\1/slice/value/_type=BinOp
-\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/slice/_type=BinOp
+\n(?:\1.+\n)*?\1/slice/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -760,23 +760,22 @@ ORDER BY i1.path
 
 ```re
            ^(.*)/_type=Subscript
-\n(?:\1.+\n)*?\1/slice/_type=Index
 (   # A negative number
-\n(?:\1.+\n)*?\1/slice/value/_type=Num
-\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/value/n=(?P<SUFFIX>-\d+)
+\n(?:\1.+\n)*?\1/slice/_type=Num
+\n(?:\1.+\n)*?\1/slice/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/slice/n=(?P<SUFFIX>-\d+)
 |   # A negated non-literal expression
-\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/value/op/_type=USub
+\n(?:\1.+\n)*?\1/slice/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/slice/op/_type=USub
 |   # A binary operation whose left operand is negated
-\n(?:\1.+\n)*?\1/slice/value/_type=BinOp
-\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/value/left/_type=UnaryOp
-\n(?:\1.+\n)*?\1/slice/value/left/op/_type=USub
+\n(?:\1.+\n)*?\1/slice/_type=BinOp
+\n(?:\1.+\n)*?\1/slice/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/slice/left/_type=UnaryOp
+\n(?:\1.+\n)*?\1/slice/left/op/_type=USub
 |   # A complemented expression
-\n(?:\1.+\n)*?\1/slice/value/_type=UnaryOp
-\n(?:\1.+\n)*?\1/slice/value/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/slice/value/op/_type=Invert
+\n(?:\1.+\n)*?\1/slice/_type=UnaryOp
+\n(?:\1.+\n)*?\1/slice/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/slice/op/_type=Invert
 )
 ```
 
@@ -2614,7 +2613,7 @@ _Limitation._ The number to be clamped must appear on the left hand side of the 
            ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/assigntargets/.*/slice/_type=(?P<SUFFIX>.+|Index|Slice)
+\n(?:\1.+\n)*?\1/assigntargets/.*/slice/_type=(?P<SUFFIX>.+)
 )+
 ```
 
@@ -2626,14 +2625,20 @@ _Limitation._ The number to be clamped must appear on the left hand side of the 
 3   (c[i], d[i]) = foo
 4   e[i:j] = bar
 5   (f[i:j], h[i:j]) = bizz
+6   a[5] = 42
+7   a[i + 1] = 42
+8   a[foo(bar)] = 42
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
-| `subscript_assignment:Index` | 1, 2, 2, 3, 3 |
+| `subscript_assignment:Name` | 1, 2, 2, 3, 3 |
 | `subscript_assignment:Slice` | 4, 5, 5 |
+| `subscript_assignment:Num` | 6 |
+| `subscript_assignment:BinOp` | 7 |
+| `subscript_assignment:Call` | 8 |
 
 --------------------------------------------------------------------------------
 
@@ -2686,7 +2691,7 @@ Deleting a name removes the binding of that name from the local or global namesp
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)*?\1/(?P<_1>targets/\d+)/_type=Subscript
-\n(?:\1.+\n)*?\1/(?P=_1)            /.*/_type=(?P<SUFFIX>Slice|Index)
+\n(?:\1.+\n)*?\1/(?P=_1)            /slice/_type=(?P<SUFFIX>.+)
 )+
 ```
 
@@ -2706,7 +2711,7 @@ Deleting a name removes the binding of that name from the local or global namesp
 | Label | Lines |
 |:--|:--|
 | `node:Delete` | 1, 2, 3, 4, 5, 6 |
-| `subscript_deletion:Index` | 3, 4 |
+| `subscript_deletion:Num` | 3, 4 |
 | `subscript_deletion:Slice` | 5, 5, 5 |
 
 --------------------------------------------------------------------------------

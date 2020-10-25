@@ -1733,7 +1733,7 @@
         "node:Name": [[1,1],[1,1]],
         "node:Subscript": [[1,1]],
         "one_liner_style": [[1,1]],
-        "subscript_deletion:Index": [[1,1]],
+        "subscript_deletion:Name": [[1,1]],
         "variety:*": [[1,1]],
         "whole_span:1": [[1,1]]
       },
@@ -9438,7 +9438,7 @@
         "node:Name": [[1,1],[1,1],[1,1]],
         "node:Subscript": [[1,1]],
         "one_liner_style": [[1,1]],
-        "subscript_assignment:Index": [[1,1]],
+        "subscript_assignment:Name": [[1,1]],
         "variety:*": [[1,1]],
         "whole_span:1": [[1,1]]
       },
@@ -10474,7 +10474,7 @@
         "scope:size": [[2,4]],
         "scope:x": [[13,15]],
         "scope:y": [[13,15]],
-        "subscript_assignment:Index": [[9,9]],
+        "subscript_assignment:Name": [[9,9]],
         "unary_operator:Not": [[14,14]],
         "value_attr:p": [[6,6],[9,9],[9,9],[10,10]],
         "variety:***": [[1,15]],
@@ -20318,11 +20318,11 @@
     "string_formatting_operator": [
       "177.3241-find-files-with-a-given-list-of-filename-extensions.py"
     ],
-    "subscript_assignment:Index": [
+    "subscript_assignment:Name": [
       "172.2442-insert-entry-in-map.py",
       "187.3261-disjoint-set.py"
     ],
-    "subscript_deletion:Index": [
+    "subscript_deletion:Name": [
       "029.0199-remove-item-from-list-by-its-index.py"
     ],
     "swap": [

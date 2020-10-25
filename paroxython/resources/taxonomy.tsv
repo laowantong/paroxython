@@ -246,7 +246,7 @@ var/assignment/explicit/conditional/compact	compact_conditional_assignment
 var/assignment/explicit/conditional/corrective	corrective_conditional_assignment
 var/assignment/explicit/conditional/verbose	verbose_conditional_assignment
 var/assignment/explicit/constant	assignment_lhs_identifier:[[:upper:]0-9_]+
-var/assignment/explicit/index	subscript_assignment:Index
+var/assignment/explicit/index	subscript_assignment:(?!Slice).+
 var/assignment/explicit/negate	negate
 var/assignment/explicit/parallel	parallel_assignment:2
 var/assignment/explicit/parallel/more_than_two	parallel_assignment:(?!2$)\d+
@@ -265,7 +265,7 @@ var/assignment/implicit/parameter/self	function_parameter:self
 var/assignment/implicit/parameter/throwaway	function_parameter:_
 var/deletion	node:Delete
 var/deletion/attribute	attribute_deletion:.+
-var/deletion/index	subscript_deletion:Index
+var/deletion/index	subscript_deletion:(?!Slice).+
 var/deletion/slice	subscript_deletion:Slice
 var/deletion/unbinding	unbinding:.+
 var/metasyntactic	(function|assignment_lhs_identifier|function_parameter|iteration_variable):(foobar|foo|bar)

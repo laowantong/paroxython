@@ -104,13 +104,13 @@ So far so good. However:
 
 > `typed_ast` will not be updated to support parsing Python 3.8 and newer.
 
-This means that `typed_ast`, although convenient to parse Python 3.5, 3.6, 3.7 and 3.8, will chope on
+This means that `typed_ast`, although convenient to parse Python 3.5 and newer, will chope on
 Python 3.8 specific syntax, as assignment expressions.
 
 This is the reason why, when launched from Python 3.8 or higher, Paroxython switches to the parser of
 the standard library [`ast`](https://docs.python.org/3/library/ast.html). However, the ASTs generated
-by the two libraries are not 100% identical. Wrapping their parsers requires us to erase the
-differences as much as possible. Some of the functions presented below are written for this purpose.
+by the two libraries are not 100% identical. Wrapping their parsers requires us to erase as much
+differences as possible. Some of the functions presented below are written for this purpose.
 
 ### On the fly: modification of the AST
 
@@ -245,6 +245,64 @@ into this one:
 /body/1/value/n=-42
 ```
 
+#### Index simplification
+
+Since Python 3.9, the class `ast.Index` is deprecated: simple indexes are represented by their value.
+
+For instance, `a[42]` is parsed as:
+
+```python
+[...] slice=Constant(value=42) [...]
+```
+
+... instead of:
+
+```python
+[...] slice=Index(value=Constant(value=42))) [...]
+```
+
+To unify the further treatment of indexes, the function `simplify_indexes` post-processes the
+generated flat representation to transform this kind of output:
+
+```plain
+/body/1/_type=Expr
+/body/1/_pos=1:1-
+/body/1/value/_type=Subscript
+/body/1/value/_hash=0x0001
+/body/1/value/_pos=1:1-0-
+/body/1/value/value/_type=Name
+/body/1/value/value/_hash=0x0002
+/body/1/value/value/_pos=1:1-0-0-
+/body/1/value/value/id=a
+/body/1/value/value/ctx/_type=Load
+/body/1/value/slice/_type=Index           # Line to be suppressed.
+/body/1/value/slice/value/_type=Num       # Lines to be simplified...
+/body/1/value/slice/value/_hash=0x0003    # ...
+/body/1/value/slice/value/_pos=1:1-0-1-0- # ...
+/body/1/value/slice/value/n=42            # ...
+/body/1/value/ctx/_type=Load
+```
+
+into this one:
+
+```plain
+/body/1/_type=Expr
+/body/1/_pos=1:1-
+/body/1/value/_type=Subscript
+/body/1/value/_hash=0x0001
+/body/1/value/_pos=1:1-0-
+/body/1/value/value/_type=Name
+/body/1/value/value/_hash=0x0002
+/body/1/value/value/_pos=1:1-0-0-
+/body/1/value/value/id=a
+/body/1/value/value/ctx/_type=Load
+/body/1/value/slice/_type=Num        # Simplified lines...
+/body/1/value/slice/_hash=0x0003     # ...
+/body/1/value/slice/_pos=1:1-0-1-    # ... (the last segment of the path is dropped)
+/body/1/value/slice/n=42             # ...
+/body/1/value/ctx/_type=Load
+```
+
 #### Suppressing useless lines
 
 - Starting with Python 3.8, `kind` is an attribute of a constant allowing tools to distinguish
@@ -282,10 +340,10 @@ from typing import Any, Callable, Match
 import regex  # type: ignore
 
 
-def select_ast_post_processing(strategy):
+def select_ast_post_processing():
     """Customize the post-treatment of the AST depending on the parser used to create it."""
 
-    if strategy == "standard_ast":
+    if sys.version_info >= (3, 9):
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
@@ -295,31 +353,36 @@ def select_ast_post_processing(strategy):
             flat_ast = unquote(flat_ast)
             return flat_ast
 
-    elif strategy == "typed_ast":
+    elif sys.version_info >= (3, 8):
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
+            flat_ast = suppress_posonlyargs(flat_ast)
+            flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
+            flat_ast = simplify_indexes(flat_ast)
             flat_ast = unquote(flat_ast)
-            flat_ast = correct_all_decorated_callable_starts(flat_ast)
             return flat_ast
 
     else:
 
-        def post_process(flat_ast):  # pragma: no cover
+        def post_process(flat_ast):
+            flat_ast = suppress_kinds(flat_ast)
+            flat_ast = simplify_negative_literals(flat_ast)
+            flat_ast = simplify_indexes(flat_ast)
+            flat_ast = unquote(flat_ast)
+            flat_ast = correct_all_decorated_callable_starts(flat_ast)
             return flat_ast
 
     return post_process
 
 
 # fmt: off
-if sys.version >= "3.8":
+if sys.version_info >= (3, 8):
     import ast
-    ast_strategy = "standard_ast"
 else:
     from typed_ast import ast3 as ast # type: ignore
-    ast_strategy = "typed_ast"
-post_process = select_ast_post_processing(ast_strategy)
+post_process = select_ast_post_processing()
 # fmt: on
 
 
@@ -402,6 +465,23 @@ def simplify_negative_literals(
     Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
     """
     return sub(r"\1/_type=Num\2\1/n=-\3", flat_ast)
+
+
+def simplify_indexes(
+    flat_ast: str,
+    subn_index: Callable = regex.compile(r"(?m)^(.*?)/_type=Index\n").subn,
+    sub_slice_value_pos: Callable = regex.compile(r"(?m)^([^=]*/slice/value/_pos=.+)\d+-").sub,
+    sub_slice_value: Callable = regex.compile(r"(?m)^([^=]*/slice)/value").sub,
+) -> str:
+    """[Simplify the indexes](#index-simplification) of a given flat AST.
+
+    Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
+    """
+    (flat_ast, n) = subn_index("", flat_ast)
+    if n == 0:
+        return flat_ast
+    flat_ast = sub_slice_value_pos(r"\1", flat_ast)
+    return sub_slice_value(r"\1", flat_ast)
 
 
 def backport_all_constants(
