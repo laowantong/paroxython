@@ -3,7 +3,7 @@
     - [`09_indent.py`](#program-09_indentpy-learning-cost-14375)
 - [`2 programs of learning cost in [2, 4[`](#2-programs-of-learning-cost-in-2-4)
     - [`04_fibonacci.py`](#program-04_fibonaccipy-learning-cost-253125)
-    - [`08_arguments.py`](#program-08_argumentspy-learning-cost-3125)
+    - [`08_arguments.py`](#program-08_argumentspy-learning-cost-33125)
 - [`6 programs of learning cost in [4, 8[`](#6-programs-of-learning-cost-in-4-8)
     - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-403125)
     - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-40625)
@@ -88,7 +88,7 @@
 
 ---
 
-### Program `08_arguments.py` (learning cost 3.125)
+### Program `08_arguments.py` (learning cost 3.3125)
 
 ```python
 1   import sys
@@ -104,6 +104,7 @@
 | 0.25 | `call/composition` | 3 |
 | 0 | `call/subroutine/builtin/casting/int` | 3 |
 | 0 | `call/subroutine/builtin/sum` | 3 |
+| 0.1875 | `def/subroutine/generator/expression` | 3 |
 | 0 | `flow/exception/catch/ValueError` | 2-6 |
 | 0.875 | `import/standard/sys` | 1 |
 | 0 | `style/imperative` | 1-6 |

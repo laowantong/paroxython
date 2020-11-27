@@ -104,7 +104,7 @@ So far so good. However:
 
 > `typed_ast` will not be updated to support parsing Python 3.8 and newer.
 
-This means that `typed_ast`, although convenient to parse Python 3.5 and newer, will chope on
+This means that `typed_ast`, although convenient to parse Python 3.5 and newer, will start choping on
 Python 3.8 specific syntax, as assignment expressions.
 
 This is the reason why, when launched from Python 3.8 or higher, Paroxython switches to the parser of

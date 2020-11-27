@@ -45,6 +45,7 @@ def/subroutine/function/impure	impure_function:.+
 def/subroutine/function/predicate	function_returning_something:(is|are|has|have|can|must|needs)_.+
 def/subroutine/function/pure	pure_function:.+
 def/subroutine/generator	generator:.+
+def/subroutine/generator/expression	comprehension:Generator
 def/subroutine/higher_order	higher_order_function:.+
 def/subroutine/method/flavor/class	class_method:.+
 def/subroutine/method/flavor/instance	instance_method:.+
@@ -193,11 +194,13 @@ type/boolean/literal/True	literal:True
 type/non_sequence/dictionary	external_free_call:dict
 type/non_sequence/dictionary	member_call_method:(fromkeys|get|items|keys|popitem|setdefault|values)
 type/non_sequence/dictionary	member_call_method:dict:(pop|clear|copy|update)
+type/non_sequence/dictionary/comprehension	comprehension:Dict
 type/non_sequence/dictionary/literal	literal:Dict
 type/non_sequence/dictionary/literal/empty	empty_literal:Dict
 type/non_sequence/set	external_free_call:set
 type/non_sequence/set	member_call_method:(add|difference|difference_update|discard|intersection|intersection_update|isdisjoint|issubset|issuperset|symmetric_difference|symmetric_difference_update|union)
 type/non_sequence/set	member_call_method:set:(pop|clear|copy|remove|update)
+type/non_sequence/set/comprehension	comprehension:Set
 type/non_sequence/set/literal	literal:Set
 type/null/literal	literal:None
 type/number	member_call_method:(as_integer_ratio)
@@ -221,6 +224,7 @@ type/sequence	member_call_method:(count|index)
 type/sequence/list	external_free_call:list
 type/sequence/list	member_call_method:(append|extend|insert|reverse|sort)
 type/sequence/list	member_call_method:list:(count|index|pop|clear|copy|remove)
+type/sequence/list/comprehension	comprehension:List
 type/sequence/list/literal	literal:List
 type/sequence/list/literal/empty	empty_literal:List
 type/sequence/string	external_free_call:str

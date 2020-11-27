@@ -404,6 +404,7 @@
       "taxa": {
         "call/subroutine/builtin/print": [[4,4]],
         "call/subroutine/builtin/sum": [[3,3]],
+        "def/subroutine/generator/expression": [[3,3]],
         "meta/count/program/sloc/4": [[1,4]],
         "meta/count/variety/*": [[1,4]],
         "meta/program": [[1,4]],
@@ -486,6 +487,7 @@
         "call/subroutine/builtin/casting/int": [[3,3]],
         "call/subroutine/builtin/print": [[4,4],[6,6]],
         "call/subroutine/builtin/sum": [[3,3]],
+        "def/subroutine/generator/expression": [[3,3]],
         "flow/exception/catch/ValueError": [[2,6]],
         "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
@@ -1626,6 +1628,7 @@
         "type/boolean/literal/True": [[7,7]],
         "type/number/integer/literal": [[1,1],[5,5],[5,5],[12,12],[14,14],[17,17]],
         "type/number/integer/literal/zero": [[10,10]],
+        "type/sequence/list/comprehension": [[13,13]],
         "type/sequence/list/literal": [[11,11],[14,14]],
         "type/sequence/list/literal/empty": [[11,11]],
         "type/sequence/tuple/literal": [[4,4],[5,5],[5,5],[6,6],[14,14]],
@@ -2065,6 +2068,7 @@
         "condition/equality": [[15,15]],
         "def/class": [[2,3]],
         "def/subroutine/function/impure": [[10,21]],
+        "def/subroutine/generator/expression": [[24,24]],
         "def/subroutine/procedure": [[4,9]],
         "def/subroutine/recursive/call_count/1": [[10,21]],
         "def/subroutine/recursive/tail": [[10,21]],
@@ -5764,6 +5768,11 @@
     "def/subroutine/generator": [
       "20_prime_numbers.py"
     ],
+    "def/subroutine/generator/expression": [
+      "07_grocery_bill.py",
+      "08_arguments.py",
+      "28_queens.py"
+    ],
     "def/subroutine/method/flavor/instance": [
       "12_classes.py",
       "13_unit_testing.py"
@@ -6237,6 +6246,9 @@
     ],
     "type/sequence": [
       "20_prime_numbers.py"
+    ],
+    "type/sequence/list/comprehension": [
+      "18_queens.py"
     ],
     "type/sequence/list/literal": [
       "03_friends.py",

@@ -35,8 +35,8 @@
     - [`023.1102-convert-real-number-to-string-with-2-decimal-places.py`](#program-0231102-convert-real-number-to-string-with-2-decimal-placespy-learning-cost-6234375)
     - [`024.0664-assign-to-string-the-japanese-word-.py`](#program-0240664-assign-to-string-the-japanese-word-py-learning-cost-4375)
     - [`025.0195-send-a-value-to-another-thread.py`](#program-0250195-send-a-value-to-another-threadpy-learning-cost-80625)
-    - [`026.0194-create-a-2-dimensional-array.py`](#program-0260194-create-a-2-dimensional-arraypy-learning-cost-609375)
-    - [`027.0192-create-a-3-dimensional-array.py`](#program-0270192-create-a-3-dimensional-arraypy-learning-cost-609375)
+    - [`026.0194-create-a-2-dimensional-array.py`](#program-0260194-create-a-2-dimensional-arraypy-learning-cost-703125)
+    - [`027.0192-create-a-3-dimensional-array.py`](#program-0270192-create-a-3-dimensional-arraypy-learning-cost-703125)
     - [`027.0193-create-a-3-dimensional-array.py`](#program-0270193-create-a-3-dimensional-arraypy-learning-cost-6125)
     - [`028.0350-sort-by-a-property.py`](#program-0280350-sort-by-a-propertypy-learning-cost-625)
     - [`029.0199-remove-item-from-list-by-its-index.py`](#program-0290199-remove-item-from-list-by-its-indexpy-learning-cost-325)
@@ -72,7 +72,7 @@
     - [`055.0575-convert-integer-to-string.py`](#program-0550575-convert-integer-to-stringpy-learning-cost-528125)
     - [`056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py`](#program-0561424-launch-1000-parallel-tasks-and-wait-for-completionpy-learning-cost-11625)
     - [`057.0260-filter-list.py`](#program-0570260-filter-listpy-learning-cost-525)
-    - [`057.3173-filter-list.py`](#program-0573173-filter-listpy-learning-cost-5125)
+    - [`057.3173-filter-list.py`](#program-0573173-filter-listpy-learning-cost-60625)
     - [`058.0665-extract-file-content-to-a-string.py`](#program-0580665-extract-file-content-to-a-stringpy-learning-cost-525)
     - [`059.0668-write-to-standard-error-stream.py`](#program-0590668-write-to-standard-error-streampy-learning-cost-440625)
     - [`060.1084-read-command-line-argument.py`](#program-0601084-read-command-line-argumentpy-learning-cost-60)
@@ -129,7 +129,7 @@
     - [`110.1455-check-if-string-is-blank.py`](#program-1101455-check-if-string-is-blankpy-learning-cost-7015625)
     - [`111.2168-launch-other-program.py`](#program-1112168-launch-other-programpy-learning-cost-621875)
     - [`112.2144-iterate-over-map-entries-ordered-by-keys.py`](#program-1122144-iterate-over-map-entries-ordered-by-keyspy-learning-cost-70)
-    - [`113.2157-iterate-over-map-entries-ordered-by-values.py`](#program-1132157-iterate-over-map-entries-ordered-by-valuespy-learning-cost-11546875)
+    - [`113.2157-iterate-over-map-entries-ordered-by-values.py`](#program-1132157-iterate-over-map-entries-ordered-by-valuespy-learning-cost-12484375)
     - [`114.2273-test-deep-equality.py`](#program-1142273-test-deep-equalitypy-learning-cost-41875)
     - [`115.2138-compare-dates.py`](#program-1152138-compare-datespy-learning-cost-50625)
     - [`116.1257-remove-occurrences-of-word-from-string.py`](#program-1161257-remove-occurrences-of-word-from-stringpy-learning-cost-6265625)
@@ -148,15 +148,15 @@
     - [`126.2137-multiple-return-values.py`](#program-1262137-multiple-return-valuespy-learning-cost-86875)
     - [`127.2274-source-code-inclusion.py`](#program-1272274-source-code-inclusionpy-learning-cost-784375)
     - [`128.2085-breadth-first-traversing-of-a-tree.py`](#program-1282085-breadth-first-traversing-of-a-treepy-learning-cost-19796875)
-    - [`129.2282-breadth-first-traversing-in-a-graph.py`](#program-1292282-breadth-first-traversing-in-a-graphpy-learning-cost-188125)
-    - [`130.2283-depth-first-traversing-in-a-graph.py`](#program-1302283-depth-first-traversing-in-a-graphpy-learning-cost-17984375)
+    - [`129.2282-breadth-first-traversing-in-a-graph.py`](#program-1292282-breadth-first-traversing-in-a-graphpy-learning-cost-1975)
+    - [`130.2283-depth-first-traversing-in-a-graph.py`](#program-1302283-depth-first-traversing-in-a-graphpy-learning-cost-18921875)
     - [`131.2083-successive-conditions.py`](#program-1312083-successive-conditionspy-learning-cost-325)
     - [`131.2766-successive-conditions.py`](#program-1312766-successive-conditionspy-learning-cost-33125)
     - [`132.2040-measure-duration-of-procedure-execution.py`](#program-1322040-measure-duration-of-procedure-executionpy-learning-cost-6125)
     - [`133.2160-case-insensitive-string-contains.py`](#program-1332160-case-insensitive-string-containspy-learning-cost-6046875)
     - [`134.1850-create-a-new-list.py`](#program-1341850-create-a-new-listpy-learning-cost-4375)
     - [`135.2158-remove-item-from-list-by-its-value.py`](#program-1352158-remove-item-from-list-by-its-valuepy-learning-cost-259375)
-    - [`136.2141-remove-all-occurrences-of-a-value-from-a-list.py`](#program-1362141-remove-all-occurrences-of-a-value-from-a-listpy-learning-cost-525)
+    - [`136.2141-remove-all-occurrences-of-a-value-from-a-list.py`](#program-1362141-remove-all-occurrences-of-a-value-from-a-listpy-learning-cost-61875)
     - [`137.1823-check-if-string-contains-only-digits.py`](#program-1371823-check-if-string-contains-only-digitspy-learning-cost-5296875)
     - [`138.2161-create-temp-file.py`](#program-1382161-create-temp-filepy-learning-cost-43125)
     - [`139.2162-create-temp-directory.py`](#program-1392162-create-temp-directorypy-learning-cost-43125)
@@ -176,15 +176,15 @@
     - [`151.2166-remove-string-trailing-path-separator.py`](#program-1512166-remove-string-trailing-path-separatorpy-learning-cost-7984375)
     - [`152.2153-turn-a-character-into-a-string.py`](#program-1522153-turn-a-character-into-a-stringpy-learning-cost-34375)
     - [`153.1980-concatenate-string-with-integer.py`](#program-1531980-concatenate-string-with-integerpy-learning-cost-6234375)
-    - [`154.2155-halfway-between-two-hex-color-codes.py`](#program-1542155-halfway-between-two-hex-color-codespy-learning-cost-17296875)
-    - [`154.2292-halfway-between-two-hex-color-codes.py`](#program-1542292-halfway-between-two-hex-color-codespy-learning-cost-31625)
+    - [`154.2155-halfway-between-two-hex-color-codes.py`](#program-1542155-halfway-between-two-hex-color-codespy-learning-cost-18234375)
+    - [`154.2292-halfway-between-two-hex-color-codes.py`](#program-1542292-halfway-between-two-hex-color-codespy-learning-cost-335)
     - [`155.2147-delete-file.py`](#program-1552147-delete-filepy-learning-cost-44375)
     - [`156.2148-format-integer-with-zero-padding.py`](#program-1562148-format-integer-with-zero-paddingpy-learning-cost-53125)
     - [`157.2150-declare-constant-string.py`](#program-1572150-declare-constant-stringpy-learning-cost-53125)
     - [`158.2163-random-sublist.py`](#program-1582163-random-sublistpy-learning-cost-51875)
     - [`159.2281-trie.py`](#program-1592281-triepy-learning-cost-9828125)
     - [`160.2165-detect-if-32-bit-or-64-bit-architecture.py`](#program-1602165-detect-if-32-bit-or-64-bit-architecturepy-learning-cost-75625)
-    - [`161.2098-multiply-all-the-elements-of-a-list.py`](#program-1612098-multiply-all-the-elements-of-a-listpy-learning-cost-525)
+    - [`161.2098-multiply-all-the-elements-of-a-list.py`](#program-1612098-multiply-all-the-elements-of-a-listpy-learning-cost-61875)
     - [`162.2164-execute-procedures-depending-on-options.py`](#program-1622164-execute-procedures-depending-on-optionspy-learning-cost-6875)
     - [`163.2170-print-list-elements-by-group-of-2.py`](#program-1632170-print-list-elements-by-group-of-2py-learning-cost-89375)
     - [`163.3177-print-list-elements-by-group-of-2.py`](#program-1633177-print-list-elements-by-group-of-2py-learning-cost-161875)
@@ -205,9 +205,9 @@
     - [`174.2687-make-http-post-request.py`](#program-1742687-make-http-post-requestpy-learning-cost-9171875)
     - [`175.2613-bytes-to-hex-string.py`](#program-1752613-bytes-to-hex-stringpy-learning-cost-5296875)
     - [`176.2614-hex-string-to-byte-array.py`](#program-1762614-hex-string-to-byte-arraypy-learning-cost-5296875)
-    - [`177.2709-find-files-with-a-given-list-of-filename-extensions.py`](#program-1772709-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-115)
-    - [`177.2725-find-files-with-a-given-list-of-filename-extensions.py`](#program-1772725-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-11828125)
-    - [`177.3241-find-files-with-a-given-list-of-filename-extensions.py`](#program-1773241-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-1140625)
+    - [`177.2709-find-files-with-a-given-list-of-filename-extensions.py`](#program-1772709-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-124375)
+    - [`177.2725-find-files-with-a-given-list-of-filename-extensions.py`](#program-1772725-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-12765625)
+    - [`177.3241-find-files-with-a-given-list-of-filename-extensions.py`](#program-1773241-find-files-with-a-given-list-of-filename-extensionspy-learning-cost-1234375)
     - [`178.2615-check-if-point-is-inside-rectangle.py`](#program-1782615-check-if-point-is-inside-rectanglepy-learning-cost-60)
     - [`179.2688-get-center-of-a-rectangle.py`](#program-1792688-get-center-of-a-rectanglepy-learning-cost-70625)
     - [`179.2689-get-center-of-a-rectangle.py`](#program-1792689-get-center-of-a-rectanglepy-learning-cost-8875)
@@ -217,11 +217,11 @@
     - [`184.2701-tomorrow.py`](#program-1842701-tomorrowpy-learning-cost-69375)
     - [`185.2820-execute-function-in-30-seconds.py`](#program-1852820-execute-function-in-30-secondspy-learning-cost-8125)
     - [`186.2699-exit-program-cleanly.py`](#program-1862699-exit-program-cleanlypy-learning-cost-53125)
-    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-23953125)
+    - [`187.3261-disjoint-set.py`](#program-1873261-disjoint-setpy-learning-cost-24890625)
     - [`188.3171-matrix-multiplication.py`](#program-1883171-matrix-multiplicationpy-learning-cost-51875)
     - [`188.3284-matrix-multiplication.py`](#program-1883284-matrix-multiplicationpy-learning-cost-51875)
-    - [`189.3236-filter-and-transform-list.py`](#program-1893236-filter-and-transform-listpy-learning-cost-525)
-    - [`191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py`](#program-1913403-check-if-any-value-in-a-list-is-larger-than-a-limitpy-learning-cost-60)
+    - [`189.3236-filter-and-transform-list.py`](#program-1893236-filter-and-transform-listpy-learning-cost-61875)
+    - [`191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py`](#program-1913403-check-if-any-value-in-a-list-is-larger-than-a-limitpy-learning-cost-69375)
     - [`197.3457-get-a-list-of-lines-from-a-file.py`](#program-1973457-get-a-list-of-lines-from-a-filepy-learning-cost-45)
 # Recommended programs
 
@@ -1028,7 +1028,7 @@
 
 ---
 
-### Program `026.0194-create-a-2-dimensional-array.py` (learning cost 6.09375)
+### Program `026.0194-create-a-2-dimensional-array.py` (learning cost 7.03125)
 
 ```python
 1   x = [[0 for j in xrange(n)] for i in xrange(m)]
@@ -1040,6 +1040,7 @@
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
+| 0.9375 | `type/sequence/list/comprehension` | 1, 1 |
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1, 1 |
 | 0.875 | `var/scope/local` | 1, 1, 1 |
@@ -1049,7 +1050,7 @@
 
 ---
 
-### Program `027.0192-create-a-3-dimensional-array.py` (learning cost 6.09375)
+### Program `027.0192-create-a-3-dimensional-array.py` (learning cost 7.03125)
 
 ```python
 1   x = [[[0 for k in xrange(p)] for j in xrange(n)] for i in xrange(m)]
@@ -1061,6 +1062,7 @@
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
 | 0.96875 | `type/number/integer/literal/zero` | 1 |
+| 0.9375 | `type/sequence/list/comprehension` | 1, 1, 1 |
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1, 1, 1 |
 | 0.875 | `var/scope/local` | 1, 1, 1, 1 |
@@ -1963,7 +1965,7 @@
 
 ---
 
-### Program `057.3173-filter-list.py` (learning cost 5.125)
+### Program `057.3173-filter-list.py` (learning cost 6.0625)
 
 ```python
 1   y = [element for element in x if p(element)]
@@ -1974,6 +1976,7 @@
 | 0.75 | `call/subroutine` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
+| 0.9375 | `type/sequence/list/comprehension` | 1 |
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/local` | 1, 1 |
@@ -3236,7 +3239,7 @@
 
 ---
 
-### Program `113.2157-iterate-over-map-entries-ordered-by-values.py` (learning cost 11.546875)
+### Program `113.2157-iterate-over-map-entries-ordered-by-values.py` (learning cost 12.484375)
 
 ```python
 1   for x, k in sorted((x, k) for k, x in mymap.items()):
@@ -3249,6 +3252,7 @@
 | 0.9375 | `call/subroutine/builtin/print` | 2 |
 | 0.9375 | `call/subroutine/builtin/sorted` | 1 |
 | 0.984375 | `call/subroutine/method/non_sequence/dictionary/items` | 1 |
+| 0.9375 | `def/subroutine/generator/expression` | 1 |
 | 0.9375 | `flow/loop/exit/late` | 1-2 |
 | 0.875 | `flow/loop/for` | 1-2 |
 | 0.75 | `style/imperative` | 1-2 |
@@ -3727,7 +3731,7 @@
 
 ---
 
-### Program `129.2282-breadth-first-traversing-in-a-graph.py` (learning cost 18.8125)
+### Program `129.2282-breadth-first-traversing-in-a-graph.py` (learning cost 19.75)
 
 ```python
 1   from collections import deque
@@ -3750,6 +3754,7 @@
 | 0.984375 | `call/subroutine/method/sequence/list/extend` | 9 |
 | 0.875 | `call/subroutine/no_arguments` | 3 |
 | 0.875 | `condition/belonging/not` | 9 |
+| 0.9375 | `def/subroutine/generator/expression` | 9 |
 | 0.875 | `def/subroutine/higher_order` | 2-9 |
 | 0.875 | `def/subroutine/procedure` | 2-9 |
 | 0.9375 | `flow/loop/exit/late` | 5-9 |
@@ -3771,7 +3776,7 @@
 
 ---
 
-### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 17.984375)
+### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 18.921875)
 
 ```python
 1   def depth_first(start, f):
@@ -3793,6 +3798,7 @@
 | 0.984375 | `call/subroutine/method/sequence/list/pop` | 5 |
 | 0.875 | `call/subroutine/no_arguments` | 2 |
 | 0.875 | `condition/belonging/not` | 8 |
+| 0.9375 | `def/subroutine/generator/expression` | 8 |
 | 0.875 | `def/subroutine/higher_order` | 1-8 |
 | 0.875 | `def/subroutine/procedure` | 1-8 |
 | 0.9375 | `flow/loop/exit/late` | 4-8 |
@@ -3933,7 +3939,7 @@
 
 ---
 
-### Program `136.2141-remove-all-occurrences-of-a-value-from-a-list.py` (learning cost 5.25)
+### Program `136.2141-remove-all-occurrences-of-a-value-from-a-list.py` (learning cost 6.1875)
 
 ```python
 1   newlist = [item for item in items if item != x]
@@ -3944,6 +3950,7 @@
 | 0.875 | `condition/equality/not` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
+| 0.9375 | `type/sequence/list/comprehension` | 1 |
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/local` | 1, 1 |
@@ -4360,7 +4367,7 @@
 
 ---
 
-### Program `154.2155-halfway-between-two-hex-color-codes.py` (learning cost 17.296875)
+### Program `154.2155-halfway-between-two-hex-color-codes.py` (learning cost 18.234375)
 
 ```python
 1   r1, g1, b1 = [int(c1[p : p + 2], 16) for p in range(1, 6, 2)]
@@ -4381,6 +4388,7 @@
 | 0.875 | `type/number/integer` | 1, 2 |
 | 0.9375 | `type/number/integer/literal` | <details><summary>1, 1, 1, 1, 1, 2, 2, 2, 2,</summary>2, 3, 3, 3</details> |
 | 0.875 | `type/number/magic` | 1, 1, 2, 2 |
+| 0.9375 | `type/sequence/list/comprehension` | 1, 2 |
 | 0.875 | `type/sequence/string` | 3 |
 | 0.9375 | `type/sequence/string/literal` | 3 |
 | 0.9375 | `type/sequence/tuple/literal` | 1, 2 |
@@ -4395,7 +4403,7 @@
 
 ---
 
-### Program `154.2292-halfway-between-two-hex-color-codes.py` (learning cost 31.625)
+### Program `154.2292-halfway-between-two-hex-color-codes.py` (learning cost 33.5)
 
 ```python
 1   import numpy
@@ -4429,6 +4437,7 @@
 | 0.75 | `def/class` | 2-10 |
 | 0.875 | `def/subroutine/decorated` | 4-7 |
 | 0.875 | `def/subroutine/function` | 4-7, 8-10 |
+| 0.9375 | `def/subroutine/generator/expression` | 10 |
 | 0.96875 | `def/subroutine/method/flavor/class` | 4-7 |
 | 0.96875 | `def/subroutine/method/flavor/instance` | 8-10 |
 | 0.984375 | `def/subroutine/method/naming/magic/__str__` | 8-10 |
@@ -4443,6 +4452,7 @@
 | 0.875 | `type/number/integer` | 6 |
 | 0.9375 | `type/number/integer/literal` | 6, 6, 6, 6, 15 |
 | 0.875 | `type/number/magic` | 6 |
+| 0.9375 | `type/sequence/list/comprehension` | 6 |
 | 0.875 | `type/sequence/string` | 10 |
 | 0.9375 | `type/sequence/string/literal` | 10, 10, 11, 13 |
 | 0.96875 | `type/sequence/string/literal/empty` | 10 |
@@ -4601,7 +4611,7 @@
 
 ---
 
-### Program `161.2098-multiply-all-the-elements-of-a-list.py` (learning cost 5.25)
+### Program `161.2098-multiply-all-the-elements-of-a-list.py` (learning cost 6.1875)
 
 ```python
 1   elements = [c * x for x in elements]
@@ -4612,6 +4622,7 @@
 | 0.875 | `operator/arithmetic/multiplication` | 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
+| 0.9375 | `type/sequence/list/comprehension` | 1 |
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/local` | 1, 1 |
@@ -5052,7 +5063,7 @@
 
 ---
 
-### Program `177.2709-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 11.5)
+### Program `177.2709-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 12.4375)
 
 ```python
 1   import os
@@ -5068,6 +5079,7 @@
 | 0.875 | `style/imperative/flat` | 1-3 |
 | 0.75 | `subscript/index` | 3 |
 | 0.9375 | `type/number/integer/literal` | 3 |
+| 0.9375 | `type/sequence/list/comprehension` | 3 |
 | 0.9375 | `type/sequence/list/literal` | 2 |
 | 0.9375 | `type/sequence/string/literal` | 2, 2, 2 |
 | 0.9375 | `var/assignment/explicit/constant` | 3 |
@@ -5081,7 +5093,7 @@
 
 ---
 
-### Program `177.2725-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 11.828125)
+### Program `177.2725-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 12.765625)
 
 ```python
 1   import re
@@ -5101,6 +5113,7 @@
 | 0.875 | `import/standard/os` | 2 |
 | 0.875 | `import/standard/re` | 1 |
 | 0.875 | `style/imperative/flat` | 1-7 |
+| 0.9375 | `type/sequence/list/comprehension` | 3 |
 | 0.875 | `type/sequence/string` | 4 |
 | 0.9375 | `type/sequence/string/literal` | 4, 7 |
 | 0.9375 | `type/sequence/tuple/literal` | 5 |
@@ -5115,7 +5128,7 @@
 
 ---
 
-### Program `177.3241-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 11.40625)
+### Program `177.3241-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 12.34375)
 
 ```python
 1   import glob
@@ -5128,6 +5141,7 @@
 | 0.75 | `call/composition` | 3, 3 |
 | 0.96875 | `call/subroutine/builtin/casting/list` | 3 |
 | 0.875 | `call/subroutine/method` | 3, 3 |
+| 0.9375 | `def/subroutine/generator/expression` | 3 |
 | 0.875 | `import/standard/glob` | 1 |
 | 0.875 | `import/standard/itertools` | 2 |
 | 0.875 | `operator/string/format` | 3 |
@@ -5354,7 +5368,7 @@
 
 ---
 
-### Program `187.3261-disjoint-set.py` (learning cost 23.953125)
+### Program `187.3261-disjoint-set.py` (learning cost 24.890625)
 
 ```python
 1   class UnionFind:
@@ -5394,6 +5408,7 @@
 | 0.75 | `style/object_oriented` | 1-15 |
 | 0.75 | `subscript/index` | 6, 9, 9, 10 |
 | 0.96875 | `type/number/integer/literal/zero` | 3 |
+| 0.9375 | `type/sequence/list/comprehension` | 4 |
 | 0.9375 | `type/sequence/list/literal` | 3 |
 | 0.9375 | `type/sequence/tuple/literal` | 15, 15 |
 | 0.875 | `var/assignment/explicit` | 3, 4 |
@@ -5455,7 +5470,7 @@
 
 ---
 
-### Program `189.3236-filter-and-transform-list.py` (learning cost 5.25)
+### Program `189.3236-filter-and-transform-list.py` (learning cost 6.1875)
 
 ```python
 1   y = [T(e) for e in x if P(e)]
@@ -5466,6 +5481,7 @@
 | 0.875 | `call/class/construct` | 1, 1 |
 | 0.875 | `style/imperative/flat` | 1 |
 | 0.75 | `style/one_liner` | 1 |
+| 0.9375 | `type/sequence/list/comprehension` | 1 |
 | 0.9375 | `var/assignment/explicit/single` | 1 |
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
 | 0.875 | `var/scope/local` | 1, 1 |
@@ -5475,7 +5491,7 @@
 
 ---
 
-### Program `191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py` (learning cost 6.0)
+### Program `191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py` (learning cost 6.9375)
 
 ```python
 1   if any(v > x for v in a):
@@ -5487,6 +5503,7 @@
 | 0.9375 | `call/subroutine/builtin/any` | 1 |
 | 0.875 | `call/subroutine/no_arguments` | 2 |
 | 0.75 | `condition/inequality` | 1 |
+| 0.9375 | `def/subroutine/generator/expression` | 1 |
 | 0.875 | `flow/conditional/no_else` | 1-2 |
 | 0.75 | `style/imperative` | 1-2 |
 | 0.9375 | `var/assignment/implicit/iteration_variable` | 1 |
