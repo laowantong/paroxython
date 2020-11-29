@@ -16,13 +16,13 @@
         "node:Name": [[1,1]],
         "node:Str": [[1,1]],
         "one_liner_style": [[1,1]],
-        "variety:*": [[1,1]],
+        "variety:1": [[1,1]],
         "whole_span:1": [[1,1]]
       },
       "taxa": {
         "call/subroutine/builtin/print": [[1,1]],
         "meta/count/program/sloc/1": [[1,1]],
-        "meta/count/variety/*": [[1,1]],
+        "meta/count/variety/1": [[1,1]],
         "meta/program": [[1,1]],
         "style/imperative/flat": [[1,1]],
         "style/one_liner": [[1,1]],
@@ -57,14 +57,14 @@
         "single_assignment:name": [[1,1]],
         "special_literal_string:What is your name?\\n": [[1,1]],
         "string_formatting_operator": [[2,2]],
-        "variety:*": [[1,2]],
+        "variety:1": [[1,2]],
         "whole_span:2": [[1,2]]
       },
       "taxa": {
         "call/subroutine/builtin/input": [[1,1]],
         "call/subroutine/builtin/print": [[2,2]],
         "meta/count/program/sloc/2": [[1,2]],
-        "meta/count/variety/*": [[1,2]],
+        "meta/count/variety/1": [[1,2]],
         "meta/program": [[1,2]],
         "operator/string/format": [[2,2]],
         "style/imperative/flat": [[1,2]],
@@ -125,7 +125,7 @@
         "scope:i": [[1,3]],
         "scope:name": [[1,3]],
         "single_assignment:friends": [[1,1]],
-        "variety:*": [[1,3]],
+        "variety:1": [[1,3]],
         "whole_span:3": [[1,3]]
       },
       "taxa": {
@@ -137,7 +137,7 @@
         "flow/loop/exit/late": [[2,3]],
         "flow/loop/for/indexes_and_elements": [[2,3]],
         "meta/count/program/sloc/3": [[1,3]],
-        "meta/count/variety/*": [[1,3]],
+        "meta/count/variety/1": [[1,3]],
         "meta/program": [[1,3]],
         "style/imperative": [[1,3]],
         "type/sequence/list/literal": [[1,1]],
@@ -202,7 +202,7 @@
         "update_by_assignment:parents:babies": [[4,4]],
         "update_by_assignment_with": [[4,4]],
         "update_with": [[4,4]],
-        "variety:**": [[1,4]],
+        "variety:2": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -213,7 +213,7 @@
         "flow/loop/exit/late": [[2,4]],
         "flow/loop/while": [[2,4]],
         "meta/count/program/sloc/4": [[1,4]],
-        "meta/count/variety/**": [[1,4]],
+        "meta/count/variety/2": [[1,4]],
         "meta/program": [[1,4]],
         "operator/arithmetic/addition": [[4,4]],
         "style/imperative": [[1,4]],
@@ -255,7 +255,7 @@
         "node:arg": [[1,1]],
         "procedural_style": [[1,5]],
         "scope:name": [[1,2]],
-        "variety:**": [[1,5]],
+        "variety:2": [[1,5]],
         "whole_span:5": [[1,5]]
       },
       "taxa": {
@@ -264,7 +264,7 @@
         "def/subroutine/procedure": [[1,2]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/subroutine/sloc/2": [[1,2]],
-        "meta/count/variety/**": [[1,5]],
+        "meta/count/variety/2": [[1,5]],
         "meta/program": [[1,5]],
         "style/procedural": [[1,5]],
         "type/sequence/string/literal": [[2,2],[3,3],[4,4],[5,5]],
@@ -310,7 +310,7 @@
         "node:Str": [[2,2],[2,2],[3,3],[4,4],[6,6]],
         "scope:test_string": [[1,6]],
         "special_literal_string:^\\\\d{3}-\\\\d{4}$": [[3,3]],
-        "variety:**": [[1,6]],
+        "variety:2": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -322,7 +322,7 @@
         "flow/loop/for": [[2,6]],
         "import/standard/re": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
-        "meta/count/variety/**": [[1,6]],
+        "meta/count/variety/2": [[1,6]],
         "meta/program": [[1,6]],
         "style/imperative": [[1,6]],
         "type/sequence/list/literal": [[2,2]],
@@ -398,7 +398,7 @@
         "single_assignment:my_purchase": [[2,2]],
         "single_assignment:prices": [[1,1]],
         "string_formatting_operator": [[4,4]],
-        "variety:*": [[1,4]],
+        "variety:1": [[1,4]],
         "whole_span:4": [[1,4]]
       },
       "taxa": {
@@ -406,7 +406,7 @@
         "call/subroutine/builtin/sum": [[3,3]],
         "def/subroutine/generator/expression": [[3,3]],
         "meta/count/program/sloc/4": [[1,4]],
-        "meta/count/variety/*": [[1,4]],
+        "meta/count/variety/1": [[1,4]],
         "meta/program": [[1,4]],
         "operator/arithmetic/multiplication": [[3,3]],
         "operator/string/format": [[4,4]],
@@ -479,7 +479,7 @@
         "slice_upper:": [[3,3]],
         "try_except:ValueError": [[2,6]],
         "value_attr:argv": [[3,3]],
-        "variety:***": [[1,6]],
+        "variety:3": [[1,6]],
         "whole_span:6": [[1,6]]
       },
       "taxa": {
@@ -491,7 +491,7 @@
         "flow/exception/catch/ValueError": [[2,6]],
         "import/standard/sys": [[1,1]],
         "meta/count/program/sloc/6": [[1,6]],
-        "meta/count/variety/***": [[1,6]],
+        "meta/count/variety/3": [[1,6]],
         "meta/program": [[1,6]],
         "style/imperative": [[1,6]],
         "subscript/slice/start": [[3,3]],
@@ -561,7 +561,7 @@
         "scope:line": [[1,8]],
         "scope:python_files": [[1,8]],
         "single_assignment:python_files": [[2,2]],
-        "variety:***": [[1,8]],
+        "variety:3": [[1,8]],
         "whole_span:8": [[1,8]]
       },
       "taxa": {
@@ -578,7 +578,7 @@
         "flow/loop/for/nested/1": [[6,7]],
         "import/standard/glob": [[1,1]],
         "meta/count/program/sloc/8": [[1,8]],
-        "meta/count/variety/***": [[1,8]],
+        "meta/count/variety/3": [[1,8]],
         "meta/program": [[1,8]],
         "operator/string/concatenation": [[4,4],[7,7]],
         "style/imperative": [[1,8]],
@@ -677,7 +677,7 @@
         "single_assignment:activities": [[2,2]],
         "single_assignment:hour": [[11,11]],
         "single_assignment:time_now": [[10,10]],
-        "variety:*****": [[1,17]],
+        "variety:5": [[1,17]],
         "whole_span:17": [[1,17]]
       },
       "taxa": {
@@ -692,7 +692,7 @@
         "flow/loop/for": [[12,17]],
         "import/standard/time/localtime": [[1,1]],
         "meta/count/program/sloc/17": [[1,17]],
-        "meta/count/variety/*****": [[1,17]],
+        "meta/count/variety/5": [[1,17]],
         "meta/program": [[1,17]],
         "style/imperative": [[1,17]],
         "subscript/index": [[14,14]],
@@ -757,7 +757,7 @@
         "update_by_augmented_assignment:bottles_of_beer:1": [[10,10]],
         "update_by_augmented_assignment_with:Sub": [[10,10]],
         "update_with:Sub": [[10,10]],
-        "variety:***": [[1,10]],
+        "variety:3": [[1,10]],
         "whole_span:10": [[1,10]]
       },
       "taxa": {
@@ -766,7 +766,7 @@
         "flow/loop/exit/late": [[8,10]],
         "flow/loop/while": [[8,10]],
         "meta/count/program/sloc/10": [[1,10]],
-        "meta/count/variety/***": [[1,10]],
+        "meta/count/variety/3": [[1,10]],
         "meta/program": [[1,10]],
         "operator/arithmetic/modulo": [[9,9]],
         "operator/arithmetic/substraction": [[9,9]],
@@ -870,7 +870,7 @@
         "update_by_augmented_assignment_with:Sub": [[7,7]],
         "update_with:Add": [[5,5]],
         "update_with:Sub": [[7,7]],
-        "variety:****": [[1,12]],
+        "variety:4": [[1,12]],
         "whole_span:12": [[1,12]]
       },
       "taxa": {
@@ -888,7 +888,7 @@
         "meta/count/class/methods/4": [[1,9]],
         "meta/count/program/sloc/12": [[1,12]],
         "meta/count/subroutine/sloc/2": [[2,3],[4,5],[6,7],[8,9]],
-        "meta/count/variety/****": [[1,12]],
+        "meta/count/variety/4": [[1,12]],
         "meta/program": [[1,12]],
         "style/object_oriented": [[1,12]],
         "type/number/integer/literal": [[10,10],[11,11]],
@@ -1007,7 +1007,7 @@
         "scope:size": [[2,8]],
         "single_assignment:copy": [[3,3]],
         "single_assignment:size": [[4,4]],
-        "variety:***": [[1,11]],
+        "variety:3": [[1,11]],
         "whole_span:11": [[1,11]]
       },
       "taxa": {
@@ -1031,7 +1031,7 @@
         "meta/count/program/sloc/11": [[1,11]],
         "meta/count/subroutine/sloc/2": [[10,11]],
         "meta/count/subroutine/sloc/7": [[2,8]],
-        "meta/count/variety/***": [[1,11]],
+        "meta/count/variety/3": [[1,11]],
         "meta/program": [[1,11]],
         "operator/arithmetic/addition": [[8,8]],
         "operator/arithmetic/division": [[6,6],[8,8],[8,8],[8,8]],
@@ -1115,7 +1115,7 @@
         "scope:size": [[1,7]],
         "single_assignment:copy": [[2,2]],
         "single_assignment:size": [[3,3]],
-        "variety:**": [[1,7]],
+        "variety:2": [[1,7]],
         "whole_span:7": [[1,7]]
       },
       "taxa": {
@@ -1130,7 +1130,7 @@
         "flow/conditional/else": [[7,7]],
         "meta/count/program/sloc/7": [[1,7]],
         "meta/count/subroutine/sloc/7": [[1,7]],
-        "meta/count/variety/**": [[1,7]],
+        "meta/count/variety/2": [[1,7]],
         "meta/program": [[1,7]],
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/division": [[5,5],[7,7],[7,7],[7,7]],
@@ -1200,7 +1200,7 @@
         "scope:lines": [[1,9]],
         "single_assignment:lines": [[2,2]],
         "special_literal_string:\\nThis is the\\nfirst paragraph.\\nThis is the second.\\n": [[2,2]],
-        "variety:***": [[1,9]],
+        "variety:3": [[1,9]],
         "whole_span:9": [[1,9]]
       },
       "taxa": {
@@ -1214,7 +1214,7 @@
         "flow/loop/for": [[7,9]],
         "import/standard/itertools/groupby": [[1,1]],
         "meta/count/program/sloc/9": [[1,9]],
-        "meta/count/variety/***": [[1,9]],
+        "meta/count/variety/3": [[1,9]],
         "meta/program": [[1,9]],
         "style/imperative": [[1,9]],
         "type/sequence/string": [[2,2],[9,9]],
@@ -1389,7 +1389,7 @@
         "single_assignment:status_labels": [[15,15]],
         "single_assignment:stocks": [[14,14]],
         "single_assignment:writer": [[5,5]],
-        "variety:***": [[1,18]],
+        "variety:3": [[1,18]],
         "whole_span:18": [[1,18]]
       },
       "taxa": {
@@ -1408,7 +1408,7 @@
         "import/standard/csv": [[1,1]],
         "meta/count/program/sloc/18": [[1,18]],
         "meta/count/subroutine/sloc/2": [[2,3]],
-        "meta/count/variety/***": [[1,18]],
+        "meta/count/variety/3": [[1,18]],
         "meta/program": [[1,18]],
         "operator/arithmetic/substraction": [[3,3]],
         "style/functional_trait/pure_function": [[2,3]],
@@ -1594,7 +1594,7 @@
         "update_by_assignment:right:left": [[5,5]],
         "update_by_assignment_with": [[5,5]],
         "update_with": [[5,5]],
-        "variety:*****": [[1,20]],
+        "variety:5": [[1,20]],
         "whole_span:20": [[1,20]]
       },
       "taxa": {
@@ -1616,7 +1616,7 @@
         "meta/count/program/sloc/20": [[1,20]],
         "meta/count/subroutine/sloc/7": [[2,8]],
         "meta/count/subroutine/sloc/9": [[9,17]],
-        "meta/count/variety/*****": [[1,20]],
+        "meta/count/variety/5": [[1,20]],
         "meta/program": [[1,20]],
         "operator/arithmetic/addition": [[5,5],[17,17]],
         "operator/arithmetic/substraction": [[5,5],[12,12]],
@@ -1727,7 +1727,7 @@
         "update_by_assignment:numbers:prime": [[7,7]],
         "update_by_assignment_with:filter": [[7,7]],
         "update_with:filter": [[7,7]],
-        "variety:******": [[1,11]],
+        "variety:6": [[1,11]],
         "whole_span:11": [[1,11]],
         "yield:prime": [[6,6]]
       },
@@ -1748,7 +1748,7 @@
         "import/standard/itertools": [[1,1]],
         "meta/count/program/sloc/11": [[1,11]],
         "meta/count/subroutine/sloc/6": [[2,7]],
-        "meta/count/variety/******": [[1,11]],
+        "meta/count/variety/6": [[1,11]],
         "meta/program": [[1,11]],
         "style/functional_trait/filter": [[7,7]],
         "style/procedural": [[1,11]],
@@ -1844,7 +1844,7 @@
         "single_assignment:pantry": [[10,10]],
         "single_assignment:tree": [[9,9]],
         "special_literal_string:<html><body><table>\\n<tr><th>amt</th><th>unit</th><th>item</th></tr>\\n<tr><td>24</td><td>slices</td><td>baguette</td></tr>\\n<tr><td>2+</td><td>tbsp</td><td>olive oil</td></tr>\\n<tr><td>1</td><td>cup</td><td>tomatoes</td></tr>\\n<tr><td>1</td><td>jar</td><td>pesto</td></tr>\\n</table></body></html>": [[1,1]],
-        "variety:***": [[1,14]],
+        "variety:3": [[1,14]],
         "whole_span:14": [[1,14]]
       },
       "taxa": {
@@ -1859,7 +1859,7 @@
         "flow/loop/for": [[11,14]],
         "import/standard/xml.etree.ElementTree": [[8,8]],
         "meta/count/program/sloc/14": [[1,14]],
-        "meta/count/variety/***": [[1,14]],
+        "meta/count/variety/3": [[1,14]],
         "meta/program": [[1,14]],
         "operator/boolean/and": [[13,13]],
         "style/imperative": [[1,14]],
@@ -2053,7 +2053,7 @@
         "update_by_assignment:right:left": [[7,7]],
         "update_by_assignment_with": [[7,7]],
         "update_with": [[7,7]],
-        "variety:*******": [[1,24]],
+        "variety:7": [[1,24]],
         "whole_span:24": [[1,24]]
       },
       "taxa": {
@@ -2085,7 +2085,7 @@
         "meta/count/program/sloc/24": [[1,24]],
         "meta/count/subroutine/sloc/12": [[10,21]],
         "meta/count/subroutine/sloc/6": [[4,9]],
-        "meta/count/variety/*******": [[1,24]],
+        "meta/count/variety/7": [[1,24]],
         "meta/program": [[1,24]],
         "operator/arithmetic/addition": [[7,7]],
         "operator/arithmetic/substraction": [[7,7],[24,24],[24,24]],
@@ -2207,7 +2207,7 @@
         "update_by_augmented_assignment:guesses_made:1": [[8,8]],
         "update_by_augmented_assignment_with:Add": [[8,8]],
         "update_with:Add": [[8,8]],
-        "variety:****": [[1,18]],
+        "variety:4": [[1,18]],
         "whole_span:18": [[1,18]]
       },
       "taxa": {
@@ -2226,7 +2226,7 @@
         "flow/loop/while": [[6,14]],
         "import/standard/random": [[1,1]],
         "meta/count/program/sloc/18": [[1,18]],
-        "meta/count/variety/****": [[1,18]],
+        "meta/count/variety/4": [[1,18]],
         "meta/program": [[1,18]],
         "pattern/states/accumulate/count": [[6,14]],
         "style/imperative": [[1,18]],
@@ -5488,19 +5488,19 @@
     "value_attr:argv": [
       "08_arguments.py"
     ],
-    "variety:*": [
+    "variety:1": [
       "01_hello_world.py",
       "02_input_name.py",
       "03_friends.py",
       "07_grocery_bill.py"
     ],
-    "variety:**": [
+    "variety:2": [
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
       "14_median.py"
     ],
-    "variety:***": [
+    "variety:3": [
       "08_arguments.py",
       "09_indent.py",
       "11_bottles.py",
@@ -5509,18 +5509,18 @@
       "16_csv.py",
       "21_xml_html_parsing.py"
     ],
-    "variety:****": [
+    "variety:4": [
       "12_classes.py",
       "33_guess_the_number.py"
     ],
-    "variety:*****": [
+    "variety:5": [
       "10_time.py",
       "18_queens.py"
     ],
-    "variety:******": [
+    "variety:6": [
       "20_prime_numbers.py"
     ],
-    "variety:*******": [
+    "variety:7": [
       "28_queens.py"
     ],
     "whole_span:1": [
@@ -6011,19 +6011,19 @@
     "meta/count/subroutine/sloc/9": [
       "18_queens.py"
     ],
-    "meta/count/variety/*": [
+    "meta/count/variety/1": [
       "01_hello_world.py",
       "02_input_name.py",
       "03_friends.py",
       "07_grocery_bill.py"
     ],
-    "meta/count/variety/**": [
+    "meta/count/variety/2": [
       "04_fibonacci.py",
       "05_greet.py",
       "06_regex.py",
       "14_median.py"
     ],
-    "meta/count/variety/***": [
+    "meta/count/variety/3": [
       "08_arguments.py",
       "09_indent.py",
       "11_bottles.py",
@@ -6032,18 +6032,18 @@
       "16_csv.py",
       "21_xml_html_parsing.py"
     ],
-    "meta/count/variety/****": [
+    "meta/count/variety/4": [
       "12_classes.py",
       "33_guess_the_number.py"
     ],
-    "meta/count/variety/*****": [
+    "meta/count/variety/5": [
       "10_time.py",
       "18_queens.py"
     ],
-    "meta/count/variety/******": [
+    "meta/count/variety/6": [
       "20_prime_numbers.py"
     ],
-    "meta/count/variety/*******": [
+    "meta/count/variety/7": [
       "28_queens.py"
     ],
     "meta/program": [

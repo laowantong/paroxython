@@ -8475,7 +8475,7 @@ FROM t_function f
 
 #### Feature `variety`
 
-Ratio of the number of distinct features to the number of features, multiplied by the SLOC count. On a typical collection of educational programs, this formula should give a number of stars between 1 and 10, with a median value of about 2.5 stars. Programs that are neither too short nor too long, with as little duplication of concepts as possible, should hit the sweet spot (i.e., lots of stars).
+Ratio of the number of distinct features to the number of features, multiplied by the SLOC count. On a typical collection of educational programs, this formula should give a number between 1 and 10, with a median value of about 2.5. Programs that are neither too short nor too long, with as little duplication of concepts as possible, should hit the sweet spot (i.e., a large suffix number).
 
 ##### Derivations
 
@@ -8485,7 +8485,7 @@ Ratio of the number of distinct features to the number of features, multiplied b
 
 ```sql
 SELECT "variety",
-       printf('%.' || cast(count(DISTINCT t.span_start) * count(DISTINCT t.name_prefix) / count(t.name_prefix) AS int) ||'c', '*'),
+       cast(count(DISTINCT t.span_start) * count(DISTINCT t.name_prefix) / count(t.name_prefix) AS int),
        p.span,
        p.path
 FROM t_whole_span p
@@ -8509,7 +8509,7 @@ WHERE t.name_prefix != "node"
 
 | Label | Lines |
 |:--|:--|
-| `variety:***` | 1-7 |
+| `variety:3` | 1-7 |
 
 --------------------------------------------------------------------------------
 

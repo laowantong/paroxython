@@ -163,10 +163,10 @@
 - update_by_assignment_with:FloorDiv / collatz.py / 5
 - update_with:Add / collatz.py / 7
 - update_with:FloorDiv / collatz.py / 5
-- variety:* / assignment.py / 1
-- variety:** / is_even.py / 1-3
-- variety:*** / collatz.py / 1-8
-- variety:*** / fizzbuzz.py / 1-10
+- variety:1 / assignment.py / 1
+- variety:2 / is_even.py / 1-3
+- variety:3 / collatz.py / 1-8
+- variety:3 / fizzbuzz.py / 1-10
 - verbose_conditional_assignment / collatz.py / 4-7
 - whole_span:1 / assignment.py / 1
 - whole_span:10 / fizzbuzz.py / 1-10
