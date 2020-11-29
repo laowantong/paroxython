@@ -9,7 +9,7 @@
 [![paroxython SLOC](https://img.shields.io/badge/main%20program-~1850%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython)
 [![tests SLOC](https://img.shields.io/badge/tests-~2550%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/tests)
 [![helpers SLOC](https://img.shields.io/badge/helpers-~950%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/helpers)
-[![spec features](https://img.shields.io/badge/spec-171%20features-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
+[![spec features](https://img.shields.io/badge/spec-172%20features-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/spec.md)
 [![taxonomy mappings](https://img.shields.io/badge/taxonomy-280%20mappings-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython/resources/taxonomy.tsv)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/laowantong/paroxython.svg?style=flat)
 [![Downloads](https://pepy.tech/badge/paroxython/week)](https://pepy.tech/project/paroxython/week)
@@ -158,7 +158,7 @@ If you use Jupyter notebook/lab, you've also just installed a so-called magic co
 %load_ext paroxython
 ```
 
-This should print `"paroxython 0.6.2 loaded."`. Run it on a cell of Python code:
+This should print `"paroxython 0.6.3 loaded."`. Run it on a cell of Python code:
 
 ```python
 %%paroxython                          # Lines
@@ -180,7 +180,7 @@ def fibonacci(n):                     # 2
 | `flow/loop/while` | 5-7 |
 | `meta/count/program/sloc/8` | 2-8 |
 | `meta/count/subroutine/sloc/7` | 2-8 |
-| `meta/count/variety/***` | 2-8 |
+| `meta/count/variety/3` | 2-8 |
 | `meta/program` | 2-8 |
 | `operator/arithmetic/addition` | 7 |
 | `style/procedural` | 2-8 |

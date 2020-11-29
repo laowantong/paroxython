@@ -107,7 +107,7 @@ class TagDatabase:
     def write_json(self, db_path: Optional[Path] = None) -&gt; None:
         db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
         db_path.write_text(self.get_json())
-        print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)
+        print_success(f&#34;Dumped: {db_path.absolute()}&#34;)
 
     def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
         db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.sqlite&#34;
@@ -190,7 +190,7 @@ class TagDatabase:
         connexion.commit()
         connexion.close()
 
-        print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)
+        print_success(f&#34;Dumped: {db_path.absolute()}&#34;)
 
 
 def collect_labels(programs: Programs) -&gt; LabelInfos:
@@ -629,7 +629,7 @@ simple couples of integers.</p>
     def write_json(self, db_path: Optional[Path] = None) -&gt; None:
         db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
         db_path.write_text(self.get_json())
-        print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)
+        print_success(f&#34;Dumped: {db_path.absolute()}&#34;)
 
     def write_sqlite(self, db_path: Optional[Path] = None) -&gt; None:
         db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.sqlite&#34;
@@ -712,7 +712,7 @@ simple couples of integers.</p>
         connexion.commit()
         connexion.close()
 
-        print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)</code></pre>
+        print_success(f&#34;Dumped: {db_path.absolute()}&#34;)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -857,7 +857,7 @@ directory. Defaults to <code>None</code>.</dd>
 <pre><code class="python">def write_json(self, db_path: Optional[Path] = None) -&gt; None:
     db_path = db_path or self.directory.parent / f&#34;{self.directory.name}_db.json&#34;
     db_path.write_text(self.get_json())
-    print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)</code></pre>
+    print_success(f&#34;Dumped: {db_path.absolute()}&#34;)</code></pre>
 </details>
 </dd>
 <dt id="paroxython.make_db.TagDatabase.write_sqlite"><code class="name flex">
@@ -961,7 +961,7 @@ and the directory provided to the class constructor is <code>"foobar"</code>, fa
     connexion.commit()
     connexion.close()
 
-    print_success(f&#34;Dumped: {db_path.absolute()}.&#34;)</code></pre>
+    print_success(f&#34;Dumped: {db_path.absolute()}&#34;)</code></pre>
 </details>
 </dd>
 </dl>

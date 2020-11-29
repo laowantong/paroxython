@@ -157,7 +157,7 @@ def cli_wrapper(args):
         return print(&#34;\n&#34;.join(sorted(rec.selected_programs - rec.hidden_programs)))
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
-    print_success(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
+    print_success(f&#34;Dumped: {output_path.resolve()}\n&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -226,7 +226,7 @@ def cli_wrapper(args):
         return print(&#34;\n&#34;.join(sorted(rec.selected_programs - rec.hidden_programs)))
     output_path = Path(args[&#34;--output&#34;] or parent_path / f&#34;{prefix}recommendations.md&#34;)
     output_path.write_text(rec.get_markdown())
-    print_success(f&#34;Dumped: {output_path.resolve()}.\n&#34;)</code></pre>
+    print_success(f&#34;Dumped: {output_path.resolve()}\n&#34;)</code></pre>
 </details>
 </dd>
 </dl>

@@ -12,7 +12,7 @@ OPTIONS:
     -l --labels         Output the labels instead of the taxa.
     -t --taxonomy=PATH  The path of a TSV file mapping labels onto taxa.
                         If not specified, use the included default taxonomy:
-                        https://github.com/laowantong/paroxython/blob/0.6.2/paroxython/resources/taxonomy.tsv
+                        https://github.com/laowantong/paroxython/blob/0.6.3/paroxython/resources/taxonomy.tsv
     ```
 """
 

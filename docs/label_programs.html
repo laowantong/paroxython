@@ -31,7 +31,7 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L86" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L0-L87" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">from pathlib import Path
 from typing import Callable, Iterator, List, Set
@@ -45,12 +45,13 @@ from .user_types import Label, LabelName, Programs, Source
 
 def labelled_programs(
     directory: Path,
-    search_imported_program_path: Callable = regex.compile(r&#34;import(?:_module)?:([^:]+)&#34;).search,
+    search_imported_program_path: Callable = regex.compile(r&#34;import(?:_module)?:([^:]*)&#34;).search,
     print_performances: bool = False,
     **kwargs,
 ) -&gt; Programs:
     programs: Programs = list_programs(directory, **kwargs)
     internal_program_paths = {p.path.replace(&#34;/&#34;, &#34;.&#34;) for p in programs}  # path sep -&gt; import sep
+    internal_program_paths.add(&#34;.py&#34;)  # for `from . import foobar`, the module name will be &#34;&#34;
     parse = ProgramParser()
     print(f&#34;Labelling {len(programs)} programs.&#34;)
     for program in iterate_and_print_programs(programs):
@@ -126,16 +127,17 @@ this very list. For instance, a label <code>"import:my_program"</code> would be 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L13-L51" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L13-L52" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def labelled_programs(
     directory: Path,
-    search_imported_program_path: Callable = regex.compile(r&#34;import(?:_module)?:([^:]+)&#34;).search,
+    search_imported_program_path: Callable = regex.compile(r&#34;import(?:_module)?:([^:]*)&#34;).search,
     print_performances: bool = False,
     **kwargs,
 ) -&gt; Programs:
     programs: Programs = list_programs(directory, **kwargs)
     internal_program_paths = {p.path.replace(&#34;/&#34;, &#34;.&#34;) for p in programs}  # path sep -&gt; import sep
+    internal_program_paths.add(&#34;.py&#34;)  # for `from . import foobar`, the module name will be &#34;&#34;
     parse = ProgramParser()
     print(f&#34;Labelling {len(programs)} programs.&#34;)
     for program in iterate_and_print_programs(programs):
@@ -172,7 +174,7 @@ this very list. For instance, a label <code>"import:my_program"</code> would be 
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L54-L81" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/label_programs.py#L55-L82" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def generate_labelled_sources(programs: Programs) -&gt; Iterator:
     separator = &#34;-&#34; * 88

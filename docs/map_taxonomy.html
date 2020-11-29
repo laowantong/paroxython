@@ -504,9 +504,9 @@ pattern.</li>
 <li><code>self.compiled_labels</code> is a list of couples, of which the first member is a
 <strong>compiled</strong> label pattern, and the second member is a replacement pattern which may
 contain backreferences to one or several capture groups of the label pattern. For
-instance, it can include the couple <code>(regex.compile(r"nested_index:(\d+)$"),
+instance, it can include the couple <code>(regex.compile(r"index_shape:(\d+)$"),
 r"subscript/index/shape/\1")</code>, which will be used to “translate” any occurrence of
-the label name <code>"nested_index:3"</code> into the taxon name <code>"subscript/index/shape/3"</code>.
+the label name <code>"index_shape:3"</code> into the taxon name <code>"subscript/index/shape/3"</code>.
 As an associative list, it only allows O(n) lookups a given label pattern.</li>
 </ul>
 </li>
