@@ -2698,6 +2698,7 @@
         "if_without_else": [[7,9]],
         "index:column": [[7,7]],
         "index:row": [[6,6],[7,7]],
+        "index_shape:2": [[7,7]],
         "iteration_variable:column": [[6,6]],
         "iteration_variable:row": [[5,5]],
         "literal:None": [[4,4]],
@@ -2712,7 +2713,7 @@
         "loop_with_early_exit:for:raise": [[5,9],[6,9]],
         "loop_with_raise:for": [[5,9],[6,9]],
         "nested_for:1": [[6,9]],
-        "nested_index:2": [[7,7]],
+        "nested_index": [[7,7]],
         "no_operation": [[2,2],[11,11]],
         "node:Assign": [[4,4],[8,8]],
         "node:ClassDef": [[1,2]],
@@ -15389,6 +15390,9 @@
     "index:row": [
       "043.0676-break-outer-loop.py"
     ],
+    "index_shape:2": [
+      "043.0676-break-outer-loop.py"
+    ],
     "infinite_while": [
       "050.0572-make-an-infinite-loop.py",
       "078.1089-do-while-loop.py",
@@ -17670,7 +17674,7 @@
     "nested_function:f": [
       "037.0671-currying.py"
     ],
-    "nested_index:2": [
+    "nested_index": [
       "043.0676-break-outer-loop.py"
     ],
     "no_operation": [

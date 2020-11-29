@@ -10,7 +10,8 @@
       - [Feature `magic_number` (SQL)](#feature-magic_number)
   - [Subscripts](#subscripts)
       - [Feature `index`](#feature-index)
-      - [Feature `nested_index` (SQL)](#feature-nested_index)
+      - [Feature `nested_index`](#feature-nested_index)
+      - [Feature `index_shape` (SQL)](#feature-index_shape)
       - [Feature `index_arithmetic`](#feature-index_arithmetic)
       - [Feature `negative_index`](#feature-negative_index)
       - [Feature `slice_lower`](#feature-slice_lower)
@@ -642,7 +643,6 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 
 [⬇️ feature `find_best_element_index_unpythonic`](#feature-find_best_element_index_unpythonic)  
 [⬇️ feature `find_first_good_element_index_unpythonic`](#feature-find_first_good_element_index_unpythonic)  
-[⬇️ feature `nested_index`](#feature-nested_index)  
 
 ##### Specification
 
@@ -686,27 +686,19 @@ Match an index in a sequence type or a key in a dictionary type, and suffix it b
 
 #### Feature `nested_index`
 
-In pure Python, multidimensionnal arrays are lists of lists. Thus, accessing a cell (_i_, _j_) of a matrix _m_ is done first by accessing the _i_-th list of _m_ (`m[i]`), then the _j_-th cell of this list (`m[i][j]`). The length of this index concatenation gives the dimension (or _shape_) of the array.
+Count consecutive indexes, e.g. `...[i][j]...`.
 
 ##### Derivations
 
-[⬆️ feature `index`](#feature-index)  
+[⬇️ feature `index_shape`](#feature-index_shape)  
 
 ##### Specification
 
-```sql
-SELECT "nested_index",
-       count(*) + 1,
-       i2.span,
-       i2.path
-FROM t_index i1
-JOIN t_index i2 ON (i2.path GLOB i1.path || "*-")
-WHERE NOT EXISTS
-    (SELECT *
-     FROM t_index i0
-     WHERE (i1.path REGEXP i0.path || "\d+-$") )
-GROUP BY i1.path
-ORDER BY i1.path
+```re
+           ^(.*)(?<!/annotation)/_type=Subscript
+\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/value/_type=Subscript
+\n(?:\1.+\n)*?\1/value/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -714,7 +706,7 @@ ORDER BY i1.path
 ```python
 1   a[i] # no match
 2   a[i][j]
-3   a[i][j][k]
+3   a[i][j][k:l]
 4   a[i][j][k][l]
 5   a[i][j][k][l][m]
 6   a[i][j][k][l][m][n]
@@ -725,11 +717,56 @@ ORDER BY i1.path
 
 | Label | Lines |
 |:--|:--|
-| `nested_index:2` | 2, 7 |
-| `nested_index:3` | 3, 7 |
-| `nested_index:4` | 4 |
-| `nested_index:5` | 5 |
-| `nested_index:6` | 6 |
+| `nested_index` | 2, 3, 3, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `index_shape`
+
+In pure Python, multidimensionnal arrays are lists of lists. Thus, accessing a cell (_i_, _j_) of a matrix _m_ is done first by accessing the _i_-th list of _m_ (`m[i]`), then the _j_-th cell of this list (`m[i][j]`). The length of this index concatenation gives the dimension (or _shape_) of the array.
+
+##### Derivations
+
+[⬆️ feature `nested_index`](#feature-nested_index)  
+
+##### Specification
+
+```sql
+SELECT "index_shape",
+       count(*) + 1,
+       i2.span,
+       i2.path
+FROM t_nested_index i1
+JOIN t_nested_index i2 ON (i2.path GLOB i1.path || "*")
+WHERE NOT EXISTS
+    (SELECT *
+     FROM t_nested_index i0
+     WHERE (i1.path REGEXP i0.path || "\d+-$") )
+GROUP BY i1.path
+ORDER BY i1.path
+```
+
+##### Example
+
+```python
+1   a[i] # no match
+2   a[i][j]
+3   a[i][j][k:l]
+4   a[i][j][k][l]
+5   a[i][j][k][l][m]
+6   a[i][j][k][l][m][n]
+7   a[i][j] + b[i][j][k]
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `index_shape:2` | 2, 7 |
+| `index_shape:3` | 3, 7 |
+| `index_shape:4` | 4 |
+| `index_shape:5` | 5 |
+| `index_shape:6` | 6 |
 
 --------------------------------------------------------------------------------
 

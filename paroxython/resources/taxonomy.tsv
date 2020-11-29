@@ -182,7 +182,7 @@ subscript/index	index:.+
 subscript/index/arithmetic	index_arithmetic
 subscript/index/backwards	negative_index
 subscript/index/backwards/last	negative_index:-1
-subscript/index/shape/\1	nested_index:(\d+)
+subscript/index/shape/\1	index_shape:(\d+)
 subscript/slice/copy	slice:::
 subscript/slice/start	slice:.+:.*:.*
 subscript/slice/step	slice:.*:.*:(?!-).+

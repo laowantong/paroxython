@@ -160,9 +160,9 @@ class Taxonomy:
                 - `self.compiled_labels` is a list of couples, of which the first member is a
                 **compiled** label pattern, and the second member is a replacement pattern which may
                 contain backreferences to one or several capture groups of the label pattern. For
-                instance, it can include the couple `(regex.compile(r"nested_index:(\d+)$"),
+                instance, it can include the couple `(regex.compile(r"index_shape:(\d+)$"),
                 r"subscript/index/shape/\1")`, which will be used to “translate” any occurrence of
-                the label name `"nested_index:3"` into the taxon name `"subscript/index/shape/3"`.
+                the label name `"index_shape:3"` into the taxon name `"subscript/index/shape/3"`.
                 As an associative list, it only allows O(n) lookups a given label pattern.
         """
         taxonomy_path = taxonomy_path or Path(dirname(__file__)) / "resources" / "taxonomy.tsv"

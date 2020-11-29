@@ -253,6 +253,7 @@
 - increment
 - index
 - index_arithmetic
+- index_shape
 - infinite_while
 - instance_method|class_method|static_method
 - internal_free_call
