@@ -12,7 +12,7 @@ from .user_types import Label, LabelName, Programs, Source
 
 def labelled_programs(
     directory: Path,
-    search_imported_program_path: Callable = regex.compile(r"import(?:_module)?:([^:]+)").search,
+    search_imported_program_path: Callable = regex.compile(r"import(?:_module)?:([^:]*)").search,
     print_performances: bool = False,
     **kwargs,
 ) -> Programs:
@@ -36,6 +36,7 @@ def labelled_programs(
     """
     programs: Programs = list_programs(directory, **kwargs)
     internal_program_paths = {p.path.replace("/", ".") for p in programs}  # path sep -> import sep
+    internal_program_paths.add(".py")  # for `from . import foobar`, the module name will be ""
     parse = ProgramParser()
     print(f"Labelling {len(programs)} programs.")
     for program in iterate_and_print_programs(programs):

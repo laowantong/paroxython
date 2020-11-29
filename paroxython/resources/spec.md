@@ -6598,7 +6598,7 @@ GROUP BY e.rowid
            ^(.*)/_type=Import(From)?
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/module=(?!None\n)(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/module=(?P<SUFFIX>.+)
 |
 (
 \n(?:\1.+\n)*?\1/names/\d+/name=(?P<SUFFIX>.+)
@@ -6613,21 +6613,21 @@ GROUP BY e.rowid
 2   import m4
 3   from m5 import n1, n2
 4   from m6 import n3 as n4
-5   from . import m7
-6   from .m8 import n5
+5   from . import n5
+6   from .m8 import n6
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
+| `import_module:None` | 5 |
 | `import_module:m1` | 1 |
 | `import_module:m2` | 1 |
 | `import_module:m3` | 1 |
 | `import_module:m4` | 2 |
 | `import_module:m5` | 3 |
 | `import_module:m6` | 4 |
-| `import_module:m7` | 5 |
 | `import_module:m8` | 6 |
 
 --------------------------------------------------------------------------------
@@ -6643,7 +6643,7 @@ GROUP BY e.rowid
 ```re
            ^(.*)/_type=ImportFrom
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)*?\1/module=(?!None\n).+
+\n(?:\1.+\n)*?\1/module=.+
 (
 \n(?:\1.+\n)*?\1/names/\d+/name=(?P<SUFFIX>.+)
 )+
@@ -6656,8 +6656,8 @@ GROUP BY e.rowid
 2   import m4
 3   from m5 import n1, n2
 4   from m6 import n3 as n4
-5   from . import m7
-6   from .m8 import n5
+5   from . import n5
+6   from .m8 import n6
 ```
 
 ##### Matches
@@ -6667,7 +6667,8 @@ GROUP BY e.rowid
 | `import_name:n1` | 3 |
 | `import_name:n2` | 3 |
 | `import_name:n3` | 4 |
-| `import_name:n5` | 6 |
+| `import_name:n5` | 5 |
+| `import_name:n6` | 6 |
 
 --------------------------------------------------------------------------------
 
@@ -6684,10 +6685,13 @@ Suffixed by the imported module and, if any, the imported name. In most cases, c
 
 ```sql
 SELECT "import",
-       m.name_suffix || (CASE
-                             WHEN n.name_suffix IS NULL THEN ""
-                             ELSE ":" || n.name_suffix
-                         END),
+       (CASE
+            WHEN m.name_suffix = "None" THEN ""
+            ELSE m.name_suffix
+        END) || (CASE
+                     WHEN n.name_suffix IS NULL THEN ""
+                     ELSE ":" || n.name_suffix
+                 END),
        m.span,
        m.path
 FROM t_import_module m
@@ -6701,14 +6705,15 @@ LEFT JOIN t_import_name n ON (m.span = n.span)
 2   import m4
 3   from m5 import n1, n2
 4   from m6 import n3 as n4
-5   from . import m7
-6   from .m8 import n5
+5   from . import n5
+6   from .m8 import n6
 ```
 
 ##### Matches
 
 | Label | Lines |
 |:--|:--|
+| `import::n5` | 5 |
 | `import:m1` | 1 |
 | `import:m2` | 1 |
 | `import:m3` | 1 |
@@ -6716,8 +6721,7 @@ LEFT JOIN t_import_name n ON (m.span = n.span)
 | `import:m5:n1` | 3 |
 | `import:m5:n2` | 3 |
 | `import:m6:n3` | 4 |
-| `import:m7` | 5 |
-| `import:m8:n5` | 6 |
+| `import:m8:n6` | 6 |
 
 --------------------------------------------------------------------------------
 
