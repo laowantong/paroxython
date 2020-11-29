@@ -7733,8 +7733,11 @@ Match a whole program, and suffix it by the number of its last line of code.
 /_type=Module
 (\n.+?)+?
 _pos=(?P<POS>.+:).+ # force the path to be empty
+(
 (?:\n.+)+
 _pos=(?P<POS>(?P<SUFFIX>\d+):.+)
+|
+)
 ```
 
 ##### Example
