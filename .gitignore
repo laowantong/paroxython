@@ -134,3 +134,5 @@ html/*
 .vscode/settings.json
 paroxython/user_manual/*
 paroxython/developer_manual/*
+paroxython_db.json
+paroxython_recommendations.md
