@@ -233,7 +233,7 @@ Match the name of every node of the AST. This covers most of the [Python keyword
            ^(.*)/_type=(?P<SUFFIX>.+)
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -265,6 +265,8 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 23          assert True
 24      finally:
 25          (lambda j: 0)
+26
+27  fake = r"/_pos=\d+"
 ```
 
 **Credit.** Zach Gates, _Minimal program using all Python 3.4 keywords_, Code Golf Stack Exchange, 2016 ([link](https://codegolf.stackexchange.com/a/75901/96158)).
@@ -274,6 +276,7 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 | Label | Lines |
 |:--|:--|
 | `node:Assert` | 23 |
+| `node:Assign` | 27 |
 | `node:BoolOp` | 11, 21 |
 | `node:Break` | 19 |
 | `node:Call` | 9 |
@@ -290,13 +293,14 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 | `node:ImportFrom` | 1 |
 | `node:Lambda` | 25 |
 | `node:List` | 16 |
-| `node:Name` | 9, 9, 9, 10, 16, 17, 18 |
+| `node:Name` | 9, 9, 9, 10, 16, 17, 18, 27 |
 | `node:NameConstant` | 4, 21, 23 |
 | `node:Nonlocal` | 5 |
 | `node:Num` | 11, 11, 11, 13, 14, 21, 25 |
 | `node:Pass` | 7 |
 | `node:Raise` | 21 |
 | `node:Return` | 4 |
+| `node:Str` | 27 |
 | `node:Try` | 20-25 |
 | `node:UnaryOp` | 17 |
 | `node:While` | 10-19 |
@@ -1719,7 +1723,7 @@ Apply a function or a method to an expression involving the result of another fu
 ```re
            ^(.*)/_type=Call
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
-\n(?:\1.+\n)* \1/args/.*/_type=Call
+\n(?:\1.+\n)* \1/args/[^=]+/_type=Call
 ```
 
 ##### Example
@@ -2613,7 +2617,7 @@ _Limitation._ The number to be clamped must appear on the left hand side of the 
            ^(.*)/_type=Assign
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)*?\1/assigntargets/.*/slice/_type=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?\1/assigntargets/[^=]+/slice/_type=(?P<SUFFIX>.+)
 )+
 ```
 
@@ -3845,7 +3849,7 @@ In Python, the term "function" encompasses any type of subroutine, be it a metho
            ^(.*)/_type=FunctionDef
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -3912,7 +3916,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
            ^(.*)/_type=Return
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 )?
 (
 \n(?:\1.+\n)*?\1/value(/value|/n|/id)?=(?P<SUFFIX>.+)
@@ -3971,7 +3975,7 @@ Match `return` statements and, when the returned object is an [_atom_](#feature-
            ^(.*)/_type=ClassDef
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -4590,7 +4594,7 @@ _Terminology._ We follow the official Python FAQ for the [difference between arg
 \n(?:\1.+\n)*?\1/args/vararg=None
 \n(?:\1.+\n)*?\1/args/kwonlyargs/_length=0
 \n(?:\1.+\n)*?\1/args/kwarg=None
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -4626,7 +4630,7 @@ _Terminology._ We follow the official Python FAQ for the [difference between arg
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
 \n(?:\1.+\n)*?\1/decorator_list/_length=(?!0\n).+
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -4659,7 +4663,7 @@ _Remark._ The span starts from the first decorator.
 \n(?:\1.+\n)*?\1/(?P<_1>decorator_list/\d+)/_pos=(?P<POS>.+)  # force len(d["POS"]) != len(d["SUFFIX"])
 \n(?:\1.+\n)*?\1/(?P=_1)                   /id=(?P<SUFFIX>.+)
 )+
-\n(?:\1.+\n)* \1/body/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/body/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -4702,8 +4706,8 @@ _Remark._ The span and the path start with the first decorator and end with the 
            ^(.*)/_type=FunctionDef
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/name=(?P<SUFFIX>.+)
-\n(?:\1.+\n)*?\1/.+/_type=FunctionDef
-\n(?:\1.+\n)* \1/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/[^=]+/_type=FunctionDef
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -5236,7 +5240,7 @@ Match the body of the branch “`then`” of an `if` statement.
                 /_type=If
 \n(?:\1.+\n)*?\1/body/1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)* \1/body/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/body/[^=]+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -5290,7 +5294,7 @@ Match the body of an `elif` clause, which is (or could be rewritten as) an `else
 \n(?:\1.+\n)*?\1/orelse/1/_type=If
 \n(?:\1.+\n)*?\1/orelse/1/body/1/_pos=(?P<POS>.+)
 (
-\n(?:\1.+\n)* \1/orelse/1/body/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/orelse/1/body/[^=]+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -5357,7 +5361,7 @@ Match the body of the possible `else` branch of an `if` statement.
 \n(?:\1.+\n)*?\1/orelse/1/_pos=(?P<POS>.+)
 )
 (
-\n(?:\1.+\n)* \1/orelse/.+/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/orelse/[^=]+/_pos=(?P<POS>.+)
 )?
 ```
 
@@ -5648,7 +5652,7 @@ Match sequential loops, along with their iteration variable(s).
 \n(?:\1.+\n)*?\1/(?P<_1>target(/.+)?)/_pos=(?P<POS>.+) # force len(d["POS"]) != len(d["SUFFIX"])
 \n(?:\1.+\n)*?\1/(?P=_1)             /id=(?P<SUFFIX>.+)
 )+
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -5834,7 +5838,7 @@ Iterate over the elements of a (named) collection.
 \n(?:\1.+\n)*?\1/(?P=_1)           /id=(?P<SUFFIX>.+)
 )+
 \n(?:\1.+\n)*?\1/iter/_type=Name
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -5928,7 +5932,7 @@ Iterate over index numbers and elements of a collection.
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/target/elts/1/id=(?P<SUFFIX>.+)
 \n(?:\1.+\n)*?\1/iter/func/id=enumerate
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -5963,7 +5967,7 @@ Iterate over index numbers of a collection.
 \n(?:\1.+\n)*?\1/target/id=(?P<SUFFIX>.+)
 \n(?:\1.+\n)*?\1/iter/func/id=range
 \n(?:\1.+\n)*?\1/iter/args/[12]/func/id=len
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -6055,7 +6059,7 @@ A `for` loop with a counter `i` and a nested `for` loop which makes `i` iteratio
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/1(/.+)*/id=(?P=VAR) # match iteration variable
 \n(?:\1.+\n)* \1/(?P=_1)                    /iter/args/2(/.+)*/_hash=(?P=STOP) # match stop expression
 )
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -6090,7 +6094,7 @@ Two nested `for` loops doing the same number of iterations.
 \n(?:\1.+\n)*?\1/iter/_hash=(?P<HASH>.+) # capture _hash
 \n(?:\1.+\n)* \1/(?P<_1>(?:body|orelse)/\d+)/_type=For
 \n(?:\1.+\n)*?\1/(?P=_1)                    /iter/_hash=(?P=HASH) # match _hash
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example
@@ -6133,7 +6137,7 @@ Match an infinite loop denoted by `while True` (preferred) or `while 1`.
            ^(.*)/_type=While
 \n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
 \n(?:\1.+\n)*?\1/test/(value=True|n=1)
-\n(?:\1.+\n)* \1/.*/_pos=(?P<POS>.+)
+\n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 ```
 
 ##### Example

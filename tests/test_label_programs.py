@@ -55,7 +55,7 @@ def test_update_snapshots(capsys):
         "examples/idioms/programs",
         "examples/mini/programs",
         "examples/simple/programs",
-        "../algo/programs",
+        # "../algo/programs",
     ]
     for directory in directories:
         path = Path(directory)
