@@ -38,15 +38,15 @@ OPTIONS:
                                 imparted, costs 2^(-i). For instance, the taxon
                                 old/new/new will costs 2^-2 + 2^-3 = 0.375.
                         • linear: simply count the number of new edges.
-    -o --output=PATH    The path of the resulting report. If it is omitted, and
-                        DB_PATH is of the form PREFIX_db.json, a value of
-                        PREFIX_recommendations.md is used. If it is STDOUT, the
+    -o --output=PATH    The path of the resulting report. If it is omitted, a
+                        value of PREFIX_recommendations.md is inferred from the
+                        path PREFIX_db.json of DB_PATH. If it is STDOUT, the
                         sorted list of recommended (but not hidden) programs, is
                         printed on the standard output. [default: ]
-    -p --pipe=PATH      Path of the command pipeline. If it is omitted, and
-                        DB_PATH is of the form PREFIX_db.json, a value of
-                        PREFIX_pipe.py is used. If the associated file is
-                        missing or malformed, no filter is applied. [default: ]
+    -p --pipe=PATH      Path of the command pipeline. If it is omitted, a value
+                        of PREFIX_pipe.py is inferred from the path
+                        PREFIX_db.json of DB_PATH. If is is `[]`, no filter is
+                        applied. [default: ]
     -f --format=STR     The format of program titles in the report. This string
                         can contains the following identifiers (between braces):
                         • name: filename of the program.
@@ -96,6 +96,7 @@ def cli_wrapper(args):
         for suffix in ("_db", "-db"):
             db_path = parent_path / f"{db_path.name}{suffix}.json"
             if db_path.is_file():
+                print(f"Using database '{db_path}'.")
                 break
         else:
             print_exit(f"unable to locate a tag database in '{parent_path}': aborted.")
@@ -103,14 +104,16 @@ def cli_wrapper(args):
     prefix = m[1] if m else ""
     pipeline_path = Path(args["--pipe"] or parent_path / f"{prefix}pipe.py")
     if pipeline_path.is_file():
+        print(f"Using pipeline '{pipeline_path}'.")
         try:
             commands = literal_eval(pipeline_path.read_text())
         except Exception:  # Too many possible exceptions
-            print_exit(f"the pipeline '{pipeline_path}' is malformed: aborted.")
-    elif args["--pipe"]:
-        print_exit(f"no pipeline at '{pipeline_path}': aborted.")
-    else:
+            print_exit(f"Malformed pipeline: aborted.")
+    elif args["--pipe"] == "[]":
+        print("Using an empty pipeline.")
         commands = []
+    else:
+        print_exit(f"No pipeline at '{pipeline_path}': aborted.")
     stdout_backup = sys.stdout
     if args["--output"].upper() == "STDOUT":
         sys.stdout = sys.stderr

@@ -137,7 +137,7 @@ def test_recommend_dummy_programs():
     assert "1 program of learning cost in [1, 2[" in result_text
     assert "1 program of learning cost in [4, 8[" in result_text
 
-    result = run(f"recommend -o {result_path} --format=vscode {db_path}")  # implicit empty pipeline
+    result = run(f"recommend -o {result_path} -p [] --format=vscode {db_path}")
     assert "Processing 0 commands on 9 programs" in result
     result_text = result_path.read_text()
     assert ".py`](vscode://file//" in result_text
@@ -155,7 +155,7 @@ def test_recommend_simple_programs():
     run("collect --no_timestamp examples/simple/programs")
     run("recommend examples/simple/programs")  # abbreviated form
     output = run("recommend -o stdout examples/simple/programs_db.json")
-    assert len(output.strip().split("\n")) == 9
+    assert len(output.strip().split("\n")) == 10
 
 
 def test_recommend_failures():

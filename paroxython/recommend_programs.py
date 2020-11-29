@@ -139,6 +139,9 @@ class Recommendations:
                 Defaults to `None`, which is treated as an empty list.
         """
         commands = commands or []
+        if not isinstance(commands, list):
+            print_warning(f"commands are ignored (should be a list).")
+            commands = []
         current = set(self.db_programs)
         print(f"\nProcessing {len(commands)} commands on {len(current)} programs.")
 
@@ -150,6 +153,9 @@ class Recommendations:
                 operation = command["operation"]
             except KeyError:
                 print_warning(f"operation {i} is ignored (not specified).")
+                continue
+            except TypeError:
+                print_warning(f"operation {i} is ignored (malformed).")
                 continue
             (operation, n) = regex.subn(" all", "", operation)
             quantifier = "all" if n == 1 else "any"
