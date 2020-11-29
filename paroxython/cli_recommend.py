@@ -136,4 +136,4 @@ def cli_wrapper(args):
         return print("\n".join(sorted(rec.selected_programs - rec.hidden_programs)))
     output_path = Path(args["--output"] or parent_path / f"{prefix}recommendations.md")
     output_path.write_text(rec.get_markdown())
-    print_success(f"Dumped: {output_path.resolve()}.\n")
+    print_success(f"Dumped: {output_path.resolve()}\n")

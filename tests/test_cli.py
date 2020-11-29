@@ -72,7 +72,7 @@ def test_collect():
     assert "Labelling 4 programs." in result
     assert "Mapping taxonomy on 4 programs." in result
     assert "Dumped" in result
-    assert f"{db_path}." in result
+    assert f"{db_path}" in result
 
 
 def test_collect_options():
@@ -80,7 +80,7 @@ def test_collect_options():
 
     result = run(f"collect -o {db_path} examples/mini/programs")
     assert "Dumped" in result
-    assert f"{db_path}." in result
+    assert f"{db_path}" in result
     db = json.loads(db_path.read_text())
     assert "\n\n" not in db["programs"]["fizzbuzz.py"]["source"]  # cleaned up
 
@@ -113,7 +113,7 @@ def test_collect_options():
     db_path = Path("examples/mini/programs_db.sqlite")
     result = run(f"collect -o {db_path} examples/mini/programs")
     assert f"Dumped" in result
-    assert f"{db_path}." in result
+    assert f"{db_path}" in result
     assert db_path.is_file()
     db_path.unlink()
 

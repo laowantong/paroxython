@@ -146,7 +146,7 @@ class TagDatabase:
         """
         db_path = db_path or self.directory.parent / f"{self.directory.name}_db.json"
         db_path.write_text(self.get_json())
-        print_success(f"Dumped: {db_path.absolute()}.")
+        print_success(f"Dumped: {db_path.absolute()}")
 
     def write_sqlite(self, db_path: Optional[Path] = None) -> None:
         """Dump the constructed `TagDatabase` object as a SQLite database (experimental).
@@ -240,7 +240,7 @@ class TagDatabase:
         connexion.commit()
         connexion.close()
 
-        print_success(f"Dumped: {db_path.absolute()}.")
+        print_success(f"Dumped: {db_path.absolute()}")
 
 
 def collect_labels(programs: Programs) -> LabelInfos:

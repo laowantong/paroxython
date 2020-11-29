@@ -329,4 +329,4 @@ if __name__ == "__main__":
     rec.run_pipeline(ast.literal_eval(Path(f"{path}_pipe.py").read_text()))
     output_path = Path(f"{path}_recommendations.md")
     output_path.write_text(rec.get_markdown())
-    print(f"Dumped: {output_path.resolve()}.\n")
+    print(f"Dumped: {output_path.resolve()}\n")
