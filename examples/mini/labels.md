@@ -235,6 +235,7 @@
 - function_decorator
 - function_line_count
 - function_parameter
+- function_parameter_default
 - function_parameter_flavor
 - function_returning_nothing
 - function_returning_something

@@ -112,6 +112,7 @@
       - [Feature `function_returning_nothing` (SQL)](#feature-function_returning_nothing)
       - [Feature `function_parameter`](#feature-function_parameter)
       - [Feature `function_parameter_flavor`](#feature-function_parameter_flavor)
+      - [Feature `function_parameter_default`](#feature-function_parameter_default)
       - [Feature `function_without_parameters`](#feature-function_without_parameters)
       - [Feature `decorated_function`](#feature-decorated_function)
       - [Feature `function_decorator`](#feature-function_decorator)
@@ -4587,7 +4588,7 @@ Give the category of each function parameter among:
 - `kwonlyarg`: keyword parameter;
 - `kwarg`: dictionary of named parameters.
 
-_Remark._ The actual name of an parameter can be retrieved by joining with `function_parameter` using its `path`.
+_Remark._ The actual name of a parameter can be retrieved by joining with `function_parameter` using its `path`.
 
 _Terminology._ We follow the official Python FAQ for the [difference between arguments and parameters](https://docs.python.org/3/faq/programming.html#faq-argument-vs-parameter):
 
@@ -4616,6 +4617,32 @@ _Terminology._ We follow the official Python FAQ for the [difference between arg
 | `function_parameter_flavor:kwarg` | 1 |
 | `function_parameter_flavor:kwonlyarg` | 1, 1 |
 | `function_parameter_flavor:vararg` | 1 |
+
+--------------------------------------------------------------------------------
+
+#### Feature `function_parameter_default`
+
+##### Specification
+
+```re
+           ^(.*/args/(kw_)?defaults/\d+)/_type=(?P<SUFFIX>.+)
+\n(?:\1.+\n)*?                        \1/_pos=(?P<POS>.+)
+```
+
+##### Example
+
+```python
+1   def foobar(a=1, b=foo, *c, d=42, e=None, **f):
+2       pass
+```
+
+##### Matches
+
+| Label | Lines |
+|:--|:--|
+| `function_parameter_default:Name` | 1 |
+| `function_parameter_default:NameConstant` | 1 |
+| `function_parameter_default:Num` | 1, 1 |
 
 --------------------------------------------------------------------------------
 

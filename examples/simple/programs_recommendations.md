@@ -6,11 +6,11 @@
     - [`08_arguments.py`](#program-08_argumentspy-learning-cost-33125)
 - [`6 programs of learning cost in [4, 8[`](#6-programs-of-learning-cost-in-4-8)
     - [`21_xml_html_parsing.py`](#program-21_xml_html_parsingpy-learning-cost-403125)
-    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-40625)
+    - [`20_prime_numbers.py`](#program-20_prime_numberspy-learning-cost-4125)
     - [`10_time.py`](#program-10_timepy-learning-cost-45)
-    - [`12_classes.py`](#program-12_classespy-learning-cost-4640625)
+    - [`12_classes.py`](#program-12_classespy-learning-cost-5046875)
     - [`33_guess_the_number.py`](#program-33_guess_the_numberpy-learning-cost-53125)
-    - [`14_median.py`](#program-14_medianpy-learning-cost-5625)
+    - [`14_median.py`](#program-14_medianpy-learning-cost-58125)
 # Recommended programs
 
 ## 1 program of learning cost in [1, 2[
@@ -171,7 +171,7 @@
 
 ---
 
-### Program `20_prime_numbers.py` (learning cost 4.0625)
+### Program `20_prime_numbers.py` (learning cost 4.125)
 
 ```python
 1   import itertools
@@ -195,7 +195,7 @@
 | 0 | `call/subroutine/no_arguments` | 8 |
 | 0.75 | `condition/inequality` | 9 |
 | 0.125 | `def/subroutine/generator` | 2-7 |
-| 0.125 | `def/subroutine/no_parameter` | 2-7 |
+| 0.1875 | `def/subroutine/parameter/no` | 2-7 |
 | 0 | `flow/conditional/no_else` | 9-10 |
 | 0 | `flow/loop/exit/early/break` | 8-11 |
 | 0 | `flow/loop/exit/late` | 4-7 |
@@ -268,7 +268,7 @@
 
 ---
 
-### Program `12_classes.py` (learning cost 4.640625)
+### Program `12_classes.py` (learning cost 5.046875)
 
 ```python
 1   class BankAccount(object):
@@ -295,6 +295,8 @@
 | 0.125 | `def/subroutine/function` | 8-9 |
 | 0.21875 | `def/subroutine/method/flavor/instance` | 2-3, 4-5, 6-7, 8-9 |
 | 0.234375 | `def/subroutine/method/naming/magic/__init__` | 2-3 |
+| 0.1875 | `def/subroutine/parameter/arg` | 2, 2, 4, 4, 6, 6, 8 |
+| 0.21875 | `def/subroutine/parameter/default/Num` | 2 |
 | 0 | `def/subroutine/procedure` | 2-3, 4-5, 6-7 |
 | 0.1875 | `def/subroutine/return/something` | 9 |
 | 0.25 | `style/object_oriented` | 1-12 |
@@ -373,7 +375,7 @@
 
 ---
 
-### Program `14_median.py` (learning cost 5.625)
+### Program `14_median.py` (learning cost 5.8125)
 
 ```python
 1   def median(pool):
@@ -393,6 +395,7 @@
 | 0.875 | `condition/divisibility/parity` | 4 |
 | 0.75 | `condition/equality` | 4 |
 | 0.1875 | `def/subroutine/function/impure` | 1-7 |
+| 0.1875 | `def/subroutine/parameter/arg` | 1 |
 | 0.1875 | `def/subroutine/return/something` | 5, 7 |
 | 0 | `flow/conditional` | 4-7 |
 | 0 | `flow/conditional/else` | 7 |

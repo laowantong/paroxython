@@ -56,7 +56,9 @@ def/subroutine/method/naming/internal_use/mangling	method:__.+(?<!__)
 def/subroutine/method/naming/magic/\1	method:(__.+__)
 def/subroutine/nested	nested_function:.+
 def/subroutine/nested/closure	closure:.+
-def/subroutine/no_parameter	function_without_parameters:.+
+def/subroutine/parameter/default/\1	function_parameter_default:(.+)
+def/subroutine/parameter/no	function_without_parameters:.+
+def/subroutine/parameter/\1	function_parameter_flavor:(.+)
 def/subroutine/procedure	function_returning_nothing:.+
 def/subroutine/procedure/test	function_returning_nothing:(.+_tests?|test_.+)
 def/subroutine/recursive	recursive_function:.+

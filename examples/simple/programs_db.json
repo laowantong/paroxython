@@ -261,6 +261,7 @@
       "taxa": {
         "call/subroutine": [[3,3],[4,4],[5,5]],
         "call/subroutine/builtin/print": [[2,2]],
+        "def/subroutine/parameter/arg": [[1,1]],
         "def/subroutine/procedure": [[1,2]],
         "meta/count/program/sloc/5": [[1,5]],
         "meta/count/subroutine/sloc/2": [[1,2]],
@@ -814,6 +815,7 @@
         "function_parameter:amount": [[4,4],[6,6]],
         "function_parameter:initial_balance": [[2,2]],
         "function_parameter:self": [[2,2],[4,4],[6,6],[8,8]],
+        "function_parameter_default:Num": [[2,2]],
         "function_parameter_flavor:arg": [[2,2],[2,2],[4,4],[4,4],[6,6],[6,6],[8,8]],
         "function_returning_nothing:__init__": [[2,3]],
         "function_returning_nothing:deposit": [[4,5]],
@@ -883,6 +885,8 @@
         "def/subroutine/function": [[8,9]],
         "def/subroutine/method/flavor/instance": [[2,3],[4,5],[6,7],[8,9]],
         "def/subroutine/method/naming/magic/__init__": [[2,3]],
+        "def/subroutine/parameter/arg": [[2,2],[2,2],[4,4],[4,4],[6,6],[6,6],[8,8]],
+        "def/subroutine/parameter/default/Num": [[2,2]],
         "def/subroutine/procedure": [[2,3],[4,5],[6,7]],
         "def/subroutine/return/something": [[9,9]],
         "meta/count/class/methods/4": [[1,9]],
@@ -1022,6 +1026,7 @@
         "def/class": [[9,11]],
         "def/subroutine/function/impure": [[2,8]],
         "def/subroutine/method/flavor/instance": [[10,11]],
+        "def/subroutine/parameter/arg": [[2,2],[10,10]],
         "def/subroutine/procedure": [[10,11]],
         "def/subroutine/return/something": [[6,6],[8,8]],
         "flow/conditional": [[5,8]],
@@ -1125,6 +1130,7 @@
         "condition/divisibility/parity": [[4,4]],
         "condition/equality": [[4,4]],
         "def/subroutine/function/impure": [[1,7]],
+        "def/subroutine/parameter/arg": [[1,1]],
         "def/subroutine/return/something": [[5,5],[7,7]],
         "flow/conditional": [[4,7]],
         "flow/conditional/else": [[7,7]],
@@ -1402,6 +1408,7 @@
         "call/subroutine/method/sequence/string/format": [[18,18]],
         "condition/inequality": [[3,3],[3,3]],
         "def/subroutine/function/pure": [[2,3]],
+        "def/subroutine/parameter/arg": [[2,2],[2,2]],
         "def/subroutine/return/something": [[3,3]],
         "flow/loop/exit/late": [[16,18]],
         "flow/loop/for/elements": [[16,18]],
@@ -1605,6 +1612,7 @@
         "condition/belonging": [[6,6]],
         "condition/equality": [[10,10]],
         "def/subroutine/function/impure": [[2,8],[9,17]],
+        "def/subroutine/parameter/arg": [[2,2],[2,2],[9,9]],
         "def/subroutine/recursive/body": [[9,17]],
         "def/subroutine/recursive/call_count/1": [[9,17]],
         "def/subroutine/return/something": [[11,11],[13,17]],
@@ -1739,7 +1747,7 @@
         "call/subroutine/no_arguments": [[8,8]],
         "condition/inequality": [[9,9]],
         "def/subroutine/generator": [[2,7]],
-        "def/subroutine/no_parameter": [[2,7]],
+        "def/subroutine/parameter/no": [[2,7]],
         "flow/conditional/no_else": [[9,10]],
         "flow/loop/exit/early/break": [[8,11]],
         "flow/loop/exit/late": [[4,7]],
@@ -2069,6 +2077,7 @@
         "def/class": [[2,3]],
         "def/subroutine/function/impure": [[10,21]],
         "def/subroutine/generator/expression": [[24,24]],
+        "def/subroutine/parameter/arg": [[4,4],[10,10]],
         "def/subroutine/procedure": [[4,9]],
         "def/subroutine/recursive/call_count/1": [[10,21]],
         "def/subroutine/recursive/tail": [[10,21]],
@@ -3322,6 +3331,9 @@
     "function_parameter:self": [
       "12_classes.py",
       "13_unit_testing.py"
+    ],
+    "function_parameter_default:Num": [
+      "12_classes.py"
     ],
     "function_parameter_flavor:arg": [
       "05_greet.py",
@@ -5780,7 +5792,19 @@
     "def/subroutine/method/naming/magic/__init__": [
       "12_classes.py"
     ],
-    "def/subroutine/no_parameter": [
+    "def/subroutine/parameter/arg": [
+      "05_greet.py",
+      "12_classes.py",
+      "13_unit_testing.py",
+      "14_median.py",
+      "16_csv.py",
+      "18_queens.py",
+      "28_queens.py"
+    ],
+    "def/subroutine/parameter/default/Num": [
+      "12_classes.py"
+    ],
+    "def/subroutine/parameter/no": [
       "20_prime_numbers.py"
     ],
     "def/subroutine/procedure": [

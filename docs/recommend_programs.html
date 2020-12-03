@@ -56,7 +56,7 @@ increasing total cost and <a href="https://en.wikipedia.org/wiki/Source_lines_of
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L331" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L0-L337" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">import subprocess
 from collections import defaultdict
@@ -120,6 +120,9 @@ class Recommendations:
 
     def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
         commands = commands or []
+        if not isinstance(commands, list):
+            print_warning(f&#34;commands are ignored (should be a list).&#34;)
+            commands = []
         current = set(self.db_programs)
         print(f&#34;\nProcessing {len(commands)} commands on {len(current)} programs.&#34;)
 
@@ -131,6 +134,9 @@ class Recommendations:
                 operation = command[&#34;operation&#34;]
             except KeyError:
                 print_warning(f&#34;operation {i} is ignored (not specified).&#34;)
+                continue
+            except TypeError:
+                print_warning(f&#34;operation {i} is ignored (malformed).&#34;)
                 continue
             (operation, n) = regex.subn(&#34; all&#34;, &#34;&#34;, operation)
             quantifier = &#34;all&#34; if n == 1 else &#34;any&#34;
@@ -303,7 +309,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L318" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L68-L324" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class Recommendations:
     def __init__(
@@ -330,6 +336,9 @@ if __name__ == &#34;__main__&#34;:
 
     def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
         commands = commands or []
+        if not isinstance(commands, list):
+            print_warning(f&#34;commands are ignored (should be a list).&#34;)
+            commands = []
         current = set(self.db_programs)
         print(f&#34;\nProcessing {len(commands)} commands on {len(current)} programs.&#34;)
 
@@ -341,6 +350,9 @@ if __name__ == &#34;__main__&#34;:
                 operation = command[&#34;operation&#34;]
             except KeyError:
                 print_warning(f&#34;operation {i} is ignored (not specified).&#34;)
+                continue
+            except TypeError:
+                print_warning(f&#34;operation {i} is ignored (malformed).&#34;)
                 continue
             (operation, n) = regex.subn(&#34; all&#34;, &#34;&#34;, operation)
             quantifier = &#34;all&#34; if n == 1 else &#34;any&#34;
@@ -575,10 +587,13 @@ semantic triples (of the form subject, predicate, object).</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L113-L180" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L113-L186" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def run_pipeline(self, commands: Optional[List[Command]] = None) -&gt; None:
     commands = commands or []
+    if not isinstance(commands, list):
+        print_warning(f&#34;commands are ignored (should be a list).&#34;)
+        commands = []
     current = set(self.db_programs)
     print(f&#34;\nProcessing {len(commands)} commands on {len(current)} programs.&#34;)
 
@@ -590,6 +605,9 @@ semantic triples (of the form subject, predicate, object).</li>
             operation = command[&#34;operation&#34;]
         except KeyError:
             print_warning(f&#34;operation {i} is ignored (not specified).&#34;)
+            continue
+        except TypeError:
+            print_warning(f&#34;operation {i} is ignored (malformed).&#34;)
             continue
         (operation, n) = regex.subn(&#34; all&#34;, &#34;&#34;, operation)
         quantifier = &#34;all&#34; if n == 1 else &#34;any&#34;
@@ -656,7 +674,7 @@ be interpreted.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L182-L225" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L188-L231" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def parse_data(
     self,
@@ -687,7 +705,7 @@ be interpreted.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L227-L318" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/recommend_programs.py#L233-L324" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def get_markdown(
     self,
