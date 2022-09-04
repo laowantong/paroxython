@@ -33,7 +33,7 @@ def dump_trees(directory, update_database=True):
         db.write_json()
 
     db_path = directory.parent / f"{directory.name}_db.sqlite"
-    connexion = sqlite3.connect(str(db_path))  # str() for Python 3.6 compatibility
+    connexion = sqlite3.connect(db_path)
     c = connexion.cursor()
 
     query = "SELECT taxon, count(*) FROM taxon WHERE taxon not LIKE 'meta/count/%' GROUP BY taxon"

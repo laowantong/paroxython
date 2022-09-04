@@ -22,8 +22,6 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: SQL",
@@ -34,7 +32,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 docopt = "^0.6.2"
-python = "^3.6.1"
+python = "^3.8"
 regex = "^2022.8.17"
 typed-ast = "^1.5.4"
 typing-extensions = "^4.3.0"

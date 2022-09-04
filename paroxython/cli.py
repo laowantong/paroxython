@@ -27,8 +27,8 @@ from docopt import docopt  # type: ignore
 from . import PAROXYTHON_VERSION
 from .goodies import print_exit
 
-if sys.version < "3.6":  # pragma: no cover
-    print_exit(f"Paroxython requires Python 3.6 or later to run.\nThis version is {sys.version}.")
+if sys.version < "3.8":  # pragma: no cover
+    print_exit(f"Paroxython requires Python 3.8 or later to run.\nThis version is {sys.version}.")
 
 
 def main():

@@ -193,9 +193,8 @@ class TagDatabase:
                         )
                     )
 
-        if db_path.exists():  # pragma: no cover / Python 3.8: use missing_ok=True parameter
-            db_path.unlink()
-        connexion = sqlite3.connect(str(db_path))  # str() for Python 3.6 compatibility
+        db_path.unlink(missing_ok=True)
+        connexion = sqlite3.connect(db_path)
         c = connexion.cursor()
 
         fill = lambda columns: ",".join("?" * len(columns))
