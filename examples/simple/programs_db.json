@@ -392,6 +392,7 @@
         "node:Num": [[1,1],[1,1],[2,2],[2,2]],
         "node:Str": [[1,1],[1,1],[2,2],[2,2],[4,4]],
         "node:Subscript": [[3,3],[3,3]],
+        "node:comprehension": [[3,3]],
         "scope:fruit": [[3,3]],
         "scope:grocery_bill": [[1,4]],
         "scope:my_purchase": [[1,4]],
@@ -473,6 +474,7 @@
         "node:Str": [[4,4],[6,6]],
         "node:Subscript": [[3,3]],
         "node:Try": [[2,6]],
+        "node:comprehension": [[3,3]],
         "scope:arg": [[3,3]],
         "scope:total": [[1,6]],
         "single_assignment:total": [[3,3]],
@@ -560,6 +562,7 @@
         "node:Name": [[2,2],[2,2],[3,3],[3,3],[3,3],[4,4],[4,4],[5,5],[5,5],[5,5],[6,6],[6,6],[7,7],[7,7],[8,8]],
         "node:Str": [[2,2],[4,4],[7,7]],
         "node:With": [[5,7]],
+        "node:withitem": [[5,5]],
         "scope:file_name": [[1,8]],
         "scope:line": [[1,8]],
         "scope:python_files": [[1,8]],
@@ -1380,6 +1383,7 @@
         "node:With": [[4,10],[13,18]],
         "node:arg": [[2,2],[2,2]],
         "node:keyword": [[4,4]],
+        "node:withitem": [[4,4],[13,13]],
         "procedural_style": [[1,18]],
         "pure_function:cmp": [[2,3]],
         "return": [[3,3]],
@@ -1571,6 +1575,7 @@
         "node:Tuple": [[4,4],[5,5],[5,5],[6,6],[14,14]],
         "node:UnaryOp": [[17,17]],
         "node:arg": [[2,2],[2,2],[9,9]],
+        "node:comprehension": [[15,15],[16,17]],
         "parallel_assignment:2": [[5,5]],
         "procedural_style": [[1,20]],
         "range:BOARD_SIZE": [[15,15]],
@@ -2026,6 +2031,7 @@
         "node:Try": [[13,20]],
         "node:Tuple": [[7,7],[7,7],[8,8]],
         "node:arg": [[4,4],[10,10]],
+        "node:comprehension": [[24,24]],
         "object_oriented_style": [[1,24]],
         "parallel_assignment:2": [[7,7]],
         "raise:BailOut": [[9,9],[21,21]],
@@ -4960,8 +4966,18 @@
       "18_queens.py",
       "28_queens.py"
     ],
+    "node:comprehension": [
+      "07_grocery_bill.py",
+      "08_arguments.py",
+      "18_queens.py",
+      "28_queens.py"
+    ],
     "node:keyword": [
       "03_friends.py",
+      "16_csv.py"
+    ],
+    "node:withitem": [
+      "09_indent.py",
       "16_csv.py"
     ],
     "object_oriented_style": [

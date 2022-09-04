@@ -233,7 +233,7 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 
 ```re
            ^(.*)/_type=(?P<SUFFIX>.+)
-\n(?:\1.+\n)*?\1/_pos=(?P<POS>.+)
+\n(?:\1.+\n)*?\1/(\w+/)?_pos=(?P<POS>.+)
 (
 \n(?:\1.+\n)* \1/[^=]+/_pos=(?P<POS>.+)
 )?
@@ -309,6 +309,7 @@ Match the name of every node of the AST. This covers most of the [Python keyword
 | `node:With` | 9-25 |
 | `node:Yield` | 17 |
 | `node:arg` | 2, 25 |
+| `node:withitem` | 9 |
 
 --------------------------------------------------------------------------------
 
@@ -1724,14 +1725,6 @@ Otherwise, suffix it with an empty string.
 \n(?:\1.+\n)*?\1/(?P=_1)             /value/_pos=(?P<POS>.+)
 )+ # at least one keyword argument
 ```
-
-/body/1/value/_type=Call
-/body/1/value/_hash=0x0001
-/body/1/value/_pos=1:1-0-
-/body/1/value/func/_type=Name
-/body/1/value/func/_hash=0x0002
-/body/1/value/func/_pos=1:1-0-0-
-/body/1/value/func/id=print
 
 ##### Example
 
