@@ -11,8 +11,8 @@ tree) of the program to analyze. For instance, when the string:
 'print("hello, world")'
 ```
 
-... is fed to the function `parse()` of the modules [`ast`](https://docs.python.org/3/library/ast.html)
-or [`typed_ast`](https://github.com/python/typed_ast), the following object is returned:
+... is fed to the function `parse()` of the module [`ast`](https://docs.python.org/3/library/ast.html),
+the following object is returned:
 
 ```plain
                            Module()
@@ -89,28 +89,6 @@ That's the general principle. In the next section, we enumerate the tweaks we ma
 of this text to make it more suitable for regular expression parsing.
 
 ## Implementation details
-
-### Libraries used
-
-When Paroxython is launched from Python 3.7 or lower, the parsing of source code into an AST is
-performed by the third-party library [typed-ast](https://github.com/python/typed_ast). To quote the
-README:
-
-> `typed_ast` is a Python 3 package that provides a [...] parser similar to the standard `ast` library.
-> Unlike `ast`, the parsers [...] are independent of the version of Python under which they are run.
-> [...] `typed_ast` runs on CPython 3.5-3.8
-
-So far so good. However:
-
-> `typed_ast` will not be updated to support parsing Python 3.8 and newer.
-
-This means that `typed_ast`, although convenient to parse Python 3.5 and newer, will start choping on
-Python 3.8 specific syntax, as assignment expressions.
-
-This is the reason why, when launched from Python 3.8 or higher, Paroxython switches to the parser of
-the standard library [`ast`](https://docs.python.org/3/library/ast.html). However, the ASTs generated
-by the two libraries are not 100% identical. Wrapping their parsers requires us to erase as much
-differences as possible. Some of the functions presented below are written for this purpose.
 
 ### On the fly: modification of the AST
 
@@ -334,6 +312,7 @@ and classes would incorrectly be marked as starting from the line of their first
 """
 
 
+import ast
 import sys
 from typing import Any, Callable, Match
 
@@ -343,24 +322,24 @@ import regex  # type: ignore
 def select_ast_post_processing():
     """Customize the post-treatment of the AST depending on the parser used to create it."""
 
-    if sys.version_info >= (3, 9):
+    if sys.version_info >= (3, 10):
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
+            flat_ast = suppress_alias_pos(flat_ast)
             flat_ast = suppress_posonlyargs(flat_ast)
             flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
             flat_ast = unquote(flat_ast)
             return flat_ast
 
-    elif sys.version_info >= (3, 8):
+    elif sys.version_info >= (3, 9):
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
             flat_ast = suppress_posonlyargs(flat_ast)
             flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
-            flat_ast = simplify_indexes(flat_ast)
             flat_ast = unquote(flat_ast)
             return flat_ast
 
@@ -368,22 +347,17 @@ def select_ast_post_processing():
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
+            flat_ast = suppress_posonlyargs(flat_ast)
+            flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
             flat_ast = simplify_indexes(flat_ast)
             flat_ast = unquote(flat_ast)
-            flat_ast = correct_all_decorated_callable_starts(flat_ast)
             return flat_ast
 
     return post_process
 
 
-# fmt: off
-if sys.version_info >= (3, 8):
-    import ast
-else:
-    from typed_ast import ast3 as ast # type: ignore
 post_process = select_ast_post_processing()
-# fmt: on
 
 
 def flatten_ast(tree) -> str:
@@ -411,7 +385,7 @@ def flatten_node(
         prefix (str, optional): The prefix of the current line to dump. Defaults to `""`.
         path (str, optional): The path of the current node. Defaults to `""`.
         remove_context (Callable, optional): A function removing the node context encoded in the
-            result of `ast3.dump()`.
+            result of `ast.dump()`.
             [Not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
             Defaults to `regex.compile(r", ctx=.+?\(\)").sub`.
 
@@ -565,11 +539,23 @@ def suppress_kinds(
     return sub("", flat_ast)
 
 
+def suppress_alias_pos(
+    flat_ast: str,
+    sub: Callable = regex.compile(r"(?m)^(.+/_type=alias\n).+_pos=.+\n").sub,
+) -> str:
+    """Suppress the AST line following import aliases. Since Python 3.10, it contains a position,
+    useless in the following.
+
+    Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
+    """
+    return sub(r"\1", flat_ast)
+
+
 def suppress_posonlyargs(
     flat_ast: str,
     sub: Callable = regex.compile(r"(?m)^.+/args/posonlyargs/_length=\d+\n").sub,
 ) -> str:
-    """Starting from Python 3.8, suppress positional-only parameters in function definitions.
+    """Suppress positional-only parameters in function definitions.
 
     Argument `sub` [not to be explicitly provided.](developer_manual/index.html#default-argument-trick)
     """
