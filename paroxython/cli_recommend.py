@@ -81,7 +81,7 @@ import sys
 from pathlib import Path
 
 import regex  # type: ignore
-from typed_ast.ast3 import literal_eval
+from ast import literal_eval
 
 from .goodies import print_success, print_exit
 from .recommend_programs import Recommendations

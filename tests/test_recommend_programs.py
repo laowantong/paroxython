@@ -1,4 +1,4 @@
-from typed_ast.ast3 import literal_eval
+from ast import literal_eval
 import json
 from pathlib import Path
 
