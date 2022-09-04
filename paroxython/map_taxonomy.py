@@ -220,7 +220,7 @@ class Taxonomy:
         result: TaxonNames = self.literal_labels.get(label_name, [])
         for (label_regex_pattern, taxon_pattern) in self.compiled_labels:
             if label_regex_pattern.match(label_name):
-                result.append(label_regex_pattern.sub(taxon_pattern, label_name))
+                result.append(TaxonName(label_regex_pattern.sub(taxon_pattern, label_name)))
         return result
 
     def to_taxa(self, labels: Labels) -> Taxa:
