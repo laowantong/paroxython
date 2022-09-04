@@ -1456,70 +1456,100 @@
     },
     "025.0195-send-a-value-to-another-thread.py": {
       "timestamp": "",
-      "source": "import Queue\nq = Queue()\nt = Thread(target=worker)\nt.daemon = True\nt.start()\nq.put(\"Alan\")",
+      "source": "from queue import Queue\nfrom threading import Thread\nq = Queue()\ndef worker():\n    while True:\n        print(f\"Hello, {q.get()}\")\n        q.task_done()\nThread(target=worker, daemon=True).start()\nq.put(\"Alan\")\nq.join()",
       "labels": {
-        "argument:": [[6,6]],
-        "argument:worker": [[3,3]],
-        "assignment:Queue": [[2,2]],
-        "assignment:Thread": [[3,3]],
-        "assignment:True": [[4,4]],
-        "assignment_lhs_identifier:q": [[2,2]],
-        "assignment_lhs_identifier:t": [[3,3],[4,4]],
-        "assignment_rhs_atom:True": [[4,4]],
-        "assignment_rhs_atom:worker": [[3,3]],
-        "external_free_call:Queue": [[2,2]],
-        "external_free_call:Thread": [[3,3]],
-        "flat_style": [[1,6]],
-        "free_call:Queue": [[2,2]],
-        "free_call:Thread": [[3,3]],
-        "free_call_no_arguments:Queue": [[2,2]],
-        "free_call_with_keyword_argument:Thread:target": [[3,3]],
-        "global_scope:q": [[1,6]],
-        "global_scope:t": [[1,6]],
-        "imperative_style": [[1,6]],
-        "import:Queue": [[1,1]],
-        "import_module:Queue": [[1,1]],
-        "keyword_argument:target": [[3,3]],
-        "literal:Str": [[6,6]],
-        "literal:True": [[4,4]],
-        "loaded_variable:q": [[6,6]],
-        "loaded_variable:t": [[4,4],[5,5]],
-        "loaded_variable:worker": [[3,3]],
-        "member_call:q:put": [[6,6]],
-        "member_call:t:start": [[5,5]],
-        "member_call_method:put": [[6,6]],
-        "member_call_method:start": [[5,5]],
-        "member_call_object:q": [[6,6]],
-        "member_call_object:t": [[5,5]],
-        "node:Assign": [[2,2],[3,3],[4,4]],
-        "node:Attribute": [[4,4],[5,5],[6,6]],
-        "node:Call": [[2,2],[3,3],[5,5],[6,6]],
-        "node:Expr": [[5,5],[6,6]],
-        "node:Import": [[1,1]],
-        "node:Name": [[2,2],[2,2],[3,3],[3,3],[3,3],[4,4],[5,5],[6,6]],
-        "node:NameConstant": [[4,4]],
-        "node:Str": [[6,6]],
-        "node:keyword": [[3,3]],
-        "scope:q": [[1,6]],
-        "scope:t": [[1,6]],
-        "single_assignment:q": [[2,2]],
-        "single_assignment:t": [[3,3]],
-        "variety:3": [[1,6]],
-        "whole_span:6": [[1,6]]
+        "access_outer_scope:q": [[4,7]],
+        "argument:": [[6,6],[9,9]],
+        "argument:True": [[8,8]],
+        "argument:worker": [[8,8]],
+        "assignment:Queue": [[3,3]],
+        "assignment_lhs_identifier:q": [[3,3]],
+        "composition": [[6,6]],
+        "external_free_call:Queue": [[3,3]],
+        "external_free_call:Thread": [[8,8]],
+        "external_free_call:print": [[6,6]],
+        "free_call:Queue": [[3,3]],
+        "free_call:Thread": [[8,8]],
+        "free_call:print": [[6,6]],
+        "free_call_no_arguments:Queue": [[3,3]],
+        "free_call_with_keyword_argument:Thread:daemon": [[8,8]],
+        "free_call_with_keyword_argument:Thread:target": [[8,8]],
+        "free_call_without_result:print": [[6,6]],
+        "function:worker": [[4,7]],
+        "function_line_count:4": [[4,7]],
+        "function_returning_nothing:worker": [[4,7]],
+        "function_without_parameters:worker": [[4,7]],
+        "global_scope:q": [[1,10]],
+        "import:queue:Queue": [[1,1]],
+        "import:threading:Thread": [[2,2]],
+        "import_module:queue": [[1,1]],
+        "import_module:threading": [[2,2]],
+        "import_name:Queue": [[1,1]],
+        "import_name:Thread": [[2,2]],
+        "infinite_while": [[5,7]],
+        "keyword_argument:daemon": [[8,8]],
+        "keyword_argument:target": [[8,8]],
+        "literal:Str": [[6,6],[9,9]],
+        "literal:True": [[5,5],[8,8]],
+        "loaded_variable:q": [[6,6],[7,7],[9,9],[10,10]],
+        "loaded_variable:worker": [[8,8]],
+        "loop:while": [[5,7]],
+        "loop_with_late_exit:while": [[5,7]],
+        "member_call:q:get": [[6,6]],
+        "member_call:q:join": [[10,10]],
+        "member_call:q:put": [[9,9]],
+        "member_call:q:task_done": [[7,7]],
+        "member_call_method:get": [[6,6]],
+        "member_call_method:join": [[10,10]],
+        "member_call_method:put": [[9,9]],
+        "member_call_method:start": [[8,8]],
+        "member_call_method:task_done": [[7,7]],
+        "member_call_object:q": [[6,6],[7,7],[9,9],[10,10]],
+        "node:Assign": [[3,3]],
+        "node:Attribute": [[6,6],[7,7],[8,8],[9,9],[10,10]],
+        "node:Call": [[3,3],[6,6],[6,6],[7,7],[8,8],[8,8],[9,9],[10,10]],
+        "node:Expr": [[6,6],[7,7],[8,8],[9,9],[10,10]],
+        "node:FormattedValue": [[6,6]],
+        "node:FunctionDef": [[4,7]],
+        "node:ImportFrom": [[1,1],[2,2]],
+        "node:JoinedStr": [[6,6]],
+        "node:Name": [[3,3],[3,3],[6,6],[6,6],[7,7],[8,8],[8,8],[9,9],[10,10]],
+        "node:NameConstant": [[5,5],[8,8]],
+        "node:Str": [[6,6],[9,9]],
+        "node:While": [[5,7]],
+        "node:keyword": [[8,8],[8,8]],
+        "procedural_style": [[1,10]],
+        "scope:q": [[1,10]],
+        "single_assignment:q": [[3,3]],
+        "variety:5": [[1,10]],
+        "whole_span:10": [[1,10]]
       },
       "taxa": {
-        "call/class/construct": [[2,2],[3,3]],
-        "call/subroutine/method": [[5,5],[6,6]],
-        "import/third_party/Queue": [[1,1]],
-        "meta/count/program/sloc/6": [[1,6]],
-        "meta/count/variety/3": [[1,6]],
-        "meta/program": [[1,6]],
-        "style/imperative/flat": [[1,6]],
-        "type/boolean/literal/True": [[4,4]],
-        "type/sequence/string/literal": [[6,6]],
-        "var/assignment/explicit": [[4,4]],
-        "var/assignment/explicit/single": [[2,2],[3,3]],
-        "var/scope/global": [[1,6]]
+        "call/class/construct": [[3,3],[8,8]],
+        "call/composition": [[6,6]],
+        "call/subroutine/builtin/print": [[6,6]],
+        "call/subroutine/method": [[7,7],[8,8],[9,9]],
+        "call/subroutine/method/non_sequence/dictionary/get": [[6,6]],
+        "call/subroutine/method/sequence/string/join": [[10,10]],
+        "def/subroutine/parameter/no": [[4,7]],
+        "def/subroutine/procedure": [[4,7]],
+        "flow/loop/exit/late": [[5,7]],
+        "flow/loop/while/infinite": [[5,7]],
+        "import/standard/queue/Queue": [[1,1]],
+        "import/standard/threading/Thread": [[2,2]],
+        "meta/count/program/sloc/10": [[1,10]],
+        "meta/count/subroutine/sloc/4": [[4,7]],
+        "meta/count/variety/5": [[1,10]],
+        "meta/program": [[1,10]],
+        "style/procedural": [[1,10]],
+        "type/boolean/literal/True": [[5,5],[8,8]],
+        "type/non_sequence/dictionary": [[6,6]],
+        "type/sequence/string": [[10,10]],
+        "type/sequence/string/literal": [[6,6],[9,9]],
+        "type/sequence/string/literal/formatted": [[6,6]],
+        "var/assignment/explicit/single": [[3,3]],
+        "var/scope/global": [[1,10]],
+        "var/scope/outer/variable": [[4,7]]
       }
     },
     "026.0194-create-a-2-dimensional-array.py": {
@@ -10839,6 +10869,9 @@
     "access_outer_scope:a": [
       "037.0671-currying.py"
     ],
+    "access_outer_scope:q": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "accumulate_elements:add": [
       "119.3263-deduplicate-list.py"
     ],
@@ -11004,6 +11037,9 @@
     ],
     "argument:Parent": [
       "073.0673-create-a-factory.py"
+    ],
+    "argument:True": [
+      "025.0195-send-a-value-to-another-thread.py"
     ],
     "argument:__file__": [
       "107.2139-get-folder-containing-current-program.py"
@@ -11431,14 +11467,10 @@
     "assignment:TestClass": [
       "104.3264-save-object-into-xml-file.py"
     ],
-    "assignment:Thread": [
-      "025.0195-send-a-value-to-another-thread.py"
-    ],
     "assignment:Timer": [
       "185.2820-execute-function-in-30-seconds.py"
     ],
     "assignment:True": [
-      "025.0195-send-a-value-to-another-thread.py",
       "128.2085-breadth-first-traversing-of-a-tree.py"
     ],
     "assignment:asizeof": [
@@ -11949,7 +11981,6 @@
       "183.3025-make-http-put-request.py"
     ],
     "assignment_lhs_identifier:t": [
-      "025.0195-send-a-value-to-another-thread.py",
       "038.0186-extract-a-substring.py",
       "041.0187-reverse-a-string.py",
       "041.2714-reverse-a-string.py",
@@ -12138,7 +12169,6 @@
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
     "assignment_rhs_atom:True": [
-      "025.0195-send-a-value-to-another-thread.py",
       "128.2085-breadth-first-traversing-of-a-tree.py"
     ],
     "assignment_rhs_atom:Vertex": [
@@ -12538,9 +12568,6 @@
       "039.0571-check-if-string-contains-a-word.py",
       "133.2160-case-insensitive-string-contains.py"
     ],
-    "assignment_rhs_atom:worker": [
-      "025.0195-send-a-value-to-another-thread.py"
-    ],
     "assignment_rhs_atom:x": [
       "019.0197-reverse-a-list.py",
       "019.1983-reverse-a-list.py",
@@ -12779,6 +12806,7 @@
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
     "composition": [
+      "025.0195-send-a-value-to-another-thread.py",
       "034.0625-create-a-set-of-objects.py",
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py",
@@ -13050,6 +13078,7 @@
       "003.0019-create-a-procedure.py",
       "007.0183-iterate-over-list-indexes-and-values.py",
       "013.0574-iterate-over-map-keys-and-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py",
       "042.1264-continue-outer-loop.py",
       "042.3168-continue-outer-loop.py",
@@ -13161,7 +13190,6 @@
       "022.0243-convert-string-to-integer.py",
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "024.0664-assign-to-string-the-japanese-word-.py",
-      "025.0195-send-a-value-to-another-thread.py",
       "026.0194-create-a-2-dimensional-array.py",
       "027.0192-create-a-3-dimensional-array.py",
       "027.0193-create-a-3-dimensional-array.py",
@@ -13616,6 +13644,7 @@
       "003.0019-create-a-procedure.py",
       "007.0183-iterate-over-list-indexes-and-values.py",
       "013.0574-iterate-over-map-keys-and-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py",
       "042.1264-continue-outer-loop.py",
       "042.3168-continue-outer-loop.py",
@@ -13753,6 +13782,9 @@
       "129.2282-breadth-first-traversing-in-a-graph.py",
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
+    "free_call_with_keyword_argument:Thread:daemon": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "free_call_with_keyword_argument:Thread:target": [
       "025.0195-send-a-value-to-another-thread.py"
     ],
@@ -13828,6 +13860,7 @@
       "003.0019-create-a-procedure.py",
       "007.0183-iterate-over-list-indexes-and-values.py",
       "013.0574-iterate-over-map-keys-and-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py",
       "042.1264-continue-outer-loop.py",
       "042.3168-continue-outer-loop.py",
@@ -13970,6 +14003,9 @@
     "function:union_set": [
       "187.3261-disjoint-set.py"
     ],
+    "function:worker": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "function:x": [
       "090.1099-read-only-outside.py"
     ],
@@ -14010,6 +14046,7 @@
       "009.3176-create-a-binary-tree-data-structure.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "020.0573-return-two-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py",
       "040.2279-graph-with-adjacency-lists.py",
       "104.3264-save-object-into-xml-file.py",
@@ -14249,6 +14286,9 @@
     "function_returning_nothing:union_set": [
       "187.3261-disjoint-set.py"
     ],
+    "function_returning_nothing:worker": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "function_returning_something:__str__": [
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
@@ -14320,6 +14360,9 @@
     ],
     "function_without_parameters:foo": [
       "126.2137-multiple-return-values.py"
+    ],
+    "function_without_parameters:worker": [
+      "025.0195-send-a-value-to-another-thread.py"
     ],
     "functional_style": [
       "004.0024-create-a-function-which-returns-the-square-of-an-integer.py",
@@ -14602,7 +14645,6 @@
       "183.3025-make-http-put-request.py"
     ],
     "global_scope:t": [
-      "025.0195-send-a-value-to-another-thread.py",
       "038.0186-extract-a-substring.py",
       "041.0187-reverse-a-string.py",
       "041.2714-reverse-a-string.py",
@@ -14885,7 +14927,6 @@
       "022.0243-convert-string-to-integer.py",
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "024.0664-assign-to-string-the-japanese-word-.py",
-      "025.0195-send-a-value-to-another-thread.py",
       "026.0194-create-a-2-dimensional-array.py",
       "027.0192-create-a-3-dimensional-array.py",
       "027.0193-create-a-3-dimensional-array.py",
@@ -15047,9 +15088,6 @@
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py",
       "197.3457-get-a-list-of-lines-from-a-file.py"
     ],
-    "import:Queue": [
-      "025.0195-send-a-value-to-another-thread.py"
-    ],
     "import:__future__:division": [
       "068.2271-create-a-bitset.py"
     ],
@@ -15156,6 +15194,9 @@
     "import:pyxser": [
       "104.3264-save-object-into-xml-file.py"
     ],
+    "import:queue:Queue": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "import:random": [
       "010.1478-shuffle-a-list.py",
       "011.0047-pick-a-random-element-from-a-list.py",
@@ -15202,6 +15243,9 @@
       "033.1420-atomically-read-and-update-variable.py",
       "185.2820-execute-function-in-30-seconds.py"
     ],
+    "import:threading:Thread": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "import:time": [
       "045.0570-pause-execution-for-5-seconds.py",
       "125.2167-measure-function-call-duration.py"
@@ -15223,9 +15267,6 @@
     ],
     "import:webbrowser": [
       "164.2169-open-url-in-default-browser.py"
-    ],
-    "import_module:Queue": [
-      "025.0195-send-a-value-to-another-thread.py"
     ],
     "import_module:__future__": [
       "001.0003-print-hello-world.py",
@@ -15318,6 +15359,9 @@
     "import_module:pyxser": [
       "104.3264-save-object-into-xml-file.py"
     ],
+    "import_module:queue": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "import_module:random": [
       "010.0182-shuffle-a-list.py",
       "010.1478-shuffle-a-list.py",
@@ -15359,6 +15403,7 @@
       "139.2162-create-temp-directory.py"
     ],
     "import_module:threading": [
+      "025.0195-send-a-value-to-another-thread.py",
       "033.1420-atomically-read-and-update-variable.py",
       "185.2820-execute-function-in-30-seconds.py"
     ],
@@ -15388,6 +15433,12 @@
     "import_name:Pool": [
       "030.0189-parallelize-execution-of-1000-independent-tasks.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py"
+    ],
+    "import_name:Queue": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
+    "import_name:Thread": [
+      "025.0195-send-a-value-to-another-thread.py"
     ],
     "import_name:dataclass": [
       "005.0663-create-a-2d-point-data-structure.py"
@@ -15483,6 +15534,7 @@
       "043.0676-break-outer-loop.py"
     ],
     "infinite_while": [
+      "025.0195-send-a-value-to-another-thread.py",
       "050.0572-make-an-infinite-loop.py",
       "078.1089-do-while-loop.py",
       "121.3029-udp-listen-and-read.py"
@@ -15646,6 +15698,9 @@
     ],
     "keyword_argument:args": [
       "185.2820-execute-function-in-30-seconds.py"
+    ],
+    "keyword_argument:daemon": [
+      "025.0195-send-a-value-to-another-thread.py"
     ],
     "keyword_argument:data": [
       "174.2687-make-http-post-request.py",
@@ -16569,7 +16624,6 @@
       "186.2699-exit-program-cleanly.py"
     ],
     "loaded_variable:t": [
-      "025.0195-send-a-value-to-another-thread.py",
       "082.1096-count-substring-occurrences.py",
       "109.2280-number-of-bytes-of-a-type.py"
     ],
@@ -16996,6 +17050,7 @@
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
     "loop:while": [
+      "025.0195-send-a-value-to-another-thread.py",
       "050.0572-make-an-infinite-loop.py",
       "078.1089-do-while-loop.py",
       "121.3029-udp-listen-and-read.py",
@@ -17036,6 +17091,7 @@
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
     "loop_with_late_exit:while": [
+      "025.0195-send-a-value-to-another-thread.py",
       "050.0572-make-an-infinite-loop.py",
       "121.3029-udp-listen-and-read.py",
       "128.2085-breadth-first-traversing-of-a-tree.py",
@@ -17183,7 +17239,16 @@
     "member_call:q:extend": [
       "129.2282-breadth-first-traversing-in-a-graph.py"
     ],
+    "member_call:q:get": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
+    "member_call:q:join": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "member_call:q:put": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
+    "member_call:q:task_done": [
       "025.0195-send-a-value-to-another-thread.py"
     ],
     "member_call:random:choice": [
@@ -17235,9 +17300,6 @@
     "member_call:sys:exit": [
       "087.1139-stop-program.py",
       "186.2699-exit-program-cleanly.py"
-    ],
-    "member_call:t:start": [
-      "025.0195-send-a-value-to-another-thread.py"
     ],
     "member_call:time:sleep": [
       "045.0570-pause-execution-for-5-seconds.py"
@@ -17391,6 +17453,9 @@
     "member_call_method:fromtimestamp": [
       "098.2142-epoch-seconds-to-date-object.py"
     ],
+    "member_call_method:get": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "member_call_method:getLogger": [
       "145.1822-print-log-line-with-datetime.py"
     ],
@@ -17429,6 +17494,7 @@
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
     "member_call_method:join": [
+      "025.0195-send-a-value-to-another-thread.py",
       "053.0240-join-a-list-of-strings.py",
       "053.1933-join-a-list-of-strings.py",
       "071.0379-echo-program-implementation.py",
@@ -17569,6 +17635,9 @@
     "member_call_method:sub": [
       "147.2171-remove-all-non-ascii-characters.py"
     ],
+    "member_call_method:task_done": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "member_call_method:timeit": [
       "132.2040-measure-duration-of-procedure-execution.py"
     ],
@@ -17686,9 +17755,6 @@
     "member_call_object:sys": [
       "087.1139-stop-program.py",
       "186.2699-exit-program-cleanly.py"
-    ],
-    "member_call_object:t": [
-      "025.0195-send-a-value-to-another-thread.py"
     ],
     "member_call_object:time": [
       "045.0570-pause-execution-for-5-seconds.py"
@@ -18424,6 +18490,9 @@
       "163.2170-print-list-elements-by-group-of-2.py",
       "163.3177-print-list-elements-by-group-of-2.py"
     ],
+    "node:FormattedValue": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "node:FunctionDef": [
       "003.0019-create-a-procedure.py",
       "003.2372-create-a-procedure.py",
@@ -18436,6 +18505,7 @@
       "017.1103-create-a-tree-data-structure.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "020.0573-return-two-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "031.0188-recursive-factorial-simple.py",
       "032.0196-integer-exponentiation-by-squaring.py",
       "035.0667-first-class-function--compose.py",
@@ -18499,7 +18569,6 @@
       "014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py",
       "015.0184-pick-uniformly-a-random-integer-in-ab.py",
-      "025.0195-send-a-value-to-another-thread.py",
       "027.0193-create-a-3-dimensional-array.py",
       "033.1420-atomically-read-and-update-variable.py",
       "045.0570-pause-execution-for-5-seconds.py",
@@ -18559,6 +18628,7 @@
       "001.0003-print-hello-world.py",
       "005.0663-create-a-2d-point-data-structure.py",
       "010.0182-shuffle-a-list.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "030.0189-parallelize-execution-of-1000-independent-tasks.py",
       "037.0671-currying.py",
       "040.2279-graph-with-adjacency-lists.py",
@@ -18576,6 +18646,9 @@
       "174.2687-make-http-post-request.py",
       "179.2689-get-center-of-a-rectangle.py",
       "184.2701-tomorrow.py"
+    ],
+    "node:JoinedStr": [
+      "025.0195-send-a-value-to-another-thread.py"
     ],
     "node:Lambda": [
       "028.0350-sort-by-a-property.py",
@@ -19077,6 +19150,7 @@
       "187.3261-disjoint-set.py"
     ],
     "node:While": [
+      "025.0195-send-a-value-to-another-thread.py",
       "050.0572-make-an-infinite-loop.py",
       "078.1089-do-while-loop.py",
       "121.3029-udp-listen-and-read.py",
@@ -19360,6 +19434,7 @@
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "020.0573-return-two-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "043.2733-break-outer-loop.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "124.2152-binary-search-for-a-value-in-sorted-array.py",
@@ -19920,7 +19995,6 @@
       "073.0673-create-a-factory.py"
     ],
     "scope:t": [
-      "025.0195-send-a-value-to-another-thread.py",
       "038.0186-extract-a-substring.py",
       "041.0187-reverse-a-string.py",
       "041.2714-reverse-a-string.py",
@@ -20281,7 +20355,6 @@
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
     "single_assignment:t": [
-      "025.0195-send-a-value-to-another-thread.py",
       "038.0186-extract-a-substring.py",
       "041.0187-reverse-a-string.py",
       "041.2714-reverse-a-string.py",
@@ -20924,7 +20997,6 @@
     ],
     "variety:3": [
       "005.0663-create-a-2d-point-data-structure.py",
-      "025.0195-send-a-value-to-another-thread.py",
       "031.0188-recursive-factorial-simple.py",
       "037.0671-currying.py",
       "042.3168-continue-outer-loop.py",
@@ -20946,6 +21018,7 @@
       "129.2282-breadth-first-traversing-in-a-graph.py"
     ],
     "variety:5": [
+      "025.0195-send-a-value-to-another-thread.py",
       "043.0676-break-outer-loop.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
@@ -21046,6 +21119,9 @@
       "178.2615-check-if-point-is-inside-rectangle.py",
       "179.2688-get-center-of-a-rectangle.py",
       "189.3236-filter-and-transform-list.py"
+    ],
+    "whole_span:10": [
+      "025.0195-send-a-value-to-another-thread.py"
     ],
     "whole_span:11": [
       "043.0676-break-outer-loop.py"
@@ -21173,7 +21249,6 @@
     ],
     "whole_span:6": [
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
-      "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "090.1099-read-only-outside.py",
@@ -21213,6 +21288,7 @@
       "189.3236-filter-and-transform-list.py"
     ],
     "call/composition": [
+      "025.0195-send-a-value-to-another-thread.py",
       "034.0625-create-a-set-of-objects.py",
       "035.0667-first-class-function--compose.py",
       "036.0670-first-class-function--generic-composition.py",
@@ -21358,6 +21434,7 @@
       "003.0019-create-a-procedure.py",
       "007.0183-iterate-over-list-indexes-and-values.py",
       "013.0574-iterate-over-map-keys-and-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py",
       "042.1264-continue-outer-loop.py",
       "042.3168-continue-outer-loop.py",
@@ -21500,6 +21577,9 @@
     "call/subroutine/method/mutable_duck/remove": [
       "135.2158-remove-item-from-list-by-its-value.py"
     ],
+    "call/subroutine/method/non_sequence/dictionary/get": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "call/subroutine/method/non_sequence/dictionary/items": [
       "013.0574-iterate-over-map-keys-and-values.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
@@ -21578,6 +21658,7 @@
       "137.1823-check-if-string-contains-only-digits.py"
     ],
     "call/subroutine/method/sequence/string/join": [
+      "025.0195-send-a-value-to-another-thread.py",
       "053.0240-join-a-list-of-strings.py",
       "053.1933-join-a-list-of-strings.py",
       "071.0379-echo-program-implementation.py",
@@ -21832,6 +21913,7 @@
     ],
     "def/subroutine/parameter/no": [
       "003.2372-create-a-procedure.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "126.2137-multiple-return-values.py"
     ],
     "def/subroutine/parameter/vararg": [
@@ -21846,6 +21928,7 @@
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "017.1103-create-a-tree-data-structure.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "040.2279-graph-with-adjacency-lists.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "090.1099-read-only-outside.py",
@@ -21963,6 +22046,7 @@
       "007.0183-iterate-over-list-indexes-and-values.py",
       "013.0574-iterate-over-map-keys-and-values.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "030.0189-parallelize-execution-of-1000-independent-tasks.py",
       "040.2279-graph-with-adjacency-lists.py",
       "042.3168-continue-outer-loop.py",
@@ -22022,6 +22106,7 @@
       "130.2283-depth-first-traversing-in-a-graph.py"
     ],
     "flow/loop/while/infinite": [
+      "025.0195-send-a-value-to-another-thread.py",
       "050.0572-make-an-infinite-loop.py",
       "078.1089-do-while-loop.py",
       "121.3029-udp-listen-and-read.py"
@@ -22124,6 +22209,9 @@
     "import/standard/pathlib/Path": [
       "144.2915-check-if-file-exists.py"
     ],
+    "import/standard/queue/Queue": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "import/standard/random": [
       "010.1478-shuffle-a-list.py",
       "011.0047-pick-a-random-element-from-a-list.py",
@@ -22167,6 +22255,9 @@
       "033.1420-atomically-read-and-update-variable.py",
       "185.2820-execute-function-in-30-seconds.py"
     ],
+    "import/standard/threading/Thread": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "import/standard/time": [
       "045.0570-pause-execution-for-5-seconds.py",
       "125.2167-measure-function-call-duration.py"
@@ -22188,9 +22279,6 @@
     ],
     "import/standard/webbrowser": [
       "164.2169-open-url-in-default-browser.py"
-    ],
-    "import/third_party/Queue": [
-      "025.0195-send-a-value-to-another-thread.py"
     ],
     "import/third_party/lxml.etree": [
       "103.2276-load-xml-file-into-struct.py"
@@ -22323,6 +22411,9 @@
       "179.2688-get-center-of-a-rectangle.py",
       "189.3236-filter-and-transform-list.py"
     ],
+    "meta/count/program/sloc/10": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "meta/count/program/sloc/11": [
       "043.0676-break-outer-loop.py"
     ],
@@ -22449,7 +22540,6 @@
     ],
     "meta/count/program/sloc/6": [
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
-      "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "090.1099-read-only-outside.py",
@@ -22505,6 +22595,7 @@
       "009.3176-create-a-binary-tree-data-structure.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "020.0573-return-two-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py",
       "040.2279-graph-with-adjacency-lists.py",
       "104.3264-save-object-into-xml-file.py",
@@ -22737,7 +22828,6 @@
     ],
     "meta/count/variety/3": [
       "005.0663-create-a-2d-point-data-structure.py",
-      "025.0195-send-a-value-to-another-thread.py",
       "031.0188-recursive-factorial-simple.py",
       "037.0671-currying.py",
       "042.3168-continue-outer-loop.py",
@@ -22759,6 +22849,7 @@
       "129.2282-breadth-first-traversing-in-a-graph.py"
     ],
     "meta/count/variety/5": [
+      "025.0195-send-a-value-to-another-thread.py",
       "043.0676-break-outer-loop.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
@@ -23165,7 +23256,6 @@
       "022.0243-convert-string-to-integer.py",
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
       "024.0664-assign-to-string-the-japanese-word-.py",
-      "025.0195-send-a-value-to-another-thread.py",
       "026.0194-create-a-2-dimensional-array.py",
       "027.0192-create-a-3-dimensional-array.py",
       "027.0193-create-a-3-dimensional-array.py",
@@ -23486,6 +23576,7 @@
       "016.1530-depth-first-traversing-of-a-binary-tree.py",
       "018.2084-depth-first-traversing-of-a-tree.py",
       "020.0573-return-two-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "043.2733-break-outer-loop.py",
       "056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py",
       "124.2152-binary-search-for-a-value-in-sorted-array.py",
@@ -23554,6 +23645,7 @@
     ],
     "type/non_sequence/dictionary": [
       "013.0574-iterate-over-map-keys-and-values.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "052.0666-check-if-map-contains-value.py",
       "113.2157-iterate-over-map-entries-ordered-by-values.py"
     ],
@@ -23737,6 +23829,7 @@
     ],
     "type/sequence/string": [
       "023.1102-convert-real-number-to-string-with-2-decimal-places.py",
+      "025.0195-send-a-value-to-another-thread.py",
       "041.0187-reverse-a-string.py",
       "049.0242-split-a-space-separated-string.py",
       "053.0240-join-a-list-of-strings.py",
@@ -23827,6 +23920,9 @@
       "147.2171-remove-all-non-ascii-characters.py",
       "154.2292-halfway-between-two-hex-color-codes.py"
     ],
+    "type/sequence/string/literal/formatted": [
+      "025.0195-send-a-value-to-another-thread.py"
+    ],
     "type/sequence/string/literal/special/\\n": [
       "002.1493-print-hello-10-times.py",
       "002.3117-print-hello-10-times.py",
@@ -23862,7 +23958,6 @@
       "009.1410-create-a-binary-tree-data-structure.py",
       "009.3176-create-a-binary-tree-data-structure.py",
       "017.1103-create-a-tree-data-structure.py",
-      "025.0195-send-a-value-to-another-thread.py",
       "040.2279-graph-with-adjacency-lists.py",
       "090.1099-read-only-outside.py",
       "104.3264-save-object-into-xml-file.py",
@@ -24315,6 +24410,7 @@
       "191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py"
     ],
     "var/scope/outer/variable": [
+      "025.0195-send-a-value-to-another-thread.py",
       "037.0671-currying.py"
     ],
     "var/scope/shadowing": [

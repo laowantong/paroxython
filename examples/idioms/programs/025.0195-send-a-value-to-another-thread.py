@@ -5,19 +5,22 @@ Share the string value "Alan" with an existing running process which will then d
 Source: programming-idioms.org
 """
 
-# Implementation author: programming-idioms.org
+# Implementation author: Aristide
 # Created on 2016-02-18T16:57:58.135862Z
-# Last modified on 2016-02-18T16:57:58.135862Z
-# Version 1
+# Last modified on 2022-09-04
+# Version 2
 
-# The _Queue module has been renamed to _queue in Python 3.
-
-import Queue
+from queue import Queue
+from threading import Thread
 
 q = Queue()
 
-t = Thread(target=worker)
-t.daemon = True
-t.start()
+def worker():
+    while True:
+        print(f"Hello, {q.get()}")
+        q.task_done()
+
+Thread(target=worker, daemon=True).start()
 
 q.put("Alan")
+q.join()

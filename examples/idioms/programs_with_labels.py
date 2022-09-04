@@ -213,12 +213,16 @@ s = "ネコ" # assignment, assignment_lhs_identifier:s, flat_style, global_scope
 # ----------------------------------------------------------------------------------------
 # 025.0195-send-a-value-to-another-thread.py
 # ----------------------------------------------------------------------------------------
-import Queue # flat_style (-> +5), global_scope:q (-> +5), global_scope:t (-> +5), imperative_style (-> +5), import:Queue, import_module:Queue, node:Import, scope:q (-> +5), scope:t (-> +5), variety:3 (-> +5), whole_span:6 (-> +5)
+from queue import Queue # global_scope:q (-> +9), import:queue:Queue, import_module:queue, import_name:Queue, node:ImportFrom, procedural_style (-> +9), scope:q (-> +9), variety:5 (-> +9), whole_span:10 (-> +9)
+from threading import Thread # import:threading:Thread, import_module:threading, import_name:Thread, node:ImportFrom
 q = Queue() # assignment:Queue, assignment_lhs_identifier:q, external_free_call:Queue, free_call:Queue, free_call_no_arguments:Queue, node:Assign, node:Call, node:Name, single_assignment:q
-t = Thread(target=worker) # argument:worker, assignment:Thread, assignment_lhs_identifier:t, assignment_rhs_atom:worker, external_free_call:Thread, free_call:Thread, free_call_with_keyword_argument:Thread:target, keyword_argument:target, loaded_variable:worker, node:Assign, node:Call, node:Name, node:keyword, single_assignment:t
-t.daemon = True # assignment:True, assignment_lhs_identifier:t, assignment_rhs_atom:True, literal:True, loaded_variable:t, node:Assign, node:Attribute, node:Name, node:NameConstant
-t.start() # loaded_variable:t, member_call:t:start, member_call_method:start, member_call_object:t, node:Attribute, node:Call, node:Expr, node:Name
+def worker(): # access_outer_scope:q (-> +3), function:worker (-> +3), function_line_count:4 (-> +3), function_returning_nothing:worker (-> +3), function_without_parameters:worker (-> +3), node:FunctionDef (-> +3)
+    while True: # infinite_while (-> +2), literal:True, loop:while (-> +2), loop_with_late_exit:while (-> +2), node:NameConstant, node:While (-> +2)
+        print(f"Hello, {q.get()}") # argument:, composition, external_free_call:print, free_call:print, free_call_without_result:print, literal:Str, loaded_variable:q, member_call:q:get, member_call_method:get, member_call_object:q, node:Attribute, node:Call, node:Expr, node:FormattedValue, node:JoinedStr, node:Name, node:Str
+        q.task_done() # loaded_variable:q, member_call:q:task_done, member_call_method:task_done, member_call_object:q, node:Attribute, node:Call, node:Expr, node:Name
+Thread(target=worker, daemon=True).start() # argument:True, argument:worker, external_free_call:Thread, free_call:Thread, free_call_with_keyword_argument:Thread:daemon, free_call_with_keyword_argument:Thread:target, keyword_argument:daemon, keyword_argument:target, literal:True, loaded_variable:worker, member_call_method:start, node:Attribute, node:Call, node:Expr, node:Name, node:NameConstant, node:keyword
 q.put("Alan") # argument:, literal:Str, loaded_variable:q, member_call:q:put, member_call_method:put, member_call_object:q, node:Attribute, node:Call, node:Expr, node:Name, node:Str
+q.join() # loaded_variable:q, member_call:q:join, member_call_method:join, member_call_object:q, node:Attribute, node:Call, node:Expr, node:Name
 
 # ----------------------------------------------------------------------------------------
 # 026.0194-create-a-2-dimensional-array.py

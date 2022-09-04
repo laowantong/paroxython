@@ -34,7 +34,7 @@
     - [`022.0243-convert-string-to-integer.py`](#program-0220243-convert-string-to-integerpy-learning-cost-528125)
     - [`023.1102-convert-real-number-to-string-with-2-decimal-places.py`](#program-0231102-convert-real-number-to-string-with-2-decimal-placespy-learning-cost-6234375)
     - [`024.0664-assign-to-string-the-japanese-word-.py`](#program-0240664-assign-to-string-the-japanese-word-py-learning-cost-4375)
-    - [`025.0195-send-a-value-to-another-thread.py`](#program-0250195-send-a-value-to-another-threadpy-learning-cost-80625)
+    - [`025.0195-send-a-value-to-another-thread.py`](#program-0250195-send-a-value-to-another-threadpy-learning-cost-190625)
     - [`026.0194-create-a-2-dimensional-array.py`](#program-0260194-create-a-2-dimensional-arraypy-learning-cost-703125)
     - [`027.0192-create-a-3-dimensional-array.py`](#program-0270192-create-a-3-dimensional-arraypy-learning-cost-703125)
     - [`027.0193-create-a-3-dimensional-array.py`](#program-0270193-create-a-3-dimensional-arraypy-learning-cost-6125)
@@ -1011,31 +1011,48 @@
 
 ---
 
-### Program `025.0195-send-a-value-to-another-thread.py` (learning cost 8.0625)
+### Program `025.0195-send-a-value-to-another-thread.py` (learning cost 19.0625)
 
 ```python
-1   import Queue
-2   q = Queue()
-3   t = Thread(target=worker)
-4   t.daemon = True
-5   t.start()
-6   q.put("Alan")
+1   from queue import Queue
+2   from threading import Thread
+3   q = Queue()
+4   def worker():
+5       while True:
+6           print(f"Hello, {q.get()}")
+7           q.task_done()
+8   Thread(target=worker, daemon=True).start()
+9   q.put("Alan")
+10  q.join()
 ```
 
 | Cost  | Taxon | Location |
 |----|----|----|
-| 0.875 | `call/class/construct` | 2, 3 |
-| 0.875 | `call/subroutine/method` | 5, 6 |
-| 0.875 | `import/third_party/Queue` | 1 |
-| 0.875 | `style/imperative/flat` | 1-6 |
-| 0.9375 | `type/boolean/literal/True` | 4 |
-| 0.9375 | `type/sequence/string/literal` | 6 |
-| 0.875 | `var/assignment/explicit` | 4 |
-| 0.9375 | `var/assignment/explicit/single` | 2, 3 |
-| 0.875 | `var/scope/global` | 1-6 |
-| 0 | `meta/count/program/sloc/6` | 1-6 |
-| 0 | `meta/count/variety/3` | 1-6 |
-| 0 | `meta/program` | 1-6 |
+| 0.875 | `call/class/construct` | 3, 8 |
+| 0.75 | `call/composition` | 6 |
+| 0.9375 | `call/subroutine/builtin/print` | 6 |
+| 0.875 | `call/subroutine/method` | 7, 8, 9 |
+| 0.984375 | `call/subroutine/method/non_sequence/dictionary/get` | 6 |
+| 0.984375 | `call/subroutine/method/sequence/string/join` | 10 |
+| 0.9375 | `def/subroutine/parameter/no` | 4-7 |
+| 0.875 | `def/subroutine/procedure` | 4-7 |
+| 0.9375 | `flow/loop/exit/late` | 5-7 |
+| 0.9375 | `flow/loop/while/infinite` | 5-7 |
+| 0.9375 | `import/standard/queue/Queue` | 1 |
+| 0.9375 | `import/standard/threading/Thread` | 2 |
+| 0.75 | `style/procedural` | 1-10 |
+| 0.9375 | `type/boolean/literal/True` | 5, 8 |
+| 0.875 | `type/non_sequence/dictionary` | 6 |
+| 0.875 | `type/sequence/string` | 10 |
+| 0.9375 | `type/sequence/string/literal` | 6, 9 |
+| 0.96875 | `type/sequence/string/literal/formatted` | 6 |
+| 0.9375 | `var/assignment/explicit/single` | 3 |
+| 0.875 | `var/scope/global` | 1-10 |
+| 0.9375 | `var/scope/outer/variable` | 4-7 |
+| 0 | `meta/count/program/sloc/10` | 1-10 |
+| 0 | `meta/count/subroutine/sloc/4` | 4-7 |
+| 0 | `meta/count/variety/5` | 1-10 |
+| 0 | `meta/program` | 1-10 |
 
 ---
 
