@@ -1,5 +1,6 @@
+# WARNING: fails under version 0.10.0 of pdoc. Revert to version 0.9.1 in the meantime.
+
 import shutil
-import sqlite3
 import subprocess
 from os.path import dirname
 from pathlib import Path
@@ -9,8 +10,6 @@ import regex  # type: ignore
 import context
 from paroxython.cli_tag import main as tag_program
 from paroxython.preprocess_source import Cleanup
-
-import draw_flow
 
 PATH = f"{Path(dirname(__file__)).parent}"
 
@@ -103,7 +102,7 @@ def resolve_new_types():
     for (filename, trigger, type_name) in data:
         source = Path(f"docs/{filename}.html").read_text()
         match = regex.search(
-            fr"{trigger}(?:</span> )?: (<function NewType\.<locals>\.new_type at 0x\w+?>)", source
+            rf"{trigger}(?:</span> )?: (<function NewType\.<locals>\.new_type at 0x\w+?>)", source
         )
         result[type_name] = match[1]
         print(f"{match[1]} -> {type_name}")
@@ -190,22 +189,22 @@ def compute_stats():
         print(f"{directory}: {total} SLOC")
         total = 50 * round(total / 50)
         (readme_text, n) = regex.subn(
-            fr"(?m)(!\[{directory} SLOC\].+?)~\d+(%20SLOC)",
-            fr"\1~{total}\2",
+            rf"(?m)(!\[{directory} SLOC\].+?)~\d+(%20SLOC)",
+            rf"\1~{total}\2",
             readme_text,
         )
         assert n > 0, f"Unable to create badge for '{directory}' SLOC."
     total = Path("paroxython/resources/spec.md").read_text().count("#### Feature")
     (readme_text, n) = regex.subn(
-        fr"(?m)(!\[spec features\].+?)-\d+(%20features)",
-        fr"\1-{total}\2",
+        rf"(?m)(!\[spec features\].+?)-\d+(%20features)",
+        rf"\1-{total}\2",
         readme_text,
     )
     assert n == 1
     total = Path("paroxython/resources/taxonomy.tsv").read_text().partition("-- EOF")[0].count("\n")
     (readme_text, n) = regex.subn(
-        fr"(?m)(!\[taxonomy mappings\].+)-\d+(%20mappings)",
-        fr"\1-{total}\2",
+        rf"(?m)(!\[taxonomy mappings\].+)-\d+(%20mappings)",
+        rf"\1-{total}\2",
         readme_text,
     )
     assert n == 1
@@ -232,19 +231,19 @@ def patch_prose():
             text,
         )
         assert n == 1, f"Unable to change the title of {slug} in nav!"
-        (text, n) = regex.subn(fr"""(?s)</div>\n<ul id="index">.+</ul>\n""", "", text)
+        (text, n) = regex.subn(rf"""(?s)</div>\n<ul id="index">.+</ul>\n""", "", text)
         assert n == 1, f"Unable to suppress the index section in prose {slug}'s nav!"
         (index_text, n) = regex.subn(
-            fr"""<li><code><a title="paroxython.{slug}".+\n""", "", index_text
+            rf"""<li><code><a title="paroxython.{slug}".+\n""", "", index_text
         )
         assert n == 1, f"Unable to remove nav url for {slug}!"
         (index_text, n) = regex.subn(
-            fr"""(?s)<dt><code class="name"><a title="paroxython\.{slug}".+?</dd>\n""",
+            rf"""(?s)<dt><code class="name"><a title="paroxython\.{slug}".+?</dd>\n""",
             "",
             index_text,
         )
         assert n == 1, f"Unable to remove module section for {slug}!"
-        (text, n) = regex.subn(fr"""(?s)<details class="source">.+</details>\n""", "", text)
+        (text, n) = regex.subn(rf"""(?s)<details class="source">.+</details>\n""", "", text)
         assert n == 1, f"Unable to suppress the source code in prose {slug}!"
         (text, n) = regex.subn(
             """href="index.html">""",
@@ -355,7 +354,7 @@ def inject_taxonomy():
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">{tree}</script>
     """
-    (text, n) = regex.subn("</head>", fr"{head}</head>", text)
+    (text, n) = regex.subn("</head>", rf"{head}</head>", text)
     assert n == 1
     index_path.write_text(text)
 
