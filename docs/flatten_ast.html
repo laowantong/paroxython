@@ -34,8 +34,8 @@ generally start with the <a href="https://en.wikipedia.org/wiki/Abstract_syntax_
 tree) of the program to analyze. For instance, when the string:</p>
 <pre><code class="python">'print(&quot;hello, world&quot;)'
 </code></pre>
-<p>&hellip; is fed to the function <code>parse()</code> of the modules <a href="https://docs.python.org/3/library/ast.html"><code>ast</code></a>
-or <a href="https://github.com/python/typed_ast"><code>typed_ast</code></a>, the following object is returned:</p>
+<p>&hellip; is fed to the function <code>parse()</code> of the module <a href="https://docs.python.org/3/library/ast.html"><code>ast</code></a>,
+the following object is returned:</p>
 <pre><code class="plain">                           Module()
                               |
                               | body[0]
@@ -96,25 +96,6 @@ to the block of lines that share the same prefix (referred by <code>\1</code>).<
 <p>That's the general principle. In the next section, we enumerate the tweaks we make to the generation
 of this text to make it more suitable for regular expression parsing.</p>
 <h2 id="implementation-details">Implementation details</h2>
-<h3 id="libraries-used">Libraries used</h3>
-<p>When Paroxython is launched from Python 3.7 or lower, the parsing of source code into an <abbr title="Abstract Syntax Tree">AST</abbr> is
-performed by the third-party library <a href="https://github.com/python/typed_ast">typed-ast</a>. To quote the
-README:</p>
-<blockquote>
-<p><code>typed_ast</code> is a Python 3 package that provides a [&hellip;] parser similar to the standard <code>ast</code> library.
-Unlike <code>ast</code>, the parsers [&hellip;] are independent of the version of Python under which they are run.
-[&hellip;] <code>typed_ast</code> runs on CPython 3.5-3.8</p>
-</blockquote>
-<p>So far so good. However:</p>
-<blockquote>
-<p><code>typed_ast</code> will not be updated to support parsing Python 3.8 and newer.</p>
-</blockquote>
-<p>This means that <code>typed_ast</code>, although convenient to parse Python 3.5 and newer, will start choping on
-Python 3.8 specific syntax, as assignment expressions.</p>
-<p>This is the reason why, when launched from Python 3.8 or higher, Paroxython switches to the parser of
-the standard library <a href="https://docs.python.org/3/library/ast.html"><code>ast</code></a>. However, the ASTs generated
-by the two libraries are not 100% identical. Wrapping their parsers requires us to erase as much
-differences as possible. Some of the functions presented below are written for this purpose.</p>
 <h3 id="on-the-fly-modification-of-the-ast">On the fly: modification of the <abbr title="Abstract Syntax Tree">AST</abbr></h3>
 <h4 id="field-reordering">Field reordering</h4>
 <p>Somewhat counterintuitively, in the original <abbr title="Abstract Syntax Tree">AST</abbr>, several pieces of information pertaining to a
@@ -291,33 +272,34 @@ merely increments a counter and associates it with any newly encountered string
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L606" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L0-L592" class="git-link">Browse GitHub</a>
 </summary>
-<pre><code class="python">import sys
+<pre><code class="python">import ast
+import sys
 from typing import Any, Callable, Match
 
 import regex  # type: ignore
 
 
 def select_ast_post_processing():
-    if sys.version_info &gt;= (3, 9):
+    if sys.version_info &gt;= (3, 10):
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
+            flat_ast = suppress_alias_pos(flat_ast)
             flat_ast = suppress_posonlyargs(flat_ast)
             flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
             flat_ast = unquote(flat_ast)
             return flat_ast
 
-    elif sys.version_info &gt;= (3, 8):
+    elif sys.version_info &gt;= (3, 9):
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
             flat_ast = suppress_posonlyargs(flat_ast)
             flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
-            flat_ast = simplify_indexes(flat_ast)
             flat_ast = unquote(flat_ast)
             return flat_ast
 
@@ -325,22 +307,17 @@ def select_ast_post_processing():
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
+            flat_ast = suppress_posonlyargs(flat_ast)
+            flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
             flat_ast = simplify_indexes(flat_ast)
             flat_ast = unquote(flat_ast)
-            flat_ast = correct_all_decorated_callable_starts(flat_ast)
             return flat_ast
 
     return post_process
 
 
-# fmt: off
-if sys.version_info &gt;= (3, 8):
-    import ast
-else:
-    from typed_ast import ast3 as ast # type: ignore
 post_process = select_ast_post_processing()
-# fmt: on
 
 
 def flatten_ast(tree) -&gt; str:
@@ -457,6 +434,13 @@ def suppress_kinds(
     return sub(&#34;&#34;, flat_ast)
 
 
+def suppress_alias_pos(
+    flat_ast: str,
+    sub: Callable = regex.compile(r&#34;(?m)^(.+/_type=alias\n).+_pos=.+\n&#34;).sub,
+) -&gt; str:
+    return sub(r&#34;\1&#34;, flat_ast)
+
+
 def suppress_posonlyargs(
     flat_ast: str,
     sub: Callable = regex.compile(r&#34;(?m)^.+/args/posonlyargs/_length=\d+\n&#34;).sub,
@@ -506,27 +490,27 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L343-L377" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L322-L357" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def select_ast_post_processing():
-    if sys.version_info &gt;= (3, 9):
+    if sys.version_info &gt;= (3, 10):
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
+            flat_ast = suppress_alias_pos(flat_ast)
             flat_ast = suppress_posonlyargs(flat_ast)
             flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
             flat_ast = unquote(flat_ast)
             return flat_ast
 
-    elif sys.version_info &gt;= (3, 8):
+    elif sys.version_info &gt;= (3, 9):
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
             flat_ast = suppress_posonlyargs(flat_ast)
             flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
-            flat_ast = simplify_indexes(flat_ast)
             flat_ast = unquote(flat_ast)
             return flat_ast
 
@@ -534,10 +518,11 @@ if __name__ == &#34;__main__&#34;:
 
         def post_process(flat_ast):
             flat_ast = suppress_kinds(flat_ast)
+            flat_ast = suppress_posonlyargs(flat_ast)
+            flat_ast = backport_all_constants(flat_ast)
             flat_ast = simplify_negative_literals(flat_ast)
             flat_ast = simplify_indexes(flat_ast)
             flat_ast = unquote(flat_ast)
-            flat_ast = correct_all_decorated_callable_starts(flat_ast)
             return flat_ast
 
     return post_process</code></pre>
@@ -551,7 +536,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L358-L365" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L348-L355" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def post_process(flat_ast):
     flat_ast = suppress_kinds(flat_ast)
@@ -573,7 +558,7 @@ depending on the <abbr title="Abstract Syntax Tree">AST</abbr> library (either t
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L389-L398" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L363-L372" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def flatten_ast(tree) -&gt; str:
     pseudo_hash.reset()
@@ -597,7 +582,7 @@ depending on the <abbr title="Abstract Syntax Tree">AST</abbr> library (either t
 <dd>The path of the current node. Defaults to <code>""</code>.</dd>
 <dt><strong><code>remove_context</code></strong> :&ensp;<code>Callable</code>, optional</dt>
 <dd>A function removing the node context encoded in the
-result of <code>ast3.dump()</code>.
+result of <code>ast.dump()</code>.
 <a href="developer_manual/index.html#default-argument-trick">Not to be explicitly provided.</a>
 Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 </dl>
@@ -609,7 +594,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L401-L450" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L375-L424" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def flatten_node(
     node: Any,
@@ -658,7 +643,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L453-L467" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L427-L441" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def simplify_negative_literals(
     flat_ast: str,
@@ -677,7 +662,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L470-L484" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L444-L458" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def simplify_indexes(
     flat_ast: str,
@@ -701,7 +686,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L487-L501" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L461-L475" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def backport_all_constants(
     flat_ast: str,
@@ -719,7 +704,7 @@ Defaults to <code>regex.compile(r", ctx=.+?\(\)").sub</code>.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L504-L515" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L478-L489" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def replace_one_constant(m: Match) -&gt; str:
     if m[3].startswith((&#34;&#39;&#34;, &#39;&#34;&#39;)):
@@ -748,7 +733,7 @@ library <code>ast</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L518-L537" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L492-L511" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def correct_all_decorated_callable_starts(
     flat_ast: str,
@@ -766,7 +751,7 @@ library <code>ast</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L540-L543" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L514-L517" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def replace_one_decorated_callable_start(m: Match) -&gt; str:
     start = int(m[5]) + int(m[6])  # number of decorators + line number of the first decorator
@@ -782,7 +767,7 @@ library <code>ast</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L546-L554" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L520-L528" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def unquote(
     flat_ast: str,
@@ -800,7 +785,7 @@ library <code>ast</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L557-L565" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L531-L539" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def suppress_kinds(
     flat_ast: str,
@@ -809,16 +794,35 @@ library <code>ast</code>.</p>
     return sub(&#34;&#34;, flat_ast)</code></pre>
 </details>
 </dd>
-<dt id="paroxython.flatten_ast.suppress_posonlyargs"><code class="name flex">
-<span>def <span class="ident">suppress_posonlyargs</span></span>(<span>flat_ast: str, <br>sub: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
+<dt id="paroxython.flatten_ast.suppress_alias_pos"><code class="name flex">
+<span>def <span class="ident">suppress_alias_pos</span></span>(<span>flat_ast: str, <br>sub: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Starting from Python 3.8, suppress positional-only parameters in function definitions.</p>
+<div class="desc"><p>Suppress the <abbr title="Abstract Syntax Tree">AST</abbr> line following import aliases. Since Python 3.10, it contains a position,
+useless in the following.</p>
 <p>Argument <code>sub</code> <a href="developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L568-L576" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L542-L551" class="git-link">Browse GitHub</a>
+</summary>
+<pre><code class="python">def suppress_alias_pos(
+    flat_ast: str,
+    sub: Callable = regex.compile(r&#34;(?m)^(.+/_type=alias\n).+_pos=.+\n&#34;).sub,
+) -&gt; str:
+    return sub(r&#34;\1&#34;, flat_ast)</code></pre>
+</details>
+</dd>
+<dt id="paroxython.flatten_ast.suppress_posonlyargs"><code class="name flex">
+<span>def <span class="ident">suppress_posonlyargs</span></span>(<span>flat_ast: str, <br>sub: Callable = &lt;built-in method sub of regex&gt;<br>) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Suppress positional-only parameters in function definitions.</p>
+<p>Argument <code>sub</code> <a href="developer_manual/index.html#default-argument-trick">not to be explicitly provided.</a></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L554-L562" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def suppress_posonlyargs(
     flat_ast: str,
@@ -840,7 +844,7 @@ library <code>ast</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L582-L599" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L568-L585" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">class PseudoHashFactory:
     def __init__(self):
@@ -867,7 +871,7 @@ library <code>ast</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L588-L591" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L574-L577" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def reset(self):
     self.i = 0
@@ -882,7 +886,7 @@ library <code>ast</code>.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L593-L599" class="git-link">Browse GitHub</a>
+<a href="https://github.com/laowantong/paroxython/blob/master/paroxython/flatten_ast.py#L579-L585" class="git-link">Browse GitHub</a>
 </summary>
 <pre><code class="python">def __call__(self, x):
     if x not in self.cache:
@@ -908,7 +912,6 @@ library <code>ast</code>.</p>
 <ul>
 <li><a href="#motivation-and-purpose">Motivation and purpose</a></li>
 <li><a href="#implementation-details">Implementation details</a><ul>
-<li><a href="#libraries-used">Libraries used</a></li>
 <li><a href="#on-the-fly-modification-of-the-ast">On the fly: modification of the AST</a><ul>
 <li><a href="#field-reordering">Field reordering</a></li>
 <li><a href="#children-numbering">Children numbering</a></li>
@@ -950,6 +953,7 @@ library <code>ast</code>.</p>
 <li><code><a title="paroxython.flatten_ast.replace_one_decorated_callable_start" href="#paroxython.flatten_ast.replace_one_decorated_callable_start">replace_one_decorated_callable_start</a></code></li>
 <li><code><a title="paroxython.flatten_ast.unquote" href="#paroxython.flatten_ast.unquote">unquote</a></code></li>
 <li><code><a title="paroxython.flatten_ast.suppress_kinds" href="#paroxython.flatten_ast.suppress_kinds">suppress_kinds</a></code></li>
+<li><code><a title="paroxython.flatten_ast.suppress_alias_pos" href="#paroxython.flatten_ast.suppress_alias_pos">suppress_alias_pos</a></code></li>
 <li><code><a title="paroxython.flatten_ast.suppress_posonlyargs" href="#paroxython.flatten_ast.suppress_posonlyargs">suppress_posonlyargs</a></code></li>
 </ul>
 </li>
