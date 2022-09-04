@@ -51,7 +51,7 @@ reformat_spec(SPEC_PATH)
 
 for (suffix, ast_library) in [("standard_ast", ast), ("typed_ast", ast3)]:
     flatten_ast.ast = ast_library
-    flatten_ast.select_ast_post_processing(suffix)
+    flatten_ast.select_ast_post_processing()
     specs = []
     for match in extract_specs(SPEC_PATH):
         (label_name, language, spec, source) = match.groups()
