@@ -75,10 +75,7 @@ def test_malformed_example():
     source = "if foo():\nbar() # wrong indentation"
     result = parse(Program(source=source, labels=[], taxa=[], addition={}, deletion={}))
     print(result)
-    assert result[0].name in (
-        "ast_construction:IndentationError",  # under Python 3.7 ast standard library
-        "ast_construction:SyntaxError",  # under Python 3.7 with typed_ast.ast3 library
-    )
+    assert result[0].name == "ast_construction:IndentationError"
 
 
 def test_empty_example():

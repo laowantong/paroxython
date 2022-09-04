@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "paroxython"
-version = "0.6.4"
+version = "0.7.0"
 description = "Search Python code for algorithmic features"
 authors = ["Aristide Grange"]
 license = "MIT"
@@ -34,7 +34,6 @@ classifiers = [
 docopt = "^0.6.2"
 python = "^3.8"
 regex = "^2022.8.17"
-typed-ast = "^1.5.4"
 typing-extensions = "^4.3.0"
 
 [tool.poetry.dev-dependencies]
