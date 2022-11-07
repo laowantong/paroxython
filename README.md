@@ -205,7 +205,7 @@ As you can see, in this program, Paroxython identifies among others:
 - a simple [tuple assignment](https://en.wikibooks.org/wiki/Python_Programming/Tuples#Packing_and_Unpacking) (`var/assignment/explicit/parallel`). Note that we distinguish between explicit (with `=`) and implicit (parameters and iteration variables) assignments;
 - a “sliding” tuple assignment (`var/assignment/explicit/parallel/slide`). If the denomination is unique to us, the pattern itself occurs in a number of programs: implementations of [C-finite sequences](https://en.wikipedia.org/wiki/Constant-recursive_sequence) with C greater than 1, [Greatest Common Divisor](https://en.wikipedia.org/wiki/Greatest_common_divisor), [Quicksort](https://en.wikipedia.org/wiki/Quicksort), etc.
 - four local variables (`var/scope/local`);
-- an estimation of the variety of concepts involved (`meta/count/variety/***`), depending on the number of lines, features and distinct features.
+- an estimation of the variety of concepts involved (`meta/count/variety/3`), depending on the number of lines, features and distinct features.
 
 The magic command `%%paroxython` (corresponding to the subcommand [`tag`](https://laowantong.github.io/paroxython/cli_tag.html)) only scratches the surface of the system. As shown before, to estimate the learning cost of the features and get actionable recommendations, you will need first to construct the tag database with [`collect`](https://laowantong.github.io/paroxython/cli_collect.html), and then call [`recommend`](https://laowantong.github.io/paroxython/cli_recommend.html) on a pipeline of yours.
 
