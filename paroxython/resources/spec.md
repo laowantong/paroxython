@@ -5696,6 +5696,7 @@ Match sequential loops, along with their iteration variable(s).
 [⬇️ feature `accumulate_some_elements`](#feature-accumulate_some_elements)  
 [⬇️ feature `find_best_element`](#feature-find_best_element)  
 [⬇️ feature `find_best_element_index`](#feature-find_best_element_index)  
+[⬇️ feature `find_first_good_element`](#feature-find_first_good_element)  
 [⬇️ feature `for_range`](#feature-for_range)  
 [⬇️ feature `nested_for`](#feature-nested_for)  
 [⬇️ feature `universal_quantification|existential_quantification`](#feature-universal_quantificationexistential_quantification)  
@@ -5880,10 +5881,6 @@ GROUP BY path
 #### Feature `for_each`
 
 Iterate over the elements of a (named) collection.
-
-##### Derivations
-
-[⬇️ feature `find_first_good_element`](#feature-find_first_good_element)  
 
 ##### Specification
 
@@ -7461,7 +7458,7 @@ Linear search. Return the first element of a sequence satisfying a predicate.
 
 ##### Derivations
 
-[⬆️ feature `for_each`](#feature-for_each)  
+[⬆️ feature `for`](#feature-for)  
 [⬆️ feature `if`](#feature-if)  
 [⬆️ feature `if_test_atom`](#feature-if_test_atom)  
 [⬆️ feature `return`](#feature-return)  
@@ -7473,7 +7470,7 @@ SELECT "find_first_good_element",
        lp.name_suffix,
        lp.span,
        lp.path
-FROM t_for_each lp -- A for each loop...
+FROM t_for lp -- A for each loop...
 JOIN t_if ON (t_if.path GLOB lp.path || "*-")-- enclosing an if statement...
 JOIN t_if_test_atom x ON (x.span_start = t_if.span_start
                           AND x.name_suffix = lp.name_suffix)-- which tests the iteration variable...
@@ -7487,7 +7484,12 @@ JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
 1   def search_element(iterable):
 2       for element in iterable:
 3           if is_good(element):
-4                return element
+4               return element
+5   def largest_prime_below(n):
+6       for i in range(n - 1, 1, -1):
+7           if is_prime(i):
+8               return i
+9       return None
 ```
 
 ##### Matches
@@ -7495,6 +7497,7 @@ JOIN t_return ret ON (ret.path GLOB t_if.path || "*-" -- and returns...
 | Label | Lines |
 |:--|:--|
 | `find_first_good_element:element` | 2-4 |
+| `find_first_good_element:i` | 6-8 |
 
 --------------------------------------------------------------------------------
 
