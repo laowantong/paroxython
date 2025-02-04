@@ -17,11 +17,11 @@
 """
 
 import sys
-import pkg_resources
+from importlib.metadata import distribution, PackageNotFoundError
 
 try:
-    PAROXYTHON_VERSION = pkg_resources.get_distribution("paroxython").version
-except pkg_resources.DistributionNotFound:
+    PAROXYTHON_VERSION = distribution("paroxython").version
+except PackageNotFoundError:
     PAROXYTHON_VERSION = "(unknown version)"  # For tests during CI
 
 if "ipykernel" in sys.modules:
