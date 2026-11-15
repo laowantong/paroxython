@@ -4,7 +4,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/73432ed4c5294326ba6279bbbb0fe2e6)](https://www.codacy.com/manual/laowantong/paroxython)
 [![Updates](https://pyup.io/repos/github/laowantong/paroxython/shield.svg)](https://pyup.io/repos/github/laowantong/paroxython/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/paroxython)
-[![GitHub Release](https://img.shields.io/github/release/laowantong/paroxython.svg?style=flat)]()
+[![PyPI version](https://img.shields.io/pypi/v/paroxython?style=flat)](https://pypi.org/project/paroxython/)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/laowantong/paroxython)
 [![paroxython SLOC](https://img.shields.io/badge/main%20program-~1850%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/paroxython)
 [![tests SLOC](https://img.shields.io/badge/tests-~2550%20SLOC-blue)](https://github.com/laowantong/paroxython/blob/master/tests)
@@ -157,7 +157,7 @@ After checking the files in `dist/`, publish only the intended release, for
 example:
 
 ```shell
-uv publish dist/paroxython-0.7.3.tar.gz dist/paroxython-0.7.3-py3-none-any.whl
+uv publish dist/paroxython-0.7.4.tar.gz dist/paroxython-0.7.4-py3-none-any.whl
 ```
 
 ### IPython magic command
