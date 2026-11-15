@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      UV_PYTHON_PREFERENCE: only-managed
     strategy:
       matrix:
         python-version:
@@ -20,12 +22,9 @@ jobs:
           - '3.13'
     steps:
       - uses: actions/checkout@v4
-      - name: 'Set up Python ${{ matrix.python-version }}'
-        uses: actions/setup-python@v5
-        with:
-          python-version: '${{ matrix.python-version }}'
       - uses: astral-sh/setup-uv@v6
-      - run: uv sync --locked
-      - run: uv run --locked pytest --cov=./ --cov-report=xml
-      - run: uv build
+      - run: uv python install ${{ matrix.python-version }}
+      - run: uv sync --locked --python ${{ matrix.python-version }}
+      - run: uv run --locked --python ${{ matrix.python-version }} pytest --cov=./ --cov-report=xml
+      - run: uv build --python ${{ matrix.python-version }}
       - uses: codecov/codecov-action@v5
