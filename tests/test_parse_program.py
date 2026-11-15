@@ -172,7 +172,7 @@ label_captures = [
         ],
     },
 ]
-label_captures = (d.values() for d in label_captures)
+label_captures = [(d["name"], d["captures"], d["expected"]) for d in label_captures]
 
 
 @pytest.mark.parametrize("name, captures, expected", label_captures)
