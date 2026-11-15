@@ -284,7 +284,7 @@ class Recommendations:
                 toc.append(f"    - [`{name}`](#{slug})")
                 contents.append(f"\n### {title}")
                 contents.append(f"\n```python\n{add_line_numbers(program_info['source'])}\n```")
-                contents.append(f"\n<details>\n  <summary>⊕</summary>\n  ")
+                contents.append(f"\n<details>\n  <summary>⊕</summary>")
                 contents.append("\n| Cost  | Taxon | Location |")
                 contents.append("|" + "----|" * 3)
                 items = sorted(

@@ -21,6 +21,9 @@
 9   9   O/C/H/B  O/J
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0 | `O` | 7 |
@@ -37,6 +40,8 @@
 | 0 | `Y` | 6 |
 | 0 | `Y/E` | 8 |
 | 0.25 | `Y/T` | 1 |
+
+</details>
 
 ---
 
@@ -56,6 +61,9 @@
 9   9   X/S/M/L/R/D  X/S/M/L/V  Y/T/Q  O/C/H/B/I
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0 | `O` | 2, 6 |
@@ -69,6 +77,8 @@
 | 0 | `Y` | 1 |
 | 0.25 | `Y/T` | 7 |
 | 0.375 | `Y/T/Q` | 1, 9 |
+
+</details>
 
 ---
 

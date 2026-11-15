@@ -28,6 +28,9 @@
 8       print()
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.25 | `call/composition` | 7 |
@@ -52,6 +55,8 @@
 | 0 | `meta/count/variety/3` | 1-8 |
 | 0 | `meta/program` | 1-8 |
 
+</details>
+
 ---
 
 ## 2 programs of learning cost in [2, 4[
@@ -64,6 +69,9 @@
 3       print("This generation has {} babies".format(babies))
 4       parents, babies = (babies, parents + babies)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -86,6 +94,8 @@
 | 0 | `meta/count/variety/2` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
+</details>
+
 ---
 
 ### Program `08_arguments.py` (learning cost 3.3125)
@@ -98,6 +108,9 @@
 5   except ValueError:
 6       print("Please supply integer arguments")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -119,6 +132,8 @@
 | 0 | `meta/count/program/sloc/6` | 1-6 |
 | 0 | `meta/count/variety/3` | 1-6 |
 | 0 | `meta/program` | 1-6 |
+
+</details>
 
 ---
 
@@ -142,6 +157,9 @@
 13      if item.tag == "td" and item.text not in pantry:
 14          print("{}: {} {}".format(item.text, amt.text, unit.text))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -169,6 +187,8 @@
 | 0 | `meta/count/variety/3` | 1-14 |
 | 0 | `meta/program` | 1-14 |
 
+</details>
+
 ---
 
 ### Program `20_prime_numbers.py` (learning cost 4.125)
@@ -186,6 +206,9 @@
 10          break
 11      print(p)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -217,6 +240,8 @@
 | 0 | `meta/count/variety/6` | 1-11 |
 | 0 | `meta/program` | 1-11 |
 
+</details>
+
 ---
 
 ### Program `10_time.py` (learning cost 4.5)
@@ -240,6 +265,9 @@
 16  else:
 17      print("Unknown, AFK or sleeping!")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -266,6 +294,8 @@
 | 0 | `meta/count/variety/5` | 1-17 |
 | 0 | `meta/program` | 1-17 |
 
+</details>
+
 ---
 
 ### Program `12_classes.py` (learning cost 5.046875)
@@ -284,6 +314,9 @@
 11  my_account.withdraw(50)
 12  print(my_account.balance, my_account.overdrawn())
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -317,6 +350,8 @@
 | 0 | `meta/count/variety/4` | 1-12 |
 | 0 | `meta/program` | 1-12 |
 
+</details>
+
 ---
 
 ### Program `33_guess_the_number.py` (learning cost 5.3125)
@@ -341,6 +376,9 @@
 17  else:
 18      print("Nope. The number I was thinking of was {}".format(number))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -373,6 +411,8 @@
 | 0 | `meta/count/variety/4` | 1-18 |
 | 0 | `meta/program` | 1-18 |
 
+</details>
+
 ---
 
 ### Program `14_median.py` (learning cost 5.8125)
@@ -386,6 +426,9 @@
 6       else:
 7           return (copy[int(size / 2 - 1)] + copy[int(size / 2)]) / 2
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -414,6 +457,8 @@
 | 0 | `meta/count/subroutine/sloc/7` | 1-7 |
 | 0 | `meta/count/variety/2` | 1-7 |
 | 0 | `meta/program` | 1-7 |
+
+</details>
 
 ---
 

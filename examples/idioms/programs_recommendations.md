@@ -234,6 +234,9 @@
 2   print("Hello World")
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/subroutine/builtin/print` | 2 |
@@ -245,6 +248,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `001.1159-print-hello-world.py` (learning cost 3.5)
@@ -252,6 +257,9 @@
 ```python
 1   print("Hello World")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -263,6 +271,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `002.0011-print-hello-10-times.py` (learning cost 9.0625)
@@ -271,6 +281,9 @@
 1   for i in range(10):
 2       print("Hello")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -288,6 +301,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `002.1493-print-hello-10-times.py` (learning cost 6.234375)
@@ -295,6 +310,9 @@
 ```python
 1   print("Hello\n" * 10)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -308,6 +326,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -317,6 +337,9 @@
 1   print("Hello\n" * 10)
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/subroutine/builtin/print` | 1 |
@@ -330,6 +353,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `003.0019-create-a-procedure.py` (learning cost 7.875)
@@ -338,6 +363,9 @@
 1   def finish(name):
 2       print("My job here is done. Goodbye " + name)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -355,6 +383,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `003.2372-create-a-procedure.py` (learning cost 4.0625)
@@ -363,6 +393,9 @@
 1   def a():
 2       pass
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -376,6 +409,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `004.0024-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 7.875)
@@ -384,6 +419,9 @@
 1   def square(x):
 2       return x * x
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -401,6 +439,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `004.2921-create-a-function-which-returns-the-square-of-an-integer.py` (learning cost 8.8125)
@@ -409,6 +449,9 @@
 1   def square(x):
 2       return x ** 2
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -427,6 +470,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `005.0663-create-a-2d-point-data-structure.py` (learning cost 2.4375)
@@ -439,6 +484,9 @@
 5       y: float
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `def/class` | 3-5 |
@@ -448,6 +496,8 @@
 | 0 | `meta/count/variety/3` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
+</details>
+
 ---
 
 ### Program `006.0032-iterate-over-list-values.py` (learning cost 5.1875)
@@ -456,6 +506,9 @@
 1   for x in items:
 2       doSomething(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -469,6 +522,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `007.0183-iterate-over-list-indexes-and-values.py` (learning cost 7.25)
@@ -477,6 +532,9 @@
 1   for i, x in enumerate(items):
 2       print(i, x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -492,6 +550,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `008.0039-initialize-a-new-map-associative-array.py` (learning cost 6.25)
@@ -499,6 +559,9 @@
 ```python
 1   x = {"one": 1, "two": 2}
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -513,6 +576,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `009.1410-create-a-binary-tree-data-structure.py` (learning cost 9.796875)
@@ -524,6 +589,9 @@
 4           self.left = None
 5           self.right = None
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -544,6 +612,8 @@
 | 0 | `meta/count/variety/2` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
+</details>
+
 ---
 
 ### Program `009.3176-create-a-binary-tree-data-structure.py` (learning cost 8.921875)
@@ -555,6 +625,9 @@
 4           self._left_child = left_child
 5           self._right_child = right_child
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -574,6 +647,8 @@
 | 0 | `meta/count/variety/2` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
+</details>
+
 ---
 
 ### Program `010.0182-shuffle-a-list.py` (learning cost 3.3125)
@@ -582,6 +657,9 @@
 1   from random import shuffle
 2   shuffle(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -593,6 +671,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `010.1478-shuffle-a-list.py` (learning cost 4.34375)
@@ -601,6 +681,9 @@
 1   import random
 2   random.shuffle(list)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -613,6 +696,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `011.0047-pick-a-random-element-from-a-list.py` (learning cost 4.34375)
@@ -621,6 +706,9 @@
 1   import random
 2   random.choice(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -633,6 +721,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `012.0181-check-if-list-contains-a-value.py` (learning cost 2.375)
@@ -640,6 +730,9 @@
 ```python
 1   x in list
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -650,6 +743,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `013.0574-iterate-over-map-keys-and-values.py` (learning cost 8.109375)
@@ -658,6 +753,9 @@
 1   for k, v in mymap.items():
 2       print(k, v)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -674,6 +772,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `014.0185-pick-uniformly-a-random-floating-point-number-in-ab.py` (learning cost 9.71875)
@@ -683,6 +783,9 @@
 2   def pick(a, b):
 3       return random.randrange(a, b)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -702,6 +805,8 @@
 | 0 | `meta/count/variety/2` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `014.3410-pick-uniformly-a-random-floating-point-number-in-ab.py` (learning cost 4.34375)
@@ -710,6 +815,9 @@
 1   import random
 2   random.uniform(a, b)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -722,6 +830,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `015.0184-pick-uniformly-a-random-integer-in-ab.py` (learning cost 4.34375)
@@ -730,6 +840,9 @@
 1   import random
 2   random.randint(a, b)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -741,6 +854,8 @@
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
+
+</details>
 
 ---
 
@@ -754,6 +869,9 @@
 5       f(bt)
 6       dfs(bt.right)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -775,6 +893,8 @@
 | 0 | `meta/count/variety/4` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
+</details>
+
 ---
 
 ### Program `017.1103-create-a-tree-data-structure.py` (learning cost 12.671875)
@@ -785,6 +905,9 @@
 3           self.value = value
 4           self.children = list(children)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -808,6 +931,8 @@
 | 0 | `meta/count/variety/2` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
+</details>
+
 ---
 
 ### Program `018.2084-depth-first-traversing-of-a-tree.py` (learning cost 12.46875)
@@ -818,6 +943,9 @@
 3       for child in root:
 4           DFS(f, child)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -840,6 +968,8 @@
 | 0 | `meta/count/variety/2` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
+</details>
+
 ---
 
 ### Program `019.0197-reverse-a-list.py` (learning cost 4.375)
@@ -847,6 +977,9 @@
 ```python
 1   x = reversed(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -859,6 +992,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `019.1983-reverse-a-list.py` (learning cost 5.3125)
@@ -866,6 +1001,9 @@
 ```python
 1   y = x[::-1]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -879,6 +1017,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `019.3164-reverse-a-list.py` (learning cost 3.484375)
@@ -886,6 +1026,9 @@
 ```python
 1   x.reverse()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -897,6 +1040,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `020.0573-return-two-values.py` (learning cost 13.4375)
@@ -907,6 +1052,9 @@
 3           if x in item:
 4               return idx, item.index(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -930,6 +1078,8 @@
 | 0 | `meta/count/variety/2` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
+</details>
+
 ---
 
 ### Program `021.0084-swap-values-of-variables-a-and-b.py` (learning cost 4.40625)
@@ -937,6 +1087,9 @@
 ```python
 1   a, b = b, a
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -949,6 +1102,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `022.0243-convert-string-to-integer.py` (learning cost 5.28125)
@@ -956,6 +1111,9 @@
 ```python
 1   i = int(s)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -969,6 +1127,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `023.1102-convert-real-number-to-string-with-2-decimal-places.py` (learning cost 6.234375)
@@ -976,6 +1136,9 @@
 ```python
 1   s = "{:.2f}".format(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -990,6 +1153,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `024.0664-assign-to-string-the-japanese-word-.py` (learning cost 4.375)
@@ -997,6 +1162,9 @@
 ```python
 1   s = "ネコ"
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1008,6 +1176,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -1025,6 +1195,9 @@
 9   q.put("Alan")
 10  q.join()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1054,6 +1227,8 @@
 | 0 | `meta/count/variety/5` | 1-10 |
 | 0 | `meta/program` | 1-10 |
 
+</details>
+
 ---
 
 ### Program `026.0194-create-a-2-dimensional-array.py` (learning cost 7.03125)
@@ -1061,6 +1236,9 @@
 ```python
 1   x = [[0 for j in xrange(n)] for i in xrange(m)]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1076,6 +1254,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `027.0192-create-a-3-dimensional-array.py` (learning cost 7.03125)
@@ -1083,6 +1263,9 @@
 ```python
 1   x = [[[0 for k in xrange(p)] for j in xrange(n)] for i in xrange(m)]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1098,6 +1281,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `027.0193-create-a-3-dimensional-array.py` (learning cost 6.125)
@@ -1106,6 +1291,9 @@
 1   import numpy
 2   x = numpy.zeros((m, n, p))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1120,6 +1308,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `028.0350-sort-by-a-property.py` (learning cost 7.1875)
@@ -1127,6 +1317,9 @@
 ```python
 1   items = sorted(items, key=lambda x: x.p)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1142,6 +1335,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `029.0199-remove-item-from-list-by-its-index.py` (learning cost 3.25)
@@ -1149,6 +1344,9 @@
 ```python
 1   del items[i]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1160,6 +1358,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `030.0189-parallelize-execution-of-1000-independent-tasks.py` (learning cost 11.78125)
@@ -1170,6 +1370,9 @@
 3   for i in range(1, 1001):
 4       pool.apply_async(f, [i])
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1190,6 +1393,8 @@
 | 0 | `meta/count/variety/2` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
+</details>
+
 ---
 
 ### Program `031.0188-recursive-factorial-simple.py` (learning cost 14.9375)
@@ -1201,6 +1406,9 @@
 4       else:
 5           return i * f(i - 1)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1226,6 +1434,8 @@
 | 0 | `meta/count/variety/3` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
+</details>
+
 ---
 
 ### Program `032.0196-integer-exponentiation-by-squaring.py` (learning cost 7.875)
@@ -1234,6 +1444,9 @@
 1   def exp(x, n):
 2       return x ** n
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1251,6 +1464,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `033.1420-atomically-read-and-update-variable.py` (learning cost 5.1875)
@@ -1265,6 +1480,9 @@
 7       lock.release()
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `call/subroutine` | 5 |
@@ -1277,6 +1495,8 @@
 | 0 | `meta/count/variety/2` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
+</details>
+
 ---
 
 ### Program `034.0625-create-a-set-of-objects.py` (learning cost 7.53125)
@@ -1286,6 +1506,9 @@
 2       pass
 3   x = set(T())
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1302,6 +1525,8 @@
 | 0 | `meta/count/variety/2` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `035.0667-first-class-function--compose.py` (learning cost 11.1875)
@@ -1310,6 +1535,9 @@
 1   def compose(f, g):
 2       return lambda a: g(f(a))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1330,6 +1558,8 @@
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
+
+</details>
 
 ---
 
@@ -1340,6 +1570,9 @@
 2       return lambda x: g(f(x))
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `call/composition` | 2 |
@@ -1359,6 +1592,8 @@
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
+
+</details>
 
 ---
 
@@ -1372,6 +1607,9 @@
 5       return add
 6   print(f(2)(1))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1396,6 +1634,8 @@
 | 0 | `meta/count/variety/3` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
+</details>
+
 ---
 
 ### Program `038.0186-extract-a-substring.py` (learning cost 5.1875)
@@ -1403,6 +1643,9 @@
 ```python
 1   t = s[i:j]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1416,6 +1659,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `039.0571-check-if-string-contains-a-word.py` (learning cost 4.1875)
@@ -1423,6 +1668,9 @@
 ```python
 1   ok = word in s
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1434,6 +1682,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -1454,6 +1704,9 @@
 12              self[l2].add(l1)
 13  G = Graph((0, 1, 2, 3), (1, 4, 2))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1494,6 +1747,8 @@
 | 0 | `meta/count/variety/4` | 1-13 |
 | 0 | `meta/program` | 1-13 |
 
+</details>
+
 ---
 
 ### Program `041.0187-reverse-a-string.py` (learning cost 8.984375)
@@ -1501,6 +1756,9 @@
 ```python
 1   t = s.decode("utf8")[::-1].encode("utf8")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1518,6 +1776,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `041.2714-reverse-a-string.py` (learning cost 5.3125)
@@ -1525,6 +1785,9 @@
 ```python
 1   t = s[::-1]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1537,6 +1800,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -1552,6 +1817,9 @@
 7       except Exception:
 8           continue
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1572,6 +1840,8 @@
 | 0 | `meta/count/variety/4` | 1-8 |
 | 0 | `meta/program` | 1-8 |
 
+</details>
+
 ---
 
 ### Program `042.3168-continue-outer-loop.py` (learning cost 8.84375)
@@ -1583,6 +1853,9 @@
 4               continue
 5           print(v)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1599,6 +1872,8 @@
 | 0 | `meta/count/program/sloc/5` | 1-5 |
 | 0 | `meta/count/variety/3` | 1-5 |
 | 0 | `meta/program` | 1-5 |
+
+</details>
 
 ---
 
@@ -1617,6 +1892,9 @@
 10  except BreakOuterLoop:
 11      pass
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1641,6 +1919,8 @@
 | 0 | `meta/count/variety/5` | 1-11 |
 | 0 | `meta/program` | 1-11 |
 
+</details>
+
 ---
 
 ### Program `043.2733-break-outer-loop.py` (learning cost 19.6875)
@@ -1654,6 +1934,9 @@
 6       return None
 7   print(loop_breaking(([1, 2, 3], [4, 5, 6], [7, 8, 9]), 6))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1684,6 +1967,8 @@
 | 0 | `meta/count/variety/2` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
+</details>
+
 ---
 
 ### Program `044.0190-insert-element-in-list.py` (learning cost 3.484375)
@@ -1691,6 +1976,9 @@
 ```python
 1   s.insert(i, x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1702,6 +1990,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `045.0570-pause-execution-for-5-seconds.py` (learning cost 6.15625)
@@ -1710,6 +2000,9 @@
 1   import time
 2   time.sleep(5)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1724,6 +2017,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `046.0191-extract-beginning-of-string-prefix.py` (learning cost 6.125)
@@ -1731,6 +2026,9 @@
 ```python
 1   t = s[:5]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1745,6 +2043,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `047.0198-extract-string-suffix.py` (learning cost 6.125)
@@ -1752,6 +2052,9 @@
 ```python
 1   t = s[-5:]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1766,6 +2069,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `048.0210-multi-line-string-literal.py` (learning cost 4.421875)
@@ -1775,6 +2080,9 @@
 2   Dewey
 3   Louie"""
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1787,6 +2095,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `049.0242-split-a-space-separated-string.py` (learning cost 5.296875)
@@ -1794,6 +2104,9 @@
 ```python
 1   chunks = s.split()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1807,6 +2120,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `050.0572-make-an-infinite-loop.py` (learning cost 4.3125)
@@ -1815,6 +2130,9 @@
 1   while True:
 2       pass
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1827,6 +2145,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `051.0230-check-if-map-contains-key.py` (learning cost 2.375)
@@ -1834,6 +2154,9 @@
 ```python
 1   k in m
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1844,6 +2167,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `052.0666-check-if-map-contains-value.py` (learning cost 4.234375)
@@ -1851,6 +2176,9 @@
 ```python
 1   v in map.values()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1863,6 +2191,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `053.0240-join-a-list-of-strings.py` (learning cost 6.234375)
@@ -1870,6 +2200,9 @@
 ```python
 1   y = ", ".join(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1884,6 +2217,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `053.1933-join-a-list-of-strings.py` (learning cost 8.796875)
@@ -1891,6 +2226,9 @@
 ```python
 1   y = ", ".join(map(str, x))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1908,6 +2246,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `054.0241-compute-sum-of-integers.py` (learning cost 4.375)
@@ -1915,6 +2255,9 @@
 ```python
 1   s = sum(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1927,6 +2270,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `055.0575-convert-integer-to-string.py` (learning cost 5.28125)
@@ -1934,6 +2279,9 @@
 ```python
 1   s = str(i)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1947,6 +2295,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `056.1424-launch-1000-parallel-tasks-and-wait-for-completion.py` (learning cost 12.5625)
@@ -1959,6 +2309,9 @@
 5       p.map(func=f, iterable=range(1, 1001))
 6   print("Finished")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -1981,6 +2334,8 @@
 | 0 | `meta/count/variety/3` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
+</details>
+
 ---
 
 ### Program `057.0260-filter-list.py` (learning cost 5.25)
@@ -1988,6 +2343,9 @@
 ```python
 1   y = filter(p, x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2001,6 +2359,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `057.3173-filter-list.py` (learning cost 6.0625)
@@ -2008,6 +2368,9 @@
 ```python
 1   y = [element for element in x if p(element)]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2022,6 +2385,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `058.0665-extract-file-content-to-a-string.py` (learning cost 5.25)
@@ -2029,6 +2394,9 @@
 ```python
 1   lines = open(f).read()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2042,6 +2410,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `059.0668-write-to-standard-error-stream.py` (learning cost 4.40625)
@@ -2050,6 +2420,9 @@
 1   import sys
 2   print(x, "is negative", file=sys.stderr)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2062,6 +2435,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `060.1084-read-command-line-argument.py` (learning cost 6.0)
@@ -2070,6 +2445,9 @@
 1   import sys
 2   x = sys.argv[1]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2084,6 +2462,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `061.0576-get-current-date.py` (learning cost 5.1875)
@@ -2092,6 +2472,9 @@
 1   import datetime
 2   d = datetime.datetime.now()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2105,6 +2488,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `062.1091-find-substring-position.py` (learning cost 5.296875)
@@ -2112,6 +2497,9 @@
 ```python
 1   i = x.find(y)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2125,6 +2513,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `063.1088-replace-fragment-of-a-string.py` (learning cost 5.296875)
@@ -2132,6 +2522,9 @@
 ```python
 1   x2 = x.replace(y, z)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2145,6 +2538,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `064.0274-big-integer--value-3-power-247.py` (learning cost 6.125)
@@ -2152,6 +2547,9 @@
 ```python
 1   x = 3 ** 247
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2166,6 +2564,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `065.1085-format-decimal-number.py` (learning cost 6.234375)
@@ -2173,6 +2573,9 @@
 ```python
 1   s = "{:.1%}".format(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2187,6 +2590,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `066.0672-big-integer-exponentiation.py` (learning cost 4.3125)
@@ -2194,6 +2599,9 @@
 ```python
 1   z = x ** n
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2206,6 +2614,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `067.1426-binomial-coefficient-n-choose-k.py` (learning cost 10.5)
@@ -2215,6 +2625,9 @@
 2   def binom(n, k):
 3       return math.factorial(n) // math.factorial(k) // math.factorial(n - k)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2235,6 +2648,8 @@
 | 0 | `meta/count/variety/1` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `068.2271-create-a-bitset.py` (learning cost 12.375)
@@ -2244,6 +2659,9 @@
 2   import math
 3   x = bytearray(int(math.ceil(n / 8.0)))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2265,6 +2683,8 @@
 | 0 | `meta/count/variety/2` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `069.1086-seed-random-generator.py` (learning cost 4.3125)
@@ -2273,6 +2693,9 @@
 1   import random
 2   rand = random.Random(s)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2285,6 +2708,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `070.1087-use-clock-as-random-generator-seed.py` (learning cost 4.3125)
@@ -2293,6 +2718,9 @@
 1   import random
 2   rand = random.Random()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2305,6 +2733,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `071.0379-echo-program-implementation.py` (learning cost 8.796875)
@@ -2313,6 +2743,9 @@
 1   import sys
 2   print(" ".join(sys.argv[1:]))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2330,6 +2763,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `073.0673-create-a-factory.py` (learning cost 10.5625)
@@ -2339,6 +2774,9 @@
 2       if issubclass(a_class, Parent):
 3           return a_class(str_)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2359,6 +2797,8 @@
 | 0 | `meta/count/variety/1` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `074.0674-compute-gcd.py` (learning cost 5.125)
@@ -2367,6 +2807,9 @@
 1   from fractions import gcd
 2   x = gcd(a, b)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2380,6 +2823,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `075.0675-compute-lcm.py` (learning cost 6.875)
@@ -2388,6 +2833,9 @@
 1   from fractions import gcd
 2   x = (a * b) // gcd(a, b)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2403,6 +2851,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `076.1083-binary-digits-from-an-integer.py` (learning cost 6.234375)
@@ -2410,6 +2860,9 @@
 ```python
 1   s = "{:b}".format(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2424,6 +2877,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `077.1093-complex-number.py` (learning cost 6.3125)
@@ -2432,6 +2887,9 @@
 1   x = 3j - 2
 2   y = x * 1j
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2446,6 +2904,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `078.1089-do-while-loop.py` (learning cost 6.21875)
@@ -2456,6 +2916,9 @@
 3       if not c:
 4           break
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2470,6 +2933,8 @@
 | 0 | `meta/count/variety/4` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
+</details>
+
 ---
 
 ### Program `079.1090-convert-integer-to-floating-point-number.py` (learning cost 5.28125)
@@ -2477,6 +2942,9 @@
 ```python
 1   y = float(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2490,6 +2958,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `080.1092-truncate-floating-point-number-to-integer.py` (learning cost 5.28125)
@@ -2497,6 +2967,9 @@
 ```python
 1   y = int(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2510,6 +2983,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `081.2270-round-floating-point-number-to-integer.py` (learning cost 7.96875)
@@ -2517,6 +2992,9 @@
 ```python
 1   y = int(x + 0.5)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2533,6 +3011,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `082.1096-count-substring-occurrences.py` (learning cost 5.15625)
@@ -2540,6 +3020,9 @@
 ```python
 1   count = s.count(t)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2553,6 +3036,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `083.1805-regex-with-character-repetition.py` (learning cost 6.125)
@@ -2561,6 +3046,9 @@
 1   import re
 2   r = re.compile(r"htt+p")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2575,6 +3063,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `084.1940-count-bits-set-in-integer-binary-representation.py` (learning cost 7.03125)
@@ -2582,6 +3072,9 @@
 ```python
 1   c = bin(i).count("1")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2597,6 +3090,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `085.1003-check-if-integer-addition-will-overflow.py` (learning cost 7.0)
@@ -2605,6 +3100,9 @@
 1   def adding_will_overflow(x, y):
 2       return False
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2620,6 +3118,8 @@
 | 0 | `meta/count/subroutine/sloc/2` | 1-2 |
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
+
+</details>
 
 ---
 
@@ -2630,6 +3130,9 @@
 2       return False
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `def/subroutine/function/pure` | 1-2 |
@@ -2645,6 +3148,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `087.1139-stop-program.py` (learning cost 5.28125)
@@ -2653,6 +3158,9 @@
 1   import sys
 2   sys.exit(1)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2666,6 +3174,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `088.2143-allocate-1m-bytes.py` (learning cost 6.21875)
@@ -2673,6 +3183,9 @@
 ```python
 1   buf = bytearray(1000000)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2687,6 +3200,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `089.1097-handle-invalid-argument.py` (learning cost 3.5)
@@ -2694,6 +3209,9 @@
 ```python
 1   raise ValueError("x is invalid")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2704,6 +3222,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -2717,6 +3237,9 @@
 5       def x(self):
 6           return self._x
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2739,6 +3262,8 @@
 | 0 | `meta/count/variety/4` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
+</details>
+
 ---
 
 ### Program `091.1098-load-json-file-into-struct.py` (learning cost 6.3125)
@@ -2748,6 +3273,9 @@
 2   with open("data.json", "r") as input:
 3       x = json.load(input)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2762,6 +3290,8 @@
 | 0 | `meta/count/variety/2` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `092.1100-save-object-into-json-file.py` (learning cost 5.46875)
@@ -2771,6 +3301,9 @@
 2   with open("data.json", "w") as output:
 3       json.dump(x, output)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2784,6 +3317,8 @@
 | 0 | `meta/count/variety/2` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `093.1082-pass-a-runnable-procedure-as-parameter.py` (learning cost 10.5625)
@@ -2793,6 +3328,9 @@
 2   def control(f):
 3       return f()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2813,6 +3351,8 @@
 | 0 | `meta/count/variety/3` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `094.1101-print-type-of-variable.py` (learning cost 4.25)
@@ -2820,6 +3360,9 @@
 ```python
 1   print(type(x))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2832,6 +3375,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `094.1864-print-type-of-variable.py` (learning cost 2.5625)
@@ -2839,6 +3384,9 @@
 ```python
 1   print(x.__class__)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2849,6 +3397,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `095.2140-get-file-size.py` (learning cost 5.1875)
@@ -2857,6 +3407,9 @@
 1   import os
 2   x = os.path.getsize(path)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2870,6 +3423,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `096.1094-check-string-prefix.py` (learning cost 5.296875)
@@ -2877,6 +3432,9 @@
 ```python
 1   b = s.startswith(prefix)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2890,6 +3448,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `097.1095-check-string-suffix.py` (learning cost 5.296875)
@@ -2897,6 +3457,9 @@
 ```python
 1   b = s.endswith(suffix)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2910,6 +3473,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `098.2142-epoch-seconds-to-date-object.py` (learning cost 5.1875)
@@ -2918,6 +3483,9 @@
 1   import datetime
 2   d = datetime.date.fromtimestamp(ts)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2931,6 +3499,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `099.1429-format-date-yyyy-mm-dd.py` (learning cost 8.0)
@@ -2940,6 +3510,9 @@
 2   d = date(2016, 9, 28)
 3   x = d.strftime("%Y-%m-%d")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2956,6 +3529,8 @@
 | 0 | `meta/count/variety/1` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `099.2693-format-date-yyyy-mm-dd.py` (learning cost 4.5)
@@ -2965,6 +3540,9 @@
 2   d = date.today()
 3   x = d.isoformat()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2977,6 +3555,8 @@
 | 0 | `meta/count/variety/1` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `100.1142-sort-by-a-comparator.py` (learning cost 3.484375)
@@ -2984,6 +3564,9 @@
 ```python
 1   items.sort(c)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -2995,6 +3578,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `101.2172-load-from-http-get-request-into-a-string.py` (learning cost 4.4375)
@@ -3004,6 +3589,9 @@
 2   with urllib.request.urlopen(u) as f:
 3       s = f.read()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3016,6 +3604,8 @@
 | 0 | `meta/count/variety/2` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `102.2173-load-from-http-get-request-into-a-file.py` (learning cost 7.0625)
@@ -3024,6 +3614,9 @@
 1   import urllib
 2   filename, headers = urllib.request.urlretrieve(u, "result.txt")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3039,6 +3632,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `103.2276-load-xml-file-into-struct.py` (learning cost 6.125)
@@ -3047,6 +3642,9 @@
 1   import lxml.etree
 2   x = lxml.etree.parse("data.xml")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3060,6 +3658,8 @@
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
+
+</details>
 
 ---
 
@@ -3079,6 +3679,9 @@
 11  ser = pyx.serialize(obj=tst, enc="utf-8")
 12  print(ser)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3107,6 +3710,8 @@
 | 0 | `meta/count/variety/3` | 1-12 |
 | 0 | `meta/program` | 1-12 |
 
+</details>
+
 ---
 
 ### Program `105.1804-current-executable-name.py` (learning cost 6.03125)
@@ -3115,6 +3720,9 @@
 1   import sys
 2   s = sys.argv[0]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3129,6 +3737,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `106.2039-get-program-working-directory.py` (learning cost 5.1875)
@@ -3137,6 +3747,9 @@
 1   import os
 2   dir = os.getcwd()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3150,6 +3763,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `107.2139-get-folder-containing-current-program.py` (learning cost 5.9375)
@@ -3158,6 +3773,9 @@
 1   import os
 2   dir = os.path.dirname(os.path.abspath(__file__))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3172,6 +3790,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `108.1291-determine-if-variable-name-is-defined.py` (learning cost 6.0625)
@@ -3180,6 +3800,9 @@
 1   if "x" in locals():
 2       print(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3194,6 +3817,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `109.2280-number-of-bytes-of-a-type.py` (learning cost 5.1875)
@@ -3202,6 +3827,9 @@
 1   import pympler.asizeof
 2   n = pympler.asizeof.asizeof(t)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3215,6 +3843,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `110.1455-check-if-string-is-blank.py` (learning cost 7.015625)
@@ -3222,6 +3852,9 @@
 ```python
 1   blank = s.strip() == ""
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3237,6 +3870,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `111.2168-launch-other-program.py` (learning cost 6.21875)
@@ -3245,6 +3880,9 @@
 1   import subprocess
 2   subprocess.call(["x", "a", "b"])
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3259,6 +3897,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `112.2144-iterate-over-map-entries-ordered-by-keys.py` (learning cost 7.0)
@@ -3267,6 +3907,9 @@
 1   for k in sorted(mymap):
 2       print(mymap[k])
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3282,6 +3925,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `113.2157-iterate-over-map-entries-ordered-by-values.py` (learning cost 12.484375)
@@ -3290,6 +3935,9 @@
 1   for x, k in sorted((x, k) for k, x in mymap.items()):
 2       print(k, x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3311,6 +3959,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `114.2273-test-deep-equality.py` (learning cost 4.1875)
@@ -3318,6 +3968,9 @@
 ```python
 1   b = x == y
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3330,6 +3983,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `115.2138-compare-dates.py` (learning cost 5.0625)
@@ -3338,6 +3993,9 @@
 1   import datetime
 2   b = d1 < d2
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3351,6 +4009,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `116.1257-remove-occurrences-of-word-from-string.py` (learning cost 6.265625)
@@ -3358,6 +4018,9 @@
 ```python
 1   s2 = s1.replace(w, "")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3372,6 +4035,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `117.1297-get-list-size.py` (learning cost 4.375)
@@ -3379,6 +4044,9 @@
 ```python
 1   n = len(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3391,6 +4059,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `118.1254-list-to-set.py` (learning cost 5.28125)
@@ -3398,6 +4068,9 @@
 ```python
 1   y = set(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3411,6 +4084,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `118.3266-list-to-set.py` (learning cost 3.46875)
@@ -3418,6 +4093,9 @@
 ```python
 1   set(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3429,6 +4107,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `119.1253-deduplicate-list.py` (learning cost 7.875)
@@ -3436,6 +4116,9 @@
 ```python
 1   x = list(set(x))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3452,6 +4135,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `119.3263-deduplicate-list.py` (learning cost 19.28125)
@@ -3466,6 +4151,9 @@
 7           elements_unique.append(i)
 8   print(elements_unique)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3494,6 +4182,8 @@
 | 0 | `meta/count/variety/3` | 1-8 |
 | 0 | `meta/program` | 1-8 |
 
+</details>
+
 ---
 
 ### Program `120.1479-read-integer-from-stdin.py` (learning cost 7.71875)
@@ -3501,6 +4191,9 @@
 ```python
 1   input_var = int(raw_input("Input Prompting String: "))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3517,6 +4210,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `121.3029-udp-listen-and-read.py` (learning cost 13.625)
@@ -3530,6 +4225,9 @@
 6       data, addr = sock.recvfrom(1024)
 7       print("received message:", data)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3552,6 +4250,8 @@
 | 0 | `meta/count/variety/2` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
+</details>
+
 ---
 
 ### Program `122.1453-declare-enumeration.py` (learning cost 8.71875)
@@ -3560,6 +4260,9 @@
 1   class Suit:
 2       SPADES, HEARTS, DIAMONDS, CLUBS = range(4)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3577,6 +4280,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `122.1454-declare-enumeration.py` (learning cost 6.125)
@@ -3589,6 +4294,9 @@
 5       DIAMONDS = 3
 6       CLUBS = 4
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3603,6 +4311,8 @@
 | 0 | `meta/count/variety/2` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
+</details>
+
 ---
 
 ### Program `123.2146-assert-condition.py` (learning cost 1.625)
@@ -3611,6 +4321,9 @@
 1   assert isConsistent
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.75 | `flow/assertion` | 1 |
@@ -3618,6 +4331,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -3629,6 +4344,9 @@
 3       i = bisect.bisect_left(a, x)
 4       return i if i != len(a) and a[i] == x else -1
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3653,6 +4371,8 @@
 | 0 | `meta/count/variety/2` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
+</details>
+
 ---
 
 ### Program `125.2167-measure-function-call-duration.py` (learning cost 8.0625)
@@ -3664,6 +4384,9 @@
 4   t2 = time.perf_counter()
 5   print("Seconds:", t2 - t1)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3680,6 +4403,8 @@
 | 0 | `meta/count/variety/2` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
+</details>
+
 ---
 
 ### Program `126.2137-multiple-return-values.py` (learning cost 8.75)
@@ -3688,6 +4413,9 @@
 1   def foo():
 2       return "string", True
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3706,6 +4434,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `127.2274-source-code-inclusion.py` (learning cost 7.84375)
@@ -3714,6 +4444,9 @@
 1   import imp
 2   foo = imp.load_module("foobody", "foobody.txt").foo
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3730,6 +4463,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `128.2085-breadth-first-traversing-of-a-tree.py` (learning cost 20.734375)
@@ -3745,6 +4480,9 @@
 8                   n.discovered = True
 9                   Q.append(n)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3776,6 +4514,8 @@
 | 0 | `meta/count/variety/4` | 1-9 |
 | 0 | `meta/program` | 1-9 |
 
+</details>
+
 ---
 
 ### Program `129.2282-breadth-first-traversing-in-a-graph.py` (learning cost 20.6875)
@@ -3791,6 +4531,9 @@
 8           seen.add(vertex)
 9           q.extend(v for v in vertex.adjacent if v not in seen)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3822,6 +4565,8 @@
 | 0 | `meta/count/variety/4` | 1-9 |
 | 0 | `meta/program` | 1-9 |
 
+</details>
+
 ---
 
 ### Program `130.2283-depth-first-traversing-in-a-graph.py` (learning cost 19.859375)
@@ -3836,6 +4581,9 @@
 7           seen.add(vertex)
 8           stack.extend(v for v in vertex.adjacent if v not in seen)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3866,6 +4614,8 @@
 | 0 | `meta/count/variety/3` | 1-8 |
 | 0 | `meta/program` | 1-8 |
 
+</details>
+
 ---
 
 ### Program `131.2083-successive-conditions.py` (learning cost 3.25)
@@ -3873,6 +4623,9 @@
 ```python
 1   f1 if c1 else f2 if c2 else f3 if c3 else None
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3883,6 +4636,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -3897,6 +4652,9 @@
 6       f3()
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `call/subroutine/no_arguments` | 2, 4, 6 |
@@ -3907,6 +4665,8 @@
 | 0 | `meta/count/variety/2` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
+</details>
+
 ---
 
 ### Program `132.2040-measure-duration-of-procedure-execution.py` (learning cost 6.125)
@@ -3915,6 +4675,9 @@
 1   import timeit
 2   duration = timeit.timeit("f()", setup="from __main__ import f")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3929,6 +4692,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `133.2160-case-insensitive-string-contains.py` (learning cost 6.046875)
@@ -3936,6 +4701,9 @@
 ```python
 1   ok = word.lower() in s.lower()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3950,6 +4718,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `134.1850-create-a-new-list.py` (learning cost 4.375)
@@ -3957,6 +4727,9 @@
 ```python
 1   items = [a, b, c]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3969,6 +4742,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `135.2158-remove-item-from-list-by-its-value.py` (learning cost 2.59375)
@@ -3976,6 +4751,9 @@
 ```python
 1   items.remove(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -3986,6 +4764,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `136.2141-remove-all-occurrences-of-a-value-from-a-list.py` (learning cost 6.1875)
@@ -3993,6 +4773,9 @@
 ```python
 1   newlist = [item for item in items if item != x]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4007,6 +4790,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `137.1823-check-if-string-contains-only-digits.py` (learning cost 5.296875)
@@ -4014,6 +4799,9 @@
 ```python
 1   b = s.isdigit()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4027,6 +4815,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `138.2161-create-temp-file.py` (learning cost 4.3125)
@@ -4035,6 +4825,9 @@
 1   import tempfile
 2   file = tempfile.TemporaryFile()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4046,6 +4839,8 @@
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
+
+</details>
 
 ---
 
@@ -4056,6 +4851,9 @@
 2   td = tempfile.TemporaryDirectory()
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.875 | `import/standard/tempfile` | 1 |
@@ -4067,6 +4865,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `140.2156-delete-map-entry.py` (learning cost 3.46875)
@@ -4074,6 +4874,9 @@
 ```python
 1   m.pop(k, None)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4085,6 +4888,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `141.2159-iterate-in-sequence-over-two-lists.py` (learning cost 6.1875)
@@ -4093,6 +4898,9 @@
 1   for x in items1 + items2:
 2       print(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4107,6 +4915,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `142.2151-hexadecimal-digits-of-an-integer.py` (learning cost 4.375)
@@ -4114,6 +4924,9 @@
 ```python
 1   s = hex(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4126,6 +4939,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `143.2256-iterate-alternatively-over-two-lists.py` (learning cost 6.25)
@@ -4134,6 +4949,9 @@
 1   for pair in zip(item1, item2):
 2       print(pair)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4148,6 +4966,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `144.2145-check-if-file-exists.py` (learning cost 5.1875)
@@ -4156,6 +4976,9 @@
 1   import os
 2   b = os.path.exists(fp)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4169,6 +4992,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `144.2915-check-if-file-exists.py` (learning cost 6.125)
@@ -4177,6 +5002,9 @@
 1   from pathlib import Path
 2   b = Path(fp).exists()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4191,6 +5019,8 @@
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `145.1822-print-log-line-with-datetime.py` (learning cost 7.21875)
@@ -4203,6 +5033,9 @@
 5   logger = logging.getLogger("NAME OF LOGGER")
 6   logger.info(msg)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4218,6 +5051,8 @@
 | 0 | `meta/count/variety/2` | 1-6 |
 | 0 | `meta/program` | 1-6 |
 
+</details>
+
 ---
 
 ### Program `146.1825-convert-string-to-floating-point-number.py` (learning cost 6.34375)
@@ -4228,6 +5063,9 @@
 3   locale.setlocale(locale.LC_ALL, "de")
 4   f = locale.atof(s)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4242,6 +5080,8 @@
 | 0 | `meta/count/variety/2` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
+</details>
+
 ---
 
 ### Program `146.1826-convert-string-to-floating-point-number.py` (learning cost 5.28125)
@@ -4249,6 +5089,9 @@
 ```python
 1   f = float(s)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4262,6 +5105,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `146.2739-convert-string-to-floating-point-number.py` (learning cost 4.40625)
@@ -4269,6 +5114,9 @@
 ```python
 1   float("1.3")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4281,6 +5129,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `147.2171-remove-all-non-ascii-characters.py` (learning cost 7.140625)
@@ -4289,6 +5139,9 @@
 1   import re
 2   t = re.sub("[^\u0000-\u007f]", "", s)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4304,6 +5157,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `148.1829-read-list-of-integer-numbers-from-stdin.py` (learning cost 9.703125)
@@ -4311,6 +5166,9 @@
 ```python
 1   list(map(int, input().split()))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4329,6 +5187,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `150.2154-remove-trailing-slash.py` (learning cost 6.234375)
@@ -4336,6 +5196,9 @@
 ```python
 1   p = p.rstrip("/")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4350,6 +5213,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `151.2166-remove-string-trailing-path-separator.py` (learning cost 7.984375)
@@ -4359,6 +5224,9 @@
 2   if p.endswith(os.sep):
 3       p = p[:-1]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4375,6 +5243,8 @@
 | 0 | `meta/count/variety/2` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `152.2153-turn-a-character-into-a-string.py` (learning cost 3.4375)
@@ -4382,6 +5252,9 @@
 ```python
 1   s = c
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4393,6 +5266,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `153.1980-concatenate-string-with-integer.py` (learning cost 6.234375)
@@ -4400,6 +5275,9 @@
 ```python
 1   t = "{}{}".format(s, i)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4414,6 +5292,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `154.2155-halfway-between-two-hex-color-codes.py` (learning cost 18.234375)
@@ -4423,6 +5303,9 @@
 2   r2, g2, b2 = [int(c2[p : p + 2], 16) for p in range(1, 6, 2)]
 3   c = "#{:02x}{:02x}{:02x}".format((r1 + r2) // 2, (g1 + g2) // 2, (b1 + b2) // 2)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4450,6 +5333,8 @@
 | 0 | `meta/count/variety/0` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `154.2292-halfway-between-two-hex-color-codes.py` (learning cost 34.4375)
@@ -4471,6 +5356,9 @@
 14  print(c2)
 15  print((c1 + c2) / 2)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4519,6 +5407,8 @@
 | 0 | `meta/count/variety/5` | 1-15 |
 | 0 | `meta/program` | 1-15 |
 
+</details>
+
 ---
 
 ### Program `155.2147-delete-file.py` (learning cost 4.4375)
@@ -4528,6 +5418,9 @@
 2   path = pathlib.Path(_filepath)
 3   path.unlink()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4540,6 +5433,8 @@
 | 0 | `meta/count/variety/2` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `156.2148-format-integer-with-zero-padding.py` (learning cost 5.3125)
@@ -4547,6 +5442,9 @@
 ```python
 1   s = format("03d", i)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4560,6 +5458,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `157.2150-declare-constant-string.py` (learning cost 5.3125)
@@ -4567,6 +5467,9 @@
 ```python
 1   PLANET = "Earth"
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4580,6 +5483,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `158.2163-random-sublist.py` (learning cost 5.1875)
@@ -4588,6 +5493,9 @@
 1   import random
 2   y = random.sample(x, k)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4601,6 +5509,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `159.2281-trie.py` (learning cost 11.734375)
@@ -4612,6 +5522,9 @@
 4           self.children = []
 5           self.value = value
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4634,6 +5547,8 @@
 | 0 | `meta/count/variety/2` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
+</details>
+
 ---
 
 ### Program `160.2165-detect-if-32-bit-or-64-bit-architecture.py` (learning cost 7.5625)
@@ -4645,6 +5560,9 @@
 4   else:
 5       f32()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4661,6 +5579,8 @@
 | 0 | `meta/count/variety/2` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
+</details>
+
 ---
 
 ### Program `161.2098-multiply-all-the-elements-of-a-list.py` (learning cost 6.1875)
@@ -4668,6 +5588,9 @@
 ```python
 1   elements = [c * x for x in elements]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4682,6 +5605,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `162.2164-execute-procedures-depending-on-options.py` (learning cost 6.875)
@@ -4693,6 +5618,9 @@
 4   if "f" in sys.argv[1:]:
 5       fox()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4708,6 +5636,8 @@
 | 0 | `meta/count/variety/2` | 1-5 |
 | 0 | `meta/program` | 1-5 |
 
+</details>
+
 ---
 
 ### Program `163.2170-print-list-elements-by-group-of-2.py` (learning cost 8.9375)
@@ -4716,6 +5646,9 @@
 1   for x in zip(list[::2], list[1::2]):
 2       print(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4733,6 +5666,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `163.3177-print-list-elements-by-group-of-2.py` (learning cost 17.125)
@@ -4746,6 +5681,9 @@
 6   for a, b in pairwise(list):
 7       print(a, b)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4773,6 +5711,8 @@
 | 0 | `meta/count/variety/3` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
+</details>
+
 ---
 
 ### Program `164.2169-open-url-in-default-browser.py` (learning cost 4.34375)
@@ -4781,6 +5721,9 @@
 1   import webbrowser
 2   webbrowser.open(s)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4793,6 +5736,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `165.2149-last-element-of-list.py` (learning cost 6.0625)
@@ -4800,6 +5745,9 @@
 ```python
 1   x = items[-1]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4814,6 +5762,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `166.2272-concatenate-two-lists.py` (learning cost 4.3125)
@@ -4821,6 +5771,9 @@
 ```python
 1   ab = a + b
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4833,6 +5786,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `167.2611-trim-prefix.py` (learning cost 7.984375)
@@ -4840,6 +5795,9 @@
 ```python
 1   t = s[s.startswith(p) and len(p) :]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4856,6 +5814,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `167.3175-trim-prefix.py` (learning cost 5.296875)
@@ -4863,6 +5823,9 @@
 ```python
 1   t = s.lstrip(p)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4876,6 +5839,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `168.2277-trim-suffix.py` (learning cost 7.953125)
@@ -4883,6 +5848,9 @@
 ```python
 1   t = s.rsplit(w, 1)[0]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4899,6 +5867,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `168.3174-trim-suffix.py` (learning cost 5.296875)
@@ -4906,6 +5876,9 @@
 ```python
 1   t = s.rstrip(w)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4919,6 +5892,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `169.2233-string-length.py` (learning cost 4.375)
@@ -4926,6 +5901,9 @@
 ```python
 1   n = len(s)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4937,6 +5915,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -4946,6 +5926,9 @@
 1   n = len(mymap)
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/subroutine/builtin/len` | 1 |
@@ -4957,6 +5940,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `171.2446-add-an-element-at-the-end-of-a-list.py` (learning cost 3.484375)
@@ -4964,6 +5949,9 @@
 ```python
 1   s.append(x)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4975,6 +5963,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `172.2442-insert-entry-in-map.py` (learning cost 3.3125)
@@ -4982,6 +5972,9 @@
 ```python
 1   m[k] = v
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -4993,6 +5986,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `173.2427-format-a-number-with-grouped-thousands.py` (learning cost 3.5)
@@ -5000,6 +5995,9 @@
 ```python
 1   print("f'{1000:,}'")
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5010,6 +6008,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -5019,6 +6019,9 @@
 1   print("format(1000, ',')")
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/subroutine/builtin/print` | 1 |
@@ -5028,6 +6031,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -5037,6 +6042,9 @@
 1   print("'{:,}'.format(1000)")
 ```
 
+<details>
+  <summary>⊕</summary>
+
 | Cost  | Taxon | Location |
 |----|----|----|
 | 0.9375 | `call/subroutine/builtin/print` | 1 |
@@ -5046,6 +6054,8 @@
 | 0 | `meta/count/program/sloc/1` | 1 |
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
+
+</details>
 
 ---
 
@@ -5057,6 +6067,9 @@
 3   req = request.Request(u, data=data, method="POST")
 4   resp = request.urlopen(req)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5074,6 +6087,8 @@
 | 0 | `meta/count/variety/1` | 1-4 |
 | 0 | `meta/program` | 1-4 |
 
+</details>
+
 ---
 
 ### Program `175.2613-bytes-to-hex-string.py` (learning cost 5.296875)
@@ -5081,6 +6096,9 @@
 ```python
 1   s = a.hex()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5094,6 +6112,8 @@
 | 0 | `meta/count/variety/1` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `176.2614-hex-string-to-byte-array.py` (learning cost 5.296875)
@@ -5101,6 +6121,9 @@
 ```python
 1   a = bytearray.fromhex(s)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5114,6 +6137,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `177.2709-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 12.4375)
@@ -5123,6 +6148,9 @@
 2   extensions = [".jpg", ".jpeg", ".png"]
 3   L = [f for f in os.listdir(D) if os.path.splitext(f)[1] in extensions]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5144,6 +6172,8 @@
 | 0 | `meta/count/variety/1` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `177.2725-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 12.765625)
@@ -5158,6 +6188,9 @@
 7       if re.match(r"^.*\.(?:jpg|jpeg|png)$", filename)
 8   ]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5179,6 +6212,8 @@
 | 0 | `meta/count/variety/2` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
+</details>
+
 ---
 
 ### Program `177.3241-find-files-with-a-given-list-of-filename-extensions.py` (learning cost 12.34375)
@@ -5188,6 +6223,9 @@
 2   import itertools
 3   list(itertools.chain(*(glob.glob("*/**.%s" % ext) for ext in ["jpg", "jpeg", "png"])))
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5209,6 +6247,8 @@
 | 0 | `meta/count/variety/1` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `178.2615-check-if-point-is-inside-rectangle.py` (learning cost 6.0)
@@ -5216,6 +6256,9 @@
 ```python
 1   b = (x1 < x < x2) and (y1 < y < y2)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5230,6 +6273,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `179.2688-get-center-of-a-rectangle.py` (learning cost 7.0625)
@@ -5237,6 +6282,9 @@
 ```python
 1   center = ((x1 + x2) / 2, (y1 + y2) / 2)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5252,6 +6300,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `179.2689-get-center-of-a-rectangle.py` (learning cost 8.875)
@@ -5261,6 +6311,9 @@
 2   Point = namedtuple("Point", "x y")
 3   center = Point((x1 + x2) / 2, (y1 + y2) / 2)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5278,6 +6331,8 @@
 | 0 | `meta/count/variety/1` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `180.2612-list-files-in-directory.py` (learning cost 5.1875)
@@ -5286,6 +6341,9 @@
 1   import os
 2   x = os.listdir(d)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5299,6 +6357,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `182.2658-quine-program.py` (learning cost 5.484375)
@@ -5307,6 +6367,9 @@
 1   s = "s = %r\nprint(s%%s)"
 2   print(s % s)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5319,6 +6382,8 @@
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
+
+</details>
 
 ---
 
@@ -5333,6 +6398,9 @@
 6   r = requests.put(url, headers=headers, data=data)
 7   status_code, content = r.status_code, r.content
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5350,6 +6418,8 @@
 | 0 | `meta/count/variety/2` | 1-7 |
 | 0 | `meta/program` | 1-7 |
 
+</details>
+
 ---
 
 ### Program `184.2701-tomorrow.py` (learning cost 6.9375)
@@ -5358,6 +6428,9 @@
 1   from datetime import date, timedelta
 2   date.today() + timedelta(days=1)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5373,6 +6446,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `185.2820-execute-function-in-30-seconds.py` (learning cost 8.125)
@@ -5382,6 +6457,9 @@
 2   timer = threading.Timer(30.0, f, args=(42,))
 3   timer.start()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5398,6 +6476,8 @@
 | 0 | `meta/count/variety/1` | 1-3 |
 | 0 | `meta/program` | 1-3 |
 
+</details>
+
 ---
 
 ### Program `186.2699-exit-program-cleanly.py` (learning cost 5.3125)
@@ -5406,6 +6486,9 @@
 1   import sys
 2   sys.exit(0)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5418,6 +6501,8 @@
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/variety/2` | 1-2 |
 | 0 | `meta/program` | 1-2 |
+
+</details>
 
 ---
 
@@ -5440,6 +6525,9 @@
 14          if not self.is_same_set(i, j):
 15              x, y = self.find_set(i), self.find_set(j)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5480,6 +6568,8 @@
 | 0 | `meta/count/variety/3` | 1-15 |
 | 0 | `meta/program` | 1-15 |
 
+</details>
+
 ---
 
 ### Program `188.3171-matrix-multiplication.py` (learning cost 5.1875)
@@ -5488,6 +6578,9 @@
 1   import numpy as np
 2   c = a @ b
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5501,6 +6594,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `188.3284-matrix-multiplication.py` (learning cost 5.1875)
@@ -5509,6 +6604,9 @@
 1   import numpy as np
 2   c = np.matmul(a, b)
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5522,6 +6620,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `189.3236-filter-and-transform-list.py` (learning cost 6.1875)
@@ -5529,6 +6629,9 @@
 ```python
 1   y = [T(e) for e in x if P(e)]
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5543,6 +6646,8 @@
 | 0 | `meta/count/variety/0` | 1 |
 | 0 | `meta/program` | 1 |
 
+</details>
+
 ---
 
 ### Program `191.3403-check-if-any-value-in-a-list-is-larger-than-a-limit.py` (learning cost 6.9375)
@@ -5551,6 +6656,9 @@
 1   if any(v > x for v in a):
 2       f()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5566,6 +6674,8 @@
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
 
+</details>
+
 ---
 
 ### Program `197.3457-get-a-list-of-lines-from-a-file.py` (learning cost 4.5)
@@ -5574,6 +6684,9 @@
 1   with open(path) as f:
 2       lines = f.readlines()
 ```
+
+<details>
+  <summary>⊕</summary>
 
 | Cost  | Taxon | Location |
 |----|----|----|
@@ -5585,6 +6698,8 @@
 | 0 | `meta/count/program/sloc/2` | 1-2 |
 | 0 | `meta/count/variety/1` | 1-2 |
 | 0 | `meta/program` | 1-2 |
+
+</details>
 
 ---
 
