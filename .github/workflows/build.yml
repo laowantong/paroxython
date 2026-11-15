@@ -8,23 +8,24 @@ on:
       - master
 jobs:
   build:
-    runs-on: '${{ matrix.os }}'
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os:
-          - ubuntu-18.04
         python-version:
           - '3.8'
           - '3.9'
           - '3.10'
+          - '3.11'
+          - '3.12'
+          - '3.13'
     steps:
+      - uses: actions/checkout@v4
       - name: 'Set up Python ${{ matrix.python-version }}'
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '${{ matrix.python-version }}'
-      - uses: actions/checkout@v2
-      - run: pip install -r requirements.txt
-      - run: pip install pytest pytest-cov
-      - run: pip install coverage
-      - run: pytest --cov=./
-      - run: 'bash <(curl -s https://codecov.io/bash)'
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - run: uv run --locked pytest --cov=./ --cov-report=xml
+      - run: uv build
+      - uses: codecov/codecov-action@v5

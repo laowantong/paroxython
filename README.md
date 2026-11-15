@@ -150,6 +150,16 @@ The following command should print a help message and exit:
 paroxython --help
 ```
 
+For development from a checkout, use `uv sync` to install the project and
+its development dependencies, and run the tests with `uv run pytest`.
+To build a source distribution and wheel, run `uv build`.
+After checking the files in `dist/`, publish only the intended release, for
+example:
+
+```shell
+uv publish dist/paroxython-0.7.3.tar.gz dist/paroxython-0.7.3-py3-none-any.whl
+```
+
 ### IPython magic command
 
 If you use Jupyter notebook/lab, you've also just installed a so-called magic command. Load it like this:
