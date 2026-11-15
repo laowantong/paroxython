@@ -121,7 +121,7 @@ class DerivedLabelsDatabase:
 
     def __init__(self):
         self.c = sqlite3.connect(":memory:")
-        self.c.create_function("regexp", narg=2, func=lambda rex, s: bool(regex.match(rex, s)))
+        self.c.create_function("regexp", 2, lambda rex, s: bool(regex.match(rex, s)))
         # References:
         # - https://www.sqlite.org/inmemorydb.html
         # - https://www.sqlite.org/lang_expr.html#regexp
