@@ -38,6 +38,8 @@ def foo():
 /body/1/returns=None # moved before the body of the function
 /body/1/type_comment=None
 /body/1/body/_length=2 # start of the body of the function
+/body/1/body/1/_type=Expr
+/body/1/body/1/_pos=2:1-5-1-
 >>>
 
 <<< Example of conditional else
@@ -244,6 +246,12 @@ def test_flatten_ast(title, source, expected):
     result = flatten_ast(ast.parse(source)).strip()
     print(result)
     assert expected in result
+
+
+@pytest.mark.skipif("type_params" not in ast.FunctionDef._fields, reason="requires Python 3.12")
+def test_flatten_generic_function():
+    result = flatten_ast(ast.parse("def f[T](x: T):\n    return x"))
+    assert "/body/1/type_params/_length=1\n" in result
 
 
 if __name__ == "__main__":

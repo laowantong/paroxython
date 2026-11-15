@@ -403,6 +403,10 @@ def flatten_node(
         if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
             # make `body` the last item of a `def` clause
             fields = iter(sorted(fields, key=lambda c: c[0] == "body"))
+            # Python 3.12 added type_params, shifting the body field's index and
+            # thus its descendants' paths. Omit it when empty to preserve those
+            # paths across versions, but retain non-empty generic parameters.
+            fields = ((name, value) for name, value in fields if name != "type_params" or value)
         for (i, (name, x)) in enumerate(fields):
             if name == "orelse" and isinstance(node, (ast.For, ast.While, ast.AsyncFor)):
                 name = "loopelse"  # make the `orelse` clause specific to conditionals
