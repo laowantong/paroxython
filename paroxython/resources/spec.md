@@ -743,7 +743,7 @@ JOIN t_nested_index i2 ON (i2.path GLOB i1.path || "*")
 WHERE NOT EXISTS
     (SELECT *
      FROM t_nested_index i0
-     WHERE (i1.path REGEXP i0.path || "\d+-$") )
+     WHERE (i1.path REGEXP i0.path || "\d+-$"))
 GROUP BY i1.path
 ORDER BY i1.path
 ```
@@ -4333,7 +4333,7 @@ WHERE NOT EXISTS
                            "free_call:print"))
             AND t.path GLOB f.path || "*-")
        OR (t.name_prefix = "method"
-           AND t.path=f.path) )
+           AND t.path=f.path))
 GROUP BY f.rowid
 ```
 
@@ -4444,7 +4444,7 @@ WHERE NOT EXISTS
      FROM t
      WHERE (t.name_prefix IN ("method",
                               "pure_function")
-            AND t.path=f.path) )
+            AND t.path=f.path))
 GROUP BY f.rowid
 ```
 
@@ -5024,7 +5024,7 @@ WHERE t_free_call.name_suffix = t_recursive_function.name_suffix
   AND NOT EXISTS
     (SELECT 1
      FROM t_free_tail_call
-     WHERE t_free_tail_call.path = t_free_call.path )
+     WHERE t_free_tail_call.path = t_free_call.path)
 GROUP BY t_recursive_function.span
 ```
 
@@ -7161,7 +7161,7 @@ WHERE NOT EXISTS -- Ensure that there is no...
      FROM t_assignment_lhs_identifier -- other assignment...
      WHERE name_suffix == lhs.name_suffix -- of the candidate...
        AND span != lhs.span
-       AND path GLOB t_for.path || "*-" ) -- INSIDE the loop.
+       AND path GLOB t_for.path || "*-") -- INSIDE the loop.
 ```
 
 ##### Example
@@ -7260,7 +7260,7 @@ WHERE NOT EXISTS -- Ensure that there is no...
      FROM t_assignment_lhs_identifier -- other assignment...
      WHERE name_suffix == lhs.name_suffix -- of the candidate...
        AND span != lhs.span
-       AND path GLOB t_for.path || "*-" ) -- INSIDE the loop.
+       AND path GLOB t_for.path || "*-") -- INSIDE the loop.
 ```
 
 ##### Example
@@ -7361,7 +7361,7 @@ WHERE NOT EXISTS -- Ensure that there is no...
      FROM t_assignment_lhs_identifier -- other assignment...
      WHERE name_suffix == lhs.name_suffix -- of the candidate...
        AND span != lhs.span
-       AND path GLOB idx.path || "*-" ) -- INSIDE the loop.
+       AND path GLOB idx.path || "*-") -- INSIDE the loop.
 ```
 
 ##### Example
@@ -8095,7 +8095,7 @@ WHERE y.name_prefix IN ("function_parameter",
     (SELECT *
      FROM t_scope s
      WHERE s.path GLOB f.path || "*" -- equal or inner span
-       AND s.name_suffix = x.name_suffix )
+       AND s.name_suffix = x.name_suffix)
 ```
 
 ##### Example
@@ -8215,7 +8215,7 @@ WHERE NOT EXISTS
                              "object_oriented_style",
                              "loop",
                              "assignment",
-                             "update") )
+                             "update"))
 LIMIT 1
 ```
 
