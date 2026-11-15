@@ -157,7 +157,7 @@ After checking the files in `dist/`, publish only the intended release, for
 example:
 
 ```shell
-uv publish dist/paroxython-0.7.4.tar.gz dist/paroxython-0.7.4-py3-none-any.whl
+uv publish dist/paroxython-0.7.5.tar.gz dist/paroxython-0.7.5-py3-none-any.whl
 ```
 
 ### IPython magic command

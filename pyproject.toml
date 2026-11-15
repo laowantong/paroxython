@@ -1,6 +1,6 @@
 [project]
 name = "paroxython"
-version = "0.7.4"
+version = "0.7.5"
 description = "Search Python code for algorithmic features"
 authors = [{name = "Aristide Grange"}]
 license = {text = "MIT"}
